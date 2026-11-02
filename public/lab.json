@@ -1,6 +1,6 @@
 {
-  "id": "lab-template",
-  "title": { "fr": "Lab Template", "en": "Lab Template" },
+  "id": "bioclimatic-house-lab",
+  "title": { "fr": "Bioclimatic House Lab", "en": "Bioclimatic House Lab" },
   "tagline": { "fr": "Un lab à remplacer", "en": "A lab to replace" },
   "tags": [],
   "difficulty": 1,
