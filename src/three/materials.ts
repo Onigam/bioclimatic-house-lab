@@ -72,14 +72,20 @@ export function makeMaterials(): Mats {
   });
   const plinth = std({ color: 0x8f8a80, roughness: 0.97, map: tiled(concreteMap(), 1 / 1.4) });
   const render = std({ color: 0xe6dccb, roughness: 0.96, map: tiled(renderMap(), 1 / 1.5) });
-  const black = std({ color: 0xffffff, roughness: 0.5, metalness: 0.04, map: tiled(blackPaintMap(), 1 / 1.1) });
+  const black = std({
+    color: 0xffffff,
+    roughness: 0.62,
+    metalness: 0.0,
+    envMapIntensity: 0.35,
+    map: tiled(blackPaintMap(), 1 / 1.1),
+  });
   const glass = std({
-    color: 0xcfe3e0,
+    color: 0x8fa8a4,
     roughness: 0.03,
     metalness: 0.0,
     transparent: true,
-    opacity: 0.16,
-    envMapIntensity: 1.6,
+    opacity: 0.1,
+    envMapIntensity: 0.15,
     depthWrite: false,
   });
   glass.userData.glass = true;

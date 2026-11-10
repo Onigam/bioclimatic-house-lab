@@ -94,6 +94,24 @@ for (const [id, mod] of worlds) {
       expect(mod.hotspots.filter((h) => !h.minor).length).toBeLessThanOrEqual(6);
     });
 
+    it('points each label at the part it names: the anchor stands on or within a metre of the part’s box', () => {
+      go();
+      reg.setAllFactors(0);
+      mod.scene.updateMatrixWorld(true);
+      const p = new THREE.Vector3();
+      const bad: string[] = [];
+      for (const h of mod.hotspots) {
+        // the scale of the false colour and the sun’s arcs name a part and stand beside it, on purpose
+        if (id === 'wall' && h.label.en.endsWith('°C')) continue;
+        if (id === 'site' && /sun/i.test(h.label.en)) continue;
+        h.anchor.getWorldPosition(p);
+        const box = reg.bounds(h.partId);
+        const d = box.distanceToPoint(p);
+        if (d > 1.0) bad.push(`${h.partId} (${h.label.en}): ${d.toFixed(2)} m`);
+      }
+      expect(bad).toEqual([]);
+    });
+
     it('has a home camera outside the machine, within its limits', () => {
       const d = mod.home.position.distanceTo(mod.home.target);
       expect(d).toBeGreaterThan(mod.minDistance);

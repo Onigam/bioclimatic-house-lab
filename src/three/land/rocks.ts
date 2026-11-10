@@ -17,8 +17,8 @@ export interface Boulder {
   seed: number;
 }
 
-export function boulderGeometry(b: Boulder, y: number): THREE.BufferGeometry {
-  const g = new THREE.IcosahedronGeometry(b.r, 3);
+export function boulderGeometry(b: Boulder, y: number, detail = 3): THREE.BufferGeometry {
+  const g = new THREE.IcosahedronGeometry(b.r, detail);
   g.deleteAttribute('uv');
   const p = g.attributes.position as THREE.BufferAttribute;
   const v = new THREE.Vector3();
@@ -58,8 +58,8 @@ export function scatterBoulders(
 }
 
 /** The boulders as one mesh in the granite material; each stands on the ground at its own x and z. */
-export function boulderMesh(list: Boulder[], material: THREE.Material): THREE.Mesh {
-  const parts = list.map((b) => boulderGeometry(b, groundY(b.x, b.z)));
+export function boulderMesh(list: Boulder[], material: THREE.Material, detail = 3): THREE.Mesh {
+  const parts = list.map((b) => boulderGeometry(b, groundY(b.x, b.z), detail));
   const m = new THREE.Mesh(joined(parts), material);
   m.name = 'boulders';
   m.castShadow = true;

@@ -375,7 +375,7 @@ export function createWallScene(opts: WallOptions = {}): WallScene {
       rig.update(s);
       // the glass: more of a steep sun is sent back, so the sheets look brighter, and fainter ones show the black behind
       mats.glass.opacity = 0.07 + 0.3 * s.glassRefuses;
-      mats.glass.envMapIntensity = 0.45 + 1.4 * s.glassRefuses;
+      mats.glass.envMapIntensity = 0.15 + 1.1 * s.glassRefuses;
       // the flap goes where the model's goes, smoothly
       flapNow = dt > 0 ? damp(flapNow, s.flapOpen, 5, Math.min(dt, 0.1)) : flapNow;
       build.setFlap(flapNow);

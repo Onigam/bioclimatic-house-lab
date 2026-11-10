@@ -256,12 +256,12 @@ export function createRoomScene(opts: RoomOptions = {}): RoomScene {
     flow,
     scenery: () => [house.root, living.furniture],
     drawn: living.drawn,
-    home: { position: V(-2.0, 3.0, -2.2), target: V(-0.2, 1.9, 0.3) },
+    home: { position: V(-3.4, 4.6, -6.0), target: V(-0.2, 1.9, 0.3) },
     minDistance: 0.15,
     maxDistance: 22,
     near: 0.03,
     far: 160,
-    homePadding: 0.36,
+    homePadding: 0.8,
     declutter: true,
     update(s, dt, view) {
       const p = opts.params?.();
@@ -285,7 +285,7 @@ export function createRoomScene(opts: RoomOptions = {}): RoomScene {
       }
       rig.update(s);
       mats.glass.opacity = 0.07 + 0.3 * s.glassRefuses;
-      mats.glass.envMapIntensity = 0.45 + 1.4 * s.glassRefuses;
+      mats.glass.envMapIntensity = 0.15 + 1.1 * s.glassRefuses;
       flapNow = dt > 0 ? damp(flapNow, s.flapOpen, 5, Math.min(dt, 0.1)) : flapNow;
       house.collector.setFlap(flapNow);
       flow.update(s, dt, view.slowMo, view.schematic);

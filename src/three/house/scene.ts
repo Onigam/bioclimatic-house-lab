@@ -400,7 +400,7 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
 
   const drawn = { flap: 0, snow: 0, cut: false, spec };
   let flapNow = 0;
-  let tubeShown = false;
+  let tubeShown = true;
   const mod: HouseScene = {
     id: 'house',
     scene,
@@ -455,7 +455,7 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
       drawn.snow = SNOW.value;
       oakSeason(oaks.crownMaterial, s.dayOfYear);
       mats.glass.opacity = 0.07 + 0.3 * s.glassRefuses;
-      mats.glass.envMapIntensity = 0.45 + 1.4 * s.glassRefuses;
+      mats.glass.envMapIntensity = 0.15 + 1.1 * s.glassRefuses;
       flapNow = dt > 0 ? damp(flapNow, s.flapOpen, 5, Math.min(dt, 0.1)) : flapNow;
       house.collector.setFlap(flapNow);
       drawn.flap = flapNow;
@@ -474,12 +474,13 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
       caps.update(view.cutaway, registry);
       for (const o of house.collector.cutOnly) o.visible = view.cutaway;
 
-      // the earth tube exists only in its scenario: off, its parts are hidden (and no longer count in the overview's frame)
+      // the earth tube exists only in its scenario: off, its three parts collapse to a point in the house (the kit sets a part's display state back every frame, so it cannot be hidden that way): they are not drawn,
+      // cannot be hit, and do not count in the overview's frame
       const wantTube = !!p?.earthTube;
-      if (wantTube !== tubeShown || !wantTube) {
+      if (wantTube !== tubeShown) {
         for (const id of earthParts) {
-          if (!wantTube) registry.setDisplay(id, 'hidden');
-          else if (registry.get(id)?.display === 'hidden') registry.setDisplay(id, 'solid');
+          groups[id].visible = wantTube;
+          groups[id].scale.setScalar(wantTube ? 1 : 1e-4);
         }
         tubeShown = wantTube;
       }

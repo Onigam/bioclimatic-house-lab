@@ -309,6 +309,7 @@ export function createSiteScene(opts: SiteOptions = {}): SiteScene {
       ),
     ],
     mats.granite,
+    2,
   );
   roots['granite-slope'].add(rocks);
   roots['meadow-clearing'].add(meadowOverlay());
@@ -352,8 +353,8 @@ export function createSiteScene(opts: SiteOptions = {}): SiteScene {
     }
     return out;
   };
-  const pinesNear = stand('pine', make(70, { x0: -150, x1: 120, z0: -200, z1: -14 }, 0.8, 1.3, 6), 3, 0);
-  const pinesFar = stand('pine', make(130, { x0: -500, x1: 800, z0: -700, z1: -60 }, 0.9, 1.5, 9), 3, 1);
+  const pinesNear = stand('pine', make(48, { x0: -150, x1: 120, z0: -200, z1: -14 }, 0.8, 1.3, 6), 3, 0);
+  const pinesFar = stand('pine', make(110, { x0: -500, x1: 800, z0: -700, z1: -60 }, 0.9, 1.5, 9), 3, 1);
   const oaks = stand('oak', make(24, { x0: -70, x1: 130, z0: -22, z1: 50 }, 0.8, 1.2, 5), 3);
   const bushes = stand('bush', make(70, { x0: -80, x1: 150, z0: -40, z1: 60 }, 0.8, 1.6, 7), 3);
   roots['tree-clumps'].add(pinesNear.group, pinesFar.group, oaks.group, bushes.group);
@@ -490,7 +491,7 @@ export function createSiteScene(opts: SiteOptions = {}): SiteScene {
       drawn.snow = SNOW.value;
       oakSeason(oaks.crownMaterial, s.dayOfYear);
       mats.glass.opacity = 0.07 + 0.3 * s.glassRefuses;
-      mats.glass.envMapIntensity = 0.45 + 1.4 * s.glassRefuses;
+      mats.glass.envMapIntensity = 0.15 + 1.1 * s.glassRefuses;
       flapNow = dt > 0 ? damp(flapNow, s.flapOpen, 5, Math.min(dt, 0.1)) : flapNow;
       house.collector.setFlap(flapNow);
       twin.collector.setFlap(flapNow);

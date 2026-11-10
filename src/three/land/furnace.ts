@@ -305,16 +305,7 @@ export function buildMonument(mats: Mats): Monument {
   const collector = buildElement(mats, ELEMENT_1974, bays, null);
   collector.root.position.set(0, 5.2, M.depth / 2 + 0.4);
   group.add(collector.root);
-  // the wall behind the band: the elements stand on a rendered plinth and a back wall the thickness of the element
-  group.add(
-    Object.assign(
-      new THREE.Mesh(
-        bx(-M.length / 2, 4.5, M.depth / 2 - 0.9, M.length / 2, 5.2 + ELEMENT_1974.height, M.depth / 2 + 0.4),
-        render,
-      ),
-      { castShadow: true, name: 'monument-trombe-base' },
-    ),
-  );
+  // a plinth under the band and a band of render over it: the elements' own back wall is the building's
   return { group, collector };
 }
 
@@ -379,17 +370,18 @@ export function buildRidges(snowTone = new THREE.Color(0xf2f4f8)): {
     return hor[hor.length - 1]![1];
   };
   const layers = [
-    { r: 3800, scale: 0.55 },
+    { r: 2600, scale: 0.5 },
+    { r: 4000, scale: 0.8 },
     { r: 6200, scale: 1.0 },
   ];
   const heightAt = (az: number, layer: number): number => {
     const L = layers[layer]!;
     const base = Math.tan((angleAt(az) * Math.PI) / 180) * L.r * L.scale;
     const ang = (az * Math.PI) / 180;
-    return (
-      base * (0.8 + 0.5 * fbm(Math.cos(ang) * 3 + layer * 7, Math.sin(ang) * 3, 4)) +
-      60 * fbm(ang * 9 + layer * 3, 2.2, 3)
-    );
+    // broad swells, then peaks and cols: two octaves finer than the model's coarse horizon
+    const broad = 0.7 + 0.6 * fbm(Math.cos(ang) * 3 + layer * 7, Math.sin(ang) * 3, 4);
+    const peaks = 0.5 * Math.abs(fbm(ang * 22 + layer * 5, 4.1, 3) - 0.5) * 2 + 0.35 * fbm(ang * 60 + layer, 1.7, 3);
+    return base * broad * (0.85 + 0.5 * peaks) + 40 * fbm(ang * 9 + layer * 3, 2.2, 3);
   };
   const pos: number[] = [];
   const col: number[] = [];
@@ -406,9 +398,10 @@ export function buildRidges(snowTone = new THREE.Color(0xf2f4f8)): {
       const x = -Math.sin(a) * L.r;
       const z = Math.cos(a) * L.r;
       pos.push(x, -120, z, x, h, z);
-      c.setHSL(0.6, 0.12, 0.34 + 0.06 * li);
+      // the foot is forest, the crown a blue-grey going to snow: nearer rings darker, further ones paler
+      c.setHSL(0.3, 0.14, 0.2 + 0.05 * li);
       col.push(c.r, c.g, c.b);
-      const top = c.clone().lerp(snowTone, 0.5 + 0.2 * li);
+      const top = new THREE.Color().setHSL(0.6, 0.1, 0.42 + 0.06 * li).lerp(snowTone, 0.45 + 0.15 * li);
       col.push(top.r, top.g, top.b);
       if (i > 0) {
         const p = b0 + (i - 1) * 2;
