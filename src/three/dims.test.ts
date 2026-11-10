@@ -12,7 +12,10 @@ import {
   ELEMENT_1974,
   LENGTH,
   ROOF_PITCH,
+  ROOM,
   TUBE,
+  X_EAST_IN,
+  X_WEST_IN,
   Y_EAVE,
   Y_RIDGE,
   bayX,
@@ -121,12 +124,23 @@ describe('the dimensions', () => {
     const w = landAtWalls();
     expect(w.north).toBeCloseTo(GROUND_NORTH, 6);
     expect(w.south).toBeCloseTo(GROUND_SOUTH, 6);
-    expect(GROUND_NORTH - GROUND_SOUTH).toBeGreaterThan(1.6);
-    expect(GROUND_NORTH - GROUND_SOUTH).toBeLessThan(3.6);
+    // the low end of the open data's 2 to 3.5 m (research §3): 2.0 m, the same figure as docs/3d.md
+    expect(GROUND_NORTH - GROUND_SOUTH).toBeCloseTo(2.0, 9);
+    // and the eaves, from the south ground, stay inside the open data's 5.8 to 6.7 m
+    expect(Y_EAVE - GROUND_SOUTH).toBeGreaterThan(5.8);
+    expect(Y_EAVE - GROUND_SOUTH).toBeLessThan(6.7);
     for (const x of [-12, -7, 0, 7, 30, 50]) expect(groundY(x, 0)).toBeCloseTo(slopeY(0), 9);
     // monotone along the front: falls to the south, rises to the north
     for (let z = -30; z < 40; z += 2) expect(slopeY(z + 2)).toBeLessThan(slopeY(z));
     expect(Z_SOUTH).toBeGreaterThan(Z_NORTH);
+  });
+
+  it('places the north window and the fresh-air vent along the north wall, clear of the gables and of each other', () => {
+    const a = ROOM.northWindow;
+    const b = ROOM.freshVent;
+    expect(a.x - a.w / 2).toBeGreaterThan(X_WEST_IN);
+    expect(b.x + b.w / 2).toBeLessThan(X_EAST_IN);
+    expect(b.x - b.w / 2).toBeGreaterThan(a.x + a.w / 2);
   });
 
   it('draws the earth tube at the model’s size: 50 m, Ø0.2 m, 2 m deep', () => {

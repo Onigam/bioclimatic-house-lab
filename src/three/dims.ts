@@ -222,9 +222,12 @@ export const WALL = 0.3;
 export const SLAB = 0.2;
 /** Ceiling's thickness. estimate: a slab of board and plaster on joists, thin. */
 export const CEILING_T = 0.06;
-/** Ground at the north wall and at the south front, m under the floor: the ground falls to the south. estimate: open data says about 2–3.5 m over the footprint, plan precision 3 m (research §3); the low end. */
+/**
+ * Ground at the north wall and at the south front, m under the floor: the ground falls to the south by 2.0 m over the 6.6 m of the footprint. estimate: open data says about 2–3.5 m over the footprint, plan precision 3 m
+ * (research §3); this is the low end, with the floor 0.3 m above the ground at the north wall (a plinth). The eaves then stand 6.5 m over the ground at the south front, inside the open data's 5.8–6.7 m.
+ */
 export const GROUND_NORTH = -0.3;
-export const GROUND_SOUTH = -2.0;
+export const GROUND_SOUTH = GROUND_NORTH - 2.0;
 /** Footing under the foundation walls, below the ground. estimate */
 export const FOOTING = 0.5;
 /** Steps of the gables' foundation. estimate: five steps of the slope's fall over 6.6 m. */
@@ -239,7 +242,10 @@ export const Y_EAVE = elementLayout(ELEMENT_1967).yTop + 0.08;
 export const Y_RIDGE = Y_EAVE + Z_SOUTH * Math.tan(ROOF_PITCH);
 /** Roof's build-up, from the rafters up: rafters and boards, insulation, battens and covering. estimate (research §3: roof build-up unknown; G·V stands for the whole). */
 export const ROOF = { rafter: 0.14, insulation: 0.1, cover: 0.03 } as const;
-/** The chimney: one stack on the roof (research: « the use of the chimney is unknown »). Its place on the plan is an estimate. */
+/**
+ * The chimney: one stack on the roof (research: « the use of the chimney is unknown »). Its place on the plan is an estimate. `above` is measured from the RIDGE LINE (`Y_RIDGE`) to the top of the stack, under its cap
+ * and flue pot, whatever slope the stack comes through: the stack stands north of the ridge (z = −0.9), where the roof's surface is 0.4 m lower, so it clears the roof's surface at its foot by 0.9 + 0.4 m. estimate
+ */
 export const CHIMNEY = { x: -4.4, z: -0.9, w: 0.5, d: 0.5, above: 0.9, cap: 0.08 } as const;
 
 /** Where a gable's foundation steps, m: the fall in `GABLE_STEPS` equal steps from the north to the south. derived */
@@ -297,10 +303,10 @@ export const ROOM = {
   /** estimate: the panel on the partition; a recorder on its desk, instruments of 1974–75. */
   panel: { w: 0.32, h: 0.42, d: 0.1, y: 1.4 },
   recorder: { w: 0.42, h: 0.2, d: 0.34 },
-  /** estimate: a north window, small and few (S2 on the principle). */
-  northWindow: { w: 0.9, sill: 1.0, head: 2.0 },
-  /** estimate: the fresh-air vent, low on the north wall. Where fresh air comes in is unknown (research §2.11). */
-  freshVent: { w: 0.3, h: 0.15, y: 0.2 },
+  /** estimate: a north window, small and few (S2 on the principle). `x` is its centre along the north wall (the heater stands under it). */
+  northWindow: { x: -0.6, w: 0.9, sill: 1.0, head: 2.0 },
+  /** estimate: the fresh-air vent, low on the north wall. `x` is its centre along the wall. Where fresh air comes in is unknown (research §2.11). */
+  freshVent: { x: 1.55, w: 0.3, h: 0.15, y: 0.2 },
 } as const;
 
 /** Depths of the thermocouples in the wall from its outer face, m, at the 0.60 m wall: the drawn wall scales them with its thickness. estimate: S1 gives 0.1 mm copper-constantan « at depths » (no list); a spread that shows the wave, the first and last a bead's radius and more from the faces. */

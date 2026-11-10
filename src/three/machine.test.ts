@@ -219,7 +219,8 @@ describe('attached and resting', () => {
   it('the chimney stands on the ceiling and clears the ridge', () => {
     const stack = geoBox(named(house.build.groups.chimney, 'stack'), house.build.root);
     expect(Math.abs(stack.min.y - (CEILING + CEILING_T))).toBeLessThan(0.003);
-    expect(stack.max.y).toBeGreaterThan(Y_RIDGE + 0.6);
+    // `CHIMNEY.above` is measured from the ridge line to the stack's top (dims.ts), which is what the drawing's elevation reads too
+    expect(Math.abs(stack.max.y - (Y_RIDGE + CHIMNEY.above))).toBeLessThan(0.003);
     expect(Math.abs(stack.min.x - (CHIMNEY.x - CHIMNEY.w / 2))).toBeLessThan(0.003);
   });
   it('the north wall stands on the ground at its foot, the south ground is where the dims say', () => {

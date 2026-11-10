@@ -21,10 +21,10 @@ const V = (x: number, y: number, z: number) => new THREE.Vector3(x, y, z);
 
 /** Where things stand on the north wall (x along it): estimates. */
 export const AT = {
-  heaterX: -0.6,
+  heaterX: ROOM.northWindow.x,
   panelX: 0.55,
   thermostatX: 1.05,
-  ventX: 1.55,
+  ventX: ROOM.freshVent.x,
   /** The recorder's desk and the recorder, on the south wall's side, east of the entrance, by the sample element's junction box. */
   desk: { x0: 0.9, x1: 1.5, z1: 2.5, depth: 0.58 },
   /** The ceiling hook of the air probe. */

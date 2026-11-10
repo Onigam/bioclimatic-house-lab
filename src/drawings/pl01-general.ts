@@ -20,7 +20,7 @@ import {
   PARTITION,
   RECESS,
   RECESS_BAYS,
-  ROOF_PITCH,
+  ROOM,
   WALL,
   WINDOW,
   WINDOW_BAY,
@@ -43,7 +43,6 @@ const S = 1 / 110;
 /** Plan: east to the right, north up; the south front is at the bottom. */
 const P = (x: number, z: number): Pt => [mm(x), mm(-z)];
 const E = (x: number, y: number): Pt => [mm(x), mm(y)];
-const TAN = Math.tan(ROOF_PITCH);
 const recessC = (bayX(RECESS_BAYS[0]!) + bayX(RECESS_BAYS[1]!)) / 2;
 /** Risers of the balcony's stair: the ground's fall over the riser, rounded up. derived from estimates */
 const RISERS = Math.ceil(-GROUND_SOUTH / BALCONY.rise);
@@ -57,7 +56,14 @@ function plan(d: Drawing): View {
   v.rect(P(X_WEST + WALL, zIn), P(X_EAST - WALL, Z_NORTH_IN), { w: W.thin, fill: FILL.plaster });
   v.rect(P(LIVING_X0, zIn), P(LIVING_X1, Z_NORTH_IN), { w: W.thin, fill: FILL.glass });
   // the walls: north, the two gables
-  v.rect(P(X_WEST, Z_NORTH), P(X_EAST, Z_NORTH_IN), { w: W.medium, fill: FILL.concrete });
+  // the north wall, with the north window's opening in it (its x is `ROOM.northWindow.x`)
+  const nwx = ROOM.northWindow;
+  v.rect(P(X_WEST, Z_NORTH), P(nwx.x - nwx.w / 2, Z_NORTH_IN), { w: W.medium, fill: FILL.concrete });
+  v.rect(P(nwx.x + nwx.w / 2, Z_NORTH), P(X_EAST, Z_NORTH_IN), { w: W.medium, fill: FILL.concrete });
+  v.line(P(nwx.x - nwx.w / 2, Z_NORTH + WALL / 2), P(nwx.x + nwx.w / 2, Z_NORTH + WALL / 2), {
+    w: W.medium,
+    color: '#4a8fb0',
+  });
   v.rect(P(X_WEST, Z_NORTH), P(X_WEST + WALL, Z_SOUTH), { w: W.medium, fill: FILL.concrete });
   v.rect(P(X_EAST - WALL, Z_NORTH), P(X_EAST, Z_SOUTH), { w: W.medium, fill: FILL.concrete });
   // the south front, bay by bay
@@ -144,6 +150,7 @@ function plan(d: Drawing): View {
   });
   v.leader(P(LIVING_X0 + 0.9, Z_NORTH_IN + 1.3), 0, 26, l('salon', 'living room'), { size: 1.9 });
   v.leader(P(CHIMNEY.x, CHIMNEY.z), -8, -16, l('cheminée', 'chimney'), { size: 1.9 });
+  v.leader(P(nwx.x, Z_NORTH + 0.1), 0, -14, l('fenêtre nord', 'north window'), { size: 1.9 });
   v.leader(P(X_WEST + WALL / 2, -0.9), 8, 3, l('pignon', 'gable'), { size: 1.9 });
   v.caption(E(0, -9.0), l('PLAN, AU NIVEAU DE LA DALLE', 'PLAN, AT THE LEVEL OF THE SLAB'), '1:110');
   return v;
@@ -151,15 +158,14 @@ function plan(d: Drawing): View {
 
 function elevation(d: Drawing): View {
   const v = d.view(116, 221, S);
-  const ridgeAt = (z: number): number => Y_RIDGE - Math.abs(z) * TAN;
   // the ground at the south front, and the foundation under the front
   v.line(E(X_WEST - 1.2, GROUND_SOUTH), E(X_EAST + 1.2, GROUND_SOUTH), { w: W.medium });
   v.rect(E(X_WEST, GROUND_SOUTH), E(X_EAST, L0.yBottom), { w: W.thin, fill: FILL.concrete });
   // the south roof plane and the head band under it
   v.rect(E(X_WEST - EAVE, Y_EAVE), E(X_EAST + EAVE, Y_RIDGE), { w: W.medium, fill: FILL.roof });
   v.rect(E(X_WEST, L0.yTop), E(X_EAST, Y_EAVE), { w: W.medium, fill: FILL.concrete });
-  // the chimney, through the north slope
-  const top = ridgeAt(CHIMNEY.z) + CHIMNEY.above;
+  // the chimney, through the north slope: its top is `CHIMNEY.above` over the ridge line, as in the 3D
+  const top = Y_RIDGE + CHIMNEY.above;
   v.rect(E(CHIMNEY.x - CHIMNEY.w / 2, Y_RIDGE - 0.15), E(CHIMNEY.x + CHIMNEY.w / 2, top), {
     w: W.medium,
     fill: FILL.plaster,

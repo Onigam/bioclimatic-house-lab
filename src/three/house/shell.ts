@@ -272,9 +272,9 @@ export function buildHouse(mats: Mats, opts: HouseOptions = {}): HouseBuild {
   // ---------------------------------------------------------------------------------------------- the north wall, with its window and the fresh-air vent
   {
     const nw = ROOM.northWindow;
-    const wx = -0.6;
+    const wx = nw.x;
     const fv = ROOM.freshVent;
-    const vx = 1.55;
+    const vx = fv.x;
     const holes = [
       rect(wx - nw.w / 2, nw.sill, wx + nw.w / 2, nw.head),
       rect(vx - fv.w / 2, fv.y, vx + fv.w / 2, fv.y + fv.h),
@@ -878,7 +878,7 @@ export function buildHouse(mats: Mats, opts: HouseOptions = {}): HouseBuild {
     anchors.eastGable = new THREE.Vector3(X_EAST, 2.3, 0.0);
     anchors.westGable = new THREE.Vector3(X_WEST, 2.3, 0.0);
     anchors.northWall = new THREE.Vector3(3.6, 2.4, Z_NORTH);
-    anchors.northWindow = new THREE.Vector3(-0.6, 1.9, Z_NORTH);
+    anchors.northWindow = new THREE.Vector3(ROOM.northWindow.x, 1.9, Z_NORTH);
     anchors.roof = new THREE.Vector3(2.0, roofTop(1.5), 1.5);
     anchors.insulation = new THREE.Vector3(3.0, CEILING + CEILING_T + 0.1, -1.0);
     anchors.slab = new THREE.Vector3(2.0, -0.12, 0.8);
