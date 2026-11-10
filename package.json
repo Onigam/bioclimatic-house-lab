@@ -2,7 +2,7 @@
   "name": "bioclimatic-house-lab",
   "private": true,
   "version": "0.1.0",
-  "description": "Interactive 3D lab of a bioclimatic house: Trombe wall, earth tube, solar dryer and solar cooker",
+  "description": "Interactive 3D lab of the bioclimatic house of 1967 at Odeillo: its black concrete wall, the slow wave of heat, the air in its gap, and the question: can a house heat itself? It explains, it gives no plan",
   "type": "module",
   "scripts": {
     "dev": "vite",
