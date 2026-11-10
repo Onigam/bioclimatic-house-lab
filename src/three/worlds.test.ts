@@ -66,10 +66,8 @@ for (const [id, mod] of worlds) {
       for (const pid of PART_IDS[id]) expect(reg.get(pid)!.meshes.length, pid).toBeGreaterThan(0);
     });
 
-    it('has a sheet in the catalogue for each part, once the author has written it', () => {
-      // `src/data/parts.ts` is the author's: until it holds this lab's parts it is the template's, and the check waits
-      const written = PARTS.some((p) => ALL_PART_IDS.includes(p.id));
-      if (!written) return;
+    it('has a sheet in the catalogue for each part, in the world that draws it', () => {
+      // the author's `src/data/parts.ts` holds the 56 sheets: the check no longer waits for them
       for (const pid of reg.ids()) {
         const p = PARTS.find((x) => x.id === pid);
         expect(p, pid).toBeDefined();
