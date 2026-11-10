@@ -28,8 +28,8 @@ export const LAB_STRINGS = {
 
   // ---- the intros
   plansIntro: [
-    'Dix planches A3 générées à partir des cotes du modèle 3D et des résultats de la simulation : la maison en plan et en élévation, la coupe d’hiver et d’été, l’élément à l’échelle, l’air dans les conduits, la vague dans le mur, Noël 1974, le soleil et les saisons, le bilan, 1967 et 1974, et l’ordre du montage. Ce sont des dessins pour comprendre : les cotes estimées portent une étoile.',
-    'Ten A3 sheets generated from the 3D model’s dimensions and the simulation’s results: the house in plan and elevation, the section in winter and summer, the element at scale, the air in the ducts, the wave in the wall, Christmas 1974, the sun and the seasons, the balance, 1967 and 1974, and the order of assembly. They are drawings for understanding: estimated dimensions carry a star.',
+    'Huit planches A3 générées à partir des cotes du modèle 3D et des résultats de la simulation : la maison en plan et en élévation, la coupe d’hiver et d’été, le soleil et les saisons, l’élément de captage, l’air dans les conduits, la vague dans le mur, Noël 1974 et le bilan d’une saison. Ce sont des dessins pour comprendre : les cotes estimées portent une étoile.',
+    'Eight A3 sheets generated from the 3D model’s dimensions and the simulation’s results: the house in plan and elevation, the section in winter and summer, the sun and the seasons, the collector element, the air in the ducts, the wave in the wall, Christmas 1974 and the balance of a season. They are drawings for understanding: estimated dimensions carry a star.',
   ],
   lessonsIntro: [
     'Sept leçons, chacune ouverte sur un scénario de la simulation, qui en parcourent les douze : le mur noir, la vague lente, Noël 1974 et ses 478 %, le soleil bas et le soleil haut, la question de la maison qui se chauffe seule, la nuit, l’air neuf et le sol. Le cœur est dans la deuxième et la cinquième.',
