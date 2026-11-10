@@ -200,6 +200,11 @@ export class HouseSim implements LabSim {
     this.load(s.params, s.spinUp, s.events);
   }
 
+  /** The scenario the machine was last started from, or null when it was started from a starting point. Read-only, for the panel: a lesson can start one from outside. */
+  get scenarioNow(): ScenarioId | null {
+    return this.lastKind === 'scenario' ? (this.lastId as ScenarioId) : null;
+  }
+
   /** Start again from the last preset or scenario. */
   reset(): void {
     if (this.lastKind === 'preset') this.applyPreset(this.lastId);
@@ -462,9 +467,3 @@ export class HouseSim implements LabSim {
     return this.cached('ladder', () => shareLadder({ ...this.params, sky: 'series' }));
   }
 }
-
-/**
- * The template's placeholder (`src/lab.ts`, `src/panels/sim.ts`, `src/three/device.ts`) until the lead wires the lab: they are other roles' files and they import these names from here. To be deleted then, with
- * `placeholder.ts`.
- */
-export { DemoSim, TAU, type DemoParams, type DemoState } from './placeholder';

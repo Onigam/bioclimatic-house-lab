@@ -1,6 +1,6 @@
 import { registerStrings, tx, type CommonKey } from '@onigam/lab-kit/i18n';
 
-// The lab's own interface strings, `key: [fr, en]`. The ones every lab shares (modes, toolbar, panels, guides) live in the kit; the simulation panel's words live in src/sim/texts.ts. This file holds the frame's words for this lab: its title,
+// The lab's own interface strings, `key: [fr, en]`. The ones every lab shares (modes, toolbar, panels, guides) live in the kit; the simulation panel's words live in src/sim/texts.ts and src/panels/strings.ts. This file holds the frame's words for this lab: its title,
 // the worlds and the shortcuts between them, the intros of the Plans and Lessons modes, and the notices of the Sources panel, each said once: the safety line, the hazards together, the reconstruction and the credits, how to read the figures.
 
 export const LAB_STRINGS = {
@@ -73,18 +73,9 @@ export const LAB_STRINGS = {
   ],
 } as const satisfies Record<string, readonly [string, string]>;
 
-// The template's flywheel strings, still used by `src/lab.ts` and `src/panels/sim.ts` until the lead wires the lab to `HouseSim` and the simulation panel (kept under their names so that the repository compiles): the lead deletes them then.
-const TEMPLATE_LEFTOVERS = {
-  sceneDevice: ['Dispositif', 'Device'],
-  simTitle: ['Simulation', 'Simulation'],
-  targetRpm: ['Vitesse cible', 'Target speed'],
-  liveRpm: ['Vitesse', 'Speed'],
-  groupDevice: ['Dispositif', 'Device'],
-} as const satisfies Record<string, readonly [string, string]>;
+registerStrings(LAB_STRINGS);
 
-registerStrings({ ...LAB_STRINGS, ...TEMPLATE_LEFTOVERS });
-
-export type UiKey = keyof typeof LAB_STRINGS | keyof typeof TEMPLATE_LEFTOVERS | CommonKey;
+export type UiKey = keyof typeof LAB_STRINGS | CommonKey;
 
 export { colon } from '@onigam/lab-kit/i18n';
 

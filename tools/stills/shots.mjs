@@ -1,5 +1,5 @@
-// The modeler's stills: headless Chrome for Testing, one browser for a list of shots. Not part of the lab: a review aid, run through `shots.sh`, which takes the Mac's Chrome lock.
-//   URL=http://localhost:5863/src/three/dev/harness.html OUT=~/.cache/lab-review/bioclimatic-house-lab/3d SHOTS=shots.json node shots.mjs
+// Stills of the real lab in dev mode (`npm run dev`, which exposes `window.__lab`): headless Chrome for Testing, one browser for a list of shots. Not part of the app: a review aid, run through `shots.sh`, which takes the Mac's Chrome lock.
+//   URL=http://localhost:5863/ OUT=~/.cache/lab-review/bioclimatic-house-lab/3d SHOTS=shots.json node shots.mjs
 // Each shot: { name, scene, sim: {…params}, steps, store: {…}, cam: { pos: [x,y,z], target: [x,y,z] }, frame: [partIds], padding, wait }
 import fs from 'node:fs';
 import { createRequire } from 'node:module';
@@ -22,7 +22,10 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const browser = await puppeteer.launch({
   executablePath: CHROME,
   headless: 'new',
-  args: process.env.GL === 'swiftshader' ? ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--hide-scrollbars'] : ['--use-gl=angle', '--use-angle=metal', '--enable-gpu', '--ignore-gpu-blocklist', '--hide-scrollbars'],
+  args:
+    process.env.GL === 'swiftshader'
+      ? ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--hide-scrollbars']
+      : ['--use-gl=angle', '--use-angle=metal', '--enable-gpu', '--ignore-gpu-blocklist', '--hide-scrollbars'],
 });
 const errors = [];
 try {
@@ -53,14 +56,28 @@ try {
         await settle(800);
       }
       // a world built on its first visit takes a while to draw its first frames: wait until the stage shows it
-      await page.waitForFunction((id) => window.__lab.stage.active?.id === id, { timeout: 240000 }, s.scene).catch(() => {});
+      await page
+        .waitForFunction((id) => window.__lab.stage.active?.id === id, { timeout: 240000 }, s.scene)
+        .catch(() => {});
       await settle(1200);
     }
-    await page.evaluate(() => window.__lab.store.set({ mode: 'explore', selected: null, isolate: false, xray: false, explode: 0, cutaway: false, schematic: false, labels: 'none', panelOpen: false }));
-    if (s.sim) await page.evaluate((p) => window.__sim.set(p), s.sim);
+    await page.evaluate(() =>
+      window.__lab.store.set({
+        mode: 'explore',
+        selected: null,
+        isolate: false,
+        xray: false,
+        explode: 0,
+        cutaway: false,
+        schematic: false,
+        labels: 'none',
+        panelOpen: false,
+      }),
+    );
+    if (s.sim) await page.evaluate((p) => window.__lab.engine.set(p), s.sim);
     if (s.steps)
       await page.evaluate((n) => {
-        for (let i = 0; i < n; i++) window.__sim.step(1 / 30);
+        for (let i = 0; i < n; i++) window.__lab.engine.step(1 / 30);
       }, s.steps);
     if (s.store) await page.evaluate((p) => window.__lab.store.set(p), s.store);
     if (s.frame) {

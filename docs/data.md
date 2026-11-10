@@ -14,7 +14,7 @@ The texts of the lab, in French and English written together: 56 part sheets, th
 | `src/data/overviews.ts`           | `{ title, text }` of the four worlds, for `scenes[i].overview`                                                                                                                                                         |
 | `src/data/lessons.ts`             | the seven lessons, see `docs/lessons.md`                                                                                                                                                                               |
 | `src/data/sources.ts`, `about.ts` | the Sources panel as data and the function that builds it (`about: aboutPanel`): links, how each source was read, the law place by place                                                                               |
-| `src/i18n/ui.ts`                  | title, tagline, worlds, shortcuts, intros of Plans and Lessons, the notices of the Sources panel. The template's flywheel strings are kept at the end, marked, until the lead wires the lab                            |
+| `src/i18n/ui.ts`                  | title, tagline, worlds, shortcuts, intros of Plans and Lessons, the notices of the Sources panel. The template's flywheel strings are deleted: the lead wired the lab                                                  |
 | `src/data/*.test.ts`              | `data.test.ts` (ids, sheets, guides, overviews, numbers, marks, once-only, position), `figures.test.ts`, `lessons.test.ts`, `rich.test.ts`; `reported.ts` and `texts.ts` are their helpers                             |
 
 ## What the lead wires in `src/lab.ts`
@@ -22,7 +22,7 @@ The texts of the lab, in French and English written together: 56 part sheets, th
 - `brand.title: strL('labTitle')`, `tagline: strL('tagline')`; the four scenes `site`, `house`, `wall`, `room` with `label: strL('scene…')` and `overview: { ...OVERVIEWS[id], actions }` (the shortcuts are `goSite`, `goHouse`, `goWall`, `goRoom`).
 - `guides: { assembly: { scene: 'house', steps: ASSEMBLY }, install: { scene: 'house', steps: INSTALL } }`: **every step names its own world** (`scene`), the guide's is only the default.
 - `lessons: { items: LESSONS, intro: strL('lessonsIntro') }`, `plans: { sheets: SHEETS, groups: SHEET_GROUPS, intro: strL('plansIntro') }`, `about: aboutPanel`, `partLinks` (`prototype-house` → `house`, `collector-element` → `wall`, `interior-partitions` → `room`), `envelopeMark: '*'` (the sheet's « Encombrement » is the 3D's own measure), `strip.alarms` with `allGood` already overridden to « Aucune alerte ».
-- Delete `src/three/device.ts`, `src/sim/placeholder.ts`, the flywheel strings at the end of `src/i18n/ui.ts` and the template's `src/panels/sim.ts` words when the panel is wired.
+- _Done by the lead:_ `src/three/device.ts`, `src/sim/placeholder.ts`, the flywheel strings of `src/i18n/ui.ts` and the template's `src/panels/sim.ts` are deleted; the simulation panel is written (`src/panels/`).
 - `public/lab.json`: proposed title « Maison bioclimatique : le mur qui garde le soleil » / « Bioclimatic house: the wall that keeps the sun » (research §8, question 9, **the owner's answer is pending**); tagline « Une maison peut-elle se chauffer seule ? » / « Can a house heat itself? »; a fuller line for the showcase: FR « Une maison de 1967 à Odeillo, coupée en deux : un mur de béton noir de 60 cm derrière deux vitres, la vague de chaleur qui y marche à 4 cm par heure, et la question que posent ses inventeurs : une maison peut-elle se chauffer seule ? » / EN « A house of 1967 at Odeillo, cut open: a black concrete wall 60 cm thick behind two sheets of glass, the wave of heat that walks through it at 4 cm an hour, and the question its inventors ask: can a house heat itself? ».
 
 ## Conventions
@@ -42,7 +42,7 @@ The frame's section (22 mm), its glazing bars and four panes to a column; the 25
 
 ## Gaps and open questions (nothing is filled)
 
-1. **The ground's fall.** `docs/3d.md` says 2.0 m over the footprint; `dims.ts` has the ground at −0.3 m at the north wall and −2.0 m at the south front, which is 1.7 m between them, and the sheets print what `dims.ts` computes (1.7 m\*, and the balcony stands « plus de 2 m » above the ground at its edge). To reconcile in `3d.md`, not in the text (`docs/3d-requests.md`).
+1. **The ground's fall** — _settled at integration:_ 2.0 m, the low end of the open data's 2 to 3.5 m; `dims.ts` now agrees with `docs/3d.md`, the sheets print 2.0 m\*, and the balcony stands « plus de 2 m » above the ground at its edge (`docs/3d-requests.md`).
 2. **The pyranometer's plane.** The research names a Kipp pyranometer « at the laboratory » and does not say how it was oriented, so the sheet says only what the paper counts. To read on the page.
 3. **Whether S1's « 1967 prototypes » are one design twice** (S5, searched only): the twin's sheet says the paper speaks of prototypes and nothing more. Open question 3 of the research (the IGN outline) is stated on that sheet and in the Sources, flagged, without a place.
 4. **What the paper's letters T_s and V mean** (figure 1): the head and sill sheets say they are read as a head and a foot, our reading.
@@ -50,7 +50,7 @@ The frame's section (22 mm), its glazing bars and four panes to a column; the 25
 6. **How the houses changed position, and when**: the paper does not say; the model's June is run in the summer position by choice.
 7. **The monument's plan** and the **protection dossier** (S5): unread, the host does not answer; the Sources say so. Research question 6 (writing to PROMES-CNRS and the DRAC) is the owner's.
 8. **The video question (research §8, question 4).** The roadmap's film that sells a document and says 1956 and 20 cm **is not credited**, as the research recommends; Penn Ar Web's film (CC BY) is credited as a companion, **not heard**, no fact taken from it. If the owner keeps the first, a line goes to `sources.ts` and to nothing else.
-9. **The title (question 9)** is the research's proposal, awaiting the owner.
+9. **The title (question 9)** is the research's proposal, awaiting the owner; applied as a **reversible default** at integration in `public/lab.json` (title; tagline = the fuller showcase line above, as the sister labs do), `index.html`, `package.json`, the README and the strings `labTitle` and `tagline`. The visitor-facing tagline under the title in the app stays the short question.
 10. **The architect's earth-tube figures** (10 and 17 °C) are left out: the transcript is Whisper's, numbers to check by ear. The lesson gives his opinion, his reservations and « his figures are illustrations ».
 
 ## What rests on a source read only in summary
