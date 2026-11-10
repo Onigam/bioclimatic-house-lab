@@ -225,18 +225,31 @@ export function createRoomScene(opts: RoomOptions = {}): RoomScene {
       visibleFrom: (c) => c.x < LIVING_X1 - 0.05,
     },
   ];
-  const ghosted = new Map<THREE.Material, boolean>();
+  // a wall that the camera goes through fades to its ghost and back over a fifth of a second, not in one frame (the clock is the view's)
+  const opacity = new Map<THREE.Material, number>();
+  let clock = 0;
+  let clockAt = 0;
   const ceilingGroup = groups['room-ceiling'];
   scene.onBeforeRender = (_r, _s, camera) => {
     const p = camera.position;
+    const dtf = Math.min(0.1, Math.max(0, clock - clockAt));
+    clockAt = clock;
     for (const w of wallSides) {
-      const ghost = !w.visibleFrom(p);
-      if (ghosted.get(w.mat) !== ghost) {
-        w.mat.transparent = ghost;
-        w.mat.opacity = ghost ? 0.1 : 1;
-        w.mat.depthWrite = !ghost;
-        w.mat.needsUpdate = true;
-        ghosted.set(w.mat, ghost);
+      const target = w.visibleFrom(p) ? 1 : 0.1;
+      const cur = opacity.get(w.mat) ?? 1;
+      const next =
+        dtf > 0 || !opacity.has(w.mat)
+          ? cur + (target - cur) * Math.min(1, 8 * Math.max(dtf, 0.1 * (opacity.has(w.mat) ? 0 : 1)))
+          : cur;
+      if (!opacity.has(w.mat) || Math.abs(next - cur) > 1e-4) {
+        opacity.set(w.mat, next);
+        w.mat.opacity = next;
+        const clear = next < 0.999;
+        if (w.mat.transparent !== clear) {
+          w.mat.transparent = clear;
+          w.mat.needsUpdate = true;
+        }
+        w.mat.depthWrite = next > 0.6;
       }
     }
     // the ceiling is hidden from above (and its lamp with it) unless it is shown on its own
@@ -264,6 +277,7 @@ export function createRoomScene(opts: RoomOptions = {}): RoomScene {
     homePadding: 0.8,
     declutter: true,
     update(s, dt, view) {
+      clock = view.time;
       const p = opts.params?.();
       const next = elementSpecOf({
         build: '1967',

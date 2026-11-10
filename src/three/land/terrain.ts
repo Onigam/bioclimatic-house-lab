@@ -146,8 +146,8 @@ export function buildBlock(o: BlockOptions): Terrain {
   g.setIndex(idx);
   g.computeVertexNormals();
   const mat = new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: 1, metalness: 0 });
+  // the diorama's top is plain: the kit's grass detail crawls under a slow orbit, and a block seen from thirty metres does not need it
   patchLand(mat);
-  grassDetail(mat);
   const top = new THREE.Mesh(g, mat);
   top.name = 'land';
   top.receiveShadow = true;

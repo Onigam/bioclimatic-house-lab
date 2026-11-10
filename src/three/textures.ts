@@ -469,9 +469,10 @@ export const slateMap = (): THREE.DataTexture =>
     const uu = (u * cols + (r % 2 ? 0.5 : 0)) % 1;
     const col = Math.floor(u * cols + (r % 2 ? 0.5 : 0));
     const vv = (v * rows) % 1;
-    const tone = 0.74 + 0.4 * hash1(r * 17 + col, 9);
-    const edge = (Math.min(uu, 1 - uu) < 0.03 ? 0.7 : 1) * (vv < 0.12 ? 0.62 : 1);
-    const k = tone * edge * (0.92 + 0.1 * (hash1(i, j) - 0.5));
+    // quiet: a slate roof seen from thirty metres crawls when its joints are dark lines, so the joints are only a little darker
+    const tone = 0.84 + 0.26 * hash1(r * 17 + col, 9);
+    const edge = (Math.min(uu, 1 - uu) < 0.03 ? 0.88 : 1) * (vv < 0.12 ? 0.82 : 1);
+    const k = tone * edge * (0.96 + 0.06 * (hash1(i, j) - 0.5));
     return [k * 0.96, k * 0.98, k * 1.04];
   });
 
