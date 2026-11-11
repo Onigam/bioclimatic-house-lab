@@ -18,7 +18,7 @@ import { oakSeason, stand, type Placement } from '../land/trees';
 import { buildFurnace, buildHeliostats, buildMonument, buildPyranometer, buildRidges } from '../land/furnace';
 import { makeMaterials } from '../materials';
 import { makeRig } from '../sun';
-import { anchor, box, hotspots, viewFrom, type HotspotDef, type PartFraming } from '../world';
+import { anchor, box, crowdLabels, hotspots, viewFrom, type HotspotDef, type PartFraming } from '../world';
 import { gravelMap, tiled } from '../textures';
 import { smoothstep } from '../common';
 
@@ -53,11 +53,11 @@ const HOTSPOTS: HotspotDef[] = [
   { id: 'solar-furnace', fr: 'Four solaire', en: 'Solar furnace', wide: true },
   { id: 'heliostat-terraces', fr: 'Héliostats', en: 'Heliostats', minor: true },
   { id: 'solar-houses-1974', fr: 'Maisons de 1974', en: 'Houses of 1974' },
-  { id: 'far-ridge', fr: 'Crêtes', en: 'Ridges', minor: true },
-  { id: 'granite-slope', fr: 'Pente de granit', en: 'Granite slope', minor: true },
-  { id: 'meadow-clearing', fr: 'Clairière', en: 'Clearing', minor: true },
-  { id: 'tree-clumps', fr: 'Bosquets', en: 'Tree clumps', minor: true },
-  { id: 'access-road', fr: 'Route', en: 'Road', minor: true },
+  { id: 'far-ridge', fr: 'Crêtes', en: 'Ridges', minor: true, crowd: true },
+  { id: 'granite-slope', fr: 'Pente de granit', en: 'Granite slope', minor: true, crowd: true },
+  { id: 'meadow-clearing', fr: 'Clairière', en: 'Clearing', minor: true, crowd: true },
+  { id: 'tree-clumps', fr: 'Bosquets', en: 'Tree clumps', minor: true, crowd: true },
+  { id: 'access-road', fr: 'Route', en: 'Road', minor: true, crowd: true },
   { id: 'pyranometer', fr: 'Pyranomètre', en: 'Pyranometer', minor: true },
   { id: 'prototype-house#dec', fr: 'Soleil de décembre', en: 'December sun', minor: true },
   { id: 'prototype-house#jun', fr: 'Soleil de juin', en: 'June sun', minor: true },
@@ -448,6 +448,7 @@ export function createSiteScene(opts: SiteOptions = {}): SiteScene {
   const drawn = { snow: 0, sunAltitude: 0, spec };
   let flapNow = 0;
   const sunPos = new THREE.Vector3();
+  const phoneLabels = crowdLabels(HOTSPOTS, anchors);
   const mod: SiteScene = {
     id: 'site',
     scene,
@@ -472,6 +473,7 @@ export function createSiteScene(opts: SiteOptions = {}): SiteScene {
     homePadding: 0.8,
     declutter: true,
     update(s, dt, view) {
+      phoneLabels();
       const p = opts.params?.();
       const next = elementSpecOf({
         build: '1967',

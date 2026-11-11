@@ -27,7 +27,7 @@ import { makeMaterials } from '../materials';
 import { Followers } from '../follow';
 import { Caps, ClipSet } from '../section';
 import { makeRig } from '../sun';
-import { anchor, box, hotspots, viewFrom, type HotspotDef, type PartFraming } from '../world';
+import { anchor, box, crowdLabels, hotspots, viewFrom, type HotspotDef, type PartFraming } from '../world';
 import { AT } from './equipment';
 import { buildLiving } from './living';
 
@@ -59,15 +59,15 @@ const HOTSPOTS: HotspotDef[] = [
   { id: 'inner-wall-face', fr: 'Face intérieure du mur', en: 'Inner face of the wall', wide: true },
   { id: 'warm-air-jet', fr: 'Jet d’air chaud', en: 'Warm-air jet', wide: true },
   { id: 'floor-return', fr: 'Retour au sol', en: 'Floor return', wide: true },
-  { id: 'thermostat', fr: 'Thermostat', en: 'Thermostat', minor: true },
+  { id: 'thermostat', fr: 'Thermostat', en: 'Thermostat', minor: true, crowd: true },
   { id: 'electric-heater', fr: 'Radiateur électrique', en: 'Electric heater', minor: true },
   { id: 'chart-recorder', fr: 'Enregistreur', en: 'Chart recorder' },
   { id: 'electric-panel', fr: 'Tableau électrique', en: 'Electric panel', minor: true },
-  { id: 'room-air-probe', fr: 'Sonde d’air', en: 'Air probe', minor: true },
-  { id: 'room-surface-probes', fr: 'Sondes de surface', en: 'Surface probes', minor: true },
-  { id: 'fresh-air-vent', fr: 'Entrée d’air frais', en: 'Fresh-air vent', minor: true },
+  { id: 'room-air-probe', fr: 'Sonde d’air', en: 'Air probe', minor: true, crowd: true },
+  { id: 'room-surface-probes', fr: 'Sondes de surface', en: 'Surface probes', minor: true, crowd: true },
+  { id: 'fresh-air-vent', fr: 'Entrée d’air frais', en: 'Fresh-air vent', minor: true, crowd: true },
   { id: 'room-floor', fr: 'Sol', en: 'Floor', minor: true },
-  { id: 'room-ceiling', fr: 'Plafond', en: 'Ceiling', minor: true },
+  { id: 'room-ceiling', fr: 'Plafond', en: 'Ceiling', minor: true, crowd: true },
   { id: 'armchair', fr: 'Fauteuil', en: 'Armchair', minor: true },
 ];
 
@@ -291,6 +291,7 @@ export function createRoomScene(opts: RoomOptions = {}): RoomScene {
 
   let flapNow = 0;
   const hotspotList = hotspots(HOTSPOTS, anchors) as Hotspot[];
+  const phoneLabels = crowdLabels(HOTSPOTS, anchors);
   const mod: RoomScene = {
     id: 'room',
     scene,
@@ -309,6 +310,7 @@ export function createRoomScene(opts: RoomOptions = {}): RoomScene {
     homePadding: 0.8,
     declutter: true,
     update(s, dt, view) {
+      phoneLabels();
       clock = view.time;
       const p = opts.params?.();
       const next = elementSpecOf({

@@ -219,7 +219,7 @@ export function buildBlock(o: BlockOptions): Terrain {
       roughness: 1,
       metalness: 0,
       transparent: true,
-      opacity: 0.4,
+      opacity: 0.34,
       depthWrite: false,
     });
     lm.userData.noShare = true;

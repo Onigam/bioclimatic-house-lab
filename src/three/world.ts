@@ -12,9 +12,14 @@ export interface HotspotDef {
   minor?: boolean;
   /** World to open when the label is clicked. */
   goto?: string;
+  /** Left out of « Toutes » on a phone or a narrow window (under `PHONE_UNDER`): with every name on, a world of eighteen parts piles its dots on the few hundred pixels of a house, and the kit can only fold them. The part keeps its chip and its outline. */
+  crowd?: boolean;
   /** A main label that only has room in a wide view: at the far edge of a narrow one its name would be cut, and the kit cannot turn it round (`docs/kit-requests.md`, 22). Narrower, it counts as minor. */
   wide?: boolean;
 }
+
+/** The window under which a `crowd` label is left out, and the share of the minor labels a phone keeps (the rest is on the chips of the panel). */
+export const PHONE_UNDER = 700;
 
 /** The window under which a `wide` label steps back. The kit reads `minor` each time it refreshes the labels: on a change of world, of selection, of label mode. */
 export const WIDE_FROM = 1100;
@@ -65,3 +70,17 @@ export function hotspots(defs: HotspotDef[], anchors: Record<string, THREE.Objec
 
 /** The moving things are attached to this: the real bounding box of the meshes under an object. */
 export const worldBox = (o: THREE.Object3D): THREE.Box3 => new THREE.Box3().setFromObject(o, true);
+
+/**
+ * Put the labels marked `crowd` away on a narrow window: their anchors are hidden (the kit draws a label only where its anchor is shown), and shown again when the window is wide. Call it from the world's `update`; it reads the window's
+ * width and touches an anchor only when the answer changes. Without a window (the tests) every label stays.
+ */
+export function crowdLabels(defs: HotspotDef[], anchors: Record<string, THREE.Object3D>): () => void {
+  let narrow: boolean | null = null;
+  return () => {
+    const now = typeof window !== 'undefined' && window.innerWidth < PHONE_UNDER;
+    if (now === narrow) return;
+    narrow = now;
+    for (const d of defs) if (d.crowd && anchors[d.id]) anchors[d.id]!.visible = !now;
+  };
+}

@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { GHOST } from '@onigam/lab-kit/three';
 import type { SceneModule } from '@onigam/lab-kit/three';
 import type { HouseState } from '../sim/types';
@@ -374,15 +374,24 @@ describe('D2, D16: the earth tube is a buried pipe in a window of the ground', (
     expect(x1 - x0).toBeLessThan(TUBE_PIT.x1 - TUBE_PIT.x0 + 1.5);
     const walls = H.tube.pit.children.find((c) => c.name === 'pit-walls') as THREE.Mesh;
     const p = walls.geometry.attributes.position as THREE.BufferAttribute;
-    // the top vertices of a wall are at the land’s height at their own place, within a centimetre
+    // the top vertices of a wall are at the land’s height at their own place, and the land’s own surface just outside the window is as high as the wall’s top there, within a centimetre
+    const land0 = (house as unknown as { scenery(): THREE.Object3D[] }).scenery()[0] as THREE.Mesh;
     let worst = 0;
-    for (let i = 0; i < p.count; i++) {
-      const x = p.getX(i);
-      const z = p.getZ(i);
-      const gy = groundY(x, z);
-      if (Math.abs(p.getY(i) - gy) < 1e-6) worst = Math.max(worst, 0);
+    for (const [px, pz] of [
+      [x0 - 0.03, (z0 + z1) / 2],
+      [x1 + 0.03, z0 + 1],
+      [(x0 + x1) / 2, z0 - 0.03],
+      [(x0 + x1) / 2, z1 + 0.03],
+      [x0 + 2, z1 + 0.03],
+    ] as const) {
+      const r = new THREE.Raycaster(new THREE.Vector3(px, 40, pz), new THREE.Vector3(0, -1, 0));
+      const hit = r.intersectObject(land0)[0]!;
+      worst = Math.max(worst, Math.abs(hit.point.y - groundY(px, pz)));
     }
-    expect(worst).toBe(0);
+    expect(worst).toBeLessThan(0.01);
+    let top = 0;
+    for (let i = 0; i < p.count; i++) top = Math.max(top, p.getY(i) - groundY(p.getX(i), p.getZ(i)));
+    expect(top).toBeLessThan(1e-6);
     // the land has no triangle over the window: a ray from above, through its middle, hits the lid and the floor, not the land’s surface
     const land = (house as unknown as { scenery(): THREE.Object3D[] }).scenery()[0] as THREE.Mesh;
     const ray = new THREE.Raycaster(new THREE.Vector3((x0 + x1) / 2, 30, (z0 + z1) / 2), new THREE.Vector3(0, -1, 0));
@@ -623,4 +632,27 @@ describe('the world’s ghost is the kit’s', () => {
     for (const m of reg.get('earth-tube-pipe')!.meshes) expect(m.material).toBe(GHOST);
     reg.setDisplay('earth-tube-pipe', 'solid');
   });
+});
+
+describe('D19: « Toutes » on a phone keeps the labels that have room', () => {
+  afterEach(() => vi.unstubAllGlobals());
+  for (const [name, mod] of [
+    ['house', house],
+    ['wall', wall],
+    ['room', room],
+    ['site', site],
+  ] as const) {
+    it(`${name}: puts the crowd labels away under 700 px, puts them back above, and never touches a main label`, () => {
+      vi.stubGlobal('window', { innerWidth: 390 });
+      go(mod);
+      const anchorShown = (h: { anchor: THREE.Object3D }): boolean => h.anchor.visible;
+      const crowd = mod.hotspots.filter((h) => !anchorShown(h));
+      expect(crowd.length, `${name} labels put away`).toBeGreaterThanOrEqual(4);
+      for (const h of crowd)
+        expect((h as unknown as { minor?: boolean }).minor, `${name}: ${h.partId} is a minor label`).toBe(true);
+      vi.stubGlobal('window', { innerWidth: 1280 });
+      go(mod);
+      expect(mod.hotspots.every(anchorShown), `${name} labels back`).toBe(true);
+    });
+  }
 });

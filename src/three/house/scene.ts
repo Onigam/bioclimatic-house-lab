@@ -44,7 +44,7 @@ import { buildLiving } from '../room/living';
 import { buildOtherRooms } from '../room/others';
 import { Caps, ClipSet } from '../section';
 import { makeRig } from '../sun';
-import { anchor, box, hotspots, viewFrom, type HotspotDef, type PartFraming } from '../world';
+import { anchor, box, crowdLabels, hotspots, viewFrom, type HotspotDef, type PartFraming } from '../world';
 import { buildEarthTube, tubeRuns } from './earthtube';
 import { Z_RUN, buildHouse, roofUnder } from './shell';
 import { buildYard } from './yard';
@@ -113,20 +113,20 @@ const HOTSPOTS: HotspotDef[] = [
   { id: 'interior-partitions', fr: 'Pièces', en: 'Rooms', goto: 'room', wide: true },
   { id: 'pitched-roof', fr: 'Toit', en: 'Roof', wide: true },
   { id: 'entrance-balcony', fr: 'Balcon', en: 'Balcony', wide: true },
-  { id: 'south-window', fr: 'Fenêtre sud', en: 'South window', wide: true, minor: true },
+  { id: 'south-window', fr: 'Fenêtre sud', en: 'South window', wide: true, minor: true, crowd: true },
   { id: 'foundation', fr: 'Fondations', en: 'Foundation', wide: true },
   { id: 'south-facade', fr: 'Façade sud', en: 'South front', minor: true },
-  { id: 'entrance-recess', fr: 'Entrée en retrait', en: 'Entrance recess', minor: true },
+  { id: 'entrance-recess', fr: 'Entrée en retrait', en: 'Entrance recess', minor: true, crowd: true },
   { id: 'east-gable', fr: 'Pignon est', en: 'East gable', minor: true },
   { id: 'west-gable', fr: 'Pignon ouest', en: 'West gable', minor: true },
   { id: 'north-wall', fr: 'Mur nord', en: 'North wall', minor: true },
-  { id: 'north-window', fr: 'Fenêtre nord', en: 'North window', minor: true },
-  { id: 'roof-insulation', fr: 'Isolation du toit', en: 'Roof insulation', minor: true },
-  { id: 'floor-slab', fr: 'Dalle', en: 'Floor slab', minor: true },
+  { id: 'north-window', fr: 'Fenêtre nord', en: 'North window', minor: true, crowd: true },
+  { id: 'roof-insulation', fr: 'Isolation du toit', en: 'Roof insulation', minor: true, crowd: true },
+  { id: 'floor-slab', fr: 'Dalle', en: 'Floor slab', minor: true, crowd: true },
   { id: 'chimney', fr: 'Cheminée', en: 'Chimney', minor: true },
-  { id: 'earth-tube-intake', fr: 'Prise d’air (et si…)', en: 'Intake (what if…)', minor: true },
+  { id: 'earth-tube-intake', fr: 'Prise d’air (et si…)', en: 'Intake (what if…)', minor: true, crowd: true },
   { id: 'earth-tube-pipe', fr: 'Tuyau enterré (et si…)', en: 'Buried pipe (what if…)', minor: true },
-  { id: 'earth-tube-drain', fr: 'Purge (et si…)', en: 'Drain (what if…)', minor: true },
+  { id: 'earth-tube-drain', fr: 'Purge (et si…)', en: 'Drain (what if…)', minor: true, crowd: true },
 ];
 
 /** The explode: the roof up, the floor and foundation down, the south front out towards the sun, the walls out, the rooms' own pieces lifted, the what-if parts off along their own axes. */
@@ -488,6 +488,7 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
   const drawn = { flap: 0, snow: 0, cut: false, tube: false, spec };
   let gableCut = false;
   let flapNow = 0;
+  const phoneLabels = crowdLabels(HOTSPOTS, anchors);
   const mod: HouseScene = {
     id: 'house',
     scene,
@@ -513,6 +514,7 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
     homePadding: 0.8,
     declutter: true,
     update(s, dt, view) {
+      phoneLabels();
       const p = opts.params?.();
       const next = elementSpecOf({
         build: '1967',

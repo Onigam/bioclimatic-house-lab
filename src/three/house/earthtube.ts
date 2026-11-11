@@ -298,7 +298,7 @@ export function buildEarthTube(mats: Mats, hole: Hole): EarthTube {
     drainAt: new THREE.Vector3(dx, dg + 0.06, dz),
     hole,
     setOn(on) {
-      ghost.opacity = on ? 0.62 : 0.26;
+      ghost.opacity = on ? 0.8 : 0.45;
       ghost.color.set(on ? 0x6aa6c6 : 0x9db4c0);
     },
   };

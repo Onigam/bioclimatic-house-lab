@@ -24,7 +24,7 @@ import { Followers } from '../follow';
 import { Caps, ClipSet } from '../section';
 import { Slots } from '../slots';
 import { makeRig } from '../sun';
-import { anchor, box, hotspots, viewFrom, type HotspotDef, type PartFraming } from '../world';
+import { anchor, box, crowdLabels, hotspots, viewFrom, type HotspotDef, type PartFraming } from '../world';
 import { buildLivedIn } from './livedin';
 
 // The `wall` world: where the heat goes. One collector element at one to one, cut open down its middle: the frame and two sheets of glass, the air gap, the black face, the concrete coloured by the model's temperatures cell by
@@ -59,13 +59,13 @@ const HOTSPOTS: HotspotDef[] = [
   { id: 'upper-duct', fr: 'Conduit haut', en: 'Upper duct' },
   { id: 'lower-duct', fr: 'Conduit bas', en: 'Lower duct' },
   { id: 'black-paint', fr: 'Peinture noire', en: 'Black paint', wide: true },
-  { id: 'inner-glazing', fr: 'Vitrage intérieur', en: 'Inner glazing', minor: true },
-  { id: 'steel-frame', fr: 'Cadre acier', en: 'Steel frame', minor: true },
+  { id: 'inner-glazing', fr: 'Vitrage intérieur', en: 'Inner glazing', minor: true, crowd: true },
+  { id: 'steel-frame', fr: 'Cadre acier', en: 'Steel frame', minor: true, crowd: true },
   { id: 'summer-flap', fr: 'Clapet d’été', en: 'Summer flap', minor: true },
-  { id: 'head-beam', fr: 'Poutre de tête', en: 'Head beam', minor: true },
-  { id: 'sill-beam', fr: 'Poutre d’appui', en: 'Sill beam', minor: true },
+  { id: 'head-beam', fr: 'Poutre de tête', en: 'Head beam', minor: true, crowd: true },
+  { id: 'sill-beam', fr: 'Poutre d’appui', en: 'Sill beam', minor: true, crowd: true },
   { id: 'wall-thermocouples', fr: 'Thermocouples du mur', en: 'Wall thermocouples', minor: true },
-  { id: 'air-thermocouples', fr: 'Thermocouples d’air', en: 'Air thermocouples', minor: true },
+  { id: 'air-thermocouples', fr: 'Thermocouples d’air', en: 'Air thermocouples', minor: true, crowd: true },
   { id: 'hot-wire-anemometer', fr: 'Anémomètre à fil chaud', en: 'Hot-wire anemometer', minor: true },
   { id: 'storage-wall#t0', fr: `${HEAT_MIN} °C`, en: `${HEAT_MIN} °C`, minor: true },
   { id: 'storage-wall#t70', fr: `${HEAT_MAX} °C`, en: `${HEAT_MAX} °C`, minor: true },
@@ -354,6 +354,7 @@ export function createWallScene(opts: WallOptions = {}): WallScene {
 
   let flapNow = 0;
   const drawn = { flap: 0, spec };
+  const phoneLabels = crowdLabels(HOTSPOTS, anchors);
   const mod: WallScene = {
     id: 'wall',
     scene,
@@ -373,6 +374,7 @@ export function createWallScene(opts: WallOptions = {}): WallScene {
     homePadding: 1.35,
     declutter: true,
     update(s, dt, view) {
+      phoneLabels();
       const p = opts.params?.();
       const next = elementSpecOf({
         build: p?.build ?? '1967',
