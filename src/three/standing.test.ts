@@ -484,6 +484,13 @@ describe('D7: the east gable is readable with the section on', () => {
     // pickable with the cut on: the kit skips a hit only where a clipping plane says so
     go(house, {}, { cutaway: true });
     expect(house.registry.pickables()).toContain(gable);
+    // and with the gable isolated away its edges go too (they are lines, not meshes of the part)
+    isolateOne(house.registry, 'foundation', 'hidden');
+    go(house, {}, { cutaway: true }, 2);
+    expect(shown(edges)).toBe(false);
+    house.registry.setAllDisplay('solid');
+    go(house, {}, { cutaway: true }, 2);
+    expect(shown(edges)).toBe(true);
     go(house, {}, { cutaway: false });
   });
 });

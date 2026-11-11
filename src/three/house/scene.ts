@@ -469,7 +469,6 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
     gableMat.transparent = cut;
     gableMat.opacity = cut ? 0.14 : 1;
     gableMat.depthWrite = !cut;
-    gableEdges.visible = cut;
   };
 
   // ---- registered parts
@@ -515,6 +514,8 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
     followers.add(yard.balcony, 'entrance-balcony');
     // the removed half's outline goes with the gable it ends in, and shows only while the section is on
     followers.add(removedHalf, 'east-gable', { moves: false, when: () => gableCut });
+    // and so do the gable's own edges (a line is not a mesh of the part: the kit's display hides meshes only)
+    followers.add(gableEdges, 'east-gable', { moves: false, when: () => gableCut });
   }
   clip.clip(world);
   // the instruments' beads and leads lie in the plane: shown only while the section is on, never clipped
@@ -642,11 +643,11 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
         lidMat.depthWrite = !open;
         tube.pit.visible = open;
       }
-      followers.update(registry);
       if (gableCut !== view.cutaway) {
         gableCut = view.cutaway;
         setGable(gableCut);
       }
+      followers.update(registry);
     },
   };
   void LENGTH;
