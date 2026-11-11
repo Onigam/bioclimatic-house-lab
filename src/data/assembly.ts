@@ -284,8 +284,8 @@ export const ASSEMBLY: GuideStep[] = [
     title: l('Les instruments du mur', 'The wall’s instruments'),
     text: withOrigin(
       l(
-        'Sept ans après la maison, les instruments de l’article : des **thermocouples** de 0,1 mm dans le béton, à plusieurs profondeurs, avec leurs fils vers la face de la pièce ; des **sondes d’air** sous un écran d’aluminium, que l’article place dans les conduits et que notre dessin, avec trois sondes, pend dans la lame ; un **anémomètre à fil chaud**, que l’article met dans le conduit bas et que notre dessin met dans le haut. Les profondeurs, le nombre et les hauteurs des sondes sont les nôtres.',
-        'Seven years after the house, the paper’s instruments: **thermocouples** of 0.1 mm in the concrete, at several depths, with their leads to the room face; **air probes** under an aluminium screen, which the paper places in the ducts and which our drawing, with three probes, hangs in the gap; a **hot-wire anemometer**, which the paper puts in the lower duct and our drawing in the upper one. The depths, the number and the heights of the probes are ours.',
+        'Sept ans après la maison, les instruments de l’article : des **thermocouples** de 0,1 mm dans le béton, à plusieurs profondeurs, avec leurs fils vers la face de la pièce ; des **sondes d’air** sous un écran d’aluminium, que l’article place dans les conduits et que notre dessin, avec trois sondes, pend dans la lame ; un **anémomètre à fil chaud**, au centre du conduit bas, comme dans l’article. Les profondeurs, le nombre et les hauteurs des sondes sont les nôtres.',
+        'Seven years after the house, the paper’s instruments: **thermocouples** of 0.1 mm in the concrete, at several depths, with their leads to the room face; **air probes** under an aluminium screen, which the paper places in the ducts and which our drawing, with three probes, hangs in the gap; a **hot-wire anemometer**, at the centre of the lower duct, as in the paper. The depths, the number and the heights of the probes are ours.',
       ),
       ORIGIN.reportedReading,
     ),

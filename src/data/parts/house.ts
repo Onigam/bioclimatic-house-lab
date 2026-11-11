@@ -241,8 +241,8 @@ export const HOUSE_PARTS: PartInfo[] = [
     category: 'structure',
     name: l('Pignon est', 'East gable'),
     short: l(
-      'Le mur du bout, à l’est : un triangle jusqu’au faîtage, sur une fondation en gradins. La Coupe l’emporte avec la moitié est.',
-      'The end wall, to the east: a triangle up to the ridge, on a stepped foundation. Section takes it away with the east half.',
+      'Le mur du bout, à l’est : un triangle jusqu’au faîtage, sur une fondation en gradins. Avec la Coupe, il n’en reste qu’un fantôme pâle.',
+      'The end wall, to the east: a triangle up to the ridge, on a stepped foundation. With Section on, only a pale ghost of it remains.',
     ),
     description: lf(
       'Les murs autres que le sud ne sont décrits nulle part. Nous dessinons un mur de {wallT} d’épaisseur, enduit, qui monte en triangle jusqu’au faîtage, à {ridge} au-dessus de la dalle (estimations). Il repose sur une fondation en gradins qui suit le terrain à 5 cm près. Pour la maison, ce mur est une perte parmi d’autres, comprise dans le chiffre de toute l’enveloppe, {gv}. De ce côté, en hiver, le soleil du matin se lève au sud-est derrière une crête plus haute que celle du soir : d’après un modèle de terrain, 5,7° au sud-est, contre 1,1° au sud-ouest.',
@@ -272,8 +272,8 @@ export const HOUSE_PARTS: PartInfo[] = [
       },
     ),
     tip: l(
-      'Ce pignon part avec la moitié est : tant que la Coupe est active, comme à l’ouverture de la maison, il n’est pas dessiné. Éteignez la Coupe pour le voir ; rallumez-la, et la pièce se montre ouverte de l’autre côté.',
-      'This gable goes with the east half: while Section is on, as when the house opens, it is not drawn. Switch Section off to see it; switch it back on, and the room shows open from the other side.',
+      'Ce pignon part avec la moitié est : tant que la Coupe est active, comme à l’ouverture de la maison, il n’est qu’un fantôme pâle, avec ses arêtes, que l’on peut pourtant choisir. Éteignez la Coupe pour le voir plein ; rallumez-la, et la pièce se montre ouverte de l’autre côté.',
+      'This gable goes with the east half: while Section is on, as when the house opens, it is only a pale ghost with its edges, which can still be chosen. Switch Section off to see it whole; switch it back on, and the room shows open from the other side.',
     ),
     design: l(
       'Les deux pignons se ressemblent, et c’est tout ce que l’on sait d’eux. Le modèle n’a pas d’effet de bord : la maison est un seul bloc, et la perte de ses murs est un chiffre pour tous.',
@@ -689,8 +689,8 @@ export const HOUSE_PARTS: PartInfo[] = [
       'The start of the earth tube: a standpipe on the ground, with a hood and a mesh, where the outside air enters.',
     ),
     description: lf(
-      'Dans le « et si… », l’air neuf entre par une colonne au-dessus du terrain, coiffée d’un capuchon qui garde la pluie et d’une grille qui garde les insectes et les feuilles. Elle repose sur un pied de béton, sur la pente au-dessus de la maison. De là, l’air entre dans un tuyau de {tubeDia} de diamètre et de {tubeLength} de long, au débit de {tubeFlow}, soit une demi-maison d’air par heure (estimations). Dans la 3D, tout est translucide : cette prise n’existe que dans son scénario.',
-      'In the “what if…”, the new air enters through a standpipe above the ground, topped with a hood that keeps the rain out and a mesh that keeps insects and leaves out. It stands on a concrete foot, on the slope above the house. From there the air enters a pipe {tubeDia} in diameter and {tubeLength} long, at a flow of {tubeFlow}, half the house’s volume of air an hour (estimates). In the 3D everything is translucent: this intake exists only in its scenario.',
+      'Dans le « et si… », l’air neuf entre par une colonne au-dessus du terrain, coiffée d’un capuchon qui garde la pluie et d’une grille qui garde les insectes et les feuilles. Elle repose sur un pied de béton, sur la pente au-dessus de la maison. De là, l’air entre dans un tuyau de {tubeDia} de diamètre et de {tubeLength} de long, au débit de {tubeFlow}, soit une demi-maison d’air par heure (estimations). Dans la 3D, la prise est dessinée pâle quand le scénario est éteint, et plus ferme quand il tourne.',
+      'In the “what if…”, the new air enters through a standpipe above the ground, topped with a hood that keeps the rain out and a mesh that keeps insects and leaves out. It stands on a concrete foot, on the slope above the house. From there the air enters a pipe {tubeDia} in diameter and {tubeLength} long, at a flow of {tubeFlow}, half the house’s volume of air an hour (estimates). In the 3D the intake is drawn pale when the scenario is off, and firmer when it runs.',
     ),
     material: l('Colonne, capuchon et grille (dessin)', 'Standpipe, hood and mesh (a drawing)'),
     specs: [
@@ -713,8 +713,8 @@ export const HOUSE_PARTS: PartInfo[] = [
       },
     ),
     tip: l(
-      'Dans la Simulation, lancez « Et si : un puits canadien » : les trois pièces apparaissent en bleu pâle, la prise sur la pente.',
-      'In the Simulation, run “What if: an earth tube”: the three parts appear in pale blue, the intake on the slope.',
+      'Dans la Simulation, lancez « Et si : un puits canadien » : les trois pièces, pâles tant que le scénario est éteint, se raffermissent dans leur fenêtre du terrain, au nord de la maison ; la prise est sur la pente.',
+      'In the Simulation, run “What if: an earth tube”: the three parts, pale while the scenario is off, firm up in their window in the ground, north of the house; the intake is on the slope.',
     ),
     design: l(
       'Un puits canadien se joue aux deux bouts : ici, l’air entre à la température du jour ; au bout, il arrive proche de celle de la terre. Entre les deux, une cinquantaine de mètres de tuyau.',
@@ -757,9 +757,9 @@ export const HOUSE_PARTS: PartInfo[] = [
         care: 'Keep the slope, clean the drain, change the intake filter according to its maker’s notice.',
       },
     ),
-    tip: l(
-      'Il est dessiné à travers le terrain, exprès : le tuyau repose à 2 m sous la terre. Il longe la pente avant de revenir vers la maison.',
-      'It is drawn through the ground, on purpose: the pipe lies 2 m under the earth. It follows the slope before turning back to the house.',
+    tip: lf(
+      'Il est enterré à {tubeDepth} dans une fenêtre taillée dans le terrain, au nord de la maison : cinq passes parallèles reliées par des coudes, la dernière finissant à l’entrée d’air frais du mur nord (le chemin est notre dessin). On le voit du nord ou d’en haut : depuis la façade, la maison le cache.',
+      'It is buried at {tubeDepth} in a window cut in the ground, north of the house: five parallel runs joined by bends, the last one ending at the fresh-air vent on the north wall (the route is our drawing). It is seen from the north or from above: from the front, the house hides it.',
     ),
     design: lf(
       'Aucun puits canadien mesuré, sur une maison, en altitude ou en France, ne nous est parvenu : seulement des vendeurs et des forums. Trois systèmes de bureaux, mesurés en Allemagne, donnent une efficacité de 0,77 à 0,94 ; notre modèle, avec un sol constant, est trop pessimiste pour ces tuyaux-là. À 1 550 m, il tempère l’air d’hiver et n’a presque pas de chaleur d’été à combattre : à peine {tubePoint}.',
