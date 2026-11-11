@@ -28,3 +28,7 @@ The earth tube's sheet (research's 11th), the 1967-and-1974 sheet and the assemb
 ## Tests
 
 `src/drawings/drawings.test.ts`: the contract (numbers, groups, parts of the right world, order), a render in both languages with no NaN and no text off the sheet, on another text or in the title block, the cartouche's words, the dimensions read from `dims.ts` (star or none), the model tables against `docs/physics.md`, no promise of safety.
+
+## After the fact-check
+
+PL-H01's stair count is `STAIR_STEPS` (`dims.ts`). PL-H03 says the model finds the fall « from winter to May–June » (the 18 points read, not 36 − 15). PL-H05's green band is the paper's ± 28 % on the heat the air carries, applied to the flow, and says so. PL-H07 and the lessons attribute 36.7 % to the paper's own rows, with its dagger. PL-H08's « who says what » gives the 1978 simulation as unread, and the row « no windows » is « windows as plain wall, people 500 W », the note saying how it differs from the « wall alone ».

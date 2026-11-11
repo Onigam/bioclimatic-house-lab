@@ -19,3 +19,7 @@ Seven lessons, two questions each, every one opening on a scenario of the simula
 ## Tests
 
 `src/data/lessons.test.ts`: seven lessons, fourteen questions, two each, three choices at least, the answer in range and not always the same, every scenario named as the panel names it in both languages, every part standing in the world it opens, each paragraph under 900 characters, and what each lesson must say.
+
+## After the fact-check
+
+Lesson 2 says the wet-concrete gap has two causes in the paper and that the model retrieves neither as a gap; it presents « the noon sun arrives when the house sleeps » as the lab's reading (the paper says « too long »), and the quiz's question says so. Lesson 3 attributes 36.7 % to the paper's own rows. Lesson 4 gives the June flow with its caveat (the paper does not say its flow was the summer mode). Lesson 5 says the sun « can save » 60 to 70 %, gives the colleague's 75 to 90 % for houses of that kind in France, and the 1978 simulation as unread; the scenario « La même maison, mieux isolée » replaces « Isoler d'abord ». Lesson 6 no longer says « à vous de choisir ». Lesson 7 gives the radon zone as read on Légifrance and Géorisques, without the commune's name, and the earth-tube architect as « transcribed roughly ».
