@@ -136,7 +136,12 @@ export const christmasSheet: DrawingSheet = {
           ': the phenomenon, not the figure, because its wall starts about 2 K cooler. On the 29th, 18.88 % against ',
         ),
         fig('dec29Model'),
-        l('. Sur les 20 jours du tableau, 36,7 % contre ', '. Over the 20 days of the table, 36.7 % against '),
+        l('. Sur les 20 jours du tableau, ', '. Over the 20 days of the table, '),
+        fig('eff20Paper'),
+        l(
+          ' d’après les lignes mêmes de l’article, qui n’imprime aucun total, contre ',
+          ' from the paper’s own rows, which print no total, against ',
+        ),
         fig('eff20'),
         l('.', '.'),
       ),

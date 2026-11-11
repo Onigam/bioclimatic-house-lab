@@ -188,8 +188,8 @@ export const waveSheet: DrawingSheet = {
       118,
       cat(
         l(
-          'Les inventeurs : 3,7 à 4 cm/h pour la maçonnerie, 14 à 16 h à ',
-          'The inventors: 3.7 to 4 cm/h for masonry, 14 to 16 h at ',
+          'Les inventeurs citent 3,7 à 4 cm/h pour la maçonnerie et mesurent 14 à 16 h à ',
+          'The inventors quote 3.7 to 4 cm/h for masonry and measure 14 to 16 h at ',
         ),
         mL(T, '', 2),
         l(

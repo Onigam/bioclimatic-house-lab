@@ -155,8 +155,8 @@ export const budgetSheet: DrawingSheet = {
   group: 'balance',
   title: l('Le bilan d’une saison', 'The balance of a season'),
   description: l(
-    'Où va la charge de chauffage d’une saison, du 1er octobre au 20 mai : le mur par l’air et par le béton, les fenêtres, les gens, et ce que paie l’électricité. Au-dessous, la part que l’électricité ne paie pas, pas à pas, ce que disent les inventeurs, un collègue, un modèle de 1978 et l’architecte d’une autre maison, et ce qui bouge la part. Le modèle atteint le bas de la fourchette des inventeurs si l’air du site est plus chaud de 5 K : il le dit, il ne tranche pas.',
-    'Where a heating season’s load goes, from 1 October to 20 May: the wall by air and by concrete, the windows, the people, and what electricity pays. Below it, the share electricity does not pay for, step by step, what the inventors, a colleague, a model of 1978 and the architect of another house say, and what moves the share. The model reaches the bottom of the inventors’ range if the site’s air is 5 K warmer: it says so, and does not settle it.',
+    'Où va la charge de chauffage d’une saison, du 1er octobre au 20 mai : le mur par l’air et par le béton, les fenêtres, les gens, et ce que paie l’électricité. Au-dessous, la part que l’électricité ne paie pas, pas à pas, ce que disent les inventeurs, un collègue, une simulation de 1978 que nous n’avons pas lue et l’architecte d’une autre maison, et ce qui bouge la part. Le modèle atteint le bas de la fourchette des inventeurs si l’air du site est plus chaud de 5 K : il le dit, il ne tranche pas.',
+    'Where a heating season’s load goes, from 1 October to 20 May: the wall by air and by concrete, the windows, the people, and what electricity pays. Below it, the share electricity does not pay for, step by step, what the inventors, a colleague, a simulation of 1978 that we have not read and the architect of another house say, and what moves the share. The model reaches the bottom of the inventors’ range if the site’s air is 5 K warmer: it says so, and does not settle it.',
   ),
   scene: 'room',
   parts: ['electric-heater', 'thermostat', 'electric-panel'],
@@ -205,8 +205,8 @@ export const budgetSheet: DrawingSheet = {
       190,
       164,
       l(
-        'Le soleil et l’air viennent d’un service de données de 2005 à 2023 ; les fenêtres de 16,7 m² et les gens de 500 W sont deux estimations ; le chauffage est une électricité idéale qui tient 20 °C.',
-        'The sun and the air come from a data service for 2005 to 2023; the 16.7 m² of windows and the 500 W of people are two estimates; the heating is an ideal electricity that holds 20 °C.',
+        'Le soleil et l’air viennent d’un service de données de 2005 à 2023 ; les fenêtres de 16,7 m² et les gens de 500 W sont deux estimations ; le chauffage est une électricité idéale qui tient 20 °C. Le « mur seul » garde la perte des fenêtres et n’en retire que le soleil ; « fenêtres en mur plein » les remplace par du mur.',
+        'The sun and the air come from a data service for 2005 to 2023; the 16.7 m² of windows and the 500 W of people are two estimates; the heating is an ideal electricity that holds 20 °C. The “wall alone” keeps the windows’ loss and removes only their sun; “windows as plain wall” replaces them with wall.',
       ),
       { color: '#5b6878' },
     );

@@ -117,7 +117,7 @@ function flowChart(d: Drawing, p: Plot): void {
     yTicks: [0, 10, 20, 30, 40, 50, 60].map((t) => [t, numL(t, 0, '', '')]),
     xUnit: l('pertes de charge du circuit, K', 'loop’s pressure losses, K'),
   });
-  // the recorded flow, with the authors' margin of 28 %, under the bars
+  // the recorded flow, with the authors' margin of 28 % on the heat carried by the air, applied here to the flow, under the bars
   v.rect([p.x, py(p, 20 * 1.28)], [p.x + p.w, py(p, 20 * 0.72)], { w: W.thin, fill: '#dbe9d5' });
   const bw = (p.w / FLOW_VS_K.length) * 0.5;
   FLOW_VS_K.forEach((r, i) => {
@@ -141,7 +141,7 @@ function flowChart(d: Drawing, p: Plot): void {
     });
   });
   v.line([p.x, py(p, 20)], [p.x + p.w, py(p, 20)], { w: W.medium, dash: 'hidden', color: COLORS.ink });
-  v.text([p.x + 1.5, py(p, 20) - 1], l('enregistré : environ 20 L/s, ± 28 %', 'recorded: about 20 L/s, ± 28 %'), {
+  v.text([p.x + 1.5, py(p, 20) - 1], l('enregistré : environ 20 L/s', 'recorded: about 20 L/s'), {
     size: 1.7,
     anchor: 'start',
     baseline: 'bottom',
@@ -224,8 +224,8 @@ export const airSheet: DrawingSheet = {
         ),
         fig('flowHalfDuct'),
         l(
-          ' et 45 °C, au bord des marges de l’article. Un grillage, un angle vif ou un volet dans le conduit feraient la même chose.',
-          ' and 45 °C, at the edge of the paper’s margins. A grille, a sharp edge or a shutter in the duct would do the same.',
+          ' et 45 °C, au bord de la marge de ± 28 % que l’article donne sur la chaleur portée par l’air, appliquée ici au débit (bande verte). Un grillage, un angle vif ou un volet dans le conduit feraient la même chose.',
+          ' and 45 °C, at the edge of the ± 28 % margin the paper gives on the heat carried by the air, applied here to the flow (green band). A grille, a sharp edge or a shutter in the duct would do the same.',
         ),
       ),
     );

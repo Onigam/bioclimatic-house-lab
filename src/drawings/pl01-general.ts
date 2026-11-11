@@ -32,6 +32,7 @@ import {
   Z_NORTH,
   Z_NORTH_IN,
   Z_SOUTH,
+  STAIR_STEPS,
   bayX,
   elementLayout,
 } from '../three/dims';
@@ -45,8 +46,8 @@ const S = 1 / 110;
 const P = (x: number, z: number): Pt => [mm(x), mm(-z)];
 const E = (x: number, y: number): Pt => [mm(x), mm(y)];
 const recessC = (bayX(RECESS_BAYS[0]!) + bayX(RECESS_BAYS[1]!)) / 2;
-/** Risers of the balcony's stair: the ground's fall over the riser, rounded up. derived from estimates */
-const RISERS = Math.ceil(-GROUND_SOUTH / BALCONY.rise);
+/** Steps of the balcony's stair: `dims.ts` counts them (the 3D builds as many, the part sheet says it). derived from estimates */
+const RISERS = STAIR_STEPS;
 
 function plan(d: Drawing): View {
   const v = d.view(116, 68, S);

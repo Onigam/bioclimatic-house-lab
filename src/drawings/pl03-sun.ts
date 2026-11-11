@@ -184,8 +184,8 @@ export const sunSheet: DrawingSheet = {
       w,
       cat(
         l(
-          'L’article donne environ 36 % l’hiver et 15 % en juin. Le modèle retrouve la baisse, ',
-          'The paper gives about 36 % in winter and 15 % in June. The model finds the fall, ',
+          'L’article donne environ 36 % l’hiver et 15 % en juin. Le modèle retrouve la baisse de l’hiver à mai-juin, ',
+          'The paper gives about 36 % in winter and 15 % in June. The model finds the fall from winter to May–June, ',
         ),
         fig('monthFall'),
         l(' contre 18 lus ; ses mois d’hiver sont ', ' against 18 read; its winter months are '),
