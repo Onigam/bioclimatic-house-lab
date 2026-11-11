@@ -26,7 +26,9 @@ import {
   wallCapacity,
   wallMass,
 } from '../sim/wave';
+import { STAIR_STEPS } from '../three/dims';
 import { FIG, type FigName } from './figures';
+import { PARTS } from './parts';
 import { numbersIn } from './texts';
 
 // Each figure the texts print, against its source: the arithmetic of docs/research.md redone, the model run. A failure here means a sheet says something the model no longer does. The simulation's own tests hold the pins; these hold the words.
@@ -202,10 +204,10 @@ describe('the model: the nights, the days and the pipe', () => {
     close('tubeKwh', o.heatingKWh, 1);
     close('tubeLoad', o.loadKWh, 200);
     expect(o.coolingKWh).toBe(0);
-    const p = tubeYear('perpignan');
-    close('tubePerpHeat', p.heatingKWh, 1);
-    close('tubePerpCool', p.coolingKWh, 1);
-    close('tubePerpLoad', p.loadKWh, 300);
+    const p = tubeYear('sealevel');
+    close('tubeSeaHeat', p.heatingKWh, 1);
+    close('tubeSeaCool', p.coolingKWh, 1);
+    close('tubeSeaLoad', p.loadKWh, 300);
     close('tubeFlow', 0.5 * HOUSE_1967.volume);
   });
 });
@@ -266,5 +268,16 @@ describe('the rest is held to the lines of docs/physics.md and to the scenarios�
   it('and starts every scenario the lessons name', () => {
     const sim = new HouseSim();
     for (const id of SCENARIO_IDS) expect(() => sim.applyScenario(id), id).not.toThrow();
+  });
+});
+
+describe('the balcony’s stair', () => {
+  it('has one count, dims.ts’s: the figure, the part sheet in both languages, and nothing like « about fifteen »', () => {
+    expect(FIG.stairSteps.v).toBe(STAIR_STEPS);
+    const sheet = PARTS.find((p) => p.id === 'entrance-balcony')!;
+    expect(sheet.description.fr).toContain(`${STAIR_STEPS} marches*`);
+    expect(sheet.description.en).toContain(`${STAIR_STEPS} steps*`);
+    expect(`${sheet.description.fr} ${sheet.description.en}`).not.toMatch(/quinzaine|about fifteen/i);
+    expect(sheet.specs.some((x) => x.label.en === 'Stair, number of steps')).toBe(true);
   });
 });

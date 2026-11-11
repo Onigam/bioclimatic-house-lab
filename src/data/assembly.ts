@@ -19,6 +19,14 @@ export const ORIGIN = {
     '**Origine** : pratique courante, avec un fait rapporté.',
     '**Origin**: usual practice, with a reported fact.',
   ),
+  reportedModel: l(
+    '**Origine** : rapporté pour ce que dit l’article, résultat du modèle (†) pour les chiffres calculés.',
+    '**Origin**: reported for what the paper says, the model’s result (†) for the computed figures.',
+  ),
+  practiceReportedModel: l(
+    '**Origine** : pratique courante, avec un fait rapporté ; le chiffre calculé est un résultat du modèle.',
+    '**Origin**: usual practice, with a reported fact; the computed figure is a result of the model.',
+  ),
 } as const;
 
 export const withOrigin = (t: L, o: L): L => l(`${t.fr} ${o.fr}`, `${t.en} ${o.en}`);
@@ -43,8 +51,8 @@ export const ASSEMBLY: GuideStep[] = [
     title: l('La fondation', 'The foundation'),
     text: withOrigin(
       lf(
-        'Sous la façade sud, la **fondation** porte le mur le plus lourd de la maison : {massT}, soit {tPerM2} de mur. Notre dessin lui donne sa semelle propre sous le mur et des gradins sous les pignons, qui suivent la pente de {groundFall}. L’article ne dit rien de la fondation, et le bâtiment de 1974 a des fondations en gradins dans le rocher d’après sa notice : celle-ci est notre dessin.',
-        'Under the south front, the **foundation** carries the heaviest wall of the house: {massT}, or {tPerM2} of wall. Our drawing gives it a footing of its own under the wall and steps under the gables, which follow the slope’s fall of {groundFall}. The paper says nothing of the foundation, and the building of 1974 has stepped foundations in the rock according to its entry: this one is our drawing.',
+        'Sous la façade sud, la **fondation** porte le mur le plus lourd de la maison : {massT}, soit {tPerM2} de mur. Notre dessin lui donne sa semelle propre sous le mur et des gradins sous les pignons, qui suivent la pente de {groundFall}. L’article ne dit rien de la fondation, et le bâtiment de 1974 a des fondations en gradins dans le rocher d’après la base nationale du patrimoine : celle-ci est notre dessin.',
+        'Under the south front, the **foundation** carries the heaviest wall of the house: {massT}, or {tPerM2} of wall. Our drawing gives it a footing of its own under the wall and steps under the gables, which follow the slope’s fall of {groundFall}. The paper says nothing of the foundation, and the building of 1974 has stepped foundations in the rock according to the national heritage database: this one is our drawing.',
       ),
       ORIGIN.reading,
     ),
@@ -95,8 +103,8 @@ export const ASSEMBLY: GuideStep[] = [
     title: l('Le mur de stockage', 'The storage wall'),
     text: withOrigin(
       l(
-        'Le **mur de stockage** : 60 cm d’un béton de gravier lourd, 2 200 kg/m³, 1,75 W/m·K, sur 48 m² de façade. Un béton coulé sur place garde son eau des années, et le mur de 1974 en a souffert : des blocs secs évitent le problème, disent les auteurs. Une fois le mur fait, il n’y a plus rien à y régler.',
-        'The **storage wall**: 60 cm of a heavy gravel concrete, 2,200 kg/m³, 1.75 W/m·K, over 48 m² of front. Concrete cast in place keeps its water for years, and the 1974 wall suffered from it: dry blocks avoid the problem, say the authors. Once the wall is made, there is nothing left to adjust in it.',
+        'Le **mur de stockage** : 60 cm d’un béton de gravier lourd, 2 200 kg/m³, 1,75 W/m·K, sur 48 m² de façade. Le mur de 1974 a rendu 8 à 10 points de moins que celui de 1967, en partie à cause de l’eau restée dans son béton, disent les auteurs, qui proposent des blocs préfabriqués secs. Une fois le mur fait, il n’y a plus rien à y régler.',
+        'The **storage wall**: 60 cm of a heavy gravel concrete, 2,200 kg/m³, 1.75 W/m·K, over 48 m² of front. The 1974 wall gave back 8 to 10 points less than the 1967 one, partly because of the water left in its concrete, say the authors, who propose dry prefabricated blocks. Once the wall is made, there is nothing left to adjust in it.',
       ),
       ORIGIN.reported,
     ),
@@ -125,8 +133,8 @@ export const ASSEMBLY: GuideStep[] = [
     title: l('Les autres murs', 'The other walls'),
     text: withOrigin(
       lf(
-        'Les autres murs, que l’article ne décrit pas : le **mur nord**, sans soleil, les deux **pignons** en triangle jusqu’au faîtage sur leurs gradins de fondation, et une petite **fenêtre nord**. Nous les dessinons de {wallT} d’épaisseur ; leurs pertes sont comprises dans le chiffre de toute l’enveloppe, 1,63 W/m³·K. Un architecte américain posait comme principe peu de fenêtres au nord, et petites.',
-        'The other walls, which the paper does not describe: the **north wall**, with no sun, the two **gables** rising in a triangle to the ridge on their foundation steps, and a small **north window**. We draw them {wallT} thick; their losses are included in the figure for the whole envelope, 1.63 W/m³·K. An American architect set out as a principle few windows on the north, and small ones.',
+        'Les autres murs, que l’article ne décrit pas : le **mur nord**, sans soleil, les deux **pignons** en triangle jusqu’au faîtage sur leurs gradins de fondation, et une petite **fenêtre nord**. Nous les dessinons de {wallT} d’épaisseur ; leurs pertes sont comprises dans le chiffre de toute l’enveloppe, 1,63 W/m³·K. Un architecte américain a réduit ses fenêtres au minimum, surtout au nord, où elles perdent plus de chaleur qu’elles n’en captent.',
+        'The other walls, which the paper does not describe: the **north wall**, with no sun, the two **gables** rising in a triangle to the ridge on their foundation steps, and a small **north window**. We draw them {wallT} thick; their losses are included in the figure for the whole envelope, 1.63 W/m³·K. An American architect kept his window area to a minimum, above all on the north, where windows lose more heat than they collect.',
       ),
       ORIGIN.reading,
     ),
@@ -276,8 +284,8 @@ export const ASSEMBLY: GuideStep[] = [
     title: l('Les instruments du mur', 'The wall’s instruments'),
     text: withOrigin(
       l(
-        'Sept ans après la maison, les instruments de l’article : des **thermocouples** de 0,1 mm dans le béton, à plusieurs profondeurs, avec leurs fils vers la face de la pièce ; trois **sondes d’air** sous un écran d’aluminium dans la lame ; un **anémomètre à fil chaud** dans le conduit haut. Les profondeurs et les hauteurs sont les nôtres.',
-        'Seven years after the house, the paper’s instruments: **thermocouples** of 0.1 mm in the concrete, at several depths, with their leads to the room face; three **air probes** under an aluminium screen in the gap; a **hot-wire anemometer** in the upper duct. The depths and the heights are ours.',
+        'Sept ans après la maison, les instruments de l’article : des **thermocouples** de 0,1 mm dans le béton, à plusieurs profondeurs, avec leurs fils vers la face de la pièce ; des **sondes d’air** sous un écran d’aluminium, que l’article place dans les conduits et que notre dessin, avec trois sondes, pend dans la lame ; un **anémomètre à fil chaud**, que l’article met dans le conduit bas et que notre dessin met dans le haut. Les profondeurs, le nombre et les hauteurs des sondes sont les nôtres.',
+        'Seven years after the house, the paper’s instruments: **thermocouples** of 0.1 mm in the concrete, at several depths, with their leads to the room face; **air probes** under an aluminium screen, which the paper places in the ducts and which our drawing, with three probes, hangs in the gap; a **hot-wire anemometer**, which the paper puts in the lower duct and our drawing in the upper one. The depths, the number and the heights of the probes are ours.',
       ),
       ORIGIN.reportedReading,
     ),

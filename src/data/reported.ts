@@ -42,4 +42,10 @@ export const KNOWN: readonly number[] = [
   22, 4, 21, 15,
   // ---- the order of the sheets: the 1 to 2, 3 to 5 and so on are words; and the figure 1 and 2 of the paper
   3, 1,
+  // ---- the 1974 wall's exchange area against the 1967 one, S1 p. 204 (K18): 3.25 and 4.50 m²; a balance over 24 hours at least, S1 p. 201
+  3.25,
+  24,
+  // ---- a house of 1986 in the national heritage database (research S21), and the radon order of 27 June 2018 (research S24, read on Légifrance)
+  1986,
+  2018,
 ];

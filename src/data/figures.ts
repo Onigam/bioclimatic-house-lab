@@ -35,6 +35,7 @@ import {
   ROOM,
   SITE,
   SLAB,
+  STAIR_STEPS,
   THERMOCOUPLE_DEPTHS,
   TUBE,
   TUBE_FALL,
@@ -70,6 +71,7 @@ const times: readonly [string, string] = [' fois', ' times'];
 const points: readonly [string, string] = [' points', ' points'];
 const renew: readonly [string, string] = [' renouvellements par heure', ' air changes an hour'];
 const steps: readonly [string, string] = [' gradins', ' steps'];
+const treads: readonly [string, string] = [' marches', ' steps'];
 
 const d = (v: number, digits: number, u?: Fig['u']): Fig => ({ v, d: digits, s: 'derived', u });
 const m = (v: number, digits: number, u?: Fig['u']): Fig => ({ v, d: digits, s: 'model', u });
@@ -129,6 +131,7 @@ export const FIG = {
   balconyWidth: e(BALCONY.width, 1, ' m'),
   balconyRail: e(BALCONY.rail, 1, ' m'),
   stairWidth: e(BALCONY.stairW, 1, ' m'),
+  stairSteps: e(STAIR_STEPS, 0, treads), // the 3D builds this many treads and the sheet PL-H01 counts them: dims.ts decides
   riser: e(BALCONY.rise, 2, ' m'),
   tread: e(BALCONY.tread, 2, ' m'),
   headBand: size(HEAD_BAND.h, HEAD_BAND.d),
@@ -205,7 +208,7 @@ export const FIG = {
   roofRatio: d(2.9, 1, times), // 186.9 / 64.9
   gv: d(489, 0, ' W/K'), // 1.63 W/m³·K × 300 m³
   envelope: d(365, 0, ' m²'), // G·V / K = 489 / 1.34
-  boxM2: d(380, 0, ' m²'), // the skin of a 15 × 6.6 × 4 m box
+  boxM2: d(371, 0, ' m²'), // the skin of a 15 × 6.6 × 4 m box: 2 × (99 + 60 + 26.4) = 370.8
   meanHeight: d(3.95, 2, ' m'), // 300 m³ / 76 m²
   pitch: d(24, 0, '°'), // atan(1.45 / 3.3), rough
   elemWatts: d(520, 0, ' W'), // 20 L/s × 1 kg/m³ × 1,007 J/kg·K × 26 K
@@ -248,6 +251,7 @@ export const FIG = {
   thermoShare: m(51, 0, pct),
   thermoShareK30: m(43, 0, pct),
   eff20: m(35, 0, pct),
+  eff20Paper: d(36.7, 1, pct), // our sum of the paper's own rows 23 Dec – 11 Jan (the paper prints no total)
   dry74: m(36, 0, pct),
   flowRange: words('model', '34 à 41 L/s', '34 to 41 L/s'),
   flowHalfDuct: m(25, 0, ' L/s'),
@@ -282,8 +286,8 @@ export const FIG = {
   tubeKwh: m(625, 0, ' kWh'),
   tubeLoad: m(57000, 0, ' kWh'),
   tubePoint: m(1, 0, ' point'),
-  tubePerpHeat: m(731, 0, ' kWh'),
-  tubePerpCool: m(484, 0, ' kWh'),
+  tubeSeaHeat: m(731, 0, ' kWh'),
+  tubeSeaCool: m(484, 0, ' kWh'),
   innerGap: words('model', '+0,3 à +5,4 K', '+0.3 to +5.4 K'),
   flowHigh50: m(50, 0, ' L/s'),
   flowLow19: m(19, 0, ' L/s'),
@@ -317,7 +321,7 @@ export const FIG = {
   juneRoomRange: words('model', '13 à 19 °C, avec un air de 8 à 18 °C', '13 to 19 °C, with the air at 8 to 18 °C'),
   winterLowPts: words('model', '8 à 12 points', '8 to 12 points'),
   summerHighPts: words('model', '5 à 11 points', '5 to 11 points'),
-  tubePerpLoad: m(22000, 0, ' kWh'),
+  tubeSeaLoad: m(22000, 0, ' kWh'),
 } as const;
 
 export type FigName = keyof typeof FIG;

@@ -48,8 +48,8 @@ export const ROOM_PARTS: PartInfo[] = [
       'Switch on X-ray: the floor, the ceiling and this face fade, and you see the ducts behind. In the Simulation, then watch the clock: the face hardly moves all day.',
     ),
     design: lf(
-      'C’est ici que le modèle a trouvé sa question la plus intéressante. Le courant qui sort de cette face, d’après les chiffres de l’article, est d’environ {streamSource} un jour de décembre. Le calcul des mêmes auteurs, entre leurs deux courbes et avec leur conductivité de 1,75, ne donne que {handConduction}. Les deux ne se rejoignent pas, alors que le modèle ferme son propre compte par construction. Une cause possible est la chaleur du conduit haut qui traverse le mur. Elle est possible, pas prouvée. Nous ne touchons pas à ce chiffre.',
-      'This is where the model found its most interesting question. The current leaving this face, by the paper’s figures, is about {streamSource} on a December day. The same authors’ calculation, between their two curves and with their conductivity of 1.75, gives only {handConduction}. The two do not meet, while the model closes its own account by construction. One possible cause is the heat of the upper duct crossing the wall. It is possible, not proved. We leave the figure as it is.',
+      'C’est ici que le modèle a trouvé sa question la plus intéressante. Le courant qui sort de cette face, d’après les chiffres de l’article, est d’environ {streamSource} un jour de décembre. Notre calcul à la main, entre leurs deux courbes (lues à l’œil) et avec leur conductivité de 1,75, ne donne que {handConduction}. Les deux ne se rejoignent pas, alors que le modèle ferme son propre compte par construction. Une cause possible est la chaleur du conduit haut qui traverse le mur. Elle est possible, pas prouvée. Nous ne touchons pas à ce chiffre.',
+      'This is where the model found its most interesting question. The current leaving this face, by the paper’s figures, is about {streamSource} on a December day. Our hand calculation, between their two curves (read by eye) and with their conductivity of 1.75, gives only {handConduction}. The two do not meet, while the model closes its own account by construction. One possible cause is the heat of the upper duct crossing the wall. It is possible, not proved. We leave the figure as it is.',
     ),
   },
   {
@@ -227,12 +227,12 @@ export const ROOM_PARTS: PartInfo[] = [
       },
     ),
     tip: l(
-      'Dans la Simulation, lancez « Isoler d’abord » : rien ne change sur le mur, et l’électricité paie beaucoup moins, parce que la maison perd moins.',
-      'In the Simulation, run “Insulate first”: nothing changes on the wall, and electricity pays far less, because the house loses less.',
+      'Dans la Simulation, lancez « La même maison, mieux isolée » : rien ne change sur le mur, et l’électricité paie beaucoup moins, parce que la maison perd moins.',
+      'In the Simulation, run “The same house, better insulated”: nothing changes on the wall, and electricity pays far less, because the house loses less.',
     ),
     design: lf(
-      'Les lignes du bilan, en part de la charge : mur par l’air {shareWallAir}, mur par conduction {shareWallConduction}, fenêtres {shareWindowLine}, gens {sharePeople}, électricité {shareElectricity}. Elles font {linesSum} : un peu de ce qui entre est perdu par une maison plus chaude. Les inventeurs annoncent 60 à 70 % pour Odeillo, un modèle de 1978 autour de 40 %. Le modèle atteint le bas de la fourchette des inventeurs si l’air du site est plus chaud de 5 K que celui du calcul de référence ({share5K}). Il dit lequel, il ne tranche pas.',
-      'The lines of the balance, as a share of the load: wall by air {shareWallAir}, wall by conduction {shareWallConduction}, windows {shareWindowLine}, people {sharePeople}, electricity {shareElectricity}. They add to {linesSum}: a little of what comes in is lost by a warmer house. The inventors report 60 to 70 % for Odeillo, a model of 1978 around 40 %. The model reaches the bottom of the inventors’ range only if the site’s air is 5 K warmer than the reference calculation’s ({share5K}). It says which, and does not settle it.',
+      'Les lignes du bilan, en part de la charge : mur par l’air {shareWallAir}, mur par conduction {shareWallConduction}, fenêtres {shareWindowLine}, gens {sharePeople}, électricité {shareElectricity}. Elles font {linesSum} : un peu de ce qui entre est perdu par une maison plus chaude. Les inventeurs disent que le soleil peut économiser 60 à 70 % à Odeillo ; une simulation de 1978, que nous n’avons pas pu lire, donnerait autour de 40 % pour l’hiver. Le modèle atteint le bas de la fourchette des inventeurs si l’air du site est plus chaud de 5 K que celui du calcul de référence ({share5K}). Il dit lequel, il ne tranche pas.',
+      'The lines of the balance, as a share of the load: wall by air {shareWallAir}, wall by conduction {shareWallConduction}, windows {shareWindowLine}, people {sharePeople}, electricity {shareElectricity}. They add to {linesSum}: a little of what comes in is lost by a warmer house. The inventors say the sun can save 60 to 70 % at Odeillo; a simulation of 1978, which we could not read, is reported to give around 40 % for the winter. The model reaches the bottom of the inventors’ range only if the site’s air is 5 K warmer than the reference calculation’s ({share5K}). It says which, and does not settle it.',
     ),
   },
   {
@@ -559,8 +559,8 @@ export const ROOM_PARTS: PartInfo[] = [
     category: 'site',
     name: l('Fauteuil', 'Armchair'),
     short: l(
-      'Un meuble pour l’échelle : les maisons étaient habitées, et l’article compte les gens dans le chauffage.',
-      'A piece of furniture for scale: the houses were lived in, and the paper counts the people in the heating.',
+      'Un meuble pour l’échelle : les maisons étaient habitées, et l’article ne dit pas ce que les occupants apportaient.',
+      'A piece of furniture for scale: the houses were lived in, and the paper does not say what their occupants gave.',
     ),
     description: lf(
       'Les maisons ont été mesurées habitées : c’est la force de l’article, et la difficulté de le lire. Notre salon a donc des meubles, un fauteuil, une table, une bibliothèque, une lampe, un tapis : rien ne dit lesquels. Ce qui compte dans le modèle, ce sont les gens et les appareils, pour {gains} (estimation : personne ne le donne), dont la moitié va dans l’air et la moitié dans les surfaces. Ils font passer la part de la saison de {shareWindows} à {shareAll}. Un fauteuil face au mur du sud reçoit sa chaleur par rayonnement, quelle que soit la température de l’air.',

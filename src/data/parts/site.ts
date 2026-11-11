@@ -31,13 +31,13 @@ export const SITE_PARTS: PartInfo[] = [
     maintenance: maint(
       {
         failure:
-          'Le premier ennui d’un mur coulé sur place est l’eau : la fiche du mur de stockage le raconte. Puis viennent les petits : une position de clapet oubliée, du verre qui s’encrasse. Un autre constructeur a vécu, à son premier hiver, un courant d’air froid qui descendait la nuit par les ouvertures du haut.',
+          'Le premier ennui d’un gros mur de béton est l’eau : la fiche du mur de stockage le raconte. Puis viennent les petits : une position de clapet oubliée, du verre qui s’encrasse. Un autre constructeur a vécu, à son premier hiver, de l’air de la pièce qui sortait chaud la nuit par les ouvertures du haut et revenait plus frais par celles du bas.',
         check: 'Comparer l’hiver à l’électricité : la facture est la mesure la plus honnête d’une maison.',
         care: 'Deux changements de saison, un lavage du verre, les conduits propres : le mur demande peu, et rarement.',
       },
       {
         failure:
-          'The first trouble of a wall cast in place is water: the storage wall’s sheet tells it. Then come the small ones: a flap left in the wrong position, glass that fouls. Another builder lived, in his first winter, with cold air falling at night through the upper vents.',
+          'The first trouble of a heavy concrete wall is water: the storage wall’s sheet tells it. Then come the small ones: a flap left in the wrong position, glass that fouls. Another builder lived, in his first winter, with room air leaving warm by the upper vents at night and coming back cooler by the lower ones.',
         check: 'Compare the winter with the electricity: the bill is the most honest measure of a house.',
         care: 'Two changes of season, a wash of the glass, the ducts kept clean: the wall asks for little, and rarely.',
       },
@@ -61,8 +61,8 @@ export const SITE_PARTS: PartInfo[] = [
       'The same house, a little further: the drawing makes it with the same function. Nothing says the two were alike.',
     ),
     description: lf(
-      'L’article parle des « prototypes » au pluriel, sans dire si ce sont deux maisons ou plus. Les données ouvertes que nous avons lues listent deux bâtiments jumeaux de plain-pied, de 15,0 sur 6,6 m, datés de 1968, près du laboratoire d’Odeillo. Aucun document ne dit que ce sont eux : c’est notre lecture, et le contour de la maison en vient. Notre dessin pose donc une seconde maison, par la même fonction, décalée de {twinAt} le long de la façade (estimation). Elle ne fait pas d’ombre à la première dans le modèle : l’horizon de calcul est celui du terrain, sans arbres ni maisons voisines.',
-      'The paper speaks of the “prototypes” in the plural, without saying whether they are two houses or more. The open data we read lists two twin one-storey buildings, 15.0 by 6.6 m, dated 1968, near the laboratory at Odeillo. No document says they are these: it is our reading, and the house’s outline comes from it. Our drawing therefore sets a second house, made by the same function, moved {twinAt} along the front (estimate). It casts no shadow on the first in the model: the calculation’s horizon is the terrain’s, with no trees nor neighbouring houses.',
+      'L’article parle des « prototypes » au pluriel, sans dire si ce sont deux maisons ou plus. Les données ouvertes que nous avons lues listent deux bâtiments jumeaux de plain-pied, de 15,0 sur 6,6 m, qui y figurent pour la première fois en 1968, près du laboratoire d’Odeillo. Aucun document ne dit que ce sont eux : c’est notre lecture, et le contour de la maison en vient. Notre dessin pose donc une seconde maison, par la même fonction, décalée de {twinAt} le long de la façade (estimation). Elle ne fait pas d’ombre à la première dans le modèle : l’horizon de calcul est celui du terrain, sans arbres ni maisons voisines.',
+      'The paper speaks of the “prototypes” in the plural, without saying whether they are two houses or more. The open data we read lists two twin one-storey buildings, 15.0 by 6.6 m, which first appear in it in 1968, near the laboratory at Odeillo. No document says they are these: it is our reading, and the house’s outline comes from it. Our drawing therefore sets a second house, made by the same function, moved {twinAt} along the front (estimate). It casts no shadow on the first in the model: the calculation’s horizon is the terrain’s, with no trees nor neighbouring houses.',
     ),
     material: l('Béton, acier, verre : la même maison', 'Concrete, steel, glass: the same house'),
     specs: [
@@ -70,7 +70,7 @@ export const SITE_PARTS: PartInfo[] = [
       sp(
         'Contour de données ouvertes',
         'Open-data outline',
-        l('15,0 × 6,6 m, daté de 1968', '15.0 × 6.6 m, dated 1968'),
+        l('15,0 × 6,6 m, apparu en 1968', '15.0 × 6.6 m, first seen in 1968'),
       ),
       sp('Ombre sur le prototype, modèle', 'Shadow on the prototype, model', l('aucune', 'none')),
     ],
@@ -108,8 +108,8 @@ export const SITE_PARTS: PartInfo[] = [
       'A rocky ground that falls to the south: what gives the house its steps and its stair.',
     ),
     description: lf(
-      'Le terrain tombe vers le sud : de {groundFall} sur l’emprise de la maison, le bas de la fourchette que donnent les données ouvertes, qui parlent de 2 à 3,5 m (estimation). La photographie de l’article montre des rochers affleurants. Nous les dessinons en granit : c’est notre choix, la photographie montre des blocs, pas leur nature. Le bâtiment de 1974, plus haut sur la pente, a des fondations en gradins dans le rocher, d’après sa notice ; celles de nos deux maisons sont en gradins aussi, mais c’est un dessin.',
-      'The ground falls to the south: by {groundFall} over the house’s footprint, the low end of the range open data gives, which speaks of 2 to 3.5 m (estimate). The paper’s photograph shows outcropping rocks. We draw them as granite: that is our choice, the photograph shows blocks, not their nature. The building of 1974, higher up the slope, has stepped foundations in the rock, according to its entry; those of our two houses are stepped too, but that is a drawing.',
+      'Le terrain tombe vers le sud : de {groundFall} sur l’emprise de la maison, le bas de la fourchette que donnent les données ouvertes, qui parlent de 2 à 3,5 m (estimation). La photographie de l’article montre des rochers affleurants. Nous les dessinons en granit : c’est notre choix, la photographie montre des blocs, pas leur nature. Le bâtiment de 1974, plus haut sur la pente, a des fondations en gradins dans le rocher, d’après la base nationale du patrimoine ; celles de nos deux maisons sont en gradins aussi, mais c’est un dessin.',
+      'The ground falls to the south: by {groundFall} over the house’s footprint, the low end of the range open data gives, which speaks of 2 to 3.5 m (estimate). The paper’s photograph shows outcropping rocks. We draw them as granite: that is our choice, the photograph shows blocks, not their nature. The building of 1974, higher up the slope, has stepped foundations in the rock, according to the national heritage database; those of our two houses are stepped too, but that is a drawing.',
     ),
     material: l('Roche affleurante et terre, dessin composé', 'Outcropping rock and earth, a composed drawing'),
     specs: [
@@ -242,8 +242,8 @@ export const SITE_PARTS: PartInfo[] = [
       'A dirt road below the meadow: it gives the scale, and recalls that tens of tonnes of concrete came by it.',
     ),
     description: lf(
-      'Aucune source ne parle d’une route. Celle-ci est composée : elle court au bas du pré, et sert à lire les distances, comme le font la jumelle et les arbres. Un mur de {massT} ne vient pourtant pas de nulle part : ses matériaux sont arrivés par camion. Elle sert aussi d’étalon : la maison, sa jumelle et le four se lisent à son échelle. Ce chemin ne dit pas où se trouvent les maisons : nous composons le plateau, nous ne le cartographions pas.',
-      'No source speaks of a road. This one is composed: it runs along the bottom of the meadow, and serves to read distances, as the twin and the trees do. A wall of {massT} does not come from nowhere, though: its materials arrived by lorry. It also serves as a yardstick: the house, its twin and the furnace read to its scale. This track does not say where the houses are: we compose the plateau, we do not map it.',
+      'Aucune source ne parle d’une route. Celle-ci est composée : elle court au bas du pré, et sert à lire les distances, comme le font la jumelle et les arbres. Un mur de {massT} ne vient pourtant pas de nulle part : ses matériaux ont dû arriver par une route, sans doute par camion (hypothèse). Elle sert aussi d’étalon : la maison, sa jumelle et le four se lisent à son échelle. Ce chemin ne dit pas où se trouvent les maisons : nous composons le plateau, nous ne le cartographions pas.',
+      'No source speaks of a road. This one is composed: it runs along the bottom of the meadow, and serves to read distances, as the twin and the trees do. A wall of {massT} does not come from nowhere, though: its materials must have come by a road, most likely by lorry (our assumption). It also serves as a yardstick: the house, its twin and the furnace read to its scale. This track does not say where the houses are: we compose the plateau, we do not map it.',
     ),
     material: l('Terre damée, dessin composé', 'Rammed earth, a composed drawing'),
     specs: [
@@ -330,8 +330,8 @@ export const SITE_PARTS: PartInfo[] = [
       '63 flat mirrors on terraces, in front of the furnace: each turns to send the sun to the great mirror.',
     ),
     description: lf(
-      'Les héliostats sont 63, pour 2 835 m² en tout, d’après le CNRS et une encyclopédie en ligne. Chacun fait donc {helioArea} (dérivé) ; nous les dessinons de {helioBox}, sur {terraces} terrasses (estimations : la forme et le nombre de terrasses sont composés). Un héliostat se règle par la règle du miroir : sa normale est la bissectrice entre la direction du soleil et celle du four, et sa largeur reste horizontale. C’est ce que fait le dessin, avec le soleil du modèle. La nuit, ils se rangent face au sol. Aucun panneau ne pénètre le terrain, à aucune heure.',
-      'The heliostats number 63, for 2,835 m² in all, according to the CNRS and an online encyclopaedia. Each is therefore {helioArea} (derived); we draw them {helioBox}, on {terraces} terraces (estimates: the shape and the number of terraces are composed). A heliostat is set by the mirror rule: its normal is the bisector between the direction of the sun and that of the furnace, and its width stays horizontal. That is what the drawing does, with the model’s sun. At night they park face down. No panel enters the ground, at any hour.',
+      'Les héliostats sont 63, pour 2 835 m² en tout, d’après le CNRS et une encyclopédie en ligne. Chacun fait donc {helioArea} (dérivé) ; nous les dessinons de {helioBox}, sur {terraces} terrasses (estimations : la forme et le nombre de terrasses sont composés). Un héliostat se règle par la règle du miroir : sa normale est la bissectrice entre la direction du soleil et celle du four, et sa largeur reste horizontale. C’est ce que fait le dessin, avec le soleil du modèle. Dans notre dessin, la nuit, ils se rangent face au sol. Aucun panneau ne pénètre le terrain, à aucune heure.',
+      'The heliostats number 63, for 2,835 m² in all, according to the CNRS and an online encyclopaedia. Each is therefore {helioArea} (derived); we draw them {helioBox}, on {terraces} terraces (estimates: the shape and the number of terraces are composed). A heliostat is set by the mirror rule: its normal is the bisector between the direction of the sun and that of the furnace, and its width stays horizontal. That is what the drawing does, with the model’s sun. In our drawing, at night they park face down. No panel enters the ground, at any hour.',
     ),
     material: l('Miroirs plans sur mâts, dessin composé', 'Flat mirrors on masts, a composed drawing'),
     specs: [
@@ -374,16 +374,17 @@ export const SITE_PARTS: PartInfo[] = [
       'The listed building of three dwellings, higher up the slope: it is seen, not entered, and it is not the 1967 house.',
     ),
     description: lf(
-      'C’est le bâtiment que le ministère de la Culture a inscrit au titre des monuments historiques le 25 mai 2011 : trois logements, des façades et des toits, et le système du mur. Il est en béton armé, de 37 sur 14 m environ et de 12,9 m de haut d’après les données ouvertes, avec des fondations en gradins dans le rocher. Les trois maisons de 1974 de l’article, que nous lisons comme celles de ce bâtiment, ont de deux à trois étages, six ou sept pièces, de 450 à 650 m³, un mur de 37 cm et un coefficient G de 1,00 W/m³·K : c’est le mur « trop court » de l’article. Son plan n’est dans aucune source : la 3D le compose, en boîte à façade sud vitrée. Il est habité, et le lab ne vous y invite pas.',
-      'This is the building the Ministry of Culture listed as a historic monument on 25 May 2011: three dwellings, the façades and roofs, and the wall system. It is of reinforced concrete, about 37 by 14 m and 12.9 m high according to open data, with stepped foundations in the rock. The paper’s three houses of 1974, which we read as those of this building, have two to three storeys, six or seven rooms, 450 to 650 m³, a wall of 37 cm and a G coefficient of 1.00 W/m³·K: it is the paper’s “too short” wall. Its plan is in no source: the 3D composes it, as a box with a glazed south front. It is lived in, and the lab does not invite you there.',
+      'C’est le bâtiment que le ministère de la Culture a inscrit au titre des monuments historiques le 25 mai 2011 : trois logements, des façades et des toits, et le système du mur. Il est en béton armé, avec des fondations en gradins dans le rocher ; les données ouvertes lui donnent 333 m² d’emprise, dans un rectangle d’environ 37 sur 14 m (l’emprise n’en remplit pas tout), et 12,9 m de haut. Les trois maisons de 1974 de l’article, que nous lisons comme celles de ce bâtiment, ont de deux à trois étages, six ou sept pièces, de 450 à 650 m³, un mur de 37 cm et un coefficient G de 1,00 W/m³·K : c’est le mur « trop court » de l’article. Son plan n’est dans aucune source : la 3D le compose, en boîte à façade sud vitrée, sur le rectangle entier et non sur l’emprise ; la cote « Encombrement » de cette fiche est mesurée sur cette boîte, avec les saillies de son toit et de son capteur. C’est une propriété privée, et le lab ne vous y invite pas.',
+      'This is the building the Ministry of Culture listed as a historic monument on 25 May 2011: three dwellings, the façades and roofs, and the wall system. It is of reinforced concrete, with stepped foundations in the rock; open data give it a footprint of 333 m², inside a rectangle of about 37 by 14 m (the footprint does not fill all of it), and 12.9 m high. The paper’s three houses of 1974, which we read as those of this building, have two to three storeys, six or seven rooms, 450 to 650 m³, a wall of 37 cm and a G coefficient of 1.00 W/m³·K: it is the paper’s “too short” wall. Its plan is in no source: the 3D composes it, as a box with a glazed south front, on the whole rectangle and not on the footprint; the “Envelope” line of this sheet is measured on that box, with the overhangs of its roof and its collector. It is private property, and the lab does not invite you there.',
     ),
     material: l('Béton armé, dessin composé', 'Reinforced concrete, a composed drawing'),
     specs: [
       sp('Logements, étages', 'Dwellings, storeys', l('3, de 2 à 3', '3, 2 to 3')),
+      sp('Emprise, données ouvertes', 'Footprint, open data', l('333 m²', '333 m²')),
       sp(
-        'Empreinte, données ouvertes',
-        'Footprint, open data',
-        l('333 m², environ 37 × 14 m', '333 m², about 37 × 14 m'),
+        'Rectangle qui la contient, données ouvertes',
+        'Rectangle that holds it, open data',
+        l('environ 37 × 14 m', 'about 37 × 14 m'),
       ),
       sp('Hauteur, données ouvertes', 'Height, open data', '12,9 m'),
       sp('Mur', 'Wall', l('37 cm, G 1,00 W/m³·K', '37 cm, G 1.00 W/m³·K')),
@@ -392,22 +393,22 @@ export const SITE_PARTS: PartInfo[] = [
     maintenance: maint(
       {
         failure:
-          'L’eau du béton coulé sur place : le mur de 1974 en a souffert, et la fiche du mur de stockage le raconte. Pour le reste, nous n’avons aucune source sur l’entretien de ce bâtiment.',
+          'L’eau restée dans le béton : le mur de 1974 en a souffert, disent ses auteurs, et la fiche du mur de stockage le raconte. Pour le reste, nous n’avons aucune source sur l’entretien de ce bâtiment.',
         check:
           'Un bâtiment inscrit ne se touche pas sans les autorités qui le protègent : les travaux sur ses façades, ses toits et son mur relèvent de leurs règles.',
         care: 'Le lab n’a rien à y entretenir : on le regarde de loin.',
       },
       {
         failure:
-          'The water in concrete cast in place: the 1974 wall suffered from it, and the storage wall’s sheet tells it. For the rest, we have no source on the upkeep of this building.',
+          'The water still in the concrete: the 1974 wall suffered from it, say its authors, and the storage wall’s sheet tells it. For the rest, we have no source on the upkeep of this building.',
         check:
           'A listed building is not touched without the authorities that protect it: works on its façades, roofs and wall fall under their rules.',
         care: 'The lab has nothing to maintain there: it is looked at from afar.',
       },
     ),
     tip: l(
-      'Cliquez le bâtiment : la caméra s’en approche, mais il n’y a pas d’intérieur. Les chiffres de 1974 sont dans la Simulation, par le réglage « Le mur et la maison de 1974 (37 cm) ».',
-      'Click the building: the camera approaches, but there is no interior. The 1974 figures are in the Simulation, through the setting “The wall and the house of 1974 (37 cm)”.',
+      'Cliquez le bâtiment : la caméra s’en approche, mais il n’y a pas d’intérieur. Les chiffres de 1974 sont dans la Simulation, par le réglage « Maison de 1974 (37 cm) ».',
+      'Click the building: the camera approaches, but there is no interior. The 1974 figures are in the Simulation, through the setting “1974 house (37 cm)”.',
     ),
     design: l(
       'Ne les confondons pas : la maison de 1967 est celle que les inventeurs mesurent, le bâtiment de 1974 est celui que l’État protège. Les auteurs disent eux-mêmes de leurs résultats de 1974 qu’ils sont à peine représentatifs : ce lab les garde comme un réglage, pas comme une maison.',

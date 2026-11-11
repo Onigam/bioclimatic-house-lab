@@ -113,7 +113,9 @@ describe('the lessons', () => {
     expect(en).toMatch(/too short/);
     expect(en).toMatch(/It decides the hour, not what is received/);
     expect(en).toMatch(/The model only knows dry concrete/);
-    expect(en).toMatch(/The measured gap, it does not explain/);
+    expect(en).toMatch(/The authors give two reasons/);
+    expect(en).toMatch(/does not retrieve the gap/);
+    expect(en).not.toMatch(/cast in place|poured/);
     expect(body('the-slow-wave', 'fr')).toMatch(/vitesse de 4,03 cm\/h/);
   });
 
@@ -157,16 +159,17 @@ describe('the lessons', () => {
     expect(en).toMatch(/The model disagrees with the curves/);
     expect(en).toMatch(/It keeps its result, and says so/);
     expect(en).toMatch(/more extreme than a real house/);
-    expect(en).toMatch(/Less heat overall, but later: your choice/);
+    expect(en).toMatch(/Less heat overall, but later\./);
+    expect(en).not.toMatch(/your choice/);
   });
 
   it('the seventh: the loop brings no air, the pipe is a what-if, nothing measured on a house, the hygiene and the radon once', () => {
     const en = body('fresh-air-and-the-ground', 'en');
     expect(en).toMatch(/renews nothing/);
     expect(en).toMatch(/has reached us/);
-    expect(en).toMatch(/His figures are illustrations, not measurements/);
-    expect(en).toMatch(/zone 3/);
-    expect(en).toMatch(/could not check/);
+    expect(en).toMatch(/could only transcribe roughly/);
+    expect(en).toMatch(/radon zone 3, the highest of three/);
+    expect(en).toMatch(/checked on Légifrance and Géorisques/);
     const all = LESSONS.flatMap((x) => x.body.map((b) => b.en)).join(' ');
     expect((all.match(/radon/gi) ?? []).length).toBe(2);
     expect((all.match(/zone 3/g) ?? []).length).toBe(1);

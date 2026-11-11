@@ -16,8 +16,8 @@ export const HOUSE_PARTS: PartInfo[] = [
       'Twelve bays of 1.27 m facing the midday: nine of collector, one of window, two of recessed entrance.',
     ),
     description: lf(
-      'La façade sud fait douze travées de 1,27 m, soit {facadeLen} : neuf de capteur, une de fenêtre, deux d’entrée en retrait. Cette répartition est lue sur une petite photographie de l’article : c’est une estimation. Les neuf travées donnent {glassNet} de verre net, barreaux retirés, contre les 48 m² annoncés. Tout se joue sur cette façade. À midi, le soleil la frappe à {sunDec} de sa perpendiculaire en décembre, à {sunJun} en juin ; l’article dit « plus de 70° » au solstice d’été. D’où un résultat qui surprend : d’après un service de données satellite, le mur reçoit {janJun} plus de soleil en janvier qu’en juin (129,6 kWh/m² contre 78,7), quand un toit plat en reçoit presque {roofRatio} plus en juin qu’en janvier.',
-      'The south front is twelve bays of 1.27 m, or {facadeLen}: nine of collector, one of window, two of recessed entrance. This layout is read from one small photograph in the paper: it is an estimate. The nine bays give {glassNet} of net glass, bars taken out, against the announced 48 m². Everything is decided on this front. At noon the sun strikes it at {sunDec} from its perpendicular in December, at {sunJun} in June; the paper says “over 70°” at the summer solstice. Hence a surprising result: according to a satellite data service, the wall receives {janJun} more sun in January than in June (129.6 kWh/m² against 78.7), when a flat roof receives almost {roofRatio} more in June than in January.',
+      'La façade sud fait douze travées de 1,27 m, soit {facadeLen} : neuf de capteur, une de fenêtre, deux d’entrée en retrait. Cette répartition est lue sur une petite photographie de l’article : c’est une estimation. Les neuf travées donnent {glassNet} de verre net, barreaux retirés, contre les 48 m² annoncés. Tout se joue sur cette façade. À midi, le soleil la frappe à {sunDec} de sa perpendiculaire en décembre, à {sunJun} en juin ; l’article dit « plus de 70° » autour du solstice d’été. D’où un résultat qui surprend : d’après un service de données satellite, le mur reçoit {janJun} plus de soleil en janvier qu’en juin (129,6 kWh/m² contre 78,7), quand un toit plat en reçoit presque {roofRatio} plus en juin qu’en janvier.',
+      'The south front is twelve bays of 1.27 m, or {facadeLen}: nine of collector, one of window, two of recessed entrance. This layout is read from one small photograph in the paper: it is an estimate. The nine bays give {glassNet} of net glass, bars taken out, against the announced 48 m². Everything is decided on this front. At noon the sun strikes it at {sunDec} from its perpendicular in December, at {sunJun} in June; the paper says “more than 70°” around the summer solstice. Hence a surprising result: according to a satellite data service, the wall receives {janJun} more sun in January than in June (129.6 kWh/m² against 78.7), when a flat roof receives almost {roofRatio} more in June than in January.',
     ),
     material: l('Béton, acier et verre', 'Concrete, steel and glass'),
     specs: [
@@ -43,8 +43,8 @@ export const HOUSE_PARTS: PartInfo[] = [
       },
     ),
     tip: l(
-      'Activez la Coupe : la moitié est de la maison s’en va, et la façade se montre en coupe, le mur coloré par les températures du modèle.',
-      'Switch on Section: the east half of the house goes away, and the front shows in section, the wall coloured by the model’s temperatures.',
+      'La maison s’ouvre déjà en coupe : la moitié est s’en est allée, et la façade se montre en coupe, le mur coloré par les températures du modèle. Si vous l’avez éteinte, rallumez la Coupe.',
+      'The house already opens cut: the east half has gone, and the front shows in section, the wall coloured by the model’s temperatures. If you turned it off, switch Section back on.',
     ),
     design: l(
       'Lire une répartition sur une photographie est un exercice d’humilité : l’article chiffre 48 m² de capteur, la photographie montre huit ou neuf travées de capteur et trois pour la porte et la fenêtre, et le dessin choisit neuf.',
@@ -61,8 +61,8 @@ export const HOUSE_PARTS: PartInfo[] = [
       'One bay of the wall: 4.38 × 1.27 m, two sheets, 12 cm of air, 60 cm of black concrete, two ducts. The model works out only one.',
     ),
     description: lf(
-      'Un élément fait 4,38 m de haut sur 1,27 m de large, soit {elemArea}. Il contient, dans l’ordre où le soleil le rencontre : le cadre d’acier, deux vitres, 12 cm d’air, le mur noir de 60 cm, un conduit au sol et un conduit sous le plafond. Pour retrouver les 48 m² de l’article, il en faut {elemCount} : huit ou neuf, et nous en dessinons neuf. Le modèle calcule un seul élément et le multiplie, sans effet de bord. Sur les 20 jours du tableau de l’article, il rend {eff20} de l’énergie reçue, quand l’article donne 36,7 %. La surface d’échange entre le mur et l’air est de 4,50 m² dans l’article ; le calcul, largeur par portée entre conduits, en trouve {exchangeCalc}.',
-      'An element is 4.38 m high by 1.27 m wide, or {elemArea}. It holds, in the order the sun meets them: the steel frame, two sheets of glass, 12 cm of air, the black wall of 60 cm, a duct at the floor and a duct under the ceiling. To make the paper’s 48 m², {elemCount} are needed: eight or nine, and we draw nine. The model works out a single element and multiplies it, with no edge effect. Over the 20 days of the paper’s table, it gives back {eff20} of the energy received, when the paper gives 36.7 %. The exchange area between wall and air is 4.50 m² in the paper; the calculation, width times span between ducts, finds {exchangeCalc}.',
+      'Un élément fait 4,38 m de haut sur 1,27 m de large, soit {elemArea}. Il contient, dans l’ordre où le soleil le rencontre : le cadre d’acier, deux vitres, 12 cm d’air, le mur noir de 60 cm, un conduit au sol et un conduit sous le plafond. Pour retrouver les 48 m² de l’article, il en faut {elemCount} : huit ou neuf, et nous en dessinons neuf. Le modèle calcule un seul élément et le multiplie, sans effet de bord. Sur les 20 jours du tableau de l’article, il rend {eff20} de l’énergie reçue, quand les lignes mêmes de l’article, qui n’imprime aucun total, donnent {eff20Paper}. La surface d’échange entre le mur et l’air est de 4,50 m² dans l’article ; le calcul, largeur par portée entre conduits, en trouve {exchangeCalc}.',
+      'An element is 4.38 m high by 1.27 m wide, or {elemArea}. It holds, in the order the sun meets them: the steel frame, two sheets of glass, 12 cm of air, the black wall of 60 cm, a duct at the floor and a duct under the ceiling. To make the paper’s 48 m², {elemCount} are needed: eight or nine, and we draw nine. The model works out a single element and multiplies it, with no edge effect. Over the 20 days of the paper’s table, it gives back {eff20} of the energy received, when the paper’s own rows, which print no total, give {eff20Paper}. The exchange area between wall and air is 4.50 m² in the paper; the calculation, width times span between ducts, finds {exchangeCalc}.',
     ),
     material: l('Béton noir, verre et acier', 'Black concrete, glass and steel'),
     specs: [
@@ -151,14 +151,15 @@ export const HOUSE_PARTS: PartInfo[] = [
       'The floor carried out in front of the door, with its rail and its stair down to the ground, which falls away to the south.',
     ),
     description: lf(
-      'Le terrain tombe vers le sud, de {groundFall} sur l’emprise de la maison (estimation), et la dalle est de niveau : devant la façade, le plancher est donc à plus de 2 m au-dessus du sol. Le balcon est la dalle prolongée de {balconyDepth} sur {balconyWidth}, avec une rampe de {balconyRail} (estimation, d’après la rampe de la photographie). Un escalier de {stairWidth} de large en descend : des marches de {riser} de haut et de {tread} de giron, une quinzaine, jusqu’au sol. Dans le dessin, la dernière marche est à une hauteur de marche du terrain, et deux limons la portent. Le modèle ne lui compte pas d’ombre : il n’a pour ombre que la tête du cadre.',
-      'The ground falls to the south, by {groundFall} over the house’s footprint (estimate), and the slab is level: in front of the front, the floor is therefore more than 2 m above the ground. The balcony is the slab carried out {balconyDepth} over {balconyWidth}, with a rail {balconyRail} high (estimate, from the photograph’s rail). A stair {stairWidth} wide goes down from it: steps {riser} high and {tread} deep, about fifteen of them, to the ground. In the drawing the last step is within a riser’s height of the ground, and two stringers carry it. The model counts no shade for it: its only shade is the head of the frame.',
+      'Le terrain tombe vers le sud, de {groundFall} sur l’emprise de la maison (estimation), et la dalle est de niveau : devant la façade, le plancher est donc à plus de 2 m au-dessus du sol. Le balcon est la dalle prolongée de {balconyDepth} sur {balconyWidth}, avec une rampe de {balconyRail} (estimation, d’après la rampe de la photographie). Un escalier de {stairWidth} de large en descend : {stairSteps} de {riser} de haut et de {tread} de giron, jusqu’au sol. Dans le dessin, la dernière marche est à une hauteur de marche du terrain, et deux limons la portent. Le modèle ne lui compte pas d’ombre : il n’a pour ombre que la tête du cadre.',
+      'The ground falls to the south, by {groundFall} over the house’s footprint (estimate), and the slab is level: in front of the front, the floor is therefore more than 2 m above the ground. The balcony is the slab carried out {balconyDepth} over {balconyWidth}, with a rail {balconyRail} high (estimate, from the photograph’s rail). A stair {stairWidth} wide goes down from it: {stairSteps} {riser} high and {tread} deep, to the ground. In the drawing the last step is within a riser’s height of the ground, and two stringers carry it. The model counts no shade for it: its only shade is the head of the frame.',
     ),
     material: l('Dalle de béton, rampe d’acier, dessin générique', 'Concrete slab, steel rail, a generic drawing'),
     specs: [
       sp('Profondeur, largeur', 'Depth, width', v('{balconyDepth} × {balconyWidth}')),
       sp('Rampe', 'Rail', v('{balconyRail}')),
       sp('Escalier, largeur', 'Stair, width', v('{stairWidth}')),
+      sp('Escalier, nombre de marches', 'Stair, number of steps', v('{stairSteps}')),
       sp('Marche, hauteur et giron', 'Step, riser and tread', v('{riser}, {tread}')),
     ],
     maintenance: maint(
@@ -196,8 +197,8 @@ export const HOUSE_PARTS: PartInfo[] = [
       'A tall bay of clear glass beside the collector: it lets the sun straight into the room, and lets the heat out.',
     ),
     description: lf(
-      'Une fenêtre haute, de {windowBox} avec son appui à {windowSill}, ouvre le mur près de l’entrée (estimation, d’après la photographie). Le modèle compte {windowsM2} de baies au sud avec l’entrée voisine, soit trois travées de 5,56 m² (estimation : personne ne publie l’aire). Le soleil qui y entre chauffe le sol et les cloisons ; la nuit, le verre perd {windowU}. Le résultat est un équilibre : sans aucune baie, la part de la saison est {win0} ; avec {windowsM2}, {shareAll} ; avec 30 m², {win30}. Une fenêtre gagne le jour et perd la nuit. L’article nomme des écrans isolants de nuit, sans rien dire de plus : avec un écran de {nightScreen} devant tout le verre, celui du mur compris, le modèle donne {nightScreenShare}.',
-      'A tall window, {windowBox} with its sill at {windowSill}, opens the wall near the entrance (estimate, from the photograph). The model counts {windowsM2} of south openings with the neighbouring entrance, that is three bays of 5.56 m² (estimate: nobody publishes the area). The sun that comes in warms the floor and the partitions; at night the glass loses {windowU}. The result is a balance: with no opening at all the season’s share is {win0}; with {windowsM2}, {shareAll}; with 30 m², {win30}. A window gains by day and loses by night. The paper names insulating night screens, and says nothing more: with a screen of {nightScreen} in front of all the glass, the wall’s included, the model gives {nightScreenShare}.',
+      'Une fenêtre haute, de {windowBox} avec son appui à {windowSill}, ouvre le mur près de l’entrée (estimation, d’après la photographie). Le modèle compte {windowsM2} de baies au sud avec l’entrée voisine, soit trois travées de 5,56 m² (estimation : personne ne publie l’aire). Le soleil qui y entre chauffe le sol et les cloisons ; la nuit, le verre perd {windowU}. Le résultat est un équilibre : avec les baies remplacées par du mur plein et les gens à 500 W, la part de la saison est {win0} ; avec {windowsM2}, {shareAll} ; avec 30 m², {win30}. (Les {shareWall} du « mur seul » gardent la perte des fenêtres et n’en retirent que le soleil.) Une fenêtre gagne le jour et perd la nuit. L’article nomme des écrans isolants de nuit, sans rien dire de plus : avec un écran de {nightScreen} devant tout le verre, celui du mur compris, le modèle donne {nightScreenShare}.',
+      'A tall window, {windowBox} with its sill at {windowSill}, opens the wall near the entrance (estimate, from the photograph). The model counts {windowsM2} of south openings with the neighbouring entrance, that is three bays of 5.56 m² (estimate: nobody publishes the area). The sun that comes in warms the floor and the partitions; at night the glass loses {windowU}. The result is a balance: with the openings replaced by plain wall and the people at 500 W, the season’s share is {win0}; with {windowsM2}, {shareAll}; with 30 m², {win30}. (The {shareWall} of the “wall alone” keeps the windows’ loss and removes only their sun.) A window gains by day and loses by night. The paper names insulating night screens, and says nothing more: with a screen of {nightScreen} in front of all the glass, the wall’s included, the model gives {nightScreenShare}.',
     ),
     material: l('Double vitrage sur cadre d’acier', 'Double glazing on a steel frame'),
     specs: [
@@ -206,8 +207,8 @@ export const HOUSE_PARTS: PartInfo[] = [
       sp('Baies au sud, modèle', 'South openings, model', v('{windowsM2}')),
       sp('Perte du double vitrage', 'Double glazing’s loss', v('{windowU}')),
       sp(
-        'Part sans baie / telle que dessinée / 30 m²',
-        'Share with none / as drawn / 30 m²',
+        'Part, baies en mur plein / telle que dessinée / 30 m²',
+        'Share, openings as plain wall / as drawn / 30 m²',
         v('{win0} / {shareAll} / {win30}'),
       ),
     ],
@@ -244,8 +245,8 @@ export const HOUSE_PARTS: PartInfo[] = [
       'The end wall, to the east: a triangle up to the ridge, on a stepped foundation. Section takes it away with the east half.',
     ),
     description: lf(
-      'Les murs autres que le sud ne sont décrits nulle part. Nous dessinons un mur de {wallT} d’épaisseur, enduit, qui monte en triangle jusqu’au faîtage, à {ridge} au-dessus de la dalle (estimations). Il repose sur une fondation en gradins qui suit le terrain à 5 cm près. Pour la maison, ce mur est une perte parmi d’autres, comprise dans le chiffre de toute l’enveloppe, {gv}. De ce côté, le soleil du matin se lève derrière une crête plus haute que celle du soir : d’après un modèle de terrain, 5,7° au sud-est, contre 1,1° au sud-ouest.',
-      'The walls other than the south one are described nowhere. We draw a wall {wallT} thick, rendered, rising in a triangle to the ridge, {ridge} above the slab (estimates). It stands on a stepped foundation that follows the ground to within 5 cm. For the house, this wall is one loss among others, included in the figure for the whole envelope, {gv}. On this side the morning sun rises behind a higher ridge than the evening’s: according to a terrain model, 5.7° to the south-east, against 1.1° to the south-west.',
+      'Les murs autres que le sud ne sont décrits nulle part. Nous dessinons un mur de {wallT} d’épaisseur, enduit, qui monte en triangle jusqu’au faîtage, à {ridge} au-dessus de la dalle (estimations). Il repose sur une fondation en gradins qui suit le terrain à 5 cm près. Pour la maison, ce mur est une perte parmi d’autres, comprise dans le chiffre de toute l’enveloppe, {gv}. De ce côté, en hiver, le soleil du matin se lève au sud-est derrière une crête plus haute que celle du soir : d’après un modèle de terrain, 5,7° au sud-est, contre 1,1° au sud-ouest.',
+      'The walls other than the south one are described nowhere. We draw a wall {wallT} thick, rendered, rising in a triangle to the ridge, {ridge} above the slab (estimates). It stands on a stepped foundation that follows the ground to within 5 cm. For the house, this wall is one loss among others, included in the figure for the whole envelope, {gv}. On this side, in winter, the morning sun rises in the south-east behind a higher ridge than the evening’s: according to a terrain model, 5.7° to the south-east, against 1.1° to the south-west.',
     ),
     material: l('Maçonnerie enduite, dessin générique', 'Rendered masonry, a generic drawing'),
     specs: [
@@ -271,8 +272,8 @@ export const HOUSE_PARTS: PartInfo[] = [
       },
     ),
     tip: l(
-      'Activez la Coupe : ce pignon part avec la moitié est, et l’on voit la pièce de l’autre côté, ouverte.',
-      'Switch on Section: this gable goes with the east half, and you see the room from the other side, open.',
+      'Ce pignon part avec la moitié est : tant que la Coupe est active, comme à l’ouverture de la maison, il n’est pas dessiné. Éteignez la Coupe pour le voir ; rallumez-la, et la pièce se montre ouverte de l’autre côté.',
+      'This gable goes with the east half: while Section is on, as when the house opens, it is not drawn. Switch Section off to see it; switch it back on, and the room shows open from the other side.',
     ),
     design: l(
       'Les deux pignons se ressemblent, et c’est tout ce que l’on sait d’eux. Le modèle n’a pas d’effet de bord : la maison est un seul bloc, et la perte de ses murs est un chiffre pour tous.',
@@ -289,8 +290,8 @@ export const HOUSE_PARTS: PartInfo[] = [
       'The end wall, to the west: a triangle on a stepped foundation, which sees the sun set behind the lowest ridge.',
     ),
     description: lf(
-      'Comme son jumeau, ce mur est de {wallT} d’épaisseur, enduit, et monte en triangle jusqu’au faîtage, {ridge} au-dessus de la dalle (estimations). Le terrain tombe de {groundFall} vers le sud : la fondation descend en {gableSteps} gradins sous lui, pour ne pas flotter au-dessus du sol. Côté ouest, le soleil du soir se couche derrière la crête la plus basse de l’horizon du midi : d’après un modèle de terrain, 1,1° au sud-ouest, contre 2,7° au sud et 5,7° au sud-est. Sa perte, comme celle de l’autre pignon, est comprise dans le chiffre de toute l’enveloppe.',
-      'Like its twin, this wall is {wallT} thick, rendered, and rises in a triangle to the ridge, {ridge} above the slab (estimates). The ground falls {groundFall} to the south: the foundation goes down in {gableSteps} steps beneath it, so as not to float above the ground. On the west side the evening sun sets behind the lowest ridge of the midday horizon: according to a terrain model, 1.1° to the south-west, against 2.7° to the south and 5.7° to the south-east. Its loss, like the other gable’s, is included in the figure for the whole envelope.',
+      'Comme son jumeau, ce mur est de {wallT} d’épaisseur, enduit, et monte en triangle jusqu’au faîtage, {ridge} au-dessus de la dalle (estimations). Le terrain tombe de {groundFall} vers le sud : la fondation descend en {gableSteps} sous lui, pour ne pas flotter au-dessus du sol. Côté ouest, en hiver, le soleil du soir se couche au sud-ouest derrière la crête la plus basse de l’horizon du midi : d’après un modèle de terrain, 1,1° au sud-ouest, contre 2,7° au sud et 5,7° au sud-est. Sa perte, comme celle de l’autre pignon, est comprise dans le chiffre de toute l’enveloppe.',
+      'Like its twin, this wall is {wallT} thick, rendered, and rises in a triangle to the ridge, {ridge} above the slab (estimates). The ground falls {groundFall} to the south: the foundation goes down in {gableSteps} beneath it, so as not to float above the ground. On the west side, in winter, the evening sun sets in the south-west behind the lowest ridge of the midday horizon: according to a terrain model, 1.1° to the south-west, against 2.7° to the south and 5.7° to the south-east. Its loss, like the other gable’s, is included in the figure for the whole envelope.',
     ),
     material: l('Maçonnerie enduite, dessin générique', 'Rendered masonry, a generic drawing'),
     specs: [
@@ -331,8 +332,8 @@ export const HOUSE_PARTS: PartInfo[] = [
       'The back wall, with no sun, on the highest ground: it is what tells what “G” is.',
     ),
     description: lf(
-      'C’est le mur qui n’a rien à gagner : la maison tourne le dos au nord. Nous le dessinons de {wallT} d’épaisseur, enduit, posé sur le terrain le plus haut (estimation). Ce que l’article donne de toute l’enveloppe tient en deux chiffres : un coefficient moyen K de 1,34 W/m²·K et des pertes G de 1,63 W/m³·K. Pour 300 m³, cela fait {gv}. Le quotient G·V sur K donne {envelope}, et la peau d’une boîte de 15 × 6,6 × 4 m en fait {boxM2} : en 1967, les deux se rejoignent. En 1974, ils ne se rejoignent plus, la définition de K nous échappe, et le modèle ne garde que G·V : il le prend pour toute la maison, façade sud comprise.',
-      'This is the wall with nothing to gain: the house turns its back to the north. We draw it {wallT} thick, rendered, standing on the highest ground (estimate). What the paper gives of the whole envelope fits in two figures: a mean coefficient K of 1.34 W/m²·K and losses G of 1.63 W/m³·K. For 300 m³ that makes {gv}. The quotient G·V over K gives {envelope}, and the skin of a box of 15 × 6.6 × 4 m is {boxM2}: in 1967 the two meet. In 1974 they no longer meet, the definition of K escapes us, and the model keeps only G·V: it takes it for the whole house, south front included.',
+      'C’est le mur qui n’a rien à gagner : la maison tourne le dos au nord. Nous le dessinons de {wallT} d’épaisseur, enduit, posé sur le terrain le plus haut (estimation). Ce que l’article donne de toute l’enveloppe tient en deux chiffres : un coefficient moyen K de 1,34 W/m²·K et des pertes G de 1,63 W/m³·K. Pour 300 m³, cela fait {gv}. Le quotient G·V sur K donne {envelope}, et la peau d’une boîte de 15 × 6,6 × 4 m en fait {boxM2} : en 1967, les deux se rejoignent à moins de 2 % près. En 1974, ils ne se rejoignent plus, la définition de K nous échappe, et le modèle ne garde que G·V : il le prend pour toute la maison, façade sud comprise.',
+      'This is the wall with nothing to gain: the house turns its back to the north. We draw it {wallT} thick, rendered, standing on the highest ground (estimate). What the paper gives of the whole envelope fits in two figures: a mean coefficient K of 1.34 W/m²·K and losses G of 1.63 W/m³·K. For 300 m³ that makes {gv}. The quotient G·V over K gives {envelope}, and the skin of a box of 15 × 6.6 × 4 m is {boxM2}: in 1967 the two meet to within 2 %. In 1974 they no longer meet, the definition of K escapes us, and the model keeps only G·V: it takes it for the whole house, south front included.',
     ),
     material: l('Maçonnerie enduite, dessin générique', 'Rendered masonry, a generic drawing'),
     specs: [
@@ -377,8 +378,8 @@ export const HOUSE_PARTS: PartInfo[] = [
       'A small window in the back wall: light without sun, and a convector beneath it.',
     ),
     description: lf(
-      'Une maison à capteur au sud a peu de raisons de percer le nord. Un architecte américain, dans sa maison à mur Trombe, en pose le principe : peu de fenêtres au nord, et petites. Nous dessinons une fenêtre de {northBox}, avec son appui à {northSill} et sa tête à {northHead} (estimation : aucune source ne donne les ouvertures du nord). Elle donne une lumière égale, sans soleil, et la nuit elle perd comme toutes les vitres. Dans le modèle, elle est comptée avec les autres pertes de l’enveloppe, dans le chiffre G, et jamais à part. Dans le dessin, le convecteur du salon est sous elle.',
-      'A house with a collector on the south has little reason to cut into the north. An American architect, in his own Trombe-wall house, sets out the principle: few windows on the north, and small ones. We draw a window of {northBox}, with its sill at {northSill} and its head at {northHead} (estimate: no source gives the north openings). It gives an even light, without sun, and at night it loses like any glass. In the model it is counted with the other losses of the envelope, in the figure for G, and never apart. In the drawing, the living room’s convector is beneath it.',
+      'Une maison à capteur au sud a peu de raisons de percer le nord. Un architecte américain, dans sa maison à mur Trombe, a réduit les fenêtres au minimum, surtout au nord, où elles perdent plus de chaleur qu’elles n’en captent. Nous dessinons une fenêtre de {northBox}, avec son appui à {northSill} et sa tête à {northHead} (estimation : aucune source ne donne les ouvertures du nord). Elle donne une lumière égale, sans soleil, et la nuit elle perd comme toutes les vitres. Dans le modèle, elle est comptée avec les autres pertes de l’enveloppe, dans le chiffre G, et jamais à part. Dans le dessin, le convecteur du salon est sous elle.',
+      'A house with a collector on the south has little reason to cut into the north. An American architect, in his own Trombe-wall house, kept the window area to a minimum, above all on the north, where windows lose more heat than they collect. We draw a window of {northBox}, with its sill at {northSill} and its head at {northHead} (estimate: no source gives the north openings). It gives an even light, without sun, and at night it loses like any glass. In the model it is counted with the other losses of the envelope, in the figure for G, and never apart. In the drawing, the living room’s convector is beneath it.',
     ),
     material: l('Double vitrage sur cadre, dessin générique', 'Double glazing on a frame, a generic drawing'),
     specs: [
@@ -415,8 +416,8 @@ export const HOUSE_PARTS: PartInfo[] = [
     category: 'structure',
     name: l('Toit à deux pans', 'Pitched roof'),
     short: l(
-      'Deux pans d’ardoise, un faîtage est-ouest : une pente d’environ 24°, qui rejette la neige vers le sud et vers le nord.',
-      'Two slate slopes, an east–west ridge: a pitch of about 24°, which sheds snow to the south and the north.',
+      'Deux pans, en ardoise dans notre dessin, un faîtage est-ouest : une pente d’environ 24°, qui rejette la neige vers le sud et vers le nord.',
+      'Two slopes, slated in our drawing, an east–west ridge: a pitch of about 24°, which sheds snow to the south and the north.',
     ),
     description: lf(
       'Les données ouvertes donnent un faîtage à environ 1,3 à 1,6 m au-dessus de l’égout, sur une demi-profondeur de 3,3 m : une pente d’environ {pitch}, valeur grossière puisque la précision d’altitude est de 2,5 m. Le faîtage court d’est en ouest. Notre dessin ajoute des chevrons de {rafter}, des planches et des ardoises de {cover} (estimations : on ne sait rien du toit). Le débord est de {eave}, car la photographie n’en montre pas de profond : le modèle ne compte donc aucune ombre portée par le toit, sauf celle de la tête du cadre. Une gouttière et deux descentes courent le long de la façade sud. La 3D ne dessine pas de neige sur le toit, alors que celle du sol suit le mois.',
@@ -464,8 +465,8 @@ export const HOUSE_PARTS: PartInfo[] = [
       'The layer laid over the ceiling: we do not know what it was, but insulation is what decides all the rest.',
     ),
     description: lf(
-      'L’article donne les pertes de la maison entière, G de 1,63 W/m³·K en 1967 et de 1,00 en 1974, et rien de plus sur les murs, le toit ou le sol. Notre dessin pose une couche d’isolant de {roofIns} sur le plafond (estimation) : c’est une façon de la faire voir. Son rôle est le plus grand de la maison. Rien ne change sur le mur : avec le G de 1974, la part de la saison passe de {shareAll} à {share1974}. Plus loin, à 0,6 W/m³·K, elle monte à {share06}, mais il faut alors ouvrir les fenêtres : il y a plus de soleil que la maison n’en peut prendre. Pas un rayon de plus : c’est la maison qui perd moins.',
-      'The paper gives the losses of the whole house, G of 1.63 W/m³·K in 1967 and 1.00 in 1974, and nothing more on the walls, the roof or the floor. Our drawing lays a layer of insulation {roofIns} thick over the ceiling (estimate): it is a way of making it visible. Its role is the greatest in the house. Nothing changes on the wall: with the 1974 G, the season’s share goes from {shareAll} to {share1974}. Further on, at 0.6 W/m³·K, it climbs to {share06}, but windows must then be opened: there is more sun than the house can take. Not one ray more: it is the house that loses less.',
+      'L’article donne les pertes de la maison entière, G de 1,63 W/m³·K en 1967 et de 1,00 en 1974, et rien de plus sur les murs, le toit ou le sol. Notre dessin pose une couche d’isolant de {roofIns} sur le plafond (estimation) : c’est une façon de la faire voir. Ce qui compte le plus, c’est l’isolation de toute l’enveloppe de 1974 : la couche dessinée ne fait que la rendre visible. Rien ne change sur le mur : avec le G de 1974, la part de la saison passe de {shareAll} à {share1974}. Plus loin, à 0,6 W/m³·K, elle monte à {share06}, mais il faut alors ouvrir les fenêtres : il y a plus de soleil que la maison n’en peut prendre. Pas un rayon de plus : c’est la maison qui perd moins.',
+      'The paper gives the losses of the whole house, G of 1.63 W/m³·K in 1967 and 1.00 in 1974, and nothing more on the walls, the roof or the floor. Our drawing lays a layer of insulation {roofIns} thick over the ceiling (estimate): it is a way of making it visible. What counts most is the insulation of the whole 1974 envelope: the drawn layer only makes it visible. Nothing changes on the wall: with the 1974 G, the season’s share goes from {shareAll} to {share1974}. Further on, at 0.6 W/m³·K, it climbs to {share06}, but windows must then be opened: there is more sun than the house can take. Not one ray more: it is the house that loses less.',
     ),
     material: l('Isolant en couche, dessin générique', 'Layered insulation, a generic drawing'),
     specs: [
@@ -492,12 +493,12 @@ export const HOUSE_PARTS: PartInfo[] = [
       },
     ),
     tip: l(
-      'Dans la Simulation, lancez « Isoler d’abord » : le mur ne change pas, la part de la saison monte.',
-      'In the Simulation, run “Insulate first”: the wall does not change, the season’s share climbs.',
+      'Dans la Simulation, lancez « La même maison, mieux isolée » : le mur ne change pas, la part de la saison monte.',
+      'In the Simulation, run “The same house, better insulated”: the wall does not change, the season’s share climbs.',
     ),
     design: l(
-      'Une maison passive allemande de 1991, à Darmstadt, a 445 mm de laine soufflée au toit : de l’isolation sans mur noir, par une autre route. Les deux manières ne s’excluent pas, mais l’ordre compte : isoler d’abord.',
-      'A German passive house of 1991, at Darmstadt, has 445 mm of blown wool in the roof: insulation with no black wall, by another road. The two ways do not exclude each other, but the order matters: insulate first.',
+      'Une maison passive allemande de 1991, à Darmstadt, a 445 mm de laine soufflée au toit : de l’isolation sans mur noir, par une autre route. Les deux manières ne s’excluent pas : la maison passive commence par l’isolation.',
+      'A German passive house of 1991, at Darmstadt, has 445 mm of blown wool in the roof: insulation with no black wall, by another road. The two ways do not exclude each other: the passive house starts from insulation.',
     ),
   },
   {
@@ -538,8 +539,8 @@ export const HOUSE_PARTS: PartInfo[] = [
       },
     ),
     tip: l(
-      'Activez la Coupe : la dalle apparaît en coupe, avec ce qu’il y a dessous, et le terrain qui tombe vers le sud.',
-      'Switch on Section: the slab appears in section, with what lies beneath, and the ground falling to the south.',
+      'La Coupe, active à l’ouverture de la maison, montre la dalle en coupe, avec ce qu’il y a dessous, et le terrain qui tombe vers le sud. Si vous l’avez éteinte, rallumez-la.',
+      'Section, on when the house opens, shows the slab in section, with what lies beneath, and the ground falling to the south. If you turned it off, switch it back on.',
     ),
     design: l(
       'Nos 81 m² contre les 76 de l’article disent seulement que le dessin n’est pas faux : les cloisons prennent la différence. La dalle, elle, n’est nulle part dans les sources.',
@@ -556,8 +557,8 @@ export const HOUSE_PARTS: PartInfo[] = [
       'What carries {massT} of wall: a footing, steps that follow the slope, and the south wall’s own foundation.',
     ),
     description: lf(
-      'Le mur de stockage pèse {massT}, soit {tPerM2} de mur, sur une seule face de la maison. La fondation qui le porte est notre dessin : une fondation propre au mur sud, de la semelle au pied du cadre, une semelle de {footing} sous le terrain, et des gradins ({gableSteps}) sous les pignons, qui suivent la pente de {groundFall} (estimations : l’article ne dit rien de la fondation). Le bâtiment de 1974, lui, est inscrit au titre des monuments historiques : sa notice parle de fondations en gradins dans le rocher. C’est une source pour ce bâtiment-là, pas pour la maison de 1967.',
-      'The storage wall weighs {massT}, or {tPerM2} of wall, on a single side of the house. The foundation that carries it is our drawing: a foundation proper to the south wall, from the footing to the frame’s foot, a footing {footing} below the ground, and steps ({gableSteps}) under the gables, following the slope’s fall of {groundFall} (estimates: the paper says nothing of the foundation). The building of 1974 is listed as a historic monument: its entry speaks of stepped foundations in the rock. That is a source for that building, not for the house of 1967.',
+      'Le mur de stockage pèse {massT}, soit {tPerM2} de mur, sur une seule face de la maison. La fondation qui le porte est notre dessin : une fondation propre au mur sud, de la semelle au pied du cadre, une semelle de {footing} sous le terrain, et des gradins ({gableSteps}) sous les pignons, qui suivent la pente de {groundFall} (estimations : l’article ne dit rien de la fondation). Le bâtiment de 1974, lui, est inscrit au titre des monuments historiques : la base nationale du patrimoine parle de fondations en gradins dans le rocher. C’est une source pour ce bâtiment-là, pas pour la maison de 1967.',
+      'The storage wall weighs {massT}, or {tPerM2} of wall, on a single side of the house. The foundation that carries it is our drawing: a foundation proper to the south wall, from the footing to the frame’s foot, a footing {footing} below the ground, and steps ({gableSteps}) under the gables, following the slope’s fall of {groundFall} (estimates: the paper says nothing of the foundation). The building of 1974 is listed as a historic monument: the national heritage database speaks of stepped foundations in the rock. That is a source for that building, not for the house of 1967.',
     ),
     material: l('Béton, en gradins, dessin générique', 'Concrete, stepped, a generic drawing'),
     specs: [
@@ -642,12 +643,12 @@ export const HOUSE_PARTS: PartInfo[] = [
     category: 'structure',
     name: l('Cheminée', 'Chimney'),
     short: l(
-      'Un conduit de brique sur le toit : à quoi il sert, personne ne le dit, et la maison chauffe à l’électricité.',
-      'A brick stack on the roof: what it is for, nobody says, and the house heats by electricity.',
+      'Un conduit de brique que notre dessin ajoute sur le toit, comme les vues aériennes semblent en montrer un : à quoi il sert, personne ne le dit, et la maison chauffe à l’électricité.',
+      'A brick stack that our drawing adds on the roof, as aerial views seem to show: what it is for, nobody says, and the house heats by electricity.',
     ),
     description: lf(
-      'Une cheminée se voit sur le toit de ces bâtiments. L’usage n’en est dit nulle part, et le chauffage d’appoint est électrique : c’est peut-être une ventilation, peut-être un reste. Ce sont nos hypothèses, aucune n’est lue. Nous la dessinons carrée, de {chimneyBox}, en brique, avec une collerette de zinc là où elle perce l’ardoise et un pot de grès au sommet, posée sur l’isolant du plafond et dépassant le faîtage (estimation). Dans le modèle, il n’y a aucun appareil à combustible, et la cheminée ne fait rien.',
-      'A chimney can be seen on the roof of these buildings. Its use is said nowhere, and the backup heating is electric: it may be a ventilation, it may be a leftover. These are our hypotheses, none is read. We draw it square, {chimneyBox}, of brick, with a zinc collar where it pierces the slate and a stoneware pot at the top, standing on the ceiling’s insulation and clearing the ridge (estimate). In the model there is no fuel appliance, and the chimney does nothing.',
+      'Notre dessin ajoute une cheminée sur le toit, comme les vues aériennes semblent en montrer une sur des bâtiments voisins. L’usage n’en est dit nulle part, et le chauffage d’appoint est électrique : c’est peut-être une ventilation, peut-être un reste. Ce sont nos hypothèses, aucune n’est lue. Nous la dessinons carrée, de {chimneyBox}, en brique, avec une collerette de zinc là où elle perce l’ardoise et un pot de grès au sommet, posée sur l’isolant du plafond et dépassant le faîtage (estimation). Dans le modèle, il n’y a aucun appareil à combustible, et la cheminée ne fait rien.',
+      'Our drawing adds a chimney on the roof, as aerial views seem to show one on neighbouring buildings. Its use is said nowhere, and the backup heating is electric: it may be a ventilation, it may be a leftover. These are our hypotheses, none is read. We draw it square, {chimneyBox}, of brick, with a zinc collar where it pierces the slate and a stoneware pot at the top, standing on the ceiling’s insulation and clearing the ridge (estimate). In the model there is no fuel appliance, and the chimney does nothing.',
     ),
     material: l('Brique, collerette de zinc, pot de grès (dessin)', 'Brick, zinc collar, stoneware pot (a drawing)'),
     specs: [
@@ -726,12 +727,12 @@ export const HOUSE_PARTS: PartInfo[] = [
     category: 'mechanical',
     name: l('Tuyau enterré (et si…)', 'Buried pipe (what if…)'),
     short: l(
-      'Cinquante mètres de tuyau à 2 m sous terre : cette maison n’en avait pas, et le modèle dit ce qu’il ferait à 1 550 m.',
-      'Fifty metres of pipe 2 m underground: this house had none, and the model says what it would do at 1,550 m.',
+      'Cinquante mètres de tuyau à 2 m sous terre : aucune source n’en mentionne dans cette maison, et le modèle dit ce qu’il ferait à 1 550 m.',
+      'Fifty metres of pipe 2 m underground: no source mentions one in this house, and the model says what it would do at 1,550 m.',
     ),
     description: lf(
-      'Cette maison n’avait pas de puits canadien : c’est une hypothèse. Le tuyau fait {tubeLength} de long et {tubeDia} de diamètre, enterré à {tubeDepth} (estimations, d’après l’illustration d’un architecte : 25 à 50 m, à 1,5 ou 2 m). Il penche d’environ {tubeFall} vers la purge. À Odeillo, en janvier, l’air sort à {tubeJanOut} quand il fait {tubeJanIn} ; en juillet, à {tubeJulOut} quand il fait {tubeJulIn}. Sur une année, il apporte {tubeKwh} de chaleur pour une charge de {tubeLoad} : environ {tubePoint} de part en plus. Au niveau de la mer, à Perpignan, il compte davantage : {tubePerpHeat} de chaleur et {tubePerpCool} de fraîcheur d’été pour une charge de {tubePerpLoad}. Ces chiffres sont ceux du modèle, jamais ceux d’un tuyau mesuré.',
-      'This house had no earth tube: it is a hypothesis. The pipe is {tubeLength} long and {tubeDia} in diameter, buried at {tubeDepth} (estimates, from an architect’s illustration: 25 to 50 m, at 1.5 or 2 m). It slopes by about {tubeFall} towards the drain. At Odeillo, in January, the air leaves at {tubeJanOut} when it is {tubeJanIn}; in July, at {tubeJulOut} when it is {tubeJulIn}. Over a year it brings {tubeKwh} of heat against a load of {tubeLoad}: about {tubePoint} more of share. At sea level, at Perpignan, it counts for more: {tubePerpHeat} of heat and {tubePerpCool} of summer coolness against a load of {tubePerpLoad}. These are the model’s figures, never those of a measured pipe.',
+      'Aucune source ne mentionne de puits canadien dans cette maison : c’est une hypothèse. Le tuyau fait {tubeLength} de long et {tubeDia} de diamètre, enterré à {tubeDepth} (estimations, d’après l’illustration d’un architecte : 25 à 50 m, à 1,5 ou 2 m). Il penche d’environ {tubeFall} vers la purge. À Odeillo, en janvier, l’air sort à {tubeJanOut} quand il fait {tubeJanIn} ; en juillet, à {tubeJulOut} quand il fait {tubeJulIn}. Sur une année, il apporte {tubeKwh} de chaleur pour une charge de {tubeLoad} : environ {tubePoint} de part en plus. Au niveau de la mer, il compte davantage : {tubeSeaHeat} de chaleur et {tubeSeaCool} de fraîcheur d’été pour une charge de {tubeSeaLoad}. Ces chiffres sont ceux du modèle, jamais ceux d’un tuyau mesuré.',
+      'No source mentions an earth tube in this house: it is a hypothesis. The pipe is {tubeLength} long and {tubeDia} in diameter, buried at {tubeDepth} (estimates, from an architect’s illustration: 25 to 50 m, at 1.5 or 2 m). It slopes by about {tubeFall} towards the drain. At Odeillo, in January, the air leaves at {tubeJanOut} when it is {tubeJanIn}; in July, at {tubeJulOut} when it is {tubeJulIn}. Over a year it brings {tubeKwh} of heat against a load of {tubeLoad}: about {tubePoint} more of share. At sea level it counts for more: {tubeSeaHeat} of heat and {tubeSeaCool} of summer coolness against a load of {tubeSeaLoad}. These are the model’s figures, never those of a measured pipe.',
     ),
     material: l('Tuyau enterré, matière non précisée (dessin)', 'Buried pipe, material not specified (a drawing)'),
     specs: [

@@ -78,14 +78,14 @@ export const WALL_PARTS: PartInfo[] = [
           'Ses faces ne se nettoient pas : la poussière s’y dépose avec les années, et un joint qui lâche remplit de buée la couche entre les deux vitres. C’est un souci de conception avant d’être un souci de lavage.',
         check:
           'Regardez le vitrage en biais, à contre-jour : la poussière du côté de la lame d’air et la buée entre les vitres se voient.',
-        care: 'Une maison de Sète a été transformée pour que ses fenêtres hautes s’ouvrent, afin d’en atteindre l’intérieur. Sinon, on nettoie seulement l’extérieur.',
+        care: 'Une maison à murs Trombe de 1986, que signale la base nationale du patrimoine, a été transformée pour que ses fenêtres hautes s’ouvrent, afin d’en atteindre l’intérieur. Sinon, on nettoie seulement l’extérieur.',
       },
       {
         failure:
           'Its faces cannot be cleaned: dust settles on them over the years, and a seal that lets go fills the layer between the two sheets with mist. It is a design worry before a washing worry.',
         check:
           'Look along the glazing against the light: dust on the air-gap side and mist between the sheets both show.',
-        care: 'A house at Sète was altered so that its high windows would open, to reach the inside. Otherwise only the outside is cleaned.',
+        care: 'A house with Trombe walls of 1986, listed in the national heritage database, was altered so that its high windows would open, to reach the inside. Otherwise only the outside is cleaned.',
       },
     ),
     tip: l(
@@ -107,8 +107,8 @@ export const WALL_PARTS: PartInfo[] = [
       'The skeleton that carries the two sheets: four panes to a column, held by angle brackets on the concrete.',
     ),
     description: lf(
-      'L’article dit « deux vitres sur un cadre d’acier », rien de plus ; celui de 1974 est en inox, ou en aluminium anodisé. Tout le reste est notre dessin : un profil mince de {frameFace} de face, qui dépasse le verre de {frameProud}, et {framePanes} carreaux par élément, parce qu’une vitre de 3 mm haute de plus de 4 m ne tiendrait pas seule (estimations). Le cadre est tenu par des équerres vissées sur les poutres de béton, en haut et en bas : c’est le béton qui le porte, pas l’air. Ses barreaux prennent un peu de verre : les neuf travées donnent {glassNet} de verre net, contre les 48 m² annoncés. Sa tête fait aussi de l’ombre sur le haut de la plaque : {shadeJune} à midi en juin, {shadeDec} en décembre (résultat du modèle).',
-      'The paper says “two sheets on a steel frame”, nothing more; the 1974 one is stainless steel, or anodised aluminium. All the rest is our drawing: a slim section {frameFace} wide on its face, standing {frameProud} proud of the glass, and {framePanes} panes to an element, because a 3 mm sheet over 4 m high would not stand alone (estimates). The frame is held by angle brackets bolted to the concrete beams, top and bottom: the concrete carries it, not the air. Its bars take a little glass: the nine bays give {glassNet} of net glass, against the announced 48 m². Its head also shades the top of the plate: {shadeJune} at noon in June, {shadeDec} in December (model result).',
+      'L’article dit « deux vitrages de 3 mm sur un cadre d’acier », rien de plus ; celui de 1974 est en inox, ou en aluminium anodisé. Tout le reste est notre dessin : un profil mince de {frameFace} de face, qui dépasse le verre de {frameProud}, et {framePanes} carreaux par élément, parce qu’une vitre de 3 mm haute de plus de 4 m ne tiendrait pas seule (estimations). Le cadre est tenu par des équerres vissées sur les poutres de béton, en haut et en bas : c’est le béton qui le porte, pas l’air. Ses barreaux prennent un peu de verre : les neuf travées donnent {glassNet} de verre net, contre les 48 m² annoncés. Sa tête fait aussi de l’ombre sur le haut de la plaque : {shadeJune} à midi en juin, {shadeDec} en décembre (résultat du modèle).',
+      'The paper says “two 3 mm glazings on a steel frame”, nothing more; the 1974 one is stainless steel, or anodised aluminium. All the rest is our drawing: a slim section {frameFace} wide on its face, standing {frameProud} proud of the glass, and {framePanes} panes to an element, because a 3 mm sheet over 4 m high would not stand alone (estimates). The frame is held by angle brackets bolted to the concrete beams, top and bottom: the concrete carries it, not the air. Its bars take a little glass: the nine bays give {glassNet} of net glass, against the announced 48 m². Its head also shades the top of the plate: {shadeJune} at noon in June, {shadeDec} in December (model result).',
     ),
     material: l('Acier, avec un joint de caoutchouc', 'Steel, with a rubber gasket'),
     specs: [
@@ -151,8 +151,8 @@ export const WALL_PARTS: PartInfo[] = [
       'Twelve centimetres of air between the last sheet and the black wall: here the warm air rises and drives the loop.',
     ),
     description: lf(
-      'L’air du bas, pris dans la pièce à 17 °C près du sol, se glisse derrière la vitre, touche le mur noir, chauffe et monte. Il ressort par le conduit du haut vers 40 à 43 °C, d’après les enregistrements lus à l’œil. Pas de ventilateur : c’est le tirage thermique, une colonne d’air chaud plus légère que l’air froid à côté d’elle. Le débit enregistré est d’environ 20 L/s par élément, à ± 28 % près selon les auteurs. À cette allure, l’air monte à {gapSpeed} dans la lame et à {ductSpeed} dans le conduit. La plaque est de 30 à 35 K plus chaude que l’air à mi-hauteur, de 40 à 45 K en bas : le modèle trouve {plateAbove} et {plateAboveLow}. Sur les jours clairs, il trouve en revanche {flowRange} à la pointe, presque le double. Il le dit, et ne s’est pas laissé régler.',
-      'The air at the bottom, taken from the room at 17 °C near the floor, slips behind the glass, touches the black wall, warms and rises. It leaves by the upper duct at about 40 to 43 °C, according to the recordings read by eye. No fan: it is the thermal draught, a column of warm air lighter than the cold air beside it. The recorded flow is about 20 L/s per element, within ± 28 % according to the authors. At that pace the air rises at {gapSpeed} in the gap and {ductSpeed} in the duct. The plate is 30 to 35 K warmer than the air at mid-height, 40 to 45 K at the bottom: the model finds {plateAbove} and {plateAboveLow}. On clear days, though, it finds {flowRange} at the peak, nearly twice as much. It says so, and was not tuned.',
+      'L’air du bas, pris dans la pièce à 17 °C près du sol, se glisse derrière la vitre, touche le mur noir, chauffe et monte. Il ressort par le conduit du haut vers 40 à 43 °C, d’après les enregistrements lus à l’œil. Pas de ventilateur : c’est le tirage thermique, une colonne d’air chaud plus légère que l’air froid à côté d’elle. Le débit enregistré est d’environ 20 L/s par élément ; les auteurs donnent ± 28 % sur la chaleur que l’air emporte, à cause de l’imprécision des mesures de vitesse. À cette allure, l’air monte à {gapSpeed} dans la lame et à {ductSpeed} dans le conduit. La plaque peut être de 30 à 35 K plus chaude que l’air à mi-hauteur, de 40 à 45 K en bas : le modèle trouve {plateAbove} et {plateAboveLow}. Sur les jours clairs, il trouve en revanche {flowRange} à la pointe, presque le double. Il le dit, et ne s’est pas laissé régler.',
+      'The air at the bottom, taken from the room at 17 °C near the floor, slips behind the glass, touches the black wall, warms and rises. It leaves by the upper duct at about 40 to 43 °C, according to the recordings read by eye. No fan: it is the thermal draught, a column of warm air lighter than the cold air beside it. The recorded flow is about 20 L/s per element; the authors give ± 28 % on the heat the air carries, because of the inaccuracy of the speed readings. At that pace the air rises at {gapSpeed} in the gap and {ductSpeed} in the duct. The plate can be 30 to 35 K warmer than the air at mid-height, 40 to 45 K at the bottom: the model finds {plateAbove} and {plateAboveLow}. On clear days, though, it finds {flowRange} at the peak, nearly twice as much. It says so, and was not tuned.',
     ),
     material: l('De l’air, dans une fente de 12 cm', 'Air, in a slot 12 cm deep'),
     specs: [
@@ -160,7 +160,7 @@ export const WALL_PARTS: PartInfo[] = [
       sp('Largeur', 'Width', '1,27 m'),
       sp('Section', 'Section', v('{gapSection}')),
       sp('Conduit, en part de la lame', 'Duct, as a share of the gap', v('{ductsOverGap}')),
-      sp('Débit enregistré', 'Recorded flow', l('environ 20 L/s, ± 28 %', 'about 20 L/s, ± 28 %')),
+      sp('Débit enregistré', 'Recorded flow', l('environ 20 L/s', 'about 20 L/s')),
       sp('Débit du modèle, jours clairs', 'Model flow, clear days', v('{flowRange}')),
     ],
     maintenance: maint(
@@ -184,8 +184,8 @@ export const WALL_PARTS: PartInfo[] = [
       'Switch on Flows: the dots of air rise at their true speed, and their colour follows the temperature round the loop. In the summer position, their path changes.',
     ),
     design: lf(
-      'Le conduit fait {ductsOverGap} de la section de la lame. Un architecte américain, pour l’Europe, citait la règle d’au moins la moitié. Aucune source ne chiffre les pertes du circuit : le modèle prend {lossK}, au milieu de {lossKRange}. De {flowHigh50} à {flowLow19}, la part de la saison ne bouge que de {shareMoves} (résultat du modèle) : ce que l’air n’emporte pas, le mur le garde.',
-      'The duct is {ductsOverGap} of the gap’s section. An American architect, for Europe, quoted a rule of at least half. No source gives the loop’s losses: the model takes {lossK}, in the middle of {lossKRange}. From {flowHigh50} to {flowLow19} the season’s share moves only {shareMoves} (model result): what the air does not carry, the wall keeps.',
+      'Le conduit fait {ductsOverGap} de la section de la lame. Un architecte américain, pour l’Europe, citait la règle d’au moins la moitié. Aucune source ne chiffre les pertes du circuit : le modèle prend {lossK}, au milieu de la plage, {lossKRange}. De {flowHigh50} à {flowLow19}, la part de la saison ne bouge que de {shareMoves} (résultat du modèle) : ce que l’air n’emporte pas, le mur le garde.',
+      'The duct is {ductsOverGap} of the gap’s section. An American architect, for Europe, quoted a rule of at least half. No source gives the loop’s losses: the model takes {lossK}, in the middle of the range, {lossKRange}. From {flowHigh50} to {flowLow19} the season’s share moves only {shareMoves} (model result): what the air does not carry, the wall keeps.',
     ),
   },
   {
@@ -198,14 +198,14 @@ export const WALL_PARTS: PartInfo[] = [
       'A coat of black acrylic on the concrete: it is what turns the light of the sun into heat.',
     ),
     description: lf(
-      'Le mur est peint en noir à l’acrylique : c’est tout ce que dit l’article. Il ne donne pas la part du soleil que la peinture garde, et le modèle prend {absorptance} ({absorptanceRange}). À midi en hiver, la plaque monte vers 63 à 66 °C d’après la courbe de décembre 1974, lue à l’œil. L’émissivité de toutes les surfaces est de 0,94 selon l’article : la peinture rend aussi très bien sa chaleur en rayons, et c’est ce qu’elle échange avec la vitre. Le réglage compte peu : de 0,90 à 0,95, la part de la saison bouge de moins de {absorbMove} (résultat du modèle). Le noir n’est pas une idée neuve : dès 1881, le brevet de Morse a une plaque noire derrière du verre.',
-      'The wall is painted black with acrylic: that is all the paper says. It does not give the share of the sun the paint keeps, and the model takes {absorptance} ({absorptanceRange}). At noon in winter the plate climbs to about 63 to 66 °C, according to the December 1974 curve read by eye. The emissivity of every surface is 0.94 according to the paper: the paint also gives its heat back as rays very well, and that is what it exchanges with the glass. The setting matters little: from 0.90 to 0.95 the season’s share moves by less than {absorbMove} (model result). Black is not a new idea: as early as 1881, Morse’s patent has a black plate behind glass.',
+      'Le mur est peint en noir à l’acrylique : c’est tout ce que dit l’article. Il ne donne pas la part du soleil que la peinture garde, et le modèle prend {absorptance} ({absorptanceRange}). En début d’après-midi, en hiver, la plaque monte vers 63 à 66 °C d’après la courbe de décembre 1974, lue à l’œil. L’article donne 0,94 d’émissivité pour les surfaces de la pièce. Nous la prenons aussi pour la peinture (estimation : l’article ne donne pas celle de la peinture). Le réglage compte peu : de 0,90 à 0,95, la part de la saison bouge de moins de {absorbMove} (résultat du modèle). Le noir n’est pas une idée neuve : dès 1881, le brevet de Morse a une plaque noire derrière du verre.',
+      'The wall is painted black with acrylic: that is all the paper says. It does not give the share of the sun the paint keeps, and the model takes {absorptance} ({absorptanceRange}). In the early afternoon in winter the plate climbs to about 63 to 66 °C, according to the December 1974 curve read by eye. The paper gives an emissivity of 0.94 for the room’s surfaces. We take the same for the paint (an estimate: the paper does not give the paint’s). The setting matters little: from 0.90 to 0.95 the season’s share moves by less than {absorbMove} (model result). Black is not a new idea: as early as 1881, Morse’s patent has a black plate behind glass.',
     ),
     material: l('Peinture acrylique noire', 'Black acrylic paint'),
     specs: [
       sp('Matière', 'Material', l('Acrylique noir', 'Black acrylic')),
       sp('Absorption du soleil', 'Sun absorbed', v('{absorptance}')),
-      sp('Émissivité', 'Emissivity', '0,94'),
+      sp('Émissivité des surfaces de la pièce', 'Emissivity of the room’s surfaces', '0,94'),
       sp('Plaque à midi, hiver', 'Plate at noon, winter', l('63 à 66 °C, à l’œil', '63 to 66 °C, by eye')),
       sp('Alarme du modèle', 'Model alarm', v('{paintAlarm}')),
     ],
@@ -261,14 +261,14 @@ export const WALL_PARTS: PartInfo[] = [
     maintenance: maint(
       {
         failure:
-          'De l’eau. Le béton coulé sur place reste humide des années. Le mur de 1974 a rendu 8 à 10 points de moins que celui de 1967 et son intérieur était plus froid que la théorie : les auteurs y voient l’eau restée dans le béton, qui doit disparaître en un ou deux ans. Le modèle, lui, ne connaît que du béton sec.',
+          'De l’eau restée dans le béton. Le mur de 1974 a rendu 8 à 10 points de moins que celui de 1967. Les auteurs en donnent deux raisons : moins de circulation d’air (une surface d’échange plus petite, 3,25 contre 4,50 m²) et moins de chaleur restituée par le béton, qu’ils rattachent à l’eau qui y reste et qu’ils attendent de voir partir en un ou deux ans. Le modèle ne connaît que du béton sec : il donne {dry74} à ce mur, un point de plus que celui de 1967 ({eff20}), et ne retrouve donc pas l’écart.',
         check:
           'Comparer la face intérieure à ce que donne la théorie, comme l’ont fait les inventeurs : un mur plus froid que prévu dit qu’il n’est pas sec.',
         care: 'Des blocs secs évitent le problème, dit l’article. Ensuite, rien : ce mur ne bouge pas et ne se règle pas.',
       },
       {
         failure:
-          'Water. Concrete cast in place stays damp for years. The 1974 wall gave back 8 to 10 points less than the 1967 one and was colder inside than theory: the authors see in it the water left in the concrete, which should go in a year or two. The model only knows dry concrete.',
+          'Water left in the concrete. The 1974 wall gave back 8 to 10 points less than the 1967 one. The authors give two reasons: less air circulation (a smaller exchange surface, 3.25 against 4.50 m²) and less heat coming through the concrete, which they trace to the water still in it and expect to go in a year or two. The model only knows dry concrete: it gives this wall {dry74}, a point above the 1967 one ({eff20}), and so does not retrieve the gap.',
         check:
           'Compare the inner face with what theory gives, as the inventors did: a wall colder than expected says it is not dry.',
         care: 'Dry blocks avoid the problem, says the paper. After that, nothing: this wall does not move and is not adjusted.',
@@ -293,8 +293,8 @@ export const WALL_PARTS: PartInfo[] = [
       'A tunnel 56.5 × 11 cm through the concrete near the ceiling: the warm air from the gap goes through it, into the room.',
     ),
     description: lf(
-      'Le conduit traverse les 60 cm de béton tout près du plafond, et mesure 0,565 × 0,110 m, soit 621,5 cm². L’air de la lame y entre par le haut et sort dans la pièce en un jet chaud, vers 40 à 43 °C d’après l’article. À 20 L/s, il y va à {ductSpeed}. Il porte beaucoup : environ {elemWatts} par élément, soit {frontKw} pour toute la façade, en supposant chaque élément pareil. Il se peut qu’en le traversant, l’air chauffe aussi le béton autour de lui, une chaleur qu’un modèle à une seule colonne de mur ne compte pas : c’est l’une des explications possibles de ce que ce modèle ne retrouve pas. Un grillage ou un angle vif ajouteraient des pertes : avec des conduits moitié moins larges, le modèle trouve {flowHalfDuct} et 45 °C, au bord des marges de l’article.',
-      'The duct goes through the 60 cm of concrete close to the ceiling, and measures 0.565 × 0.110 m, or 621.5 cm². The air from the gap goes in at the top and comes out into the room in a warm jet, at about 40 to 43 °C according to the paper. At 20 L/s it goes through at {ductSpeed}. It carries a lot: about {elemWatts} per element, or {frontKw} for the whole front, assuming every element alike. It may be that, going through, the air also warms the concrete around it, a heat that a model with a single column of wall does not count: it is one of the possible explanations of what this model does not retrieve. A grille or a sharp edge would add losses: with ducts half as wide, the model finds {flowHalfDuct} and 45 °C, at the edge of the paper’s margins.',
+      'Le conduit traverse les 60 cm de béton tout près du plafond, et mesure 0,565 × 0,110 m, soit 621,5 cm². L’air de la lame y entre par le haut et sort dans la pièce en un jet chaud, vers 40 à 43 °C d’après l’article. À 20 L/s, il y va à {ductSpeed}. Il porte beaucoup : environ {elemWatts} par élément, soit {frontKw} pour toute la façade, en supposant chaque élément pareil. Il se peut qu’en le traversant, l’air chauffe aussi le béton autour de lui, une chaleur qu’un modèle à une seule colonne de mur ne compte pas : c’est l’une des explications possibles de ce que ce modèle ne retrouve pas. Un grillage ou un angle vif ajouteraient des pertes : avec des conduits moitié moins larges, le modèle trouve {flowHalfDuct} et 45 °C, au bord de la marge de ± 28 % que l’article donne sur la chaleur portée par l’air, appliquée ici au débit.',
+      'The duct goes through the 60 cm of concrete close to the ceiling, and measures 0.565 × 0.110 m, or 621.5 cm². The air from the gap goes in at the top and comes out into the room in a warm jet, at about 40 to 43 °C according to the paper. At 20 L/s it goes through at {ductSpeed}. It carries a lot: about {elemWatts} per element, or {frontKw} for the whole front, assuming every element alike. It may be that, going through, the air also warms the concrete around it, a heat that a model with a single column of wall does not count: it is one of the possible explanations of what this model does not retrieve. A grille or a sharp edge would add losses: with ducts half as wide, the model finds {flowHalfDuct} and 45 °C, at the edge of the ± 28 % margin the paper gives on the heat carried by the air, applied here to the flow.',
     ),
     material: l(
       'Réservation dans le béton, avec fourreau et grille',
@@ -321,8 +321,8 @@ export const WALL_PARTS: PartInfo[] = [
       },
     ),
     tip: l(
-      'Activez Flux, puis passez du matin au soir : le jet du haut s’allume avec le soleil, et reste chaud plus de deux heures après lui.',
-      'Switch on Flows, then run from morning to evening: the jet at the top lights up with the sun, and stays warm for over two hours after it.',
+      'Activez Flux, puis passez du matin au soir : le jet du haut s’allume avec le soleil, et le courant dure encore deux à trois heures après lui.',
+      'Switch on Flows, then run from morning to evening: the jet at the top lights up with the sun, and the flow goes on for two to three hours after it.',
     ),
     design: lf(
       'Pourquoi deux conduits, et pas un ? Un seul laisserait l’air chaud monter et l’air froid descendre dans le même trou, qui se gêneraient. Avec un bas et un haut, la colonne tourne dans un seul sens, sans ventilateur. Ce conduit fait {ductsOverGap} de la section de la lame.',
@@ -386,8 +386,8 @@ export const WALL_PARTS: PartInfo[] = [
       'A hinged plate at the top of the wall: flat, the air goes into the room; hanging, it goes outside.',
     ),
     description: lf(
-      'L’article dessine, pour l’été, un clapet en haut du capteur. Le brevet de Trombe et Michel, de priorité 1971, décrit lui aussi un mode d’hiver et un mode d’été. En hiver, la plaque est à plat : elle ferme la poche au-dessus du conduit, et l’air chaud entre dans la pièce. En été, elle pend devant le conduit : elle le ferme, et l’air s’échappe par la tête du mur en tirant celui de la pièce. Le modèle trouve alors {summerRange}, contre environ {summerRecorded} sur le débit enregistré en juin, si c’était bien le mode d’été, ce que l’article ne dit pas. Le mécanisme est notre estimation : une plaque sur charnière, une manivelle et un cordon vers un bouton sous le toit. L’article ne dit pas quand les maisons changeaient de position.',
-      'The paper draws, for summer, a flap at the top of the collector. Trombe and Michel’s patent, with a priority of 1971, also describes a winter mode and a summer mode. In winter the plate is flat: it closes the pocket above the duct, and the warm air goes into the room. In summer it hangs in front of the duct: it shuts it, and the air escapes at the head of the wall, drawing the room’s with it. The model then finds {summerRange}, against about {summerRecorded} on the flow recorded in June, if that was the summer mode, which the paper does not say. The mechanism is our estimate: a plate on a hinge, a crank and a cord to a knob under the roof. The paper does not say when the houses changed position.',
+      'L’article dessine, pour l’été, un clapet en haut du capteur. Le brevet de Trombe et Michel, de priorité 1971, décrit lui aussi une position de chauffage et une position de rafraîchissement. Dans notre dessin, en hiver, la plaque est à plat : elle ferme la poche au-dessus du conduit, et l’air chaud entre dans la pièce. En été, elle pend devant le conduit : elle le ferme, et l’air s’échappe par la tête du mur en tirant celui de la pièce. Le modèle trouve alors {summerRange}, contre environ {summerRecorded} sur le débit enregistré en juin, si c’était bien le mode d’été, ce que l’article ne dit pas. Le mécanisme est notre estimation : une plaque sur charnière, une manivelle et un cordon vers un bouton sous le toit. L’article ne dit pas quand les maisons changeaient de position.',
+      'The paper draws, for summer, a flap at the top of the collector. Trombe and Michel’s patent, with a priority of 1971, also describes a heating position and a cooling position. In our drawing, in winter the plate is flat: it closes the pocket above the duct, and the warm air goes into the room. In summer it hangs in front of the duct: it shuts it, and the air escapes at the head of the wall, drawing the room’s with it. The model then finds {summerRange}, against about {summerRecorded} on the flow recorded in June, if that was the summer mode, which the paper does not say. The mechanism is our estimate: a plate on a hinge, a crank and a cord to a knob under the roof. The paper does not say when the houses changed position.',
     ),
     material: l('Plaque d’acier sur charnière, manivelle et cordon', 'A steel plate on a hinge, a crank and a cord'),
     specs: [
@@ -563,8 +563,8 @@ export const WALL_PARTS: PartInfo[] = [
       'Three probes that hang in the air gap, under an aluminium screen: they read the air, not the wall.',
     ),
     description: lf(
-      'Mesurer l’air devant un mur à 60 °C est délicat : le fil reçoit les rayons du mur et du soleil, et finit par lire sa propre chaleur. Les chercheurs ont donc mis leurs thermocouples sous des écrans d’aluminium, qui renvoient les rayons. Dans notre dessin, trois sondes pendent de la poutre de tête, au milieu de la lame, aux {airFractions} de la portée entre les conduits (estimation). Elles répondent aux trois lectures de l’air dans le modèle : l’entrée, le milieu, la sortie. L’air entre à 17 °C et sort, selon les enregistrements, vers 40 à 43 °C. Le modèle trouve environ {airOutModel} à la sortie sur les mêmes jours, avec plus de débit.',
-      'Measuring the air in front of a wall at 60 °C is delicate: the wire catches rays from the wall and the sun, and ends up reading its own heat. The researchers therefore put their thermocouples under aluminium screens, which send the rays back. In our drawing, three probes hang from the head beam, in the middle of the gap, at {airFractions} of the span between the ducts (estimate). They answer the model’s three readings of the air: the inlet, the middle, the outlet. The air enters at 17 °C and leaves, according to the recordings, at about 40 to 43 °C. The model finds about {airOutModel} at the outlet on the same days, with more flow.',
+      'Mesurer l’air devant un mur à 60 °C est délicat : le fil reçoit les rayons du mur et du soleil, et finit par lire sa propre chaleur. Les chercheurs ont donc mis leurs thermocouples d’air sous des écrans d’aluminium, qui renvoient les rayons, dans les conduits de circulation. Dans notre dessin, trois sondes pendent de la poutre de tête, au milieu de la lame, aux {airFractions} de la portée entre les conduits (estimation). Elles répondent aux trois lectures de l’air dans le modèle : l’entrée, le milieu, la sortie. L’air entre à 17 °C et sort, selon les enregistrements, vers 40 à 43 °C. Le modèle trouve environ {airOutModel} à la sortie sur les mêmes jours, avec plus de débit.',
+      'Measuring the air in front of a wall at 60 °C is delicate: the wire catches rays from the wall and the sun, and ends up reading its own heat. The researchers therefore put their air thermocouples under aluminium screens, which send the rays back, in the air-circulation ducts. In our drawing, three probes hang from the head beam, in the middle of the gap, at {airFractions} of the span between the ducts (estimate). They answer the model’s three readings of the air: the inlet, the middle, the outlet. The air enters at 17 °C and leaves, according to the recordings, at about 40 to 43 °C. The model finds about {airOutModel} at the outlet on the same days, with more flow.',
     ),
     material: l('Thermocouples sous écran d’aluminium', 'Thermocouples under an aluminium screen'),
     specs: [
@@ -594,8 +594,8 @@ export const WALL_PARTS: PartInfo[] = [
       'Isolate the air probes: you see them hang in the empty gap, well away from both faces.',
     ),
     design: l(
-      'Un écran d’aluminium est le geste classique pour lire un air chauffé par des rayons. L’article le dit, mais ne donne ni les hauteurs ni le nombre des sondes : ces trois-là sont les nôtres.',
-      'An aluminium screen is the classic way to read air warmed by rays. The paper says so, but gives neither the heights nor the number of probes: these three are ours.',
+      'Un écran d’aluminium est le geste classique pour lire un air chauffé par des rayons. L’article le dit et place ses sondes dans les conduits, sans en donner le nombre ni les hauteurs : ces trois-là, dans la lame, sont les nôtres.',
+      'An aluminium screen is the classic way to read air warmed by rays. The paper says so and puts its probes in the ducts, without giving their number or heights: these three, in the gap, are ours.',
     ),
   },
   {
@@ -608,15 +608,15 @@ export const WALL_PARTS: PartInfo[] = [
       'A heated wire in the duct: the faster the air, the more it cools the wire. It measured the paper’s 20 L/s.',
     ),
     description: lf(
-      'Un fil fin est chauffé par un courant. L’air qui passe le refroidit, et ce qu’il faut de courant pour le garder chaud donne la vitesse. L’appareil de l’article lit de −60 à +60 cm/s : il pourrait donc voir un courant inversé, et ses enregistrements n’en montrent aucun. Dans notre dessin, sa pointe est au centre du conduit haut, où l’air va plus vite que la moyenne. Pour 20 L/s dans 621,5 cm², la moyenne est de {ductSpeed} ; au centre, avec un profil pointu, de {centreRange} (estimation). C’est tout près de la limite de l’appareil. Les courbes des deux collecteurs restent plates au même débit : c’est un soupçon, rien de plus, mais ces 20 L/s pourraient être le plafond de l’instrument.',
-      'A fine wire is heated by a current. The air that passes cools it, and the current it takes to keep it warm gives the speed. The paper’s instrument reads from −60 to +60 cm/s: it could therefore see a reversed flow, and its recordings show none. In our drawing its tip is at the centre of the upper duct, where the air goes faster than the average. For 20 L/s in 621.5 cm² the average is {ductSpeed}; at the centre, with a peaked profile, {centreRange} (estimate). That is very near the instrument’s limit. The curves of the two collectors stay flat at the same flow: it is a suspicion, nothing more, but these 20 L/s could be the instrument’s ceiling.',
+      'Un fil fin est chauffé par un courant. L’air qui passe le refroidit, et ce qu’il faut de courant pour le garder chaud donne la vitesse. L’appareil de l’article lit de −60 à +60 cm/s, la sonde faisant 60° avec le courant : il pourrait donc voir un courant inversé, et ses enregistrements n’en montrent aucun. Dans notre dessin, sa pointe est au centre du conduit haut ; l’article la place au centre du conduit bas. Au centre d’un conduit, l’air va plus vite que la moyenne. Pour 20 L/s dans 621,5 cm², la moyenne est de {ductSpeed} ; au centre, avec un profil pointu, de {centreRange} (estimation). C’est tout près de la limite de l’appareil. Les courbes des deux collecteurs restent plates au même débit : c’est un soupçon, rien de plus, mais ces 20 L/s pourraient être le plafond de l’instrument.',
+      'A fine wire is heated by a current. The air that passes cools it, and the current it takes to keep it warm gives the speed. The paper’s instrument reads from −60 to +60 cm/s, with the probe at 60° to the flow: it could therefore see a reversed flow, and its recordings show none. In our drawing its tip is at the centre of the upper duct; the paper puts it at the centre of the lower one. At the centre of a duct the air goes faster than the average. For 20 L/s in 621.5 cm² the average is {ductSpeed}; at the centre, with a peaked profile, {centreRange} (estimate). That is very near the instrument’s limit. The curves of the two collectors stay flat at the same flow: it is a suspicion, nothing more, but these 20 L/s could be the instrument’s ceiling.',
     ),
     material: l('Fil chaud, avec son boîtier', 'Hot wire, with its housing'),
     specs: [
       sp('Plage', 'Range', l('−60 à +60 cm/s', '−60 to +60 cm/s')),
       sp('Vitesse moyenne à 20 L/s', 'Mean speed at 20 L/s', v('{ductSpeed}')),
       sp('Vitesse au centre, estimée', 'Speed at the centre, estimated', v('{centreRange}')),
-      sp('Incertitude du débit', 'Flow uncertainty', '± 28 %'),
+      sp('Incertitude, chaleur portée par l’air', 'Uncertainty, heat carried by the air', '± 28 %'),
     ],
     maintenance: maint(
       {
@@ -635,12 +635,12 @@ export const WALL_PARTS: PartInfo[] = [
       },
     ),
     tip: l(
-      'Isolez l’anémomètre : sa sonde entre par la grille du conduit haut, et son câble rejoint la boîte de jonction.',
-      'Isolate the anemometer: its probe enters through the upper duct’s grille, and its cable runs to the junction box.',
+      'Isolez l’anémomètre : sa sonde entre par la grille du conduit haut (dans l’article, c’est le conduit bas), et son câble rejoint la boîte de jonction.',
+      'Isolate the anemometer: its probe enters through the upper duct’s grille (in the paper it is the lower duct), and its cable runs to the junction box.',
     ),
     design: l(
-      'Les auteurs donnent ± 28 % et blâment la turbulence. Le modèle trouve environ deux fois leur débit et ne s’aligne pas. Un plafond de l’appareil pourrait expliquer l’écart, mais le conduit de 1974, plus grand, plafonne au même débit, ce qui joue contre.',
-      'The authors give ± 28 % and blame turbulence. The model finds about twice their flow and does not line up. A ceiling of the instrument could explain the gap, but the larger duct of 1974 tops out at the same flow, which argues against it.',
+      'Les auteurs donnent ± 28 % sur la chaleur portée par l’air, à cause de l’imprécision des mesures de vitesse, et pensent que la turbulence limite le débit. Le modèle trouve environ deux fois leur débit et ne s’aligne pas. Un plafond de l’appareil pourrait expliquer l’écart, mais le conduit de 1974, plus grand, plafonne au même débit, ce qui joue contre.',
+      'The authors give ± 28 % on the heat carried by the air, because of the inaccuracy of the speed readings, and think turbulence limits the flow. The model finds about twice their flow and does not line up. A ceiling of the instrument could explain the gap, but the larger duct of 1974 tops out at the same flow, which argues against it.',
     ),
   },
 ];
