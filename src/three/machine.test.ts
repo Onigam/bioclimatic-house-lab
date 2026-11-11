@@ -408,12 +408,17 @@ describe('what drives what is attached to it', () => {
     expect(p.max.z).toBeLessThan(l.lastBack);
     expect(Math.abs(p.max.y - l.yHeadBottom)).toBeLessThan(0.003);
   });
-  it('the anemometer’s tip is in the middle of the upper duct’s tunnel, its grip in the room', () => {
+  it('the anemometer’s tip is in the middle of the lower duct’s tunnel (S1 p. 203: « centre of the lower duct »), its grip in the room, its cable up to the box', () => {
     const p = wbox('hot-wire-anemometer', 'anemometer-probe');
     const l = L();
     expect(p.min.z).toBeGreaterThan(l.inner - 0.25);
     expect(p.max.z).toBeCloseTo((l.face + l.inner) / 2, 3);
-    expect(Math.abs((p.min.y + p.max.y) / 2 - l.yDuctHigh)).toBeLessThan(0.002);
+    expect(Math.abs((p.min.y + p.max.y) / 2 - l.yDuctLow)).toBeLessThan(0.002);
+    // the cable starts at the grip and ends against the junction box’s underside
+    const cable = wbox('hot-wire-anemometer', 'anemometer-cable');
+    expect(cable.min.y).toBeLessThan(l.yDuctLow + 0.03);
+    expect(cable.max.y).toBeLessThan(1.46);
+    expect(cable.min.y).toBeGreaterThan(l.yDuctLow - 0.04);
   });
   it('the duct sleeves run from the black face to the room face, in the notches of the wall', () => {
     const l = L();

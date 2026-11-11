@@ -49,7 +49,7 @@ export const FRAMING: Record<WallPart, PartFraming> = {
   'sill-beam': { viewDir: viewFrom(10, 100) },
   'wall-thermocouples': { viewDir: viewFrom(10, 100) },
   'air-thermocouples': { viewDir: viewFrom(10, 100), frame: box(-0.4, 1.3, -0.17, 0.0, 2.2, -0.04) },
-  'hot-wire-anemometer': { viewDir: viewFrom(12, 128), frame: box(-0.4, 3.2, -1.05, 0.1, 3.9, -0.4) },
+  'hot-wire-anemometer': { viewDir: viewFrom(12, 128), frame: box(-0.4, -0.15, -1.05, 0.1, 0.6, -0.4) },
 };
 
 const HOTSPOTS: HotspotDef[] = [

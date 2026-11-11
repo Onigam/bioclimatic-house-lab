@@ -534,13 +534,13 @@ export function buildElement(
       { name: 'air-probe-wire', cast: false, x: x0 },
     );
 
-    // the hot-wire anemometer: a probe through the upper duct's grille, its tip in the middle of the tunnel, a cable to the junction box
+    // the hot-wire anemometer: a probe through the lower duct's grille, its tip in the middle of the tunnel (the paper's « centre of the lower duct », S1 p. 203), a cable up the wall's face to the junction box
     single(
       'hot-wire-anemometer',
       mats.steel,
       (c) => {
         const { lay: L } = c;
-        const y = L.yDuctHigh;
+        const y = L.yDuctLow;
         const px = -0.05;
         const zTip = (L.face + L.inner) / 2;
         const zGrip = L.inner - 0.2;
@@ -567,18 +567,18 @@ export function buildElement(
       mats.rubber,
       (c) => {
         const { lay: L } = c;
-        const y = L.yDuctHigh;
-        // the grip, a cylinder on the probe's rear, then the cable down the wall's face to the junction box
+        const y = L.yDuctLow;
+        // the grip, a cylinder on the probe's rear, then the cable up the wall's face to the junction box's underside
         const grip = new THREE.CylinderGeometry(0.014, 0.014, 0.11, 12);
         grip.rotateX(Math.PI / 2);
         grip.translate(-0.05, y, L.inner - 0.255);
         const cable = tubeGeometry(
           [
             new THREE.Vector3(-0.05, y, L.inner - 0.31),
-            new THREE.Vector3(-0.06, y - 0.12, L.inner - 0.2),
-            new THREE.Vector3(-0.2, y - 0.6, L.inner - 0.06),
-            new THREE.Vector3(-0.32, 1.9, L.inner - 0.03),
-            new THREE.Vector3(-0.32, 1.545, L.inner - 0.03),
+            new THREE.Vector3(-0.06, y + 0.12, L.inner - 0.2),
+            new THREE.Vector3(-0.2, y + 0.6, L.inner - 0.06),
+            new THREE.Vector3(-0.32, 1.2, L.inner - 0.03),
+            new THREE.Vector3(-0.32, 1.451, L.inner - 0.03),
           ],
           0.0035,
           30,
@@ -668,7 +668,7 @@ export function buildElement(
     anchors.sillBeam = new THREE.Vector3(x0 - 0.45, (L.yBottom + L.ySillTop) / 2, L.inner);
     anchors.wallThermocouples = new THREE.Vector3(x0 - 0.32, Math.min(1.5, L.yTop - 0.5), L.inner - 0.04);
     anchors.airThermocouples = new THREE.Vector3(x0 - 0.25 + 0.055, L.yDuctLow + ctx.spec.ductSpan * 0.5, zMid);
-    anchors.anemometer = new THREE.Vector3(x0 - 0.05, L.yDuctHigh, L.inner - 0.255);
+    anchors.anemometer = new THREE.Vector3(x0 - 0.05, L.yDuctLow, L.inner - 0.255);
   };
 
   const apply = (): void => {
