@@ -547,7 +547,7 @@ describe.each(Object.keys(scripts))('narration script %s', (lang) => {
     }
   });
 
-  it('shows the earth tube in its three parts and nowhere else: on with the first word, off with the last', () => {
+  it('shows the earth tube in its three parts and nowhere else: on with the first word, off at a sentence boundary with the closing sentence still to come', () => {
     for (const s of script.segments) {
       const tube = cuesOf(s.text).filter(([n, a]) => n === 'lab' && a.startsWith('earthtube'));
       if (!WHAT_IF_PARTS.some((id) => s.id === `part-${id}`)) expect(tube, s.id).toEqual([]);
@@ -557,7 +557,16 @@ describe.each(Object.keys(scripts))('narration script %s', (lang) => {
           ['lab', 'earthtube:off'],
         ]);
         expect(s.text.startsWith('[[lab:earthtube:on]]'), s.id).toBe(true);
-        expect(s.text.trimEnd().endsWith('[[lab:earthtube:off]]'), s.id).toBe(true);
+        // the restore is not the last thing of the clip: a restore at the very end lands after the last sample of a slow page (the second review's replay read « custom » in the starting-point
+        // select at the end of the buried pipe's clip), so it comes before the closing sentence, which gives it at least two seconds (about 30 spoken characters) to land
+        const at = s.text.indexOf('[[lab:earthtube:off]]');
+        expect(spokenOf({ text: s.text.slice(0, at) }), `${s.id}: the restore comes at a sentence boundary`).toMatch(
+          /[.!?…]$/,
+        );
+        expect(
+          spokenOf({ text: s.text.slice(at) }).length,
+          `${s.id}: the restore leaves a closing sentence`,
+        ).toBeGreaterThanOrEqual(30);
       }
     }
   });

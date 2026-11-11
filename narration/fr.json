@@ -233,21 +233,21 @@
       "scope": "part:earth-tube-intake",
       "title": "Prise d’air (et si…)",
       "scene": "house",
-      "text": "[[lab:earthtube:on]] La voilà plus ferme : le début du puits canadien. Une colonne sur la pente, avec un capuchon contre la pluie, et une grille contre les insectes et les feuilles. À cette altitude, la neige compte pour la hauteur de la prise. [[lab:earthtube:off]]"
+      "text": "[[lab:earthtube:on]] La voilà plus ferme : le début du puits canadien. Une colonne sur la pente, avec un capuchon contre la pluie, et une grille contre les insectes et les feuilles. [[lab:earthtube:off]] À cette altitude, la neige compte pour la hauteur de la prise."
     },
     {
       "id": "part-earth-tube-pipe",
       "scope": "part:earth-tube-pipe",
       "title": "Tuyau enterré (et si…)",
       "scene": "house",
-      "text": "[[lab:earthtube:on]] Cinquante mètres de tuyau, à deux mètres sous terre : nos estimations. À Odeillo, en janvier, l’air du dehors est à moins un degré, et il sort à trois. En juillet, à quinze dehors, il sort à dix. Sur une année : six cent vingt-cinq kilowattheures, pour une charge de cinquante-sept mille. Environ un point de part. Aucun puits canadien mesuré sur une maison ne nous est parvenu : ces chiffres sont ceux du calcul. [[lab:earthtube:off]]"
+      "text": "[[lab:earthtube:on]] Cinquante mètres de tuyau, à deux mètres sous terre : nos estimations. À Odeillo, en janvier, l’air du dehors est à moins un degré, et il sort à trois. En juillet, à quinze dehors, il sort à dix. Sur une année : six cent vingt-cinq kilowattheures, pour une charge de cinquante-sept mille. Environ un point de part. Aucun puits canadien mesuré sur une maison ne nous est parvenu. [[lab:earthtube:off]] Ces chiffres sont ceux du calcul."
     },
     {
       "id": "part-earth-tube-drain",
       "scope": "part:earth-tube-drain",
       "title": "Purge (et si…)",
       "scene": "house",
-      "text": "[[lab:earthtube:on]] Le point bas du tuyau : un regard, sous un couvercle à ras du terrain. L’air chaud qui passe dans un tuyau froid y laisse de l’eau. Elle doit couler quelque part : sinon viennent les moisissures, et c’est ce qu’on respire ensuite. Notre modèle ne simule pas la condensation. Là où le radon est un sujet, une mesure s’impose avant tout tuyau. [[lab:earthtube:off]]"
+      "text": "[[lab:earthtube:on]] Le point bas du tuyau : un regard, sous un couvercle à ras du terrain. L’air chaud qui passe dans un tuyau froid y laisse de l’eau. Elle doit couler quelque part : sinon viennent les moisissures, et c’est ce qu’on respire ensuite. Notre modèle ne simule pas la condensation. [[lab:earthtube:off]] Là où le radon est un sujet, une mesure s’impose avant tout tuyau."
     },
     {
       "id": "part-outer-glazing",

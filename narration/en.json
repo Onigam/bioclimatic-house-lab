@@ -233,21 +233,21 @@
       "scope": "part:earth-tube-intake",
       "title": "Intake (what if…)",
       "scene": "house",
-      "text": "[[lab:earthtube:on]] There it firms up: the start of the earth tube. A column on the slope, with a cap against the rain, and a grille against insects and leaves. At this altitude, snow decides how high the intake must stand. [[lab:earthtube:off]]"
+      "text": "[[lab:earthtube:on]] There it firms up: the start of the earth tube. A column on the slope, with a cap against the rain, and a grille against insects and leaves. [[lab:earthtube:off]] At this altitude, snow decides how high the intake must stand."
     },
     {
       "id": "part-earth-tube-pipe",
       "scope": "part:earth-tube-pipe",
       "title": "Buried pipe (what if…)",
       "scene": "house",
-      "text": "[[lab:earthtube:on]] Fifty metres of pipe, two metres underground: our estimates. At Odeillo, in January, the outside air is at minus one degree, and it leaves at three. In July, with fifteen outside, it leaves at ten. Over a year: six hundred and twenty-five kilowatt-hours, against a load of fifty-seven thousand. About one point of share. No earth tube measured on a house has reached us: these figures are the calculation’s. [[lab:earthtube:off]]"
+      "text": "[[lab:earthtube:on]] Fifty metres of pipe, two metres underground: our estimates. At Odeillo, in January, the outside air is at minus one degree, and it leaves at three. In July, with fifteen outside, it leaves at ten. Over a year: six hundred and twenty-five kilowatt-hours, against a load of fifty-seven thousand. About one point of share. No earth tube measured on a house has reached us. [[lab:earthtube:off]] These figures are the calculation’s."
     },
     {
       "id": "part-earth-tube-drain",
       "scope": "part:earth-tube-drain",
       "title": "Drain (what if…)",
       "scene": "house",
-      "text": "[[lab:earthtube:on]] The low point of the pipe: an inspection chamber, under a lid level with the ground. Warm air passing through a cold pipe leaves water in it. It must drain somewhere: otherwise mould comes, and it is what you breathe afterwards. Our model does not simulate condensation. Where radon is an issue, a measurement comes before any pipe. [[lab:earthtube:off]]"
+      "text": "[[lab:earthtube:on]] The low point of the pipe: an inspection chamber, under a lid level with the ground. Warm air passing through a cold pipe leaves water in it. It must drain somewhere: otherwise mould comes, and it is what you breathe afterwards. Our model does not simulate condensation. [[lab:earthtube:off]] Where radon is an issue, a measurement comes before any pipe."
     },
     {
       "id": "part-outer-glazing",
