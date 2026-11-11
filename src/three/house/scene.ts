@@ -86,7 +86,7 @@ const HOTSPOTS: HotspotDef[] = [
   { id: 'interior-partitions', fr: 'Pièces', en: 'Rooms', goto: 'room', wide: true },
   { id: 'pitched-roof', fr: 'Toit', en: 'Roof', wide: true },
   { id: 'entrance-balcony', fr: 'Balcon', en: 'Balcony', wide: true },
-  { id: 'south-window', fr: 'Fenêtre sud', en: 'South window', wide: true },
+  { id: 'south-window', fr: 'Fenêtre sud', en: 'South window', wide: true, minor: true },
   { id: 'foundation', fr: 'Fondations', en: 'Foundation', wide: true },
   { id: 'south-facade', fr: 'Façade sud', en: 'South front', minor: true },
   { id: 'entrance-recess', fr: 'Entrée en retrait', en: 'Entrance recess', minor: true },
