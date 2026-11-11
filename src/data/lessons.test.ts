@@ -29,6 +29,14 @@ describe('the lessons', () => {
     ]);
   });
 
+  it('write each formula in symbols only, so that it reads the same in both languages (the kit has one string for it)', () => {
+    for (const x of LESSONS) {
+      expect(x.formula, x.id).toBeDefined();
+      // no word of four letters or more: a symbol, a subscript, a number
+      expect(x.formula!, x.id).not.toMatch(/\p{L}{4,}/u);
+    }
+  });
+
   it('open each on a real scenario, in a real world, on a part that stands there', () => {
     const used = new Set<string>();
     for (const x of LESSONS) {

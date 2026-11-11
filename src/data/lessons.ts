@@ -33,7 +33,7 @@ export const LESSONS: Lesson[] = [
       sp('Part de l’air, enregistrée', 'Air’s share, recorded', l('30 à 35 %', '30 to 35 %')),
       sp('Part de l’air, modèle', 'Air’s share, model', v('{thermoShare}')),
     ],
-    formula: 'Q = ṁ · cₚ · (T_sortie − T_entrée)',
+    formula: 'Q = ṁ · cₚ · (T_out − T_in)',
     focus: { scene: 'wall', part: 'black-paint', scenario: 'one-glass' },
     quiz: [
       {
@@ -108,7 +108,7 @@ export const LESSONS: Lesson[] = [
       ),
       sp('Délai à 45 cm, calculé', 'Lag at 45 cm, worked out', v('{lag45}')),
     ],
-    formula: 'v = √(2 · α · ω)   avec   α = λ / (ρ · c)',
+    formula: 'v = √(2 · α · ω),   α = λ / (ρ · c)',
     focus: { scene: 'wall', part: 'storage-wall', scenario: 'too-thick-too-thin' },
     quiz: [
       {
@@ -172,7 +172,7 @@ export const LESSONS: Lesson[] = [
       sp('Rendement, article', 'Efficiency, paper', '478,30 %'),
       sp('Rendement, modèle', 'Efficiency, model', v('{christmasModel}')),
     ],
-    formula: 'rendement = énergie rendue ÷ énergie reçue (jour entier)',
+    formula: 'η = Q_out ÷ Q_in',
     focus: { scene: 'room', part: 'inner-wall-face', scenario: 'christmas-1974' },
     quiz: [
       {
@@ -233,7 +233,7 @@ export const LESSONS: Lesson[] = [
       sp('Soleil sur le mur, janvier / juin', 'Sun on the wall, January / June', '129,6 / 78,7 kWh/m²'),
       sp('Janvier sur juin', 'January over June', v('{janJun}')),
     ],
-    formula: 'incidence à midi = 90° − (latitude − déclinaison)',
+    formula: 'θ = 90° − (φ − δ)',
     focus: { scene: 'house', part: 'south-facade', scenario: 'june-1975' },
     quiz: [
       {
@@ -308,7 +308,7 @@ export const LESSONS: Lesson[] = [
       sp('Même saison, air 5 K plus chaud', 'Same season, air 5 K warmer', v('{share5K}')),
       sp('Même maison, isolation de 1974', 'Same house, 1974 insulation', v('{share1974}')),
     ],
-    formula: 'part = 1 − électricité ÷ (G · V · ΣΔT)',
+    formula: 's = 1 − Q_el ÷ (G · V · ΣΔT)',
     focus: { scene: 'room', part: 'electric-heater', scenario: 'insulate-first' },
     quiz: [
       {
@@ -375,7 +375,7 @@ export const LESSONS: Lesson[] = [
       sp('Coût par nuit', 'Cost per night', v('{reverseKwh}')),
       sp('Gain d’un clapet à sens unique', 'Gain of a one-way flap', v('{flapPoint}')),
     ],
-    formula: 'Δp = g · H · (ρ_froid − ρ_chaud)',
+    formula: 'Δp = g · H · (ρ₁ − ρ₂),  T₁ < T₂',
     focus: { scene: 'wall', part: 'summer-flap', scenario: 'the-night' },
     quiz: [
       {
@@ -446,7 +446,7 @@ export const LESSONS: Lesson[] = [
       sp('Juillet, Odeillo', 'July, Odeillo', v('{tubeJulIn} → {tubeJulOut}')),
       sp('Gain d’une année, Odeillo', 'A year’s gain, Odeillo', v('{tubeKwh}')),
     ],
-    formula: 'Θ = (T_entrée − T_sortie) ÷ (T_entrée − T_sol)',
+    formula: 'Θ = (T_in − T_out) ÷ (T_in − T₀)',
     focus: { scene: 'house', part: 'earth-tube-pipe', scenario: 'earth-tube' },
     quiz: [
       {
