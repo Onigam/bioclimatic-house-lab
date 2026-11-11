@@ -279,8 +279,8 @@ export const say = (pair: Pair): string => pair[getLang() === 'fr' ? 0 : 1];
 export const claims = (): { who: string; value: string }[] =>
   SHARE_CLAIMS.map((c) => ({ who: say(c.who), value: tight(say(c.value)) }));
 
-/** A number and its unit stay on one line: « 35 à 45 % » is not cut before the sign in a narrow column. */
-export const tight = (text: string): string => text.replace(/ (?=%)/g, '\u00a0');
+/** A short value stays on one line: « 35 à 45 % » is not cut in a narrow column. */
+export const tight = (text: string): string => text.replace(/ /g, '\u00a0');
 
 /** A number with the decimal mark of the language; no "-0". */
 export function num(value: number, digits = 0): string {
