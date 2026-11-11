@@ -18,6 +18,10 @@ import { WORLD, createHouseScene, createRoomScene, createSiteScene, createWallSc
 
 const sim = new HouseSim();
 
+/** The application's context, kept from the simulation panel's construction (the kit builds it at mount): the house opens cut, once, on its first frame. */
+let app: AppContext<HouseSim> | null = null;
+let openedCut = false;
+
 /** The earth tube's parts exist only in their scenario (docs/3d.md): their sheets offer to run it. */
 const WHAT_IF_PARTS = new Set(['earth-tube-intake', 'earth-tube-pipe', 'earth-tube-drain']);
 
@@ -115,7 +119,17 @@ export const lab: LabDefinition<HouseSim> = {
       runCue(ctx.sim, name, arg);
     },
   },
-  simPanel: (ctx: AppContext<HouseSim>) => new SimPanel(ctx),
+  simPanel: (ctx: AppContext<HouseSim>) => {
+    app = ctx;
+    return new SimPanel(ctx);
+  },
+  // « Ce monde s’ouvre coupé » (the house's overview): the section is the machine, the home pose reads it, and the kit's tool starts off. The first time the visitor is in the house, the cut is on; the tool turns it off and it stays off.
+  onFrame: ({ activeScene }) => {
+    if (!openedCut && activeScene === 'house' && app) {
+      openedCut = true;
+      app.store.set({ cutaway: true });
+    }
+  },
   strip: { values: stripValues, clock: stripClock, alarms: stripAlarms, speeds: STRIP_SPEEDS },
   about: aboutPanel,
 };

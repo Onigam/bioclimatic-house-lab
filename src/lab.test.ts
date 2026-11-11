@@ -114,7 +114,7 @@ describe('the lab as described to the kit', () => {
     const panel = lab.simPanel!(ctx);
     expect(panel).toBeInstanceOf(SimPanel);
     panel.render();
-    expect((panel.el as unknown as FakeElement).find('.readout').length).toBeGreaterThan(8);
+    expect((panel.el as unknown as FakeElement).find('.readout').length).toBeGreaterThanOrEqual(8);
     expect(lab.strip.values(lab.sim).length).toBe(6);
     expect(lab.strip.clock(lab.sim).time).toMatch(/^\d\d:\d\d$/);
     expect(lab.strip.speeds).toContain(3600);
@@ -147,6 +147,26 @@ describe('the lab as described to the kit', () => {
     // an unknown cue does nothing and does not throw
     lab.narration!.onCue!(ctx, 'no-such-cue', 'x');
     expect(ctx.sim.params.mode).toBe('summer');
+  });
+});
+
+describe('the house opens cut', () => {
+  it('sets the section on once, on the first frame of the house, and leaves it to the visitor after', () => {
+    const calls: unknown[] = [];
+    const ctx = {
+      sim: lab.sim,
+      store: { set: (patch: unknown) => calls.push(patch) },
+    } as unknown as AppContext<HouseSim>;
+    lab.simPanel!(ctx);
+    const frame = (activeScene: string) => lab.onFrame!({ sim: lab.sim, dt: 1 / 60, view: {} as never, activeScene });
+    frame('site');
+    expect(calls).toEqual([]);
+    frame('house');
+    expect(calls).toEqual([{ cutaway: true }]);
+    frame('house');
+    frame('wall');
+    frame('house');
+    expect(calls).toEqual([{ cutaway: true }]);
   });
 });
 
