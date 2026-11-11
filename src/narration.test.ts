@@ -1,9 +1,10 @@
 import { readManifest, validateManifest } from '@onigam/lab-kit/narration';
 import { describe, expect, it } from 'vitest';
-import { LAB_CUE_NAMES, planCue } from './cues';
+import { LAB_CUE_NAMES, planCue, runCue, startingPointOf } from './cues';
 import { FIG } from './data/figures';
+import { HouseSim } from './sim/engine';
 import { ROOM_SETPOINT } from './sim/machine';
-import { DEFAULT_TIME_SCALE, PRESET_IDS, SCENARIO_IDS } from './sim/presets';
+import { DEFAULT_TIME_SCALE, PRESET_IDS, SCENARIO_IDS, presetParams } from './sim/presets';
 import { WORLD } from './three';
 import { PART_IDS, WHAT_IF_PARTS, WORLD_IDS, type WorldId } from './three/ids';
 
@@ -65,14 +66,14 @@ const ONCE: Record<string, Record<string, [RegExp, string]>> = {
   fr: {
     reconstruction: [/reconstitution pédagogique/i, 'intro'],
     noPlan: [/aucun plan à suivre/i, 'intro'],
-    figures: [/les chiffres viennent/i, 'intro'],
+    figures: [/les autres viennent de notre simulation/i, 'intro'],
     calculations: [/des calculs, pas des mesures/i, 'intro'],
     notTuned: [/ne l’avons pas réglée pour y arriver/i, 'intro'],
     sources: [/panneau Sources/i, 'intro'],
     honestAnswer: [/une bonne part, selon qui compte/i, 'intro'],
     plateauComposed: [/le plateau, lui, est composé/i, 'scene-site'],
     modelSun: [/soleil de notre modèle/i, 'scene-site'],
-    whatIf: [/n’a jamais existé ici/i, 'scene-house'],
+    whatIf: [/aucune source n’en mentionne ici/i, 'scene-house'],
     nineteenSixtySeven: [/la maison dessinée reste/i, 'scene-house'],
     flowTwice: [/presque le double/i, 'part-air-gap'],
     airShare: [/trente à trente-cinq pour cent/i, 'part-warm-air-jet'],
@@ -80,7 +81,7 @@ const ONCE: Record<string, Record<string, [RegExp, string]>> = {
     christmasModel: [/trois cent soixante-sept/i, 'part-inner-wall-face'],
     gvReading: [/lu autrement/i, 'part-north-wall'],
     winterMonths: [/huit à douze points trop bas/i, 'part-south-facade'],
-    water: [/béton coulé sur place/i, 'part-storage-wall'],
+    water: [/dit l’article, tenait à l’eau/i, 'part-storage-wall'],
     nightFlow: [/courbes de mille neuf cent soixante-sept/i, 'part-summer-flap'],
     noMeasuredTube: [/aucun puits canadien mesuré/i, 'part-earth-tube-pipe'],
     radon: [/radon/i, 'part-earth-tube-drain'],
@@ -96,14 +97,14 @@ const ONCE: Record<string, Record<string, [RegExp, string]>> = {
   en: {
     reconstruction: [/educational reconstruction/i, 'intro'],
     noPlan: [/no plan to follow/i, 'intro'],
-    figures: [/the figures come from/i, 'intro'],
+    figures: [/the others come from our simulation/i, 'intro'],
     calculations: [/calculations, not measurements/i, 'intro'],
     notTuned: [/not tuned it to get there/i, 'intro'],
     sources: [/Sources panel/i, 'intro'],
     honestAnswer: [/a good part of the way, depending on who counts/i, 'intro'],
     plateauComposed: [/plateau itself is composed/i, 'scene-site'],
     modelSun: [/sun of our model/i, 'scene-site'],
-    whatIf: [/never existed here/i, 'scene-house'],
+    whatIf: [/no source mentions one in this house/i, 'scene-house'],
     nineteenSixtySeven: [/the house we draw stays/i, 'scene-house'],
     flowTwice: [/nearly twice/i, 'part-air-gap'],
     airShare: [/thirty to thirty-five per cent/i, 'part-warm-air-jet'],
@@ -111,7 +112,7 @@ const ONCE: Record<string, Record<string, [RegExp, string]>> = {
     christmasModel: [/three hundred and sixty-seven/i, 'part-inner-wall-face'],
     gvReading: [/read the other way/i, 'part-north-wall'],
     winterMonths: [/eight to twelve points too low/i, 'part-south-facade'],
-    water: [/poured on site/i, 'part-storage-wall'],
+    water: [/says the paper, was the water/i, 'part-storage-wall'],
     nightFlow: [/curves of nineteen sixty-seven/i, 'part-summer-flap'],
     noMeasuredTube: [/no earth tube measured/i, 'part-earth-tube-pipe'],
     radon: [/radon/i, 'part-earth-tube-drain'],
@@ -132,11 +133,123 @@ const REFUSED: Record<string, RegExp> = {
   en: /without danger|without risk|no risk|\bsafely\b|\bsafe\b|guarantee|infallible|exactly|precisely/i,
 };
 
+/**
+ * What the independent fact-check found going past its source, and must not come back (docs/fact-check.md, section 1 B and 2). Each regular expression is a wording that said more than the source does; `KEPT_TO_THE_SOURCE`
+ * below holds the wording that replaces it, in the one segment where it belongs.
+ */
+const WENT_PAST: Record<string, [RegExp, string][]> = {
+  fr: [
+    [
+      /à minuit/i,
+      'the wave of the 60 cm wall comes out in the small hours (about three to four in our figures), not at midnight',
+    ],
+    [/n’a jamais existé/i, 'absence of a mention is not absence'],
+    [/il est habité/i, 'the 1974 building is private property; no source says who lives in it today'],
+    [/par camion/i, 'no source says how the materials came'],
+    [/plus de soixante-trois/i, '63.4 tonnes is before the ducts’ voids: about'],
+    [/coulé sur place/i, 'the paper gives two causes, and never says cast in place'],
+    [/le jet reste chaud/i, 'it is the flow that goes on, two to three hours'],
+    [/onze heures de retard/i, 'eleven is our closed form at 45 cm; the inventors’ target is about twelve'],
+    [/dix-neuvième siècle/i, 'the patent is of 1881'],
+    [/à midi en hiver, la plaque/i, 'the plate peaks in the early afternoon'],
+    [/son rôle est pourtant le plus grand/i, 'the layer is our drawing: the whole envelope’s losses count'],
+    [
+      /le seul vrai renouvellement/i,
+      'the summer figure is the model’s, and the paper does not say its flow was the summer mode',
+    ],
+    [/les inventeurs annoncent/i, 'the paper says the sun can save 60 to 70 per cent'],
+    [/conseille un architecte/i, 'the architect kept window area to a minimum, the north above all'],
+  ],
+  en: [
+    [
+      /at midnight/i,
+      'the wave of the 60 cm wall comes out in the small hours (about three to four in our figures), not at midnight',
+    ],
+    [/never existed/i, 'absence of a mention is not absence'],
+    [/lived in:/i, 'the 1974 building is private property; no source says who lives in it today'],
+    [/by lorry/i, 'no source says how the materials came'],
+    [/more than sixty-three/i, '63.4 tonnes is before the ducts’ voids: about'],
+    [/poured on site/i, 'the paper gives two causes, and never says cast in place'],
+    [/the jet stays warm/i, 'it is the flow that goes on, two to three hours'],
+    [/eleven hours’ delay/i, 'eleven is our closed form at 45 cm; the inventors’ target is about twelve'],
+    [/nineteenth century/i, 'the patent is of 1881'],
+    [/at midday in winter, the plate/i, 'the plate peaks in the early afternoon'],
+    [/its part is the greatest/i, 'the layer is our drawing: the whole envelope’s losses count'],
+    [
+      /the only real renewal/i,
+      'the summer figure is the model’s, and the paper does not say its flow was the summer mode',
+    ],
+    [/the inventors announce/i, 'the paper says the sun can save 60 to 70 per cent'],
+    [/advises an american architect/i, 'the architect kept window area to a minimum, the north above all'],
+  ],
+};
+
+/** The wording that keeps to the source, in the segment that says it: a marked estimate, a source named, a basis given. */
+const KEPT_TO_THE_SOURCE: Record<string, [id: string, RegExp][]> = {
+  fr: [
+    ['intro', /au petit matin/],
+    ['scene-house', /lues sur une photographie/],
+    ['scene-room', /on y compte les pertes des fenêtres, pas leur soleil/],
+    ['part-south-window', /du mur plein à leur place, les gens toujours là/],
+    ['part-heliostat-terraces', /dans notre dessin, ils se rangent/],
+    ['part-solar-houses-1974', /propriété privée/],
+    ['part-pyranometer', /dans le plan du mur/],
+    ['part-east-gable', /en hiver, au sud-est/],
+    ['part-west-gable', /en hiver, au sud-ouest/],
+    ['part-chimney', /notre dessin ajoute un conduit de brique/],
+    ['part-black-paint', /en début d’après-midi/],
+    ['part-black-paint', /en mille huit cent quatre-vingt-un/],
+    ['part-storage-wall', /un retard d’environ douze heures/],
+    ['part-upper-duct', /deux à trois heures/],
+    ['part-summer-flap', /dans notre dessin, cette plaque/],
+    ['part-air-thermocouples', /dans les conduits/],
+    ['part-hot-wire-anemometer', /dans le conduit bas/],
+    ['part-room-surface-probes', /nous lisons environ dix-sept et demi/],
+    ['part-fresh-air-vent', /dans notre modèle, la position d’été/],
+    ['part-electric-heater', /le soleil peut économiser soixante à soixante-dix pour cent/],
+    ['part-roof-insulation', /ce qui compte le plus/],
+    ['part-access-road', /environ soixante-trois tonnes/],
+    ['part-foundation', /environ soixante-trois tonnes/],
+  ],
+  en: [
+    ['intro', /in the small hours/],
+    ['scene-house', /read from a photograph/],
+    ['scene-room', /the windows’ losses are counted, their sun is not/],
+    ['part-south-window', /plain wall in their place, the people still there/],
+    ['part-heliostat-terraces', /in our drawing, they park/],
+    ['part-solar-houses-1974', /private property/],
+    ['part-pyranometer', /in the plane of the wall/],
+    ['part-east-gable', /in winter, to the south-east/],
+    ['part-west-gable', /in winter, to the south-west/],
+    ['part-chimney', /our drawing adds a brick flue/],
+    ['part-black-paint', /in the early afternoon/],
+    ['part-black-paint', /in eighteen eighty-one/],
+    ['part-storage-wall', /a delay of about twelve hours/],
+    ['part-upper-duct', /two to three hours/],
+    ['part-summer-flap', /in our drawing, this plate/],
+    ['part-air-thermocouples', /in the ducts/],
+    ['part-hot-wire-anemometer', /in the lower one/],
+    ['part-room-surface-probes', /we read about seventeen and a half/],
+    ['part-fresh-air-vent', /in our model, the summer position/],
+    ['part-electric-heater', /the sun can save sixty to seventy per cent/],
+    ['part-roof-insulation', /what counts most/],
+    ['part-access-road', /about sixty-three tonnes/],
+    ['part-foundation', /about sixty-three tonnes/],
+  ],
+};
+
 /** A figure of the lab as the voice says it, and where: if the physics or the drawing moves, this says which segments to rewrite. `said` is the spoken number in the figure's unit. */
 const FIGURES: [value: number, said: number, tolerance: number, fr: RegExp, en: RegExp, ids: string[]][] = [
   [FIG.waveSpeed.v, 4, 0.1, /quatre centimètres par heure/, /four centimetres an hour/, ['intro', 'part-storage-wall']],
   [FIG.lag60.v, 15, 0.2, /une quinzaine d’heures/, /some fifteen hours/, ['intro']],
-  [FIG.lag45.v, 11, 0.5, /onze heures de retard/, /eleven hours’ delay/, ['part-storage-wall']],
+  [
+    FIG.lag45.v,
+    11,
+    0.5,
+    /quarante-cinq centimètres en donnent onze/,
+    /forty-five centimetres give eleven/,
+    ['part-storage-wall'],
+  ],
   [FIG.shareWall.v, 32, 0.5, /trente-deux pour cent de la charge/, /thirty-two per cent of the load/, ['scene-room']],
   [FIG.shareWindows.v, 42.5, 0.1, /quarante-deux et demi/, /forty-two and a half/, ['scene-room', 'part-armchair']],
   [FIG.shareAll.v, 47, 0.5, /quarante-sept/, /forty-seven/, ['scene-room', 'part-south-window', 'part-north-wall']],
@@ -224,6 +337,42 @@ describe('narration wiring', () => {
     const { lab } = await import('./lab');
     expect(lab.narration?.manifest).toBe('audio/{lang}/manifest.json');
     expect(typeof lab.narration?.onCue).toBe('function');
+  });
+});
+
+describe('the starting-point label follows the values (qa D14)', () => {
+  it('comes back when a hand restore puts every value back, and only then', () => {
+    const sim = new HouseSim();
+    runCue(sim, 'flap', 'summer');
+    expect(sim.params.preset).toBe('custom');
+    runCue(sim, 'flap', 'winter');
+    expect(sim.params.preset).toBe('prototype-1967');
+    // the same from another starting point: the label that comes back is the one the values are
+    sim.applyPreset('wall-45');
+    runCue(sim, 'sheets', '3');
+    expect(sim.params.preset).toBe('custom');
+    runCue(sim, 'sheets', '2');
+    expect(sim.params.preset).toBe('wall-45');
+    // the clock's own controls are not part of a starting point
+    runCue(sim, 'speed', '86400');
+    expect(sim.params.preset).toBe('wall-45');
+  });
+
+  it('stays « custom » when a visitor’s own change is still there, and while a scenario runs', () => {
+    const visitor = new HouseSim();
+    visitor.set({ southWindows: 20 });
+    runCue(visitor, 'flap', 'summer');
+    runCue(visitor, 'flap', 'winter');
+    expect(visitor.params.preset).toBe('custom');
+    expect(startingPointOf(visitor)).toBeNull();
+
+    const scenario = new HouseSim();
+    runCue(scenario, 'scenario', 'the-night');
+    const { preset: _label, ...values } = presetParams('prototype-1967');
+    scenario.set(values);
+    runCue(scenario, 'flap', 'winter');
+    expect(scenario.scenarioNow).toBe('the-night');
+    expect(scenario.params.preset).toBe('custom');
   });
 });
 
@@ -422,6 +571,30 @@ describe.each(Object.keys(scripts))('narration script %s', (lang) => {
     expect(where(REFUSED[lang]!)).toEqual([]);
   });
 
+  it('keeps to its sources: nothing the fact-check found going past them comes back, and the wording that keeps to them is there', () => {
+    for (const [re, why] of WENT_PAST[lang]!) expect(where(re), `${re}: ${why}`).toEqual([]);
+    for (const [id, re] of KEPT_TO_THE_SOURCE[lang]!)
+      expect(spokenOf(seg(id)).toLowerCase(), `${id}: ${re}`).toMatch(re);
+  });
+
+  it('keeps the simulation’s starting-point label: every segment leaves the select on the 1967 prototype, never on « custom » (qa D14)', () => {
+    let touched = 0;
+    for (const s of script.segments) {
+      const labCues = cuesOf(s.text).filter(([n]) => n === 'lab');
+      if (labCues.length === 0) continue;
+      const sim = new HouseSim();
+      for (const [, arg] of labCues) {
+        const [name = '', ...rest] = arg.split(':');
+        expect(runCue(sim, name, rest.join(':') || undefined), `${s.id}: ${arg}`).toBe(true);
+      }
+      expect(sim.params.preset, `${s.id} ends on « ${sim.params.preset} »`).toBe('prototype-1967');
+      expect(startingPointOf(sim), s.id).toBe('prototype-1967');
+      touched++;
+    }
+    // the segments that touch the simulation: the three earth-tube parts, the sheets, the vents, the set point, the flap, the clock…
+    expect(touched).toBeGreaterThanOrEqual(18);
+  });
+
   it('says only today’s figures of the lab', () => {
     expect(
       DEFAULT_TIME_SCALE,
@@ -452,7 +625,7 @@ describe.each(Object.keys(scripts))('narration script %s', (lang) => {
 
   it('never says a measurement it does not have: the word only reports the sources’ measuring, or asks for a measurement', () => {
     const measured = { fr: /mesur/i, en: /measur/i }[lang as 'fr' | 'en'];
-    // the sources measured the 1967 house; the sheets of the instruments, the earth tube and the models say what could be measured
+    // the sources measured the 1967 house (the 1974 building says only « a year of recordings » for the other); the sheets of the instruments, the earth tube and the models say what could be measured
     const reporting = [
       'intro',
       'part-air-thermocouples',
@@ -461,7 +634,6 @@ describe.each(Object.keys(scripts))('narration script %s', (lang) => {
       'part-fresh-air-vent',
       'part-prototype-house',
       'part-pyranometer',
-      'part-solar-houses-1974',
       'part-twin-house',
       'part-wall-thermocouples',
     ];

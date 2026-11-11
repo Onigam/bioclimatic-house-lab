@@ -16,7 +16,7 @@
       "scope": "intro",
       "title": "Présentation du labo",
       "scene": "site",
-      "text": "[[home]] Imaginez une nuit de décembre, sur le plateau d’Odeillo. Dehors, il gèle. Dedans, un grand mur de béton noir est encore tiède, comme si le soleil de midi n’était jamais parti. [[frame:prototype-house]] Une maison peut-elle se chauffer seule ? Suivons un petit rayon de soleil. [[scene:wall]] Il traverse deux vitres, l’une après l’autre, [[frame:black-paint]] et tombe sur une peinture noire : là, il devient chaleur. [[frame:air-gap,upper-duct]] Deux chemins s’ouvrent à lui. Par l’air : il monte derrière la vitre, et ressort chaud par un conduit, en haut. Vite fait ! [[frame:storage-wall]] Ou par le béton… et notre rayon choisit la lenteur. Là, la chaleur ne saute pas : elle marche, à environ quatre centimètres par heure. Soixante centimètres de mur : une quinzaine d’heures ! [[scene:room]] Il sort côté pièce en pleine nuit, juste quand on a froid. [[scene:house]] Voilà toute l’histoire : un rayon, une peinture noire, un mur qui a de la mémoire… et une pièce tiède à minuit. [[home]] Pour commencer, quelques repères. Il y a quatre vues : le plateau, la maison, le mur et la pièce. Cliquez sur une pièce : sa fiche s’ouvre, et vous pouvez écouter son histoire. Éclaté, Transparence, Coupe et Flux montrent l’intérieur et suivent l’air. [[mode:assembly]] Le guide de montage bâtit la maison en vingt étapes. [[mode:install]] Celui d’installation en compte dix. [[mode:sim]] La simulation change l’épaisseur du mur, les vitres, le jour, et lance douze scénarios. [[mode:lessons]] Sept leçons, avec des quiz, expliquent la physique. [[mode:plans]] Huit planches réunissent les dessins. [[mode:explore]] Une dernière chose : ce laboratoire est une reconstitution pédagogique. Il explique, il ne donne aucun plan à suivre. Sauf quand une source est citée, les chiffres viennent de notre simulation : des calculs, pas des mesures. Là où elle ne retrouve pas les mesures des inventeurs, nous le disons, et nous ne l’avons pas réglée pour y arriver. Le panneau Sources dit qui a dit quoi. Alors, une maison peut-elle se chauffer seule ? La réponse honnête : une bonne part, selon qui compte, et quoi. [[select:none]] Allez voir par vous-même : le mur est encore tiède !"
+      "text": "[[home]] Imaginez une nuit de décembre, sur le plateau d’Odeillo. Dehors, il gèle. Dedans, un grand mur de béton noir est encore tiède, comme si le soleil de midi n’était jamais parti. [[frame:prototype-house]] Une maison peut-elle se chauffer seule ? Suivons un petit rayon de soleil. [[scene:wall]] Il traverse deux vitres, l’une après l’autre, [[frame:black-paint]] et tombe sur une peinture noire : là, il devient chaleur. [[frame:air-gap,upper-duct]] Deux chemins s’ouvrent à lui. Par l’air : il monte derrière la vitre, et ressort chaud par un conduit, en haut. Vite fait ! [[frame:storage-wall]] Ou par le béton… et notre rayon choisit la lenteur. Là, la chaleur ne saute pas : elle marche, à environ quatre centimètres par heure. Soixante centimètres de mur : une quinzaine d’heures ! [[scene:room]] Il sort côté pièce en pleine nuit, juste quand on a froid. [[scene:house]] Voilà toute l’histoire : un rayon, une peinture noire, un mur qui a de la mémoire… et une pièce tiède au petit matin. [[home]] Il y a quatre vues : le plateau, la maison, le mur et la pièce. Cliquez sur une pièce : sa fiche s’ouvre, et vous pouvez écouter son histoire. Éclaté, Transparence, Coupe et Flux montrent l’intérieur et suivent l’air. [[mode:assembly]] Le guide de montage bâtit la maison en vingt étapes. [[mode:install]] Celui d’installation en compte dix. [[mode:sim]] La simulation change l’épaisseur du mur, les vitres, le jour, et lance douze scénarios. [[mode:lessons]] Sept leçons, avec des quiz, expliquent la physique. [[mode:plans]] Huit planches réunissent les dessins. [[mode:explore]] Une dernière chose : ce laboratoire est une reconstitution pédagogique. Il explique, il ne donne aucun plan à suivre. Les chiffres des inventeurs sont les leurs. Les autres viennent de notre simulation ou de nos estimations : des calculs, pas des mesures. Là où elle ne retrouve pas les mesures des inventeurs, nous le disons, et nous ne l’avons pas réglée pour y arriver. Le panneau Sources dit qui a dit quoi. Alors, une maison peut-elle se chauffer seule ? La réponse honnête : une bonne part, selon qui compte, et quoi. [[select:none]] Allez voir par vous-même : le mur est encore tiède !"
     },
     {
       "id": "scene-site",
@@ -30,7 +30,7 @@
       "scope": "scene:house",
       "title": "La maison, coupée par le milieu d’une travée",
       "scene": "house",
-      "text": "[[home]] La machine, coupée par le milieu d’une travée : la moitié est a été retirée. [[frame:south-facade]] Au sud, neuf travées de capteur, une de fenêtre, deux d’entrée. [[frame:pitched-roof,roof-insulation]] Au-dessus, le toit, et son isolant, posé sur le plafond. [[frame:floor-slab,foundation]] Dessous, la dalle, et la fondation qui porte tout. [[home]] [[flows:on]] Voici l’air : il entre par le bas, monte derrière chaque vitre, et ressort en haut. [[lab:flap:summer]] Un clapet, et c’est l’été : l’air part dehors. [[lab:flap:winter]] [[flows:off]] La maison dessinée reste celle de mille neuf cent soixante-sept : les curseurs changent les chiffres, pas la forme. Et le puits canadien, ce tuyau enterré, n’a jamais existé ici : c’est une hypothèse, qui n’apparaît que dans son propre scénario."
+      "text": "[[home]] La machine, coupée par le milieu d’une travée : la moitié est a été retirée. [[frame:south-facade]] Au sud, lues sur une photographie : neuf travées de capteur, une de fenêtre, deux d’entrée. [[frame:pitched-roof,roof-insulation]] Au-dessus, le toit, et son isolant, posé sur le plafond. [[frame:floor-slab,foundation]] Dessous, la dalle, et la fondation qui porte tout. [[home]] [[flows:on]] Voici l’air : il entre par le bas, monte derrière chaque vitre, et ressort en haut. [[lab:flap:summer]] Un clapet, et c’est l’été : l’air part dehors. [[lab:flap:winter]] [[flows:off]] La maison dessinée reste celle de mille neuf cent soixante-sept : les curseurs changent les chiffres, pas la forme. Et le puits canadien, ce tuyau enterré : aucune source n’en mentionne ici. C’est une hypothèse, qui n’apparaît que dans son propre scénario."
     },
     {
       "id": "scene-wall",
@@ -44,7 +44,7 @@
       "scope": "scene:room",
       "title": "La pièce : où la chaleur arrive, où va le courant",
       "scene": "room",
-      "text": "[[home]] Entrons dans le salon, d’une ligne de travée à l’autre. [[frame:inner-wall-face]] Au fond, le dos du mur, avec ses deux grilles. [[frame:warm-air-jet,floor-return]] [[flows:on]] En haut, le jet d’air chaud ; en bas, le retour de l’air frais. [[flows:off]] [[frame:thermostat,electric-heater]] Et l’électricité, qui paie ce que le soleil n’a pas donné. [[home]] Sur une saison de chauffe, notre calcul trouve que le mur seul couvre trente-deux pour cent de la charge. Avec les fenêtres, quarante-deux et demi. Avec les gens, quarante-sept. Le reste, c’est l’électricité. Mais les deux derniers chiffres reposent sur des estimations : les fenêtres, et les gens."
+      "text": "[[home]] Entrons dans le salon, d’une ligne de travée à l’autre. [[frame:inner-wall-face]] Au fond, le dos du mur, avec ses deux grilles. [[frame:warm-air-jet,floor-return]] [[flows:on]] En haut, le jet d’air chaud ; en bas, le retour de l’air frais. [[flows:off]] [[frame:thermostat,electric-heater]] Et l’électricité, qui paie ce que le soleil n’a pas donné. [[home]] Sur une saison de chauffe, notre calcul trouve que le mur seul couvre trente-deux pour cent de la charge. On y compte les pertes des fenêtres, pas leur soleil. Avec leur soleil, quarante-deux et demi. Avec les gens, quarante-sept. Mais les deux derniers chiffres reposent sur des estimations : les fenêtres, et les gens."
     },
     {
       "id": "part-prototype-house",
@@ -65,14 +65,14 @@
       "scope": "part:granite-slope",
       "title": "Pente de granit",
       "scene": "site",
-      "text": "Le terrain tombe vers le sud, d’environ deux mètres. [[isolate:on]] Isolée, la pente se montre seule, avec ses rochers : c’est elle qui donne à la maison sa dalle de niveau, ses gradins, son balcon. [[isolate:off]] Le granit est notre choix : la photographie montre des blocs, pas leur nature. Détournez l’eau avant la maison, jamais contre elle."
+      "text": "Le terrain tombe vers le sud, d’environ deux mètres. [[isolate:on]] Isolée, la pente se montre seule : c’est elle qui donne à la maison sa dalle de niveau, ses gradins, son balcon. [[isolate:off]] Le granit est notre choix : la photographie montre des blocs, pas leur nature. Détournez l’eau avant la maison, jamais contre elle."
     },
     {
       "id": "part-meadow-clearing",
       "scope": "part:meadow-clearing",
       "title": "Clairière",
       "scene": "site",
-      "text": "Tout commence par ce pré : une maison solaire a besoin d’un sud dégagé, avant même d’avoir un mur noir. Le soleil d’hiver y arrive sans obstacle. [[lab:day:355]] En décembre, la neige couvre l’herbe ; [[lab:day:180]] en juin, elle a fondu. Cette neige n’est qu’un décor : notre calcul n’en tient pas compte. [[lab:preset:prototype-1967]] Gardez ce pré fauché, et la ligne du sud bien basse."
+      "text": "Tout commence par ce pré : une maison solaire a besoin d’un sud dégagé, avant même d’avoir un mur noir. [[lab:day:355]] En décembre, la neige couvre l’herbe ; [[lab:day:180]] en juin, elle a fondu. Cette neige n’est qu’un décor : notre calcul n’en tient pas compte. [[lab:preset:prototype-1967]] Gardez ce pré fauché, et la ligne du sud bien basse."
     },
     {
       "id": "part-tree-clumps",
@@ -86,7 +86,7 @@
       "scope": "part:access-road",
       "title": "Route",
       "scene": "site",
-      "text": "Une route de terre, au bas du pré. Aucune source n’en parle : c’est un décor honnête, composé pour qu’on lise les distances. [[isolate:on]] Seule en scène, elle donne l’échelle de la maison et de sa jumelle. [[isolate:off]] Pourtant, un mur de plus de soixante-trois tonnes ne vient pas de nulle part : ses matériaux sont bien arrivés par camion."
+      "text": "Une route de terre, au bas du pré. Aucune source n’en parle : c’est un décor honnête, composé pour qu’on lise les distances. [[isolate:on]] Seule en scène, elle donne l’échelle de la maison et de sa jumelle. [[isolate:off]] Pourtant, un mur d’environ soixante-trois tonnes ne vient pas de nulle part : il a bien fallu y amener ses matériaux."
     },
     {
       "id": "part-solar-furnace",
@@ -100,21 +100,21 @@
       "scope": "part:heliostat-terraces",
       "title": "Héliostats",
       "scene": "site",
-      "text": "Soixante-trois miroirs plans, sur des terrasses devant le four. Chacun s’incline à chaque instant, pour que la lumière retombe toujours au même point. [[lab:hour:9]] [[lab:speed:600]] Regardez-les tourner ensemble ! La nuit, ils se rangent face au sol. Notre mur, lui, reçoit le soleil comme il vient, et le garde. [[lab:preset:prototype-1967]]"
+      "text": "Soixante-trois miroirs plans, sur des terrasses devant le four. Chacun s’incline à chaque instant, pour que la lumière retombe toujours au même point. [[lab:hour:9]] [[lab:speed:600]] Regardez-les tourner ensemble ! La nuit, dans notre dessin, ils se rangent face au sol. Notre mur, lui, reçoit le soleil comme il vient, et le garde. [[lab:preset:prototype-1967]]"
     },
     {
       "id": "part-solar-houses-1974",
       "scope": "part:solar-houses-1974",
       "title": "Maisons de 1974",
       "scene": "site",
-      "text": "Plus haut sur la pente, un bâtiment protégé : trois logements, et le même système de mur. Il est habité : on le voit, on n’y entre pas. Son plan n’est dans aucune source : notre dessin le compose en simple boîte vitrée. Ne le confondons pas avec la maison de mille neuf cent soixante-sept : celle-là, on l’a mesurée."
+      "text": "Plus haut sur la pente, un bâtiment protégé : trois logements, et le même système de mur. C’est une propriété privée : on le voit, on n’y entre pas. Son plan n’est dans aucune source : notre dessin le compose en simple boîte vitrée. Ne le confondons pas avec la maison de mille neuf cent soixante-sept : celle-là a un an d’enregistrements."
     },
     {
       "id": "part-pyranometer",
       "scope": "part:pyranometer",
       "title": "Pyranomètre",
       "scene": "site",
-      "text": "Un petit dôme sur un pied, loin de tout : il mesure la puissance du soleil. À la pointe d’un jour clair d’hiver, environ neuf cent cinquante watts par mètre carré. [[isolate:on]] Notre modèle, lui, ne lit rien : il calcule le soleil, et trouve un peu moins. [[isolate:off]] Essuyez le dôme : une fiente, et il lit trop bas toute la journée."
+      "text": "Un petit dôme sur un pied, loin de tout : il mesure la puissance du soleil. À la pointe d’un jour clair d’hiver, dans le plan du mur, environ neuf cent cinquante watts par mètre carré. [[isolate:on]] Notre modèle, lui, ne lit rien : il calcule le soleil, et trouve un peu moins. [[isolate:off]] Essuyez le dôme : une fiente, et il lit trop bas toute la journée."
     },
     {
       "id": "part-far-ridge",
@@ -128,7 +128,7 @@
       "scope": "part:south-facade",
       "title": "Façade sud",
       "scene": "house",
-      "text": "Douze travées de un mètre vingt-sept, face au midi : neuf de capteur, une de fenêtre, deux d’entrée, d’après une photographie. Et voici le paradoxe : en décembre, le soleil de midi frappe la façade presque de face ; en juin, de très biais. Le mur reçoit donc plus d’une fois et demie plus de soleil en janvier qu’en juin ! Notre modèle retrouve cette baisse, mais ses mois d’hiver sont huit à douze points trop bas. Il ne calque pas l’article, et le dit."
+      "text": "Douze travées de un mètre vingt-sept, face au midi : neuf de capteur, une de fenêtre, deux d’entrée, d’après une photographie. Et voici le paradoxe : en décembre, le soleil de midi frappe la façade presque de face ; en juin, de très biais. Le mur reçoit donc plus d’une fois et demie plus de soleil en janvier qu’en juin ! Notre modèle retrouve cette baisse, mais ses mois d’hiver sont huit à douze points trop bas."
     },
     {
       "id": "part-collector-element",
@@ -156,21 +156,21 @@
       "scope": "part:south-window",
       "title": "Fenêtre sud",
       "scene": "house",
-      "text": "Une fenêtre haute, à côté du capteur : elle laisse entrer le soleil droit dans la pièce… et sortir la chaleur. Personne ne publie la surface des fenêtres : nous prenons seize mètres carrés et demi, une estimation. Sans fenêtre, quarante-deux pour cent de la saison sont couverts ; avec elles, quarante-sept. Une fenêtre gagne le jour, et perd la nuit : fermez les volets au coucher du soleil."
+      "text": "Une fenêtre haute, à côté du capteur : elle laisse entrer le soleil droit dans la pièce… et sortir la chaleur. Personne ne publie la surface des fenêtres : nous prenons seize mètres carrés et demi, une estimation. Avec du mur plein à leur place, les gens toujours là, la saison est couverte à quarante-deux pour cent. Avec elles, quarante-sept. Une fenêtre gagne le jour, et perd la nuit : fermez les volets au coucher du soleil."
     },
     {
       "id": "part-east-gable",
       "scope": "part:east-gable",
       "title": "Pignon est",
       "scene": "house",
-      "text": "Le mur du bout, à l’est : un triangle jusqu’au faîtage, sur une fondation en gradins. On ne sait rien de lui : trente centimètres, enduit, à notre idée. Pour la maison, c’est une perte parmi d’autres. [[cutaway:on]] La coupe l’emporte, avec toute la moitié est. [[cutaway:off]] Le matin, le soleil se lève derrière une crête de près de six degrés."
+      "text": "Le mur du bout, à l’est : un triangle jusqu’au faîtage, sur une fondation en gradins. On ne sait rien de lui : trente centimètres, enduit, à notre idée. Pour la maison, c’est une perte parmi d’autres. [[cutaway:on]] La coupe l’emporte, avec toute la moitié est. [[cutaway:off]] En hiver, au sud-est, le soleil se lève derrière une crête de près de six degrés."
     },
     {
       "id": "part-west-gable",
       "scope": "part:west-gable",
       "title": "Pignon ouest",
       "scene": "house",
-      "text": "Son jumeau, à l’ouest : le même triangle de trente centimètres, sur cinq gradins qui suivent la pente de deux mètres. Sans eux, il flotterait. Aucun plan ne les donne. [[cutaway:on]] Quand la coupe retire la moitié est, c’est lui qui reste, avec le toit. [[cutaway:off]] Le soir, le soleil se couche derrière la crête la plus basse : un degré à peine."
+      "text": "Son jumeau, à l’ouest : le même triangle de trente centimètres, sur cinq gradins qui suivent la pente de deux mètres. Sans eux, il flotterait. Aucun plan ne les donne. [[cutaway:on]] Quand la coupe retire la moitié est, c’est lui qui reste, avec le toit. [[cutaway:off]] En hiver, au sud-ouest, le soleil se couche derrière la crête la plus basse : un degré à peine."
     },
     {
       "id": "part-north-wall",
@@ -184,21 +184,21 @@
       "scope": "part:north-window",
       "title": "Fenêtre nord",
       "scene": "house",
-      "text": "Une petite fenêtre sur le mur du fond : de la lumière, sans soleil. Peu de fenêtres au nord, et petites, conseille un architecte américain. [[xray:on]] Le mur devient transparent : la fenêtre reste, avec le convecteur sous elle. [[xray:off]] Aucune source n’en donne les mesures. Dans le calcul, elle est comptée avec les autres pertes."
+      "text": "Une petite fenêtre sur le mur du fond : de la lumière, sans soleil. Sur une maison pareille, un architecte américain a réduit les fenêtres au minimum, au nord surtout. [[xray:on]] Le mur devient transparent : la fenêtre reste, avec le convecteur sous elle. [[xray:off]] Aucune source n’en donne les mesures. Dans le calcul, elle est comptée avec les autres pertes."
     },
     {
       "id": "part-pitched-roof",
       "scope": "part:pitched-roof",
       "title": "Toit à deux pans",
       "scene": "house",
-      "text": "Deux pans d’ardoise, un faîtage d’est en ouest, une pente d’environ vingt-quatre degrés. La neige glisse vers le sud et vers le nord. [[xray:on]] Mettons le toit en transparence : les chevrons apparaissent. [[xray:off]] L’article ne dit rien du toit : le reste est une hypothèse de dessin. Dégagez la gouttière avant l’hiver : la neige qui fond sur le toit regèle à l’égout."
+      "text": "Deux pans d’ardoise, un faîtage d’est en ouest, une pente d’environ vingt-quatre degrés. [[xray:on]] Mettons le toit en transparence : les chevrons apparaissent. [[xray:off]] L’article ne dit rien du toit : le reste est une hypothèse de dessin. Dégagez la gouttière avant l’hiver : la neige qui fond sur le toit regèle à l’égout."
     },
     {
       "id": "part-roof-insulation",
       "scope": "part:roof-insulation",
       "title": "Isolation du toit",
       "scene": "house",
-      "text": "L’article ne donne que les pertes de la maison entière : cette couche est notre dessin, dix centimètres sur le plafond. [[isolate:on]] Son rôle est pourtant le plus grand ! [[isolate:off]] Le mur ne change pas. Avec les pertes de mille neuf cent soixante-quatorze, la part de la saison monte de quarante-sept à soixante-quatorze pour cent. Pas un rayon de plus : la maison perd moins. Isoler d’abord."
+      "text": "L’article ne donne que les pertes de la maison entière : cette couche est notre dessin, dix centimètres sur le plafond. [[isolate:on]] Elle ne fait que montrer ce qui compte le plus : l’isolation de toute la maison ! [[isolate:off]] Le mur ne change pas. Avec les pertes de mille neuf cent soixante-quatorze, la part de la saison monte de quarante-sept à soixante-quatorze pour cent. Pas un rayon de plus : la maison perd moins. Isoler d’abord."
     },
     {
       "id": "part-floor-slab",
@@ -212,28 +212,28 @@
       "scope": "part:foundation",
       "title": "Fondation",
       "scene": "house",
-      "text": "Ce qui porte soixante-trois tonnes de béton noir ! Une semelle sous le terrain, des gradins qui suivent la pente, et la fondation propre du mur sud. [[isolate:on]] Isolée, elle se montre seule. Aucune source n’en donne le plan : c’est un dessin à regarder. [[isolate:off]] Un mur lourd sur une pente se surveille : fissures obliques, portes qui frottent."
+      "text": "Ce qui porte environ soixante-trois tonnes de béton noir ! Une semelle sous le terrain, des gradins qui suivent la pente, et la fondation propre du mur sud. [[isolate:on]] Isolée, elle se montre seule. Aucune source n’en donne le plan : c’est un dessin à regarder. [[isolate:off]] Un mur lourd sur une pente se surveille : fissures obliques, portes qui frottent."
     },
     {
       "id": "part-interior-partitions",
       "scope": "part:interior-partitions",
       "title": "Pièces",
       "scene": "house",
-      "text": "Quatre pièces, dit l’article, chacune avec son thermostat. Il ne donne pas le plan : le nôtre pose des cloisons. Le salon, large de quatre travées, se visite dans le monde de la pièce. Notre modèle, lui, ne connaît qu’une grande pièce, avec un seul air : c’est une limite. Laissez les portes ouvertes le jour : l’air chaud va plus loin."
+      "text": "Quatre pièces, dit l’article, chacune avec son thermostat. Il ne donne pas le plan : le nôtre pose des cloisons. Notre modèle, lui, ne connaît qu’une grande pièce, avec un seul air : c’est une limite. Laissez les portes ouvertes le jour : l’air chaud va plus loin."
     },
     {
       "id": "part-chimney",
       "scope": "part:chimney",
       "title": "Cheminée",
       "scene": "house",
-      "text": "Un conduit de brique, sur le toit. À quoi sert-il ? Personne ne le dit. Le chauffage est électrique : une ventilation, peut-être, ou un reste. Aucune hypothèse n’est lue. [[xray:on]] Le toit s’efface : la cheminée reste, posée sur le plafond, avec rien sous elle. [[xray:off]] Dans le calcul, elle ne fait rien. Un point d’interrogation dessiné en brique !"
+      "text": "Notre dessin ajoute un conduit de brique : les vues aériennes semblent en montrer un. À quoi sert-il ? Personne ne le dit. Le chauffage est électrique : une ventilation, peut-être, ou un reste. Aucune hypothèse n’est lue. [[xray:on]] Le toit s’efface : la cheminée reste, posée sur le plafond, avec rien sous elle. [[xray:off]] Dans le calcul, elle ne fait rien. Un point d’interrogation dessiné en brique !"
     },
     {
       "id": "part-earth-tube-intake",
       "scope": "part:earth-tube-intake",
       "title": "Prise d’air (et si…)",
       "scene": "house",
-      "text": "[[lab:earthtube:on]] La voilà qui apparaît, pâle et translucide : le début du puits canadien. Une colonne sur la pente, avec un capuchon contre la pluie, et une grille contre les insectes et les feuilles. De là, l’air entre dans le tuyau. À cette altitude, la neige compte pour la hauteur de la prise. [[lab:earthtube:off]]"
+      "text": "[[lab:earthtube:on]] La voilà qui apparaît, pâle et translucide : le début du puits canadien. Une colonne sur la pente, avec un capuchon contre la pluie, et une grille contre les insectes et les feuilles. À cette altitude, la neige compte pour la hauteur de la prise. [[lab:earthtube:off]]"
     },
     {
       "id": "part-earth-tube-pipe",
@@ -282,21 +282,21 @@
       "scope": "part:black-paint",
       "title": "Peinture noire",
       "scene": "wall",
-      "text": "Une couche d’acrylique noir sur le béton : c’est elle qui change notre rayon en chaleur. À midi en hiver, la plaque monte vers soixante-cinq degrés. Le noir n’est pas neuf : dès la fin du dix-neuvième siècle, un zoologiste a breveté une plaque noire derrière du verre. Fermons les évents un jour clair : [[lab:vents:closed]] la plaque frôle soixante-dix degrés, l’alarme de peinture. [[lab:vents:open]]"
+      "text": "Une couche d’acrylique noir sur le béton : c’est elle qui change notre rayon en chaleur. En début d’après-midi, en hiver, la plaque monte vers soixante-cinq degrés. Le noir n’est pas neuf : en mille huit cent quatre-vingt-un, un zoologiste a breveté une plaque noire derrière du verre. Fermons les évents un jour clair : [[lab:vents:closed]] la plaque frôle soixante-dix degrés, l’alarme de peinture. [[lab:vents:open]]"
     },
     {
       "id": "part-storage-wall",
       "scope": "part:storage-wall",
       "title": "Mur de stockage",
       "scene": "wall",
-      "text": "[[lab:speed:86400]] Soixante centimètres de béton noir. Notre rayon, devenu chaleur, n’y saute pas : il marche, à environ quatre centimètres par heure. Regardez les couleurs descendre ! Le soleil de midi traverse le mur en quatorze à seize heures : il arrive côté pièce dans la nuit. [[lab:thickness:45]] Les inventeurs voulaient quarante à quarante-cinq centimètres : onze heures de retard. [[lab:preset:prototype-1967]] Reste l’eau, que notre modèle ne simule pas. Un béton coulé sur place reste humide des années : le mur de mille neuf cent soixante-quatorze a rendu huit à dix points de moins."
+      "text": "[[lab:speed:86400]] Soixante centimètres de béton noir. Notre rayon, devenu chaleur, n’y saute pas : il marche, à environ quatre centimètres par heure. Regardez les couleurs descendre ! Le soleil de midi traverse le mur en quatorze à seize heures : il arrive côté pièce dans la nuit. [[lab:thickness:45]] Les inventeurs voulaient quarante à quarante-cinq centimètres, et un retard d’environ douze heures. Par notre calcul, quarante-cinq centimètres en donnent onze. [[lab:preset:prototype-1967]] Reste l’eau, que notre modèle ne simule pas. Le mur de mille neuf cent soixante-quatorze a rendu huit à dix points de moins : une partie, dit l’article, tenait à l’eau restée dans le béton."
     },
     {
       "id": "part-upper-duct",
       "scope": "part:upper-duct",
       "title": "Conduit haut",
       "scene": "wall",
-      "text": "L’air chaud sort par ici : un tunnel de cinquante-six centimètres sur onze, près du plafond. [[flows:on]] Pourquoi deux conduits, et pas un ? Un seul laisserait l’air chaud monter et l’air froid descendre dans le même trou : ils se gêneraient. Avec un en bas et un en haut, la colonne tourne dans un seul sens. [[flows:off]] Le jet reste chaud deux heures après le soleil."
+      "text": "L’air chaud sort par ici : un tunnel de cinquante-six centimètres sur onze, près du plafond. [[flows:on]] Pourquoi deux conduits, et pas un ? Un seul laisserait l’air chaud monter et l’air froid descendre dans le même trou : ils se gêneraient. Avec un en bas et un en haut, la colonne tourne dans un seul sens. [[flows:off]] Le courant dure deux à trois heures après le soleil."
     },
     {
       "id": "part-lower-duct",
@@ -310,7 +310,7 @@
       "scope": "part:summer-flap",
       "title": "Clapet d’été",
       "scene": "wall",
-      "text": "[[flows:on]] En hiver, cette plaque est à plat : l’air chaud entre dans la pièce. [[lab:flap:summer]] En été, elle pend devant le conduit : l’air s’échappe par la tête du mur, en tirant celui de la pièce. [[lab:flap:winter]] Et la nuit ? [[lab:scenario:the-night]] Notre modèle trouve que l’air de la lame retombe vers la pièce, par les nuits claires d’hiver : douze litres par seconde, cinq heures. Les courbes de mille neuf cent soixante-sept n’en montrent aucun. Le modèle garde son résultat, et le dit. Regardez les points d’air : ils redescendent ! [[flows:off]] [[lab:preset:prototype-1967]]"
+      "text": "[[flows:on]] Dans notre dessin, cette plaque est à plat en hiver : l’air chaud entre dans la pièce. [[lab:flap:summer]] En été, elle pend devant le conduit : l’air s’échappe par la tête du mur, en tirant celui de la pièce. [[lab:flap:winter]] Et la nuit ? [[lab:scenario:the-night]] Notre modèle trouve que l’air de la lame retombe vers la pièce, par les nuits claires d’hiver : douze litres par seconde, cinq heures. Les courbes de mille neuf cent soixante-sept n’en montrent aucun. Le modèle garde son résultat, et le dit. Regardez les points d’air : ils redescendent ! [[flows:off]] [[lab:preset:prototype-1967]]"
     },
     {
       "id": "part-head-beam",
@@ -338,14 +338,14 @@
       "scope": "part:air-thermocouples",
       "title": "Thermocouples d’air",
       "scene": "wall",
-      "text": "Mesurer l’air devant un mur à soixante degrés est délicat : le fil reçoit les rayons du mur. Il finit par lire sa propre chaleur. D’où des écrans d’aluminium, qui les renvoient. [[isolate:on]] Trois sondes pendent dans la lame, loin des parois : l’entrée, le milieu, la sortie. [[isolate:off]] L’article ne donne ni leur nombre ni leurs hauteurs : ces trois-là sont les nôtres."
+      "text": "Mesurer l’air devant un mur à soixante degrés est délicat : le fil reçoit les rayons du mur. Il finit par lire sa propre chaleur. D’où des écrans d’aluminium, qui les renvoient. [[isolate:on]] Trois sondes pendent dans la lame, loin des parois : l’entrée, le milieu, la sortie. [[isolate:off]] L’article met les siennes dans les conduits, sans dire combien ni à quelle hauteur : ces trois-là sont les nôtres."
     },
     {
       "id": "part-hot-wire-anemometer",
       "scope": "part:hot-wire-anemometer",
       "title": "Anémomètre à fil chaud",
       "scene": "wall",
-      "text": "Un fil fin, chauffé par un courant, au milieu du conduit. L’air qui passe le refroidit : plus il va vite, plus il faut de courant pour garder le fil chaud. [[isolate:on]] L’appareil lit de moins soixante à plus soixante centimètres par seconde. Il pourrait donc voir un courant inversé : les enregistrements n’en montrent aucun. [[isolate:off]] Un fil chaud se salit : la lecture dérive, sans que rien ne se voie."
+      "text": "Un fil fin, chauffé par un courant, au centre d’un conduit : l’article le met dans le conduit bas, notre dessin dans le haut. L’air qui passe le refroidit : plus il va vite, plus il faut de courant pour garder le fil chaud. [[isolate:on]] L’appareil lit de moins soixante à plus soixante centimètres par seconde. Il pourrait donc voir un courant inversé : les enregistrements n’en montrent aucun. [[isolate:off]] Un fil chaud se salit : la lecture dérive, sans que rien ne se voie."
     },
     {
       "id": "part-inner-wall-face",
@@ -359,7 +359,7 @@
       "scope": "part:warm-air-jet",
       "title": "Jet d’air chaud",
       "scene": "room",
-      "text": "[[flows:on]] Voici le premier chemin de la chaleur : le jet, l’air sorti du conduit haut, vers quarante degrés, qui file sous le plafond. [[flows:off]] Pour les inventeurs, il compte pour trente à trente-cinq pour cent de la chaleur rendue. Notre modèle trouve cinquante et un, et encore quarante-trois avec leur débit : l’écart ne vient pas que du débit. Nous ne le fermons pas. Le thermostat, à un mètre cinquante, ne sent pas ce que le jet fait tout en haut."
+      "text": "[[flows:on]] Voici le premier chemin de la chaleur : le jet, l’air sorti du conduit haut, vers quarante degrés, qui file sous le plafond. [[flows:off]] Pour les inventeurs, il compte pour trente à trente-cinq pour cent de la chaleur rendue. Notre modèle trouve cinquante et un, et encore quarante-trois avec leur débit : l’écart ne vient pas que du débit. Nous ne le fermons pas."
     },
     {
       "id": "part-floor-return",
@@ -373,21 +373,21 @@
       "scope": "part:thermostat",
       "title": "Thermostat",
       "scene": "room",
-      "text": "Le juge de la maison : à un mètre cinquante du sol, réglé à vingt degrés. Tant que la pièce est assez chaude, rien ne chauffe. [[lab:setpoint:18]] À dix-huit, la part de la saison que l’électricité ne paie pas passe de quarante-sept à cinquante-trois pour cent. [[lab:setpoint:20]] Posé dans le jet ou au soleil, il lit trop chaud, et coupe le chauffage pendant que la pièce est froide."
+      "text": "Le juge de la maison : à un mètre cinquante du sol, réglé à vingt degrés. [[lab:setpoint:18]] À dix-huit, la part de la saison que l’électricité ne paie pas passe de quarante-sept à cinquante-trois pour cent. [[lab:setpoint:20]] Posé dans le jet ou au soleil, il lit trop chaud, et coupe le chauffage pendant que la pièce est froide."
     },
     {
       "id": "part-electric-heater",
       "scope": "part:electric-heater",
       "title": "Radiateur électrique",
       "scene": "room",
-      "text": "Le chauffage d’appoint paie ce que le soleil, le mur et les gens n’ont pas donné. Nous dessinons un convecteur sous la fenêtre nord. Sur la saison de chauffe, notre calcul lui fait payer cinquante-trois pour cent de la charge. Les inventeurs annoncent soixante à soixante-dix pour cent de soleil. Le modèle n’atteint le bas de leur fourchette que si l’air du site est plus chaud de cinq degrés que celui du calcul. Il le dit, il ne tranche pas."
+      "text": "Le chauffage d’appoint paie ce que le soleil, le mur et les gens n’ont pas donné. Sur la saison de chauffe, notre calcul lui fait payer cinquante-trois pour cent de la charge. Les inventeurs disent que le soleil peut économiser soixante à soixante-dix pour cent, selon les années. Le modèle n’atteint le bas de leur fourchette que si l’air du site est plus chaud de cinq degrés que celui du calcul. Il le dit, il ne tranche pas."
     },
     {
       "id": "part-electric-panel",
       "scope": "part:electric-panel",
       "title": "Tableau électrique",
       "scene": "room",
-      "text": "Le coffret où arrive le courant, accroché à une cloison : c’est notre dessin, l’article n’en parle pas. Sa petite lampe s’allume quand le thermostat appelle le chauffage. Elle dit si l’électricité travaille, ou si le soleil et le mur suffisent. Fermé, étiqueté : son contrôle est le travail d’un électricien."
+      "text": "Le coffret où arrive le courant, accroché à une cloison : c’est notre dessin, l’article n’en parle pas. Sa petite lampe s’allume quand le thermostat appelle le chauffage. Fermé, étiqueté : son contrôle est le travail d’un électricien."
     },
     {
       "id": "part-room-air-probe",
@@ -401,7 +401,7 @@
       "scope": "part:room-surface-probes",
       "title": "Sondes de surface",
       "scene": "room",
-      "text": "Un mur chaud rayonne vers tout ce qu’il voit : le sol, le plafond, les murs voisins. Ce qu’il donne dépend de leur température : dix-huit degrés pour notre modèle, environ dix-sept et demi d’après l’article. Les deux s’accordent à un demi-degré près. [[isolate:on]] Les deux sondes de notre dessin sont les nôtres. [[isolate:off]] Collées à plat, à l’ombre : une sonde mal collée lit l’air derrière elle."
+      "text": "Un mur chaud rayonne vers tout ce qu’il voit : le sol, le plafond, les murs voisins. Ce qu’il donne dépend de leur température : dix-huit degrés pour notre modèle. Sur les courbes de l’article, nous lisons environ dix-sept et demi. Les deux s’accordent à un demi-degré près. [[isolate:on]] Les deux sondes de notre dessin sont les nôtres. [[isolate:off]] Collées à plat, à l’ombre : une sonde mal collée lit l’air derrière elle."
     },
     {
       "id": "part-chart-recorder",
@@ -415,7 +415,7 @@
       "scope": "part:fresh-air-vent",
       "title": "Entrée d’air frais",
       "scene": "room",
-      "text": "Une petite grille basse sur le mur nord, et derrière elle… rien : nous ne dessinons ni conduit, ni prise. D’où venait l’air neuf ? Les sources se taisent. La boucle du mur ne renouvelle rien : elle reprend l’air de la pièce. [[lab:flap:summer]] Le seul vrai renouvellement, c’est celui de l’été : le mur tire l’air de la pièce, deux à trois fois par heure. [[lab:flap:winter]] Une vraie entrée ne se devine pas : elle se dessine, et se mesure."
+      "text": "Une petite grille basse sur le mur nord, et derrière elle… rien : nous ne dessinons ni conduit, ni prise. D’où venait l’air neuf ? Les sources se taisent. La boucle du mur ne renouvelle rien : elle reprend l’air de la pièce. [[lab:flap:summer]] Dans notre modèle, la position d’été tire l’air de la pièce deux à trois fois par heure : le seul renouvellement qu’il montre. [[lab:flap:winter]] Une vraie entrée ne se devine pas : elle se dessine, et se mesure."
     },
     {
       "id": "part-room-floor",
@@ -429,7 +429,7 @@
       "scope": "part:room-ceiling",
       "title": "Plafond",
       "scene": "room",
-      "text": "Trois cents mètres cubes sur soixante-seize mètres carrés : la hauteur moyenne est de près de quatre mètres. Étrange, pour une maison ! Nous dessinons un plafond plat, sous un comble, avec de l’isolant par-dessus. [[xray:on]] En transparence, on voit l’isolant. [[xray:off]] Le conduit haut est à trois mètres soixante-dix. Son jet file juste dessous : l’air chaud s’y amasse, loin du thermostat."
+      "text": "Trois cents mètres cubes sur soixante-seize mètres carrés : la hauteur moyenne est de près de quatre mètres. Nous dessinons un plafond plat, sous un comble, avec de l’isolant par-dessus. [[xray:on]] En transparence, on voit l’isolant. [[xray:off]] Le conduit haut est à trois mètres soixante-dix. Son jet file juste dessous : l’air chaud s’y amasse, loin du thermostat."
     },
     {
       "id": "part-armchair",
