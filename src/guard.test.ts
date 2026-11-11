@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
 // The prototypes' position stays in the private cache: nothing in the lab says where the houses stand beyond « Odeillo ». `src/data/data.test.ts` reads the content and its documents and `src/three/worlds.test.ts` the worlds; this reads
-// the rest: the lab's description, the panels, the cues, the simulation, the drawings, the README, the page, the manifest, the package and every document of the repository.
+// the rest: the lab's description, the panels, the cues, the simulation, the drawings, the README, the page, the manifest, the package and every document of the repository, and the spoken guide's scripts and notes
+// (`narration/*.json`, `narration/README.md`: what the voice says is what the subtitles show, so it holds no more than « Odeillo » either; `src/narration.test.ts` adds the names of regions, ranges and communes).
 
 const files = Object.entries(
   import.meta.glob(
@@ -18,6 +19,8 @@ const files = Object.entries(
       '../public/lab.json',
       '../docs/*.md',
       '../BRIEF.md',
+      '../narration/*.json',
+      '../narration/README.md',
     ],
     { query: '?raw', import: 'default', eager: true },
   ) as Record<string, string>,

@@ -1,0 +1,442 @@
+{
+  "lang": "en",
+  "voiceLabel": {
+    "fr": "Voix de synthèse",
+    "en": "Synthetic voice"
+  },
+  "settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.8,
+    "style": 0.35,
+    "speed": 0.95
+  },
+  "segments": [
+    {
+      "id": "intro",
+      "scope": "intro",
+      "title": "Introduction to the lab",
+      "scene": "site",
+      "text": "[[home]] Picture a December night on the plateau of Odeillo. Outside, it is freezing. Inside, a great wall of black concrete is still warm, as if the midday sun had never left. [[frame:prototype-house]] Can a house really heat itself? Let’s follow one small ray of sunshine. [[scene:wall]] It passes through two sheets of glass, one after the other, [[frame:black-paint]] and lands on black paint: there, it turns into heat. [[frame:air-gap,upper-duct]] Two roads open before it. By the air: it rises behind the glass, and comes out hot through a duct, at the top. Quick work! [[frame:storage-wall]] Or through the concrete… and our ray chooses to take its time. There, heat does not jump: it walks, at about four centimetres an hour. Sixty centimetres of wall: some fifteen hours! [[scene:room]] It comes out on the room side in the dead of night, just when you feel the cold. [[scene:house]] That is the whole story: a ray, black paint, a wall with a memory… and a warm room at midnight. [[home]] To begin with, a few landmarks. There are four views: the plateau, the house, the wall and the room. Click on a part: its sheet opens, and you can hear its story. Explode, X-ray, Section and Flows show the inside and follow the air. [[mode:assembly]] The assembly guide builds the house in twenty steps. [[mode:install]] The installation guide takes ten. [[mode:sim]] The simulation changes the thickness of the wall, the glass, the day, and runs twelve scenarios. [[mode:lessons]] Seven lessons, with quizzes, explain the physics. [[mode:plans]] Eight sheets gather the drawings. [[mode:explore]] One last thing: this lab is an educational reconstruction. It explains, it gives no plan to follow. Unless a source is quoted, the figures come from our simulation: calculations, not measurements. Where it does not match the inventors’ measurements, we say so, and we have not tuned it to get there. The Sources panel says who said what. So, can a house heat itself? The honest answer: a good part of the way, depending on who counts, and what. [[select:none]] Go and see for yourself: the wall is still warm!"
+    },
+    {
+      "id": "scene-site",
+      "scope": "scene:site",
+      "title": "The plateau: a furnace that concentrates, a house that keeps",
+      "scene": "site",
+      "text": "[[home]] The plateau of Odeillo: a mown meadow, on a slope of rock. [[frame:prototype-house,twin-house]] Here is the house of nineteen sixty-seven, and its twin. [[frame:solar-furnace,heliostat-terraces]] Further off, the solar furnace and its mirrors: the same laboratory built one to concentrate the sun, the other to keep it. [[frame:solar-houses-1974]] Higher up, the houses of nineteen seventy-four: you can see them, you cannot go in. [[home]] [[lab:day:355]] [[lab:hour:8]] [[lab:speed:600]] Watch the sun: two arcs, the low one of December, the high one of June. The mirrors follow it, and the snow follows the month. All of it comes from the sun of our model. The plateau itself is composed: nothing here says where the houses stand. [[lab:preset:prototype-1967]]"
+    },
+    {
+      "id": "scene-house",
+      "scope": "scene:house",
+      "title": "The house, cut through the middle of a bay",
+      "scene": "house",
+      "text": "[[home]] The machine, cut through the middle of a bay: the east half has been taken away. [[frame:south-facade]] On the south side, nine bays of collector, one of window, two of entrance. [[frame:pitched-roof,roof-insulation]] Above, the roof, and its insulation, laid on the ceiling. [[frame:floor-slab,foundation]] Below, the slab, and the foundation that carries it all. [[home]] [[flows:on]] Here is the air: it enters at the bottom, rises behind each pane, and leaves at the top. [[lab:flap:summer]] One flap, and it is summer: the air goes outdoors. [[lab:flap:winter]] [[flows:off]] The house we draw stays the one of nineteen sixty-seven: the sliders change the figures, not the shape. And the earth tube, that buried pipe, never existed here: it is a what-if, and it only appears in its own scenario."
+    },
+    {
+      "id": "scene-wall",
+      "scope": "scene:wall",
+      "title": "The wall: one element at full scale",
+      "scene": "wall",
+      "text": "[[home]] A single element, at full scale, cut in two down its height. [[frame:outer-glazing,inner-glazing]] Two sheets of glass, with a little still air between them. [[frame:air-gap,black-paint]] Twelve centimetres of air gap, then the black paint. [[frame:storage-wall]] And sixty centimetres of concrete, pierced by two ducts. [[home]] This world is always cut: the section is the world. The colours, from zero to seventy degrees, show our temperatures: a false colour, not what the eye would see. [[lab:speed:86400]] At normal speed, the wave is too slow to see. So, a day a second: watch the colours go down into the wall. [[lab:preset:prototype-1967]]"
+    },
+    {
+      "id": "scene-room",
+      "scope": "scene:room",
+      "title": "The room: where the heat arrives, where the current goes",
+      "scene": "room",
+      "text": "[[home]] Let’s step into the living room, from one bay line to the other. [[frame:inner-wall-face]] At the back, the back of the wall, with its two grilles. [[frame:warm-air-jet,floor-return]] [[flows:on]] Above, the warm-air jet; below, the return of the cool air. [[flows:off]] [[frame:thermostat,electric-heater]] And electricity, which pays for what the sun has not given. [[home]] Over a heating season, our calculation finds that the wall alone covers thirty-two per cent of the load. With the windows, forty-two and a half. With the people, forty-seven. The rest is electricity. But the last two figures rest on estimates: the windows, and the people."
+    },
+    {
+      "id": "part-prototype-house",
+      "scope": "part:prototype-house",
+      "title": "The 1967 house",
+      "scene": "site",
+      "text": "A small single-storey house: four rooms, seventy-six square metres. But look at its south front: forty-eight square metres of black concrete, behind two sheets of glass! Built at Odeillo in nineteen sixty-seven, it was lived in, and measured for a year. It is the source of nearly every figure here."
+    },
+    {
+      "id": "part-twin-house",
+      "scope": "part:twin-house",
+      "title": "Its twin",
+      "scene": "site",
+      "text": "One house, or two? The paper speaks of prototypes, without saying how many. Our twin is simply a copy of the same drawing, set along the front. [[isolate:on]] It does not feed the calculation: it helps the eye read the scale. [[isolate:off]] And nothing says anyone measured one against the other."
+    },
+    {
+      "id": "part-granite-slope",
+      "scope": "part:granite-slope",
+      "title": "Granite slope",
+      "scene": "site",
+      "text": "The ground falls away to the south, by about two metres. [[isolate:on]] On its own, the slope shows itself with its rocks: it gives the house its level slab, its steps, its balcony. [[isolate:off]] The granite is our choice: the photograph shows blocks, not what they are made of. Turn water away before the house, never against it."
+    },
+    {
+      "id": "part-meadow-clearing",
+      "scope": "part:meadow-clearing",
+      "title": "Clearing",
+      "scene": "site",
+      "text": "It all begins with this meadow: a solar house needs a clear south before it even needs a black wall. Winter sun reaches it with nothing in the way. [[lab:day:355]] In December, snow covers the grass; [[lab:day:180]] in June, it has melted. That snow is only scenery: our calculation ignores it. [[lab:preset:prototype-1967]] Keep the meadow mown, and the southern skyline low."
+    },
+    {
+      "id": "part-tree-clumps",
+      "scope": "part:tree-clumps",
+      "title": "Tree clumps",
+      "scene": "site",
+      "text": "Pines and oaks: our choice, no source says what grew there. [[lab:day:15]] In winter, the oaks are bare. [[lab:day:200]] In summer, there they are in leaf! An old trick: shade in summer, sun in winter. But our model counts no tree at all: a pine too close to the front would cast shade where it sees none. [[lab:preset:prototype-1967]]"
+    },
+    {
+      "id": "part-access-road",
+      "scope": "part:access-road",
+      "title": "Road",
+      "scene": "site",
+      "text": "A dirt road, at the foot of the meadow. No source mentions it: it is an honest piece of scenery, composed so that you can read distances. [[isolate:on]] On its own, it gives the scale of the house and its twin. [[isolate:off]] Yet a wall of more than sixty-three tonnes does not come from nowhere: its materials arrived this way."
+    },
+    {
+      "id": "part-solar-furnace",
+      "scope": "part:solar-furnace",
+      "title": "Solar furnace",
+      "scene": "site",
+      "text": "The house’s big brother. The same laboratory built this furnace. Its curved mirror, of eighteen hundred and thirty square metres, concentrates light onto a single point. A thousand kilowatts! The house does the opposite: it concentrates nothing, it keeps. Its silhouette is composed from a published template."
+    },
+    {
+      "id": "part-heliostat-terraces",
+      "scope": "part:heliostat-terraces",
+      "title": "Heliostats",
+      "scene": "site",
+      "text": "Sixty-three flat mirrors, on terraces in front of the furnace. Each one sets itself between the sun and the furnace, so that the light always lands on the same spot. [[lab:hour:8]] [[lab:speed:600]] Watch them turn together! At night they park facing the ground. Our wall, by contrast, takes the sun as it comes, and keeps it. [[lab:preset:prototype-1967]]"
+    },
+    {
+      "id": "part-solar-houses-1974",
+      "scope": "part:solar-houses-1974",
+      "title": "Houses of 1974",
+      "scene": "site",
+      "text": "Higher up the slope, a protected building: three homes, and the same wall system. It is lived in: you can see it, you cannot go in. Its plan is in no source: our drawing composes it as a simple glazed box. Let us not confuse it with the house of nineteen sixty-seven: that one, they measured."
+    },
+    {
+      "id": "part-pyranometer",
+      "scope": "part:pyranometer",
+      "title": "Pyranometer",
+      "scene": "site",
+      "text": "A small dome on a stand, far from everything: it measures the power of the sun. At the peak of a clear winter day, about nine hundred and fifty watts per square metre. [[isolate:on]] Our model reads nothing: it calculates the sun, and finds a little less. [[isolate:off]] Wipe the dome: one bird dropping, and it reads low all day."
+    },
+    {
+      "id": "part-far-ridge",
+      "scope": "part:far-ridge",
+      "title": "Ridges",
+      "scene": "site",
+      "text": "The mountains in the background come from a terrain model: due south, they barely rise three degrees. [[lab:day:15]] [[lab:hour:6]] [[lab:speed:600]] None casts a shadow at midday in winter. They only cut dawn and dusk: the direct beam arrives once the sun clears the line. Less than three per cent of a clear day. It is the only scenery whose figures count. [[lab:preset:prototype-1967]]"
+    },
+    {
+      "id": "part-south-facade",
+      "scope": "part:south-facade",
+      "title": "South front",
+      "scene": "house",
+      "text": "Twelve bays of one metre twenty-seven, facing south: nine of collector, one of window, two of entrance, from a photograph. And here is the paradox: in December, the midday sun strikes the front almost head on; in June, at a steep slant. So the wall receives more than one and a half times as much sun in January as in June! Our model finds that fall, but its winter months are eight to twelve points too low. It does not copy the paper, and it says so."
+    },
+    {
+      "id": "part-collector-element",
+      "scope": "part:collector-element",
+      "title": "Collector element",
+      "scene": "house",
+      "text": "Here is the unit of everything: one bay of the wall, four metres thirty-eight high, one metre twenty-seven wide. In the order the sun meets them: the frame, two sheets of glass, twelve centimetres of air, sixty of black concrete, two ducts. For the paper’s forty-eight square metres, you need eight or nine: we draw nine. The model calculates one, then multiplies it."
+    },
+    {
+      "id": "part-entrance-recess",
+      "scope": "part:entrance-recess",
+      "title": "Entrance recess",
+      "scene": "house",
+      "text": "In the middle of the front, two bays hollowed out: a glazed door, at the back of a recess, where the collector stops. [[xray:on]] Let’s make the front transparent: the door appears. [[xray:off]] It comes from a single photograph: its sizes are estimated. Double glazing of the time loses about three watts per square metre per degree."
+    },
+    {
+      "id": "part-entrance-balcony",
+      "scope": "part:entrance-balcony",
+      "title": "Entrance balcony",
+      "scene": "house",
+      "text": "The ground falls to the south: in front of the house, the floor is more than two metres above it. Hence this balcony, and its stair. Only the rail can be guessed from the photograph; the rest is drawn so that nothing hangs in the air. And a slab that sticks out of the house is a classic cold bridge… which our calculation does not count."
+    },
+    {
+      "id": "part-south-window",
+      "scope": "part:south-window",
+      "title": "South window",
+      "scene": "house",
+      "text": "A tall window, beside the collector: it lets the sun straight into the room… and lets the heat out. Nobody publishes the area of the windows: we take sixteen and a half square metres, an estimate. With no window, forty-two per cent of the season is covered; with them, forty-seven. A window gains by day, and loses by night: close the shutters at sunset."
+    },
+    {
+      "id": "part-east-gable",
+      "scope": "part:east-gable",
+      "title": "East gable",
+      "scene": "house",
+      "text": "The end wall, to the east: a triangle up to the ridge, on a stepped foundation. We know nothing of it: thirty centimetres, rendered, as we imagine it. For the house, it is one loss among others. [[cutaway:on]] The section takes it away, with the whole east half. [[cutaway:off]] On this side, the morning sun rises behind a ridge of nearly six degrees."
+    },
+    {
+      "id": "part-west-gable",
+      "scope": "part:west-gable",
+      "title": "West gable",
+      "scene": "house",
+      "text": "Its twin, to the west: the same triangle of thirty centimetres, on five steps that follow the two-metre slope. Without them, it would float. No plan gives them. [[cutaway:on]] When the section removes the east half, this is the one that remains, with the roof. [[cutaway:off]] In the evening, the sun sets behind the lowest ridge: barely one degree."
+    },
+    {
+      "id": "part-north-wall",
+      "scope": "part:north-wall",
+      "title": "North wall",
+      "scene": "house",
+      "text": "The back wall has nothing to gain: the house turns its back on the north. But here hides the heaviest figure: the losses of the whole house, one point six three watts per cubic metre per degree. Nobody says whether that figure already holds the black wall and the windows. We chose that it does. Read the other way, the season would give twenty-four per cent instead of forty-seven. It is the heaviest assumption of the model."
+    },
+    {
+      "id": "part-north-window",
+      "scope": "part:north-window",
+      "title": "North window",
+      "scene": "house",
+      "text": "A small window in the back wall: light, without sun. Few windows to the north, and small ones, advises an American architect. [[xray:on]] Let’s make the wall transparent: the window stays, with the convector beneath it. [[xray:off]] No source gives its size. In the calculation, it is counted with the other losses."
+    },
+    {
+      "id": "part-pitched-roof",
+      "scope": "part:pitched-roof",
+      "title": "Pitched roof",
+      "scene": "house",
+      "text": "Two slopes of slate, a ridge running east to west, a pitch of about twenty-four degrees. Snow slides off to the south and to the north. [[xray:on]] Let’s make the roof transparent: the rafters appear. [[xray:off]] The paper says nothing of the roof: the rest is a drawing assumption. Clear the gutter before winter: snow melting on the roof freezes again at the eaves."
+    },
+    {
+      "id": "part-roof-insulation",
+      "scope": "part:roof-insulation",
+      "title": "Roof insulation",
+      "scene": "house",
+      "text": "The paper only gives the losses of the whole house: this layer is our drawing, ten centimetres on the ceiling. [[isolate:on]] Yet its part is the greatest of all! [[isolate:off]] The wall does not change. With the losses of nineteen seventy-four, the season’s share rises from forty-seven to seventy-four per cent. Not one ray more: the house simply loses less. Insulate first."
+    },
+    {
+      "id": "part-floor-slab",
+      "scope": "part:floor-slab",
+      "title": "Floor slab",
+      "scene": "house",
+      "text": "[[cutaway:on]] Every height in the house is counted from the top of this slab. It is level, on a bed of stones, while the ground falls away beneath it to the south. About twenty centimetres thick. A crack along the south wall, or a door that rubs: the ground has moved. [[cutaway:off]]"
+    },
+    {
+      "id": "part-foundation",
+      "scope": "part:foundation",
+      "title": "Foundation",
+      "scene": "house",
+      "text": "What carries sixty-three tonnes of black concrete! A footing below the ground, steps that follow the slope, and the south wall’s own foundation. [[isolate:on]] On its own, it shows itself alone. No source gives its plan: it is a drawing to look at. [[isolate:off]] A heavy wall on a slope needs watching: slanting cracks, doors that rub."
+    },
+    {
+      "id": "part-interior-partitions",
+      "scope": "part:interior-partitions",
+      "title": "Rooms",
+      "scene": "house",
+      "text": "Four rooms, says the paper, each with its own thermostat. It does not give the plan: ours puts in partitions. The living room, four bays wide, is visited in the room world. Our model, for its part, knows only one big room, with a single air: that is a limit. Leave the doors open by day: the warm air goes further."
+    },
+    {
+      "id": "part-chimney",
+      "scope": "part:chimney",
+      "title": "Chimney",
+      "scene": "house",
+      "text": "A brick flue, on the roof. What is it for? Nobody says. The heating is electric: a vent, perhaps, or a leftover. No guess is read from any source. [[xray:on]] Let’s make the roof transparent: the chimney stays, resting on the ceiling, with nothing under it. [[xray:off]] In the calculation, it does nothing. A question mark drawn in brick!"
+    },
+    {
+      "id": "part-earth-tube-intake",
+      "scope": "part:earth-tube-intake",
+      "title": "Intake (what if…)",
+      "scene": "house",
+      "text": "[[lab:earthtube:on]] There it appears, pale and translucent: the start of the earth tube. A column on the slope, with a cap against the rain, and a grille against insects and leaves. From there, the air enters the pipe. At this altitude, snow decides how high the intake must stand. [[lab:earthtube:off]]"
+    },
+    {
+      "id": "part-earth-tube-pipe",
+      "scope": "part:earth-tube-pipe",
+      "title": "Buried pipe (what if…)",
+      "scene": "house",
+      "text": "[[lab:earthtube:on]] Fifty metres of pipe, two metres underground. At Odeillo, in January, the outside air is at minus one degree, and it leaves at three. In July, with fifteen outside, it leaves at ten. Over a year: six hundred and twenty-five kilowatt-hours, against a load of fifty-seven thousand. About one point of share. No earth tube measured on a house has reached us: these figures are the calculation’s. [[lab:earthtube:off]]"
+    },
+    {
+      "id": "part-earth-tube-drain",
+      "scope": "part:earth-tube-drain",
+      "title": "Drain (what if…)",
+      "scene": "house",
+      "text": "[[lab:earthtube:on]] The low point of the pipe: an inspection chamber, under a lid level with the ground. Warm air passing through a cold pipe leaves water in it. It must drain somewhere: otherwise mould comes, and it is what you breathe afterwards. Our model does not simulate condensation. Where radon is an issue, a measurement comes before any pipe. [[lab:earthtube:off]]"
+    },
+    {
+      "id": "part-outer-glazing",
+      "scope": "part:outer-glazing",
+      "title": "Outer glazing",
+      "scene": "wall",
+      "text": "The first pane our ray meets: three millimetres of glass. It lets the light in, and keeps the heat: the hot black wall gives it back as rays that glass lets out poorly. How many panes? [[lab:sheets:1]] One only: the wall returns just sixteen per cent of a clear January day. [[lab:sheets:2]] Two: thirty-two. [[lab:sheets:3]] Three: thirty-seven. The third earns less than the second. [[lab:sheets:2]]"
+    },
+    {
+      "id": "part-inner-glazing",
+      "scope": "part:inner-glazing",
+      "title": "Inner glazing",
+      "scene": "wall",
+      "text": "The second pane, near the wall, doubles the first, about twenty-five millimetres behind it: the paper only says two panes. [[isolate:on]] It is the one the hot air of the gap touches. [[isolate:off]] Both its faces are shut in between the frame, the other pane and the wall: they cannot be wiped. A design problem before a cleaning problem."
+    },
+    {
+      "id": "part-steel-frame",
+      "scope": "part:steel-frame",
+      "title": "Steel frame",
+      "scene": "wall",
+      "text": "The skeleton that carries the two panes. The paper only says steel frame: a slim profile of twenty-two millimetres is our drawing. Why glazing bars? A three-millimetre pane, more than four metres tall, would not stand alone. [[xray:on]] In X-ray, the frame stays like a line drawing, held by brackets on the concrete. [[xray:off]]"
+    },
+    {
+      "id": "part-air-gap",
+      "scope": "part:air-gap",
+      "title": "Air gap",
+      "scene": "wall",
+      "text": "[[flows:on]] Twelve centimetres of air between the glass and the black wall: this is where everything turns. The air from below slips behind the glass, warms against the wall, and rises. It is a column of hot air, lighter than the cold air beside it. No fan! [[flows:off]] The recordings say about twenty litres a second. Our model finds nearly twice that. We have not tuned it: the gap stays, and we say so."
+    },
+    {
+      "id": "part-black-paint",
+      "scope": "part:black-paint",
+      "title": "Black paint",
+      "scene": "wall",
+      "text": "A coat of black acrylic on the concrete: it turns our ray into heat. At midday in winter, the plate climbs to about sixty-five degrees. Black is nothing new: as early as the late nineteenth century, a zoologist patented a black plate behind glass. Shut the vents on a clear day: [[lab:vents:closed]] the plate nears seventy degrees, the paint alarm. [[lab:vents:open]]"
+    },
+    {
+      "id": "part-storage-wall",
+      "scope": "part:storage-wall",
+      "title": "Storage wall",
+      "scene": "wall",
+      "text": "[[lab:speed:86400]] Sixty centimetres of black concrete. Our ray, now heat, does not jump in it: it walks, at about four centimetres an hour. Watch the colours go down! Midday sun crosses the wall in fourteen to sixteen hours: it reaches the room side in the night. [[lab:thickness:45]] The inventors wanted forty to forty-five centimetres: eleven hours’ delay. [[lab:preset:prototype-1967]] What remains is water, which our model does not simulate. Concrete poured on site stays damp for years: the wall of nineteen seventy-four gave back eight to ten points less."
+    },
+    {
+      "id": "part-upper-duct",
+      "scope": "part:upper-duct",
+      "title": "Upper duct",
+      "scene": "wall",
+      "text": "A tunnel fifty-six centimetres by eleven, near the ceiling: the hot air of the gap passes through it. [[flows:on]] Why two ducts, and not one? A single one would let hot air rise and cold air fall in the same hole: they would get in each other’s way. With one below and one above, the column turns one way only. [[flows:off]] The jet stays warm two hours after the sun."
+    },
+    {
+      "id": "part-lower-duct",
+      "scope": "part:lower-duct",
+      "title": "Lower duct",
+      "scene": "wall",
+      "text": "The same tunnel, at floor level. It takes the coolest air of the room, at seventeen degrees when the room is at twenty. It sends it behind the glass: that contrast keeps the loop going. [[flows:on]] Watch the air dots: they enter here, then warm up as they climb. [[flows:off]] A sofa pushed against the grille starves it of air: put nothing in front."
+    },
+    {
+      "id": "part-summer-flap",
+      "scope": "part:summer-flap",
+      "title": "Summer flap",
+      "scene": "wall",
+      "text": "[[flows:on]] In winter, this plate lies flat: the hot air goes into the room. [[lab:flap:summer]] In summer, it hangs in front of the duct: the air escapes through the head of the wall, drawing the room’s air with it. [[lab:flap:winter]] And at night? [[lab:scenario:the-night]] Our model finds that the air of the gap falls back towards the room, on clear winter nights: twelve litres a second, for five hours. Watch the air dots: they come back down! The curves of nineteen sixty-seven show none. The model keeps its result, and says so. [[flows:off]] [[lab:preset:prototype-1967]]"
+    },
+    {
+      "id": "part-head-beam",
+      "scope": "part:head-beam",
+      "title": "Head beam",
+      "scene": "wall",
+      "text": "The band of concrete that closes the top of the wall. [[isolate:on]] It holds the frame’s brackets, closes the top of the air gap, and takes the foot of the roof. [[isolate:off]] A confession: the paper’s figure marks it with two letters whose meaning we do not know. We read them as head and foot, because the hatched masonry sits in those two places: a reading, not a datum."
+    },
+    {
+      "id": "part-sill-beam",
+      "scope": "part:sill-beam",
+      "title": "Sill beam",
+      "scene": "wall",
+      "text": "The other hatched band, the lower one: the foot of the wall. It rests on the foundation and holds the foot of the frame. [[isolate:on]] The foot of a heavy wall, set on the ground, may be a bridge between the hot wall and the earth. [[isolate:off]] The paper says nothing of it, and our calculation does not count it. After the thaw, look at the bottom of the wall: a dark line says water is rising."
+    },
+    {
+      "id": "part-wall-thermocouples",
+      "scope": "part:wall-thermocouples",
+      "title": "Wall thermocouples",
+      "scene": "wall",
+      "text": "Wires of copper and constantan, a tenth of a millimetre across: so fine they hardly change what they measure. Two metals welded at the tip, and their contact gives a tiny voltage that depends on temperature. [[isolate:on]] Our drawing sets six in the concrete, from the paint to the room: you follow the wave from bead to bead. [[isolate:off]] A bead that breaks stays there for ever."
+    },
+    {
+      "id": "part-air-thermocouples",
+      "scope": "part:air-thermocouples",
+      "title": "Air thermocouples",
+      "scene": "wall",
+      "text": "Measuring the air in front of a wall at sixty degrees is delicate: the wire catches the wall’s rays. It ends up reading its own heat. Hence aluminium screens, which send the rays back. [[isolate:on]] Three probes hang in the gap, away from the walls: inlet, middle, outlet. [[isolate:off]] The paper gives neither their number nor their heights: these three are ours."
+    },
+    {
+      "id": "part-hot-wire-anemometer",
+      "scope": "part:hot-wire-anemometer",
+      "title": "Hot-wire anemometer",
+      "scene": "wall",
+      "text": "A fine wire, heated by a current, in the middle of the duct. The air that passes cools it: the faster it goes, the more current it takes to keep the wire hot. [[isolate:on]] The instrument reads from minus sixty to plus sixty centimetres a second. It could therefore see a reverse flow: the recordings show none. [[isolate:off]] A hot wire gets dirty: the reading drifts, and nothing shows it."
+    },
+    {
+      "id": "part-inner-wall-face",
+      "scope": "part:inner-wall-face",
+      "title": "Inner face of the wall",
+      "scene": "room",
+      "text": "The back of the wall, room side: barely warm, and almost still. [[xray:on]] Let’s make the floor, the ceiling and this face transparent: the ducts appear behind. [[xray:off]] [[lab:scenario:christmas-1974]] On the twenty-fourth of December, hardly any sun. Yet the wall gives back nearly five times what it received: four hundred and seventy-eight per cent! That is not a mistake: it is the sun of the day before, still in the concrete. Our model finds three hundred and sixty-seven: the phenomenon, not the figure. [[lab:preset:prototype-1967]]"
+    },
+    {
+      "id": "part-warm-air-jet",
+      "scope": "part:warm-air-jet",
+      "title": "Warm-air jet",
+      "scene": "room",
+      "text": "[[flows:on]] Here is the first road of the heat: the jet, the air leaving the upper duct at about forty degrees, running under the ceiling. [[flows:off]] For the inventors, it makes up thirty to thirty-five per cent of the heat given back. Our model finds fifty-one, and still forty-three with their flow: the gap is not only the flow. We do not close it. The thermostat, at one metre fifty, does not feel what the jet does way up high."
+    },
+    {
+      "id": "part-floor-return",
+      "scope": "part:floor-return",
+      "title": "Floor return",
+      "scene": "room",
+      "text": "The wall gives no fresh air to the room: it takes back its own. [[flows:on]] The coolest air, near the floor, heads for the low grille. It rises behind the glass, comes back out at the top, and the loop starts again. [[flows:off]] About twice an hour, the room’s air goes round the wall. When the paper says fresh air, it means this air. A rug in front of the grille, and the intake chokes."
+    },
+    {
+      "id": "part-thermostat",
+      "scope": "part:thermostat",
+      "title": "Thermostat",
+      "scene": "room",
+      "text": "The judge of the house: one metre fifty above the floor, set to twenty degrees. While the room is warm enough, nothing heats. [[lab:setpoint:18]] At eighteen, the share of the season that electricity does not pay rises from forty-seven to fifty-three per cent. [[lab:setpoint:20]] Placed in the jet, or in the sun, it reads too warm, and cuts the heating while the room is cold."
+    },
+    {
+      "id": "part-electric-heater",
+      "scope": "part:electric-heater",
+      "title": "Electric heater",
+      "scene": "room",
+      "text": "The backup heating pays for what the sun, the wall and the people have not given. We draw a convector under the north window. Over the heating season, our calculation has it pay fifty-three per cent of the load. The inventors announce sixty to seventy per cent from the sun. The model reaches the bottom of their range only if the site’s air is five degrees warmer than the calculation’s. It says so, and does not decide."
+    },
+    {
+      "id": "part-electric-panel",
+      "scope": "part:electric-panel",
+      "title": "Electric panel",
+      "scene": "room",
+      "text": "The box where the current arrives, hung on a partition: it is our drawing, the paper does not mention it. Its small lamp lights when the thermostat calls for heat. It tells you whether electricity is working, or whether sun and wall are enough. Closed, labelled: checking it is an electrician’s job."
+    },
+    {
+      "id": "part-room-air-probe",
+      "scope": "part:room-air-probe",
+      "title": "Air probe",
+      "scene": "room",
+      "text": "A thermocouple hung from the ceiling by its cable: it reads the room’s air, which the wall and the thermostat judge. [[isolate:on]] It hangs clear of the jet. [[isolate:off]] Our room has a single air: the paper’s four rooms make one. Hence one probe, where reality would have four. Keep yours in the shade, away from the jet."
+    },
+    {
+      "id": "part-room-surface-probes",
+      "scope": "part:room-surface-probes",
+      "title": "Surface probes",
+      "scene": "room",
+      "text": "A warm wall radiates to everything it sees: the floor, the ceiling, the neighbouring walls. What it gives depends on their temperature: eighteen degrees for our model, about seventeen and a half from the paper. The two agree to within half a degree. [[isolate:on]] The two probes of our drawing are ours. [[isolate:off]] Stuck flat, in the shade: a badly stuck probe reads the air behind it."
+    },
+    {
+      "id": "part-chart-recorder",
+      "scope": "part:chart-recorder",
+      "title": "Chart recorder",
+      "scene": "room",
+      "text": "A trace on paper: the pen follows the inner face, and the paper moves on with the day. [[lab:speed:86400]] Look: a day a second. The paper speaks of recordings, not of an instrument: the desk and the roll are our drawing. Four runs of four days, from December to June. For a wall with a memory, one day says nothing: you need runs. [[lab:preset:prototype-1967]]"
+    },
+    {
+      "id": "part-fresh-air-vent",
+      "scope": "part:fresh-air-vent",
+      "title": "Fresh-air vent",
+      "scene": "room",
+      "text": "A small low grille on the north wall, and behind it… nothing: we draw neither duct nor intake. Where did the fresh air come from? The sources are silent. The wall’s loop renews nothing: it takes back the room’s own air. [[lab:flap:summer]] The only real renewal is the summer’s: the wall draws the room’s air out, two to three times an hour. [[lab:flap:winter]] A real inlet cannot be guessed: it is drawn, and measured."
+    },
+    {
+      "id": "part-room-floor",
+      "scope": "part:room-floor",
+      "title": "Floor",
+      "scene": "room",
+      "text": "A tiled slab, about twenty centimetres thick. The floor, the partitions and the furniture together form a mass: a third of what the wall holds. [[xray:on]] Let’s make the floor transparent: beneath, the slab and the foundation. [[xray:off]] A heavy floor in the sun does what the wall does, only faster: that is direct gain. The wall moves less, and later."
+    },
+    {
+      "id": "part-room-ceiling",
+      "scope": "part:room-ceiling",
+      "title": "Ceiling",
+      "scene": "room",
+      "text": "Three hundred cubic metres over seventy-six square metres: the mean height is nearly four metres. Odd, for a house! We draw a flat ceiling, under an attic, with insulation on top. [[xray:on]] In X-ray, you can see the insulation. [[xray:off]] The upper duct sits at three metres seventy. Its jet runs just beneath: the warm air gathers there, far from the thermostat."
+    },
+    {
+      "id": "part-armchair",
+      "scope": "part:armchair",
+      "title": "Armchair",
+      "scene": "room",
+      "text": "An armchair facing the south wall: it receives its heat by radiation, whatever the air temperature. For our calculation, people and appliances make five hundred watts, an estimate nobody gives. The season’s share goes from forty-two and a half to forty-seven. A sofa pushed against the wall cuts off its radiation."
+    }
+  ]
+}
