@@ -267,8 +267,8 @@ export const ASSEMBLY: GuideStep[] = [
     title: l('Le chauffage d’appoint', 'The backup heating'),
     text: withOrigin(
       l(
-        'Le chauffage d’appoint : le **tableau** d’où part le courant, le **radiateur**, et le **thermostat** à 1,50 m du sol, réglé à 20 °C : ces chiffres sont ceux de l’article, mais pas le type du chauffage. Reste l’**entrée d’air frais**, que nous dessinons sans rien derrière : on ne sait pas comment l’air neuf entrait.',
-        'The backup heating: the **panel** from which the current leaves, the **heater**, and the **thermostat** 1.50 m above the floor, set to 20 °C: these figures are the paper’s, but not the type of heating. What remains is the **fresh-air vent**, which we draw with nothing behind it: we do not know how the new air came in.',
+        'Le chauffage d’appoint : le **tableau** d’où part le courant, le **radiateur**, et le **thermostat** à 1,50 m du sol, réglé à 20 °C : ces chiffres sont ceux de l’article, mais pas le type du chauffage. Reste l’**entrée d’air frais**, que nous dessinons sans rien derrière, sauf dans le « et si » du puits canadien, dont le dernier tronçon finit ici : on ne sait pas comment l’air neuf entrait.',
+        'The backup heating: the **panel** from which the current leaves, the **heater**, and the **thermostat** 1.50 m above the floor, set to 20 °C: these figures are the paper’s, but not the type of heating. What remains is the **fresh-air vent**, which we draw with nothing behind it, except in the “what if” earth tube, whose last run ends here: we do not know how the new air came in.',
       ),
       ORIGIN.reportedReading,
     ),

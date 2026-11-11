@@ -121,8 +121,8 @@ export const INSTALL: GuideStep[] = [
     title: l('L’air neuf, à part', 'Fresh air, apart'),
     text: withOrigin(
       lf(
-        'La boucle du mur reprend l’air de la pièce : elle n’apporte aucun air du dehors. L’air neuf d’une maison vient d’ailleurs, et les sources ne disent pas d’où il venait ici : l’**entrée d’air frais** de notre dessin s’ouvre sur rien. Le modèle compte {airChange} dans les pertes de la maison, et la position d’été en tire {summerRange}.',
-        'The wall’s loop takes the room’s air: it brings no outside air. A house’s new air comes from elsewhere, and the sources do not say where it came from here: the **fresh-air vent** in our drawing opens onto nothing. The model counts {airChange} in the house’s losses, and the summer position draws {summerRange}.',
+        'La boucle du mur reprend l’air de la pièce : elle n’apporte aucun air du dehors. L’air neuf d’une maison vient d’ailleurs, et les sources ne disent pas d’où il venait ici : l’**entrée d’air frais** de notre dessin n’a rien derrière, sauf dans le « et si » du puits canadien, dont le dernier tronçon finit ici. Le modèle compte {airChange} dans les pertes de la maison, et la position d’été en tire {summerRange}.',
+        'The wall’s loop takes the room’s air: it brings no outside air. A house’s new air comes from elsewhere, and the sources do not say where it came from here: the **fresh-air vent** in our drawing has nothing behind it, except in the “what if” earth tube, whose last run ends here. The model counts {airChange} in the house’s losses, and the summer position draws {summerRange}.',
       ),
       ORIGIN.reportedReading,
     ),

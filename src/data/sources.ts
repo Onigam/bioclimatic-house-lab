@@ -300,11 +300,11 @@ export const SOURCES: { fr: string; en: string; items: SourceEntry[] }[] = [
       s(
         'https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006074236',
         [
-          'Légifrance, Code du patrimoine, articles L621-27 et L621-31 à L621-32',
-          'Légifrance, Heritage Code, articles L621-27 and L621-31 to L621-32',
+          'Légifrance, Code du patrimoine, articles L621-27 et L621-30 à L621-32',
+          'Légifrance, Heritage Code, articles L621-27 and L621-30 to L621-32',
         ],
-        'Les travaux sur un immeuble inscrit et dans ses abords : les articles existent et disent bien cela ; ils ne sont lus qu’en extraits.',
-        'Works on a listed building and in its surroundings: the articles exist and say so; they are read as extracts only.',
+        'Les travaux sur un immeuble inscrit (L621-27), puis les abords et les travaux qui s’y font (L621-30 à L621-32) : les articles existent et disent bien cela ; ils ne sont lus qu’en extraits.',
+        'Works on a listed building (L621-27), then its surroundings and the works done in them (L621-30 to L621-32): the articles exist and say so; they are read as extracts only.',
         'extract',
       ),
       s(
@@ -335,8 +335,8 @@ export const SOURCES: { fr: string; en: string; items: SourceEntry[] }[] = [
 export const LAW: [place: readonly [string, string], fr: string, en: string][] = [
   [
     ['France, le patrimoine', 'France, heritage'],
-    'Le bâtiment de 1974 est inscrit depuis le 25 mai 2011 (façades, toits, système du mur), d’après la base nationale du patrimoine, le four depuis mai 2009, d’après Wikipédia. Les travaux sur un immeuble inscrit et dans ses abords relèvent du Code du patrimoine : les articles L621-27 et L621-31 à L621-32 existent et disent cela, lus en extraits sur Légifrance.',
-    'The building of 1974 has been listed since 25 May 2011 (façades, roofs, the wall system), according to the national heritage database, the furnace since May 2009, according to Wikipedia. Works on a listed building and in its surroundings fall under the Heritage Code: articles L621-27 and L621-31 to L621-32 exist and say so, read as extracts on Légifrance.',
+    'Le bâtiment de 1974 est inscrit depuis le 25 mai 2011 (façades, toits, système du mur), d’après la base nationale du patrimoine, le four depuis mai 2009, d’après Wikipédia. Les travaux sur un immeuble inscrit et dans ses abords relèvent du Code du patrimoine : L621-27 (travaux sur un immeuble inscrit) et L621-30 à L621-32 (les abords et les travaux qui s’y font) existent et disent cela, lus en extraits sur Légifrance.',
+    'The building of 1974 has been listed since 25 May 2011 (façades, roofs, the wall system), according to the national heritage database, the furnace since May 2009, according to Wikipedia. Works on a listed building and in its surroundings fall under the Heritage Code: L621-27 (works on a listed building) and L621-30 to L621-32 (the surroundings and the works done in them) exist and say so, read as extracts on Légifrance.',
   ],
   [
     ['France, la construction', 'France, building'],

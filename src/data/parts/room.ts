@@ -426,14 +426,17 @@ export const ROOM_PARTS: PartInfo[] = [
     category: 'mechanical',
     name: l('Entrée d’air frais', 'Fresh-air vent'),
     short: l(
-      'Une petite grille basse sur le mur nord : derrière elle, nous ne dessinons rien. D’où vient l’air neuf, c’est inconnu.',
-      'A small low grille on the north wall: behind it, we draw nothing. Where the fresh air comes from is unknown.',
+      'Une petite grille basse sur le mur nord : derrière elle, nous ne dessinons rien, sauf dans le « et si » du puits canadien, dont le dernier tronçon finit ici. D’où vient l’air neuf, c’est inconnu.',
+      'A small low grille on the north wall: behind it, we draw nothing, except in the “what if” earth tube, whose last run ends here. Where the fresh air comes from is unknown.',
     ),
     description: lf(
-      'La boucle du mur ne renouvelle pas l’air : elle reprend celui de la pièce, à 17 °C près du sol, et le rend plus chaud. Quand l’article dit « air frais », il parle de cet air-là. Une maison a pourtant besoin d’air neuf, et les sources ne disent pas comment il arrivait. Nous dessinons une grille de {freshBox} à {freshHeight} du sol, sur le mur nord (estimation), et rien derrière : ni conduit, ni prise. Le modèle n’a pas de chemin d’air neuf non plus : il fait passer {airChange} dans la maison, une valeur qui sert seulement à partager ses pertes (estimation). Le seul vrai renouvellement qu’on lui voit est celui de la position d’été, où le mur tire l’air de la pièce : de {summerRange}.',
-      'The wall’s loop does not renew the air: it takes the room’s own, at 17 °C near the floor, and gives it back warmer. When the paper says “fresh air”, it means that air. A house nonetheless needs new air, and the sources do not say how it arrived. We draw a grille of {freshBox} at {freshHeight} from the floor, on the north wall (estimate), and nothing behind it: no duct, no intake. The model has no fresh-air path either: it passes {airChange} through the house, a value that only serves to split its losses (estimate). The only real renewal it shows is the summer position’s, where the wall draws the room’s air: {summerRange}.',
+      'La boucle du mur ne renouvelle pas l’air : elle reprend celui de la pièce, à 17 °C près du sol, et le rend plus chaud. Quand l’article dit « air frais », il parle de cet air-là. Une maison a pourtant besoin d’air neuf, et les sources ne disent pas comment il arrivait. Nous dessinons une grille de {freshBox} à {freshHeight} du sol, sur le mur nord (estimation), et rien derrière, sauf dans le « et si » du puits canadien, dont le dernier tronçon finit ici. Le modèle n’a pas de chemin d’air neuf non plus : il fait passer {airChange} dans la maison, une valeur qui sert seulement à partager ses pertes (estimation). Le seul vrai renouvellement qu’on lui voit est celui de la position d’été, où le mur tire l’air de la pièce : de {summerRange}.',
+      'The wall’s loop does not renew the air: it takes the room’s own, at 17 °C near the floor, and gives it back warmer. When the paper says “fresh air”, it means that air. A house nonetheless needs new air, and the sources do not say how it arrived. We draw a grille of {freshBox} at {freshHeight} from the floor, on the north wall (estimate), and nothing behind it, except in the “what if” earth tube, whose last run ends here. The model has no fresh-air path either: it passes {airChange} through the house, a value that only serves to split its losses (estimate). The only real renewal it shows is the summer position’s, where the wall draws the room’s air: {summerRange}.',
     ),
-    material: l('Grille, derrière laquelle rien n’est dessiné', 'A grille, with nothing drawn behind it'),
+    material: l(
+      'Grille, rien derrière sauf le puits canadien du « et si »',
+      'A grille, nothing behind it but the “what if” earth tube',
+    ),
     specs: [
       sp('Grille dessinée', 'Grille drawn', v('{freshBox}')),
       sp('Hauteur au sol dessinée', 'Height above the floor drawn', v('{freshHeight}')),
@@ -457,8 +460,8 @@ export const ROOM_PARTS: PartInfo[] = [
       },
     ),
     tip: l(
-      'Isolez la grille : elle est seule contre le mur, et il n’y a rien derrière. Dans la Simulation, passez en position d’été pour voir l’air se renouveler.',
-      'Isolate the grille: it is alone on the wall, with nothing behind it. In the Simulation, switch to the summer position to see the air renewed.',
+      'Isolez la grille : elle est seule contre le mur. Derrière elle, rien, sauf le dernier tronçon du puits canadien du « et si », qui finit ici. Dans la Simulation, passez en position d’été pour voir l’air se renouveler.',
+      'Isolate the grille: it is alone on the wall. Behind it, nothing, except the last run of the “what if” earth tube, which ends here. In the Simulation, switch to the summer position to see the air renewed.',
     ),
     design: lf(
       'Un architecte américain a noté que sa cheminée brûlait l’air chaud de la pièce et aspirait de l’air froid du dehors : il lui aurait donné une arrivée d’air directe. Le puits canadien du « et si… », un tuyau de {tubeLength} enterré à {tubeDepth}, ferait passer {tubeFlow}. Une vraie entrée ne se devine pas : elle se dessine et se mesure.',

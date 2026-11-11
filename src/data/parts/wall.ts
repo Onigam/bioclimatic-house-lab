@@ -85,7 +85,7 @@ export const WALL_PARTS: PartInfo[] = [
           'Its faces cannot be cleaned: dust settles on them over the years, and a seal that lets go fills the layer between the two sheets with mist. It is a design worry before a washing worry.',
         check:
           'Look along the glazing against the light: dust on the air-gap side and mist between the sheets both show.',
-        care: 'A house with Trombe walls of 1986, listed in the national heritage database, was altered so that its high windows would open, to reach the inside. Otherwise only the outside is cleaned.',
+        care: 'A house with Trombe walls of 1986, noted in the national heritage database, was altered so that its high windows would open, to reach the inside. Otherwise only the outside is cleaned.',
       },
     ),
     tip: l(
@@ -206,7 +206,11 @@ export const WALL_PARTS: PartInfo[] = [
       sp('Matière', 'Material', l('Acrylique noir', 'Black acrylic')),
       sp('Absorption du soleil', 'Sun absorbed', v('{absorptance}')),
       sp('Émissivité des surfaces de la pièce', 'Emissivity of the room’s surfaces', '0,94'),
-      sp('Plaque à midi, hiver', 'Plate at noon, winter', l('63 à 66 °C, à l’œil', '63 to 66 °C, by eye')),
+      sp(
+        'Plaque, début d’après-midi, hiver',
+        'Plate, early afternoon, winter',
+        l('63 à 66 °C, à l’œil', '63 to 66 °C, by eye'),
+      ),
       sp('Alarme du modèle', 'Model alarm', v('{paintAlarm}')),
     ],
     maintenance: maint(
