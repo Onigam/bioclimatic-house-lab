@@ -13,10 +13,10 @@ HOME=$(mktemp -d) node ~/Dev/lab-kit/tools/narration/generate.mjs --src narratio
 
 | Language | Total  | Words | Intro | Worlds                                          | Parts  | Longest parts                                                                                           |
 | -------- | ------ | ----- | ----- | ----------------------------------------------- | ------ | ------------------------------------------------------------------------------------------------------- |
-| French   | 23,965 | 4,369 | 1,904 | 2,222 (site 582, house 613, wall 503, room 524) | 19,839 | `storage-wall` 526, `summer-flap` 473, `inner-wall-face` 463, `south-facade` 454, `electric-heater` 444 |
-| English  | 22,991 | 4,229 | 1,829 | 2,209 (site 567, house 630, wall 498, room 514) | 18,953 | `storage-wall` 494, `summer-flap` 459, `inner-wall-face` 458, `south-facade` 452, `north-wall` 426      |
+| French   | 23,909 | 4,355 | 1,904 | 2,234 (site 582, house 625, wall 503, room 524) | 19,771 | `storage-wall` 526, `summer-flap` 473, `south-facade` 454, `electric-heater` 444, `inner-wall-face` 437 |
+| English  | 22,914 | 4,219 | 1,829 | 2,209 (site 567, house 630, wall 498, room 514) | 18,876 | `storage-wall` 494, `summer-flap` 459, `south-facade` 452, `inner-wall-face` 444, `north-wall` 426      |
 
-The ceiling is 30,000 per language; the series aims at 17,000 to 24,000 (`src/narration.test.ts` holds 20,000 to 24,000, and no segment over 2,500, the generator's cap). The median part is 346 characters in French, 330 in English; the heroes of the lab (the slow wave, the night flow, Christmas Eve, the first part of the facade, the heater, the jet) take more. At the rate of the guides already made (about 17 characters a second) that is about 23 minutes in French and 22 in English.
+The ceiling is 30,000 per language; the series aims at 17,000 to 24,000 (`src/narration.test.ts` holds 20,000 to 24,000, and no segment over 2,500, the generator's cap). The median part is 346 characters in French, 326 in English; the heroes of the lab (the slow wave, the night flow, Christmas Eve, the first part of the facade, the heater, the jet) take more. Measured on the audio: **23.3 minutes in French, 22.4 in English**.
 
 ## Register
 
@@ -26,9 +26,9 @@ Tone statistics (`node ~/Dev/lab-kit/tools/narration/tone-stats.mjs`), against P
 
 | Script           | Chars  | Avg sentence | Over 120 chars | Exclamations / 1,000 | Questions / 1,000 | « tu » | Digits |
 | ---------------- | ------ | ------------ | -------------- | -------------------- | ----------------- | ------ | ------ |
-| `fr.json`        | 23,965 | 68           | 11             | 0.67                 | 0.38              | 0      | 0      |
+| `fr.json`        | 23,909 | 68           | 13             | 0.67                 | 0.38              | 0      | 0      |
 | Pelton `fr.json` | 23,758 | 79           | 35             | 0.80                 | 0.29              | 0      | 0      |
-| `en.json`        | 22,991 | 65           | 6              | 0.70                 | 0.39              | 0      | 0      |
+| `en.json`        | 22,914 | 65           | 6              | 0.70                 | 0.39              | 0      | 0      |
 | Pelton `en.json` | 22,836 | 69           | 2              | 0.83                 | 0.35              | 0      | 0      |
 
 The sentences are shorter than Pelton's French (the parts say more figures, so they are cut more often); the exclamations are a little rarer and the questions a little more frequent, both inside the ranges the test holds (0.5 to 1 and 0.25 to 0.6). Every gap is in the direction of fewer long sentences for the subtitles.
@@ -58,7 +58,7 @@ The sentences are shorter than Pelton's French (the parts say more figures, so t
 
 **Why the limits are in the parts and not in the introduction.** The owner's rule is that a disclaimer is said once, where it matters. The introduction says once that the model is not tuned; each disagreement is then said in the one segment where the sheets and the lessons say it (the same places as the Simulation's « Là où le modèle ne retrouve pas la source »), with the lessons' own words and figures, never softened. A visitor who plays only the introduction hears that they exist.
 
-**Hedges.** « dans le modèle » is never said (a test holds it). « notre modèle », « notre calcul », « le modèle » appear in 29 segments of 61 (a test caps them at 32), where a figure stands against a source or the model is the subject. Estimates are said as estimates by « environ », by « notre estimation » or « notre dessin » where the sheet stars them, never as reported facts.
+**Hedges.** « dans le modèle » is never said (a test holds it). « notre modèle », « notre calcul », « le modèle » appear in 20 segments of 61 in French and 21 in English (a test caps them at 24), where a figure stands against a source or the model is the subject. Estimates are said as estimates by « environ », by « notre estimation » or « notre dessin » where the sheet stars them, never as reported facts.
 
 **No promise, no new law.** No sentence says « safe » or guarantees anything (a test refuses the words). The only lines of law, radon and electricity are the ones the sheets carry: a protected building is not touched without agreement (`solar-houses-1974`), the electric panel is an electrician's job (`electric-panel`), a measurement before any buried pipe where radon is an issue (`earth-tube-drain`). No reference is added and none of the lessons' « from memory » references is spoken.
 
@@ -93,4 +93,13 @@ No person, channel, company, brand or institution: « l'article », « les inven
 
 ## Checks after generation
 
-Filled in when the audio exists (Whisper agreement per language, speaking rate, subtitles, loudness, the browser walk).
+Nobody has listened to it. What was measured (the scripts that did it are not in the repository: they only read `public/audio` and the scripts):
+
+- **Back-transcription** (Whisper `small`, every clip, normalised words, Python `difflib` ratio against the script; a number in digits is turned back into words): **French mean 0.956, lowest 0.882** (`tree-clumps`: « chênes » heard as « chaînes », which are the same sound, and « pins » as « pains »), **English mean 0.975, lowest 0.875** (`prototype-house`: « storey » and « metres » spelt American, « nineteen sixty-seven » written as a number). **No segment under 0.85** in either language, no run of three words skipped, doubled or invented in any of the 122 clips. Of the 160 and 81 differences, the 89 and 29 that are neither a plural nor a one-letter variant were all read: digits, units (« cm », « kWh »), « pour cent » written as a symbol, homophones and Whisper's own slips. The doubtful ones were heard again with `large-v3-turbo`, which agreed with the script (« un pont possible », « sans fenêtre », « couvercle à ras », « thaw », « curves »).
+- **What the check found and the retakes fixed** (a text or a cue changed, the hash cache redid only those segments, locally): French `wall-thermocouples` (« en noie six » came out as « oie scisse »: now « met six perles »), `meadow-clearing` (« sans rien devant » heard as « de vent »: « sans obstacle »), `scene-house` (« c'est un et si » was heard as « essi »: « c'est une hypothèse »); and in both languages `summer-flap` (the night's reverse flow starts about ten seconds after the scenario does, so the sentence that says « regardez les points d'air » now comes last), `scene-site` and `heliostat-terraces` (the sun's demonstration starts at nine, not eight: at eight on a December morning the model shows its reverse-flow alarm, true but distracting).
+- **Speaking rate** (characters per second, from the manifests): French median 17.1 (14.8 to 19.6), English 17.2 (15.5 to 19.3). No segment is more than 25 % from the median (the slowest, `room-floor`, is 13 % below). The sister labs' guides are at 17.4 and 17.0.
+- **Loudness** (EBU R128, every clip): French mean −27.5 LUFS (−27.6 to −27.4), English −27.5 (−27.5 to −27.4): the series' target is −27, the mass heater's guide measures −27.5, Pelton's −28.3 and −26.9.
+- **Subtitles and cues** (from the manifests): captions in order, no gap over a pause and none after the voice ends, 373 captions in French and 366 in English (the longest 130 and 123 characters, two lines at most), every cue inside its segment's duration and in order, no two camera cues less than a second and a half apart.
+- **The guide played in headless Chrome** (dev mode, `window.__lab`, 1280 px, the real player on the real audio at 1.5 times, each segment started from the 1967 prototype): **every segment of both languages, 122 in all, played to its end with every cue landed** (the world, the selection and the outline of a framed part, the tools, the mode, the scenario, the flap, the vents, the sheets, the thickness, the set point, the earth tube), nothing left on, the simulation back as it was found, **0 console errors, 0 warnings of the player**. A few stills confirmed what the eye sees: the three earth-tube parts appear when their segment starts, the night's scenario runs under `summer-flap`, the section takes the east gable away.
+
+**What could not be checked by ear, and what the owner should listen for**: the pronunciation of « Odeillo » (Whisper `small` hears « audio », « odeo » or « eau des eaux » in French and « odio » or « odilo » in English; the stronger model hears « Odeyo » in French and « Odilo » or « Odio » in English, so the English voice probably says it as written in English); the warmth and the pace of the voice itself; whether the timing of the simulation's demonstrations feels in step with the words (the cues are placed at the words, the simulation runs on its own clock at an hour a second, so the night's flow, the sun and the snow follow within a few seconds of the sentence); the names of the kit's buttons in French (« Éclaté, Transparence, Coupe et Flux »).
