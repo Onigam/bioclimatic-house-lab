@@ -135,12 +135,12 @@ export function makeRig(scene: THREE.Scene, o: RigOptions): Rig {
       rig.night = 1 - day;
       // the model's horizon cuts the beam in one step when the sun comes over the ridge (and puts it back in one step behind it): the light follows it over a few frames, not in one
       const target = clarity(state, site);
-      cNow = cNow === null ? target : dt <= 0 ? cNow : damp(cNow, target, 7, Math.min(dt, 0.1));
+      cNow = cNow === null ? target : dt <= 0 ? cNow : damp(cNow, target, 2.5, Math.min(dt, 0.1));
       const c = cNow;
       rig.beam = c;
       // The sun's beam and the moon's are laid together, each at its own strength, in one light: at dusk the sun fades out as the moon comes in, the direction turns from one to the other with them, and nothing changes in
-      // one frame (the light used to be the sun's above −1° and the moon's under it, and it jumped there, twice a day: a pop in every picture at sunrise and sunset, on a fast clock). The beam comes in over the sun's first twelve degrees: low, it crosses the thick of the air.
-      const sunI = keyMax * smoothstep(-1, 12, alt) * (0.1 + 0.9 * c) * (1 - 0.15 * low);
+      // one frame (the light used to be the sun's above −1° and the moon's under it, and it jumped there, twice a day: a pop in every picture at sunrise and sunset, on a fast clock). The beam comes in over the sun's first fourteen degrees: low, it crosses the thick of the air.
+      const sunI = keyMax * smoothstep(-1, 14, alt) * (0.1 + 0.9 * c) * (1 - 0.15 * low);
       const moonI = 0.55 * (1 - day);
       const total = sunI + moonI;
       if (sunI > 1e-4) {
@@ -156,9 +156,11 @@ export function makeRig(scene: THREE.Scene, o: RigOptions): Rig {
       }
       key.intensity = total;
       // the sky gives more when the beam is gone: a cover is bright
-      hemi.intensity = lerp(0.3, hemiMax * (0.9 + 0.35 * (1 - c)), day);
-      hemi.color.copy(HEMI_NIGHT).lerp(HEMI_DAY, day);
-      scene.environmentIntensity = lerp(0.12, 0.5 + 0.2 * (1 - c), day);
+      // the sky comes up over twenty degrees of the sun's rise (the lamps and the stars keep to `day`, which is shorter): on a fast clock the whole picture brightens, and a steeper ramp reads as a flash
+      const sky = smoothstep(-8, 12, alt);
+      hemi.intensity = lerp(0.3, hemiMax * (0.9 + 0.35 * (1 - c)), sky);
+      hemi.color.copy(HEMI_NIGHT).lerp(HEMI_DAY, sky);
+      scene.environmentIntensity = lerp(0.12, 0.5 + 0.2 * (1 - c), sky);
       place();
     },
     focus(point, h) {
