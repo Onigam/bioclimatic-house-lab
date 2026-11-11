@@ -27,6 +27,28 @@ const AIM = [20_000, 24_000] as const;
 const SEGMENT_CAP = 2_500;
 /** This lab's guide is in the local voice (generate.mjs --engine voicebox): a change of voice must be a decision, not an accident. */
 const LOCAL_VOICE = 'qwen3-tts-1.7B';
+/**
+ * The « AI slop » index of the spoken guide (narration-style/STYLE.md: scripts/slop-check.mjs and scripts/slop-patterns.json are copies, the lab cannot import from the studio): the hits of the stock patterns (P1 to P8, P10 to P14, P17, P19)
+ * per 1,000 characters. 0.8 is the ceiling for a lab guide; Pelton Lab stands at 2.1, this guide stood at 2.4 before the pass of 11 November.
+ */
+const SLOP_TICS = [
+  'P1-opener',
+  'P2-signpost',
+  'P3-short-question',
+  'P4-not-x-but-y',
+  'P5-honesty',
+  'P6-kicker',
+  'P7-personified',
+  'P8-exclamation',
+  'P10-triplet',
+  'P11-anaphora',
+  'P12-wonder-words',
+  'P13-ellipsis-beat',
+  'P14-and-yet',
+  'P17-invitation-formula',
+  'P19-qa-pair',
+];
+const SLOP_CEILING = 0.8;
 /** The setting is the only place a text may name beyond its own; the rest stays in the private cache (src/guard.test.ts). */
 const THE_ONLY_PLACE = 'Odeillo';
 
@@ -759,13 +781,40 @@ describe.each(Object.keys(scripts))('narration script %s', (lang) => {
     expect(over120).toBeLessThanOrEqual(lang === 'fr' ? 18 : 8);
   });
 
-  it('marvels without gushing, and asks questions: exclamations and questions as in the style page', () => {
+  it('keeps exclamations and questions rare: ceilings only, never a floor (a floor on either is a rule to write them)', () => {
     const all = script.segments.map(spokenOf).join(' ');
     const per1000 = (re: RegExp): number => ((all.match(re) ?? []).length / all.length) * 1000;
-    expect(per1000(/!/g)).toBeGreaterThanOrEqual(0.5);
-    expect(per1000(/!/g)).toBeLessThanOrEqual(1);
-    expect(per1000(/\?/g)).toBeGreaterThanOrEqual(0.25);
-    expect(per1000(/\?/g)).toBeLessThanOrEqual(0.6);
+    // the style page's own ceilings (narration-style/STYLE.md, P8 and P21); the kit's floors of 0.5 and 0.25 forced the slop they now count
+    expect(per1000(/!/g)).toBeLessThanOrEqual(0.3);
+    expect(per1000(/\?/g)).toBeLessThanOrEqual(0.35);
+  });
+
+  it('holds the slop index: at most 0.8 tic hits per 1,000 characters and no pattern over its ceiling (scripts/slop-check.mjs)', async () => {
+    const proc = (globalThis as unknown as { process?: { cwd(): string; execPath: string } }).process;
+    if (!proc) return;
+    const cp = (await import(/* @vite-ignore */ `node:${'child_process'}`)) as unknown as {
+      spawnSync(cmd: string, args: string[], options: { encoding: 'utf8'; cwd: string }): { stdout: string };
+    };
+    const run = cp.spawnSync(
+      proc.execPath,
+      ['scripts/slop-check.mjs', `narration/${lang}.json`, '--lang', lang, '--json'],
+      {
+        encoding: 'utf8',
+        cwd: proc.cwd(),
+      },
+    );
+    const report = JSON.parse(run.stdout) as {
+      chars: number;
+      rows: { id: string; hits: number; allowed: number; over: boolean }[];
+    };
+    const tic = report.rows.filter((r) => SLOP_TICS.includes(r.id)).reduce((n, r) => n + r.hits, 0);
+    expect((tic * 1000) / report.chars, `${tic} tic hits in ${report.chars} characters`).toBeLessThanOrEqual(
+      SLOP_CEILING,
+    );
+    expect(
+      report.rows.filter((r) => r.over).map((r) => `${r.id}: ${r.hits} hits, ${r.allowed} allowed`),
+      'patterns over their ceilings',
+    ).toEqual([]);
   });
 
   it('speaks to the listener the way the series does: « vous », « on », never « tu »', () => {
