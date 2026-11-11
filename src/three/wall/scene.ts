@@ -401,7 +401,7 @@ export function createWallScene(opts: WallOptions = {}): WallScene {
         lived.attach(build.layout.inner);
         drawn.spec = spec;
       }
-      rig.update(s);
+      rig.update(s, undefined, dt);
       // the glass: more of a steep sun is sent back, so the sheets look brighter, and fainter ones show the black behind
       mats.glass.opacity = 0.07 + 0.3 * s.glassRefuses;
       mats.glass.envMapIntensity = 0.15 + 1.1 * s.glassRefuses;

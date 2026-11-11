@@ -331,7 +331,7 @@ export function createRoomScene(opts: RoomOptions = {}): RoomScene {
         flow.relayout(house.collector.layout, spec);
         living.relayout(spec);
       }
-      rig.update(s);
+      rig.update(s, undefined, dt);
       mats.glass.opacity = 0.07 + 0.3 * s.glassRefuses;
       mats.glass.envMapIntensity = 0.15 + 1.1 * s.glassRefuses;
       flapNow = dt > 0 ? damp(flapNow, s.flapOpen, 5, Math.min(dt, 0.1)) : flapNow;

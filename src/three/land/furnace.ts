@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { joined, stick, uvMetric } from '../common';
+import { joined, smoothstep, stick, uvMetric } from '../common';
 import { SITE } from '../dims';
 import { bx, extrudeX } from '../house/geo';
 import { buildElement, type ElementBuild } from '../collector/element';
@@ -226,6 +226,7 @@ export function buildHeliostats(mats: Mats, target: THREE.Vector3): Heliostats {
     frameMesh.setMatrixAt(i, m);
     mirrors.setMatrixAt(i, m);
   };
+  const down = new THREE.Vector3(0, -1, 0);
   const api: Heliostats = {
     group,
     panels: mirrors,
@@ -233,12 +234,18 @@ export function buildHeliostats(mats: Mats, target: THREE.Vector3): Heliostats {
     pivot,
     update(alt, az) {
       sunDirection(Math.max(alt, -5), az, s);
+      // the panels turn face down at night and up to the sun by day, over the few degrees of the sun's rise: they used to flip, all 63 at once, at 2°, and the picture popped at every sunrise and sunset on a fast clock
+      const w = smoothstep(1, 7, alt);
       for (let i = 0; i < base.length; i++) {
         const b = base[i]!;
-        if (alt < 2) n.set(0.0, -1, 0.0);
+        if (w <= 0) n.set(0.0, -1, 0.0);
         else {
           to.set(target.x - b.x, target.y - (b.y + pivot), target.z - b.z).normalize();
           n.copy(s).add(to).normalize();
+          if (w < 1)
+            n.multiplyScalar(w)
+              .addScaledVector(down, 1 - w)
+              .normalize();
         }
         place(i, n);
       }

@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { clamp, lerp } from '@onigam/lab-kit/three';
+import { clamp, damp, lerp } from '@onigam/lab-kit/three';
 import { SITES, type SiteId } from '../sim/climate';
 import { clearSkyPlane, sunTerms } from '../sim/solar';
 import type { HouseState } from '../sim/types';
@@ -57,7 +57,8 @@ export interface Rig {
   dir: THREE.Vector3;
   /** Share of the beam that reaches the ground (0 under cloud and at night). */
   beam: number;
-  update(state: HouseState, site?: SiteId): void;
+  /** `dt` is the view's step in seconds: the beam's share is eased over it (the model's ridge cuts the beam in one step; the picture lets the sun come out over a few frames). Without it the share is the state's, whole; at 0 nothing moves (the share stays where it was). */
+  update(state: HouseState, site?: SiteId, dt?: number): void;
   focus(point: THREE.Vector3, half?: number): void;
 }
 
@@ -91,6 +92,8 @@ export function makeRig(scene: THREE.Scene, o: RigOptions): Rig {
   const upv = new THREE.Vector3();
   const snapped = new THREE.Vector3();
   const worldUp = new THREE.Vector3(0, 1, 0);
+  const sunV = new THREE.Vector3();
+  let cNow: number | null = null;
 
   const setHalf = (h: number): void => {
     half = h;
@@ -125,23 +128,33 @@ export function makeRig(scene: THREE.Scene, o: RigOptions): Rig {
     night: 0,
     dir,
     beam: 1,
-    update(state, site) {
+    update(state, site, dt = 0) {
       const alt = state.sunAltitude;
       const day = smoothstep(-6, 3, alt);
       const low = 1 - smoothstep(4, 26, alt);
       rig.night = 1 - day;
-      const c = clarity(state, site);
+      // the model's horizon cuts the beam in one step when the sun comes over the ridge (and puts it back in one step behind it): the light follows it over a few frames, not in one
+      const target = clarity(state, site);
+      cNow = cNow === null ? target : dt <= 0 ? cNow : damp(cNow, target, 7, Math.min(dt, 0.1));
+      const c = cNow;
       rig.beam = c;
-      if (day > 0.02 && alt > -1) {
-        sunDirection(Math.max(alt, 0.3), state.sunAzimuth, dir);
-        key.color.copy(WHITE).lerp(WARM, low);
-        // the beam: full under a clear sky, a fifth of it under a cover (the cover scatters it)
-        key.intensity = keyMax * smoothstep(-0.5, 6, alt) * (0.1 + 0.9 * c) * (1 - 0.15 * low);
+      // The sun's beam and the moon's are laid together, each at its own strength, in one light: at dusk the sun fades out as the moon comes in, the direction turns from one to the other with them, and nothing changes in
+      // one frame (the light used to be the sun's above −1° and the moon's under it, and it jumped there, twice a day: a pop in every picture at sunrise and sunset, on a fast clock). The beam comes in over the sun's first twelve degrees: low, it crosses the thick of the air.
+      const sunI = keyMax * smoothstep(-1, 12, alt) * (0.1 + 0.9 * c) * (1 - 0.15 * low);
+      const moonI = 0.55 * (1 - day);
+      const total = sunI + moonI;
+      if (sunI > 1e-4) {
+        sunDirection(Math.max(alt, 0.3), state.sunAzimuth, sunV);
+        dir.copy(sunV).multiplyScalar(sunI).addScaledVector(moon, moonI).normalize();
+        key.color
+          .copy(WHITE)
+          .lerp(WARM, low)
+          .lerp(MOON, moonI / Math.max(total, 1e-6));
       } else {
         dir.copy(moon);
         key.color.copy(MOON);
-        key.intensity = 0.55 * (1 - day);
       }
+      key.intensity = total;
       // the sky gives more when the beam is gone: a cover is bright
       hemi.intensity = lerp(0.3, hemiMax * (0.9 + 0.35 * (1 - c)), day);
       hemi.color.copy(HEMI_NIGHT).lerp(HEMI_DAY, day);

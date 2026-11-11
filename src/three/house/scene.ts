@@ -544,7 +544,7 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
         }
         drawn.spec = spec;
       }
-      rig.update(s);
+      rig.update(s, undefined, dt);
       SNOW.value = snowOfState(s);
       drawn.snow = SNOW.value;
       oakSeason(oaks.crownMaterial, s.dayOfYear);
