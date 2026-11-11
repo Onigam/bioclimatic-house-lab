@@ -10,6 +10,7 @@ import {
   ELEMENT_1974,
   LIVING_X0,
   LIVING_X1,
+  SITE,
   TUBE,
   TUBE_PIT,
   TUBE_PLAN,
@@ -20,7 +21,7 @@ import {
 } from './dims';
 import { HOUSE_PARTS, ROOM_PARTS, WALL_PARTS, WHAT_IF_PARTS } from './ids';
 import { partView, labelBoxes, homeCamera } from './framing';
-import { groundY } from './land/ground';
+import { groundY, landY } from './land/ground';
 import { createHouseScene } from './house/scene';
 import { tubeRoute } from './house/earthtube';
 import { createRoomScene } from './room/scene';
@@ -772,4 +773,28 @@ describe('D19: on a phone and a tablet no label shown with « Toutes » runs pas
           expect(bad, `${name} ${w}`).toEqual([]);
         }
       });
+});
+
+describe('N8: the 1974 building’s box is the open data’s rectangle and height, and the sheet’s « Encombrement » is that box', () => {
+  it('measures 37 m long, 12.9 m high on its shelf and 14 m deep plus the collector’s 0.4 m, and its lowest point is the shelf', () => {
+    go(site);
+    const [MX, MZ] = SITE.monumentAt;
+    const y0 = landY(MX, MZ);
+    const b = site.registry.bounds('solar-houses-1974');
+    const size = b.getSize(new THREE.Vector3());
+    expect(size.x).toBeCloseTo(SITE.monument.length, 2);
+    expect(size.y).toBeCloseTo(SITE.monument.height, 2);
+    expect(size.z).toBeCloseTo(SITE.monument.depth + 0.4, 2);
+    expect(Math.abs(b.min.y - y0)).toBeLessThan(0.03);
+    // the north face and both ends are the rectangle’s; only the south front goes out, and only by the collector
+    expect(b.min.z - MZ).toBeCloseTo(-SITE.monument.depth / 2, 2);
+    expect(b.max.z - MZ).toBeCloseTo(SITE.monument.depth / 2 + 0.4, 2);
+    expect(b.min.x - MX).toBeCloseTo(-SITE.monument.length / 2, 2);
+    expect(b.max.x - MX).toBeCloseTo(SITE.monument.length / 2, 2);
+    // the tallest roof is the stated height, and its label stands on it
+    const h = site.hotspots.find((x) => x.partId === 'solar-houses-1974')!;
+    const p = new THREE.Vector3();
+    h.anchor.getWorldPosition(p);
+    expect(b.distanceToPoint(p)).toBeLessThan(1);
+  });
 });

@@ -273,14 +273,19 @@ export function buildMonument(mats: Mats): Monument {
   group.position.set(MX, y0, MZ);
   const unit = M.length / 3;
   const render = mats.render;
+  // The box is the open data's: `M.length` × `M.depth` on the shelf, its tallest roof `M.height` over it, and nothing else outside them but the collector's glazing, which stands 0.4 m proud of the south front (the sheet says
+  // so: « Encombrement » is this box measured). It stood 2.9 m too high before (the foot 1.2 m under the shelf, the units stepped up by 0.9 m a unit, a 0.8 m parapet over the tallest) and a little wide (roof overhangs).
+  // The units meet with a 4 cm joint; the end ones are flush with the rectangle. The windows are frames that stand 6 cm out of the walls, and the walls are set back by as much, so the faces are at the rectangle.
+  const REVEAL = 0.06;
+  const halfD = M.depth / 2;
+  // each unit's roof over the shelf: the building steps down along its length (the middle unit is the tallest, a storey over the first)
+  const tops = [M.height - 2.3, M.height, M.height - 1.1];
   const body: THREE.BufferGeometry[] = [];
   for (let i = 0; i < 3; i++) {
     const x0 = -M.length / 2 + i * unit;
-    // each unit stands a step higher and the next a half-storey taller: the building steps with the slope
-    const lift = i * 0.9;
-    const h = M.height - 1.4 + (i === 1 ? 1.4 : 0) - (i === 2 ? 0.6 : 0);
-    body.push(bx(x0, -1.2 + lift * 0, -M.depth / 2, x0 + unit - 0.04, h + lift, M.depth / 2));
-    body.push(bx(x0 - 0.1, h + lift, -M.depth / 2 - 0.1, x0 + unit + 0.06, h + lift + 0.8, M.depth / 2 + 0.1));
+    body.push(
+      bx(x0 + (i > 0 ? 0.02 : 0), 0, -halfD + REVEAL, x0 + unit - (i < 2 ? 0.02 : 0), tops[i]!, halfD - REVEAL),
+    );
   }
   group.add(
     Object.assign(new THREE.Mesh(joined(body.map((p) => uvMetric(p))), render), {
@@ -295,8 +300,9 @@ export function buildMonument(mats: Mats): Monument {
     const x0 = -M.length / 2 + i * unit;
     for (const y of [1.2])
       for (let k = 0; k < 4; k++)
-        win.push(bx(x0 + 1.0 + k * 2.9, y, M.depth / 2, x0 + 2.6 + k * 2.9, y + 1.6, M.depth / 2 + 0.06));
-    win.push(bx(x0 + 1.0, 9.2, -M.depth / 2 - 0.06, x0 + unit - 1.0, 10.6, -M.depth / 2));
+        win.push(bx(x0 + 1.0 + k * 2.9, y, halfD - REVEAL - 0.01, x0 + 2.6 + k * 2.9, y + 1.6, halfD));
+    // the north band, a storey under each unit's roof
+    win.push(bx(x0 + 1.0, tops[i]! - 3.7, -halfD, x0 + unit - 1.0, tops[i]! - 2.3, -halfD + REVEAL + 0.01));
   }
   group.add(
     Object.assign(
@@ -310,7 +316,7 @@ export function buildMonument(mats: Mats): Monument {
     for (let k = 0; k < 7; k++)
       bays.push(-M.length / 2 + i * unit + 0.9 + k * ELEMENT_1974.width * 1.0 + ELEMENT_1974.width / 2);
   const collector = buildElement(mats, ELEMENT_1974, bays, null);
-  collector.root.position.set(0, 5.2, M.depth / 2 + 0.4);
+  collector.root.position.set(0, 5.2, halfD + 0.4);
   group.add(collector.root);
   // a plinth under the band and a band of render over it: the elements' own back wall is the building's
   return { group, collector };

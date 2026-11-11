@@ -425,7 +425,7 @@ export function createSiteScene(opts: SiteOptions = {}): SiteScene {
   at('twin-house', roots['twin-house'], SITE.twinAt - 5.5, 7.2, 0.3);
   at('solar-furnace', roots['solar-furnace'], FX, furnace.y0 + 52, FZ + 14);
   at('heliostat-terraces', roots['heliostat-terraces'], FX, terraceTop(), SITE.field.z0 + 4 * SITE.field.dz);
-  at('solar-houses-1974', roots['solar-houses-1974'], MX, landY(MX, MZ) + 14.4, MZ);
+  at('solar-houses-1974', roots['solar-houses-1974'], MX, landY(MX, MZ) + SITE.monument.height + 0.5, MZ);
   at('far-ridge', roots['far-ridge'], -480, 330, 3800);
   at('granite-slope', roots['granite-slope'], -32, groundY(-32, -42) + 3.5, -42);
   at('meadow-clearing', roots['meadow-clearing'], 62, 1.6, 12);
