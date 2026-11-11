@@ -1,5 +1,5 @@
 import type { HouseSim } from './sim/engine';
-import { RANGES, PRESET_IDS, SCENARIO_IDS } from './sim/presets';
+import { RANGES, PRESET_IDS, SCENARIO_IDS, presetParams } from './sim/presets';
 import type { PresetId, ScenarioId } from './sim/types';
 
 // The lab's own cues of the spoken guide: `[[lab:<name>:<arg>]]` in a segment of narration/<lang>.json, which the kit hands to `LabDefinition.narration.onCue` (docs/narration.md). The kit's cues (`scene`, `home`, `frame`, `select`, `explode`, `xray`,
@@ -98,6 +98,27 @@ export function planCue(name: string, arg?: string): CuePlan {
   }
 }
 
+/** What a starting point is made of: the clock's own controls (speed, running, slow motion) and the label itself are not part of it. */
+const NOT_A_VALUE = ['slowMo', 'timeScale', 'running', 'preset'];
+
+/**
+ * The starting point whose values the simulation holds exactly, or null. A hand restore at the end of a segment (`flap:winter`, `vents:open`, `sheets:2`, `setpoint:20`, `earthtube:off`) puts every value back, but the engine
+ * has already turned the label into 'custom' (« Autres réglages » in the starting-point select): the label must follow the values, not the way they came back.
+ */
+export function startingPointOf(sim: HouseSim): PresetId | null {
+  const now = sim.params as unknown as Record<string, unknown>;
+  for (const id of PRESET_IDS) {
+    const ref = presetParams(id) as unknown as Record<string, unknown>;
+    const same = Object.keys(ref).every((key) => {
+      if (NOT_A_VALUE.includes(key)) return true;
+      const [a, b] = [now[key], ref[key]];
+      return typeof a === 'number' && typeof b === 'number' ? Math.abs(a - b) < 1e-9 : a === b;
+    });
+    if (same) return id;
+  }
+  return null;
+}
+
 /** Run a cue of the spoken guide on the simulation. Returns false for a cue it does not know (nothing happens). */
 export function runCue(sim: HouseSim, name: string, arg?: string): boolean {
   const plan = planCue(name, arg);
@@ -105,6 +126,13 @@ export function runCue(sim: HouseSim, name: string, arg?: string): boolean {
   if (plan.kind === 'scenario') sim.applyScenario(plan.id);
   else if (plan.kind === 'preset') sim.applyPreset(plan.id);
   else if (plan.kind === 'reset') sim.reset();
-  else sim.set(plan.patch);
+  else {
+    sim.set(plan.patch);
+    // a hand restore that brings every value back to a starting point gives the label back too (not while a scenario runs: its chip is the sign that it does)
+    if (sim.params.preset === 'custom' && sim.scenarioNow === null) {
+      const back = startingPointOf(sim);
+      if (back) sim.set({ preset: back });
+    }
+  }
   return true;
 }
