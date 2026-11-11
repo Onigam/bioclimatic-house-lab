@@ -12,13 +12,11 @@ import {
   TUBE,
   TUBE_PIT,
   TUBE_PLAN,
-  WALL,
   Z_NORTH,
   elementLayout,
   elementSpecOf,
 } from './dims';
 import { HOUSE_PARTS, ROOM_PARTS, WALL_PARTS, WHAT_IF_PARTS } from './ids';
-import { Followers } from './follow';
 import { partView, labelBoxes, homeCamera } from './framing';
 import { groundY } from './land/ground';
 import { createHouseScene } from './house/scene';
@@ -102,9 +100,6 @@ describe('D6: what is not a part follows the part that carries it', () => {
 
   it('shows each prop only with its own carrier', () => {
     const reg = house.registry;
-    const carrierOf = new Map<THREE.Object3D, string>();
-    const f = (H as unknown as { followers?: Followers }).followers;
-    void f;
     const want: [string, string][] = [
       ['furniture-floor', 'floor-slab'],
       ['furniture-north', 'north-wall'],
@@ -121,7 +116,6 @@ describe('D6: what is not a part follows the part that carries it', () => {
     const list = props(H);
     for (const [name, carrier] of want) {
       const p = list.find((x) => x.name === name)!;
-      carrierOf.set(p.object, carrier);
       // with the carrier alone: shown; with another part alone: not
       isolateOne(reg, carrier, 'hidden');
       go(house, {}, {}, 2);
@@ -164,8 +158,6 @@ describe('D6: what is not a part follows the part that carries it', () => {
   it('shows no coat when the wall it hangs on is not drawn, in the wall world', () => {
     go(wall);
     const reg = wall.registry;
-    const coat = (wall as unknown as { scenery(): THREE.Object3D[] }).scenery;
-    void coat;
     let lived: THREE.Object3D | undefined;
     wall.scene.traverse((o) => {
       if (o.name === 'lived-in') lived = o;
@@ -225,13 +217,6 @@ describe('D3: in the room, what hangs on a wall goes with it when the camera is 
   });
 
   it('takes the north window, the skirting, the picture, the doors and the coat away with their walls, and what stands on the floor stays', () => {
-    const find = (name: string): THREE.Object3D => {
-      let out: THREE.Object3D | undefined;
-      room.scene.traverse((o) => {
-        if (o.name === name) out = o;
-      });
-      return out!;
-    };
     const R = room as unknown as {
       living: ReturnType<typeof import('./room/living').buildLiving>;
       house: { groups: Record<string, THREE.Object3D>; pieces: Record<string, THREE.Mesh> };
@@ -249,7 +234,6 @@ describe('D3: in the room, what hangs on a wall goes with it when the camera is 
     expect(shown(R.house.pieces['door-east']!)).toBe(false);
     expect(shown(R.living.mounts.east)).toBe(false);
     expect(shown(R.living.mounts.west)).toBe(true);
-    void find;
     render(cameraAt(-3.4, 4.6, 6));
     expect(shown(R.house.groups['north-window']!)).toBe(true);
     expect(shown(R.living.mounts.east)).toBe(true);
@@ -412,14 +396,12 @@ describe('D2, D16: the earth tube is a buried pipe in a window of the ground', (
     const rocks = (house as unknown as { scenery(): THREE.Object3D[] }).scenery()[2] as THREE.Object3D;
     const { x0, x1, z0, z1 } = H.tube.hole;
     const b = new THREE.Box3(new THREE.Vector3(x0, -9, z0), new THREE.Vector3(x1, 9, z1));
-    const rb = new THREE.Box3().setFromObject(rocks, true);
     // no boulder vertex inside the window
     const pos = (rocks as THREE.Mesh).geometry.attributes.position as THREE.BufferAttribute;
     let inside = 0;
     const v = new THREE.Vector3();
     for (let i = 0; i < pos.count; i++) if (b.containsPoint(v.fromBufferAttribute(pos, i))) inside++;
     expect(inside).toBe(0);
-    void rb;
     for (const t of (house as unknown as { trees(): { x: number; z: number; s: number }[] }).trees())
       expect(
         b
@@ -638,7 +620,6 @@ describe('D9: the 1974 preset has no block of wall over the glass, and its label
     expect(meshBox(head!).min.y).toBeCloseTo(L.yTop, 6);
     expect(meshBox(ceil!).min.y).toBeCloseTo(CEILING, 6);
     expect(meshBox(ceil!).max.y).toBeCloseTo(CEILING + CEILING_T, 6);
-    void WALL;
   });
 });
 
