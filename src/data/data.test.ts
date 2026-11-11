@@ -75,7 +75,9 @@ describe('the catalogue', () => {
       expect(p.name.en, p.id).toMatch(/what if/);
     }
     const said = PARTS.filter((p) =>
-      /n’avait pas de puits canadien|had no earth tube/.test(`${p.description.fr} ${p.description.en}`),
+      /ne mentionne de puits canadien dans cette maison|mentions an earth tube in this house/.test(
+        `${p.description.fr} ${p.description.en}`,
+      ),
     );
     expect(said.map((p) => p.id)).toEqual(['earth-tube-pipe']);
   });
@@ -163,7 +165,7 @@ describe('the overviews', () => {
     const has = (re: RegExp) => WORLD_IDS.filter((w) => re.test(`${OVERVIEWS[w].text.fr} ${OVERVIEWS[w].text.en}`));
     expect(has(/Les chiffres\*\* : sans marque/)).toEqual(['site']);
     expect(has(/composé, pas cartographié/)).toEqual(['site']);
-    expect(has(/n’existait pas dans cette maison/)).toEqual(['house']);
+    expect(has(/ne mentionne de puits canadien dans cette maison/)).toEqual(['house']);
     expect(has(/toujours coupé/)).toEqual(['wall']);
     expect(has(/La caméra est dans la pièce/)).toEqual(['room']);
   });
@@ -271,10 +273,10 @@ describe('the sources', () => {
     expect(items.length).toBeGreaterThanOrEqual(20);
     for (const s of items) {
       expect(Object.keys(ACCESS)).toContain(s.access);
-      expect(s.fr.length + s.en.length, s.label).toBeGreaterThan(60);
-      if (s.href) expect(s.href, s.label).toMatch(/^https:\/\//);
+      expect(s.fr.length + s.en.length, s.label[1]).toBeGreaterThan(60);
+      if (s.href) expect(s.href, s.label[1]).toMatch(/^https:\/\//);
     }
-    const labels = items.map((s) => s.label).join(' ');
+    const labels = items.map((s) => s.label.join(' ')).join(' ');
     for (const who of [
       'Trombe',
       'Kelbaugh',
@@ -290,6 +292,19 @@ describe('the sources', () => {
       expect(labels, who).toMatch(new RegExp(who));
     expect(items.some((s) => /osti\.gov\/servlets\/purl\/7287449/.test(s.href ?? ''))).toBe(true);
     expect(LAW.length).toBeGreaterThanOrEqual(5);
+  });
+
+  it('writes every label in both languages: what we write around a title is translated, a title keeps its language, the quotes follow the language', () => {
+    // the French words that a label written in English must not carry once the quoted titles are taken out (a title stays in its own language)
+    const frenchWords =
+      /\b(et|dans|des|du|même|brevet|communiqué|légendes|accueil|février|arrêté|ministère|qui cite|dossier|commission européenne|centre commun|licence ouverte|Wikipédia|relatif)\b/i;
+    for (const g of SOURCES)
+      for (const s of g.items) {
+        const [fr, en] = s.label;
+        expect(en.replace(/“[^”]*”/g, ''), fr).not.toMatch(frenchWords);
+        expect(en, fr).not.toMatch(/[«»]/);
+        expect(fr, en).not.toMatch(/[“”]/);
+      }
   });
 });
 

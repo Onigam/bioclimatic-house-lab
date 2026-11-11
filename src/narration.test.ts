@@ -660,7 +660,7 @@ describe.each(Object.keys(scripts))('narration script %s', (lang) => {
 
   it(`says where the houses stand nowhere beyond « ${THE_ONLY_PLACE} »: no region, range, commune, country, coordinate or street`, () => {
     const places =
-      /pyr[ée]n|cerdagne|font-romeu|via\b|targassonne|catalo|languedoc|roussillon|fran[cç]|french|europe|spain|espagn|andorr|toulouse|barcelon|\bmeuse\b|\bvosges\b|\blat(?:itude)?\b|longitude|coordonn|coordinate|\brue\b|\bstreet\b|camino|\bbâtiment\d|\bbatiment\d|\bign\b|mérimée|\bPA\d/i;
+      /pyr[ée]n|cerdagne|font-romeu|via\b|targassonne|catalo|languedoc|roussillon|occitanie|bretagne|perpignan|\bs[èe]te\b|p[ée]cout|fran[cç]|french|europe|spain|espagn|andorr|toulouse|barcelon|\bmeuse\b|\bvosges\b|\blat(?:itude)?\b|longitude|coordonn|coordinate|\brue\b|\bstreet\b|camino|\bbâtiment\d|\bbatiment\d|\bign\b|mérimée|\bPA\d|\bACR\d|_gaz|\/notice\//i;
     for (const s of script.segments) {
       const text = `${s.title} ${spokenOf(s)}`;
       expect(text, s.id).not.toMatch(places);
@@ -766,6 +766,15 @@ describe.each(Object.keys(manifests))('narration audio %s', (lang) => {
     expect(manifest).not.toBeNull();
     expect(validateManifest(manifest!, { scenes: sceneIds, parts: partIds })).toEqual([]);
     expect((manifests[lang] as { model?: string }).model).toBe(LOCAL_VOICE);
+  });
+
+  it('shows no place beyond « Odeillo » in its subtitles or its titles: not the commune, its département, a region, the main city, a villa’s town, a record’s id', () => {
+    // the subtitles are the script's words, so what the script may not say, they may not either (the second test of the script's own, above)
+    const shown = manifest!.segments.flatMap((s) => [s.title, ...s.captions.map((c) => c.text)]).join(' ');
+    expect(shown).toContain(THE_ONLY_PLACE);
+    expect(shown).not.toMatch(
+      /font[- ]?romeu|odeillo[- ]via|pyr[ée]n[ée]es|cerdagne|occitanie|bretagne|languedoc|roussillon|perpignan|\bmeuse\b|\bs[èe]te\b|p[ée]cout|\bPA\d{6,}|\bACR\d{6,}|_gaz/i,
+    );
   });
 
   it('has an audio file for every segment and none without a segment', () => {

@@ -99,11 +99,11 @@ describe('the lab as described to the kit', () => {
     // the kit sets the French typography: a no-break space before a colon or a question mark
     const plain = (text: string): string => text.replace(/[\u00a0\u202f]/g, ' ');
     setLang('fr');
-    expect(plain(tr(lab.brand.title))).toBe('MAISON BIOCLIMATIQUE : LE MUR QUI GARDE LE SOLEIL');
-    expect(plain(tr(lab.brand.tagline))).toBe('Une maison peut-elle se chauffer seule ?');
+    expect(plain(tr(lab.brand.title))).toBe('MAISON BIOCLIMATIQUE');
+    expect(plain(tr(lab.brand.tagline))).toBe('Le mur qui garde le soleil : une maison peut-elle se chauffer seule ?');
     setLang('en');
-    expect(plain(tr(lab.brand.title))).toBe('BIOCLIMATIC HOUSE: THE WALL THAT KEEPS THE SUN');
-    expect(tr(lab.brand.tagline)).toBe('Can a house heat itself?');
+    expect(plain(tr(lab.brand.title))).toBe('BIOCLIMATIC HOUSE');
+    expect(tr(lab.brand.tagline)).toBe('The wall that keeps the sun: can a house heat itself?');
     setLang('fr');
     expect(lab.envelopeMark).toBe('*');
     expect(lab.video).toBeUndefined();

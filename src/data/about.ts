@@ -32,7 +32,7 @@ export function aboutPanel(): HTMLElement[] {
           return h(
             'li',
             {},
-            s.href ? link(s.href, s.label) : s.label,
+            s.href ? link(s.href, fr ? s.label[0] : s.label[1]) : fr ? s.label[0] : s.label[1],
             ' — ',
             fr ? s.fr : s.en,
             ' (',
