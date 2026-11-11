@@ -6,12 +6,14 @@ import type { HouseState } from '../sim/types';
 import {
   CEILING,
   CEILING_T,
+  CUT_X,
   ELEMENT_1974,
   LIVING_X0,
   LIVING_X1,
   TUBE,
   TUBE_PIT,
   TUBE_PLAN,
+  X_EAST,
   Z_NORTH,
   elementLayout,
   elementSpecOf,
@@ -486,6 +488,46 @@ describe('D7: the east gable is readable with the section on', () => {
   });
 });
 
+describe('N1: the east gable’s ghost is the end of the removed half, drawn from the section’s plane', () => {
+  const outline = (): THREE.LineSegments => house.scene.getObjectByName('removed-half-outline') as THREE.LineSegments;
+
+  it('joins the section’s plane to the gable with the cut on: lines start on x = CUT_X and end on the gable, none in the void between', () => {
+    go(house, {}, { cutaway: true });
+    const o = outline();
+    expect(shown(o)).toBe(true);
+    const p = o.geometry.attributes.position as THREE.BufferAttribute;
+    expect(p.count).toBeGreaterThan(20);
+    let onPlane = 0;
+    let onGable = 0;
+    for (let i = 0; i < p.count; i++) {
+      const x = p.getX(i);
+      if (Math.abs(x - CUT_X) < 1e-4) onPlane++;
+      else if (Math.abs(x - X_EAST) < 1e-4) onGable++;
+      else throw new Error(`a line ends at x = ${x}, in the void`);
+    }
+    expect(onPlane).toBeGreaterThan(10);
+    expect(onGable).toBeGreaterThan(10);
+    // the plate’s own profile is the outline’s: the roof ridge is there, over the house’s own height
+    const box = new THREE.Box3().setFromBufferAttribute(p);
+    expect(box.max.y).toBeGreaterThan(5.5);
+    expect(box.min.x).toBeCloseTo(CUT_X, 6);
+    expect(box.max.x).toBeCloseTo(X_EAST, 6);
+  });
+
+  it('is gone with the cut off, and with the gable isolated away', () => {
+    go(house, {}, { cutaway: false });
+    expect(shown(outline())).toBe(false);
+    go(house, {}, { cutaway: true });
+    isolateOne(house.registry, 'foundation', 'hidden');
+    go(house, {}, { cutaway: true }, 2);
+    expect(shown(outline())).toBe(false);
+    house.registry.setAllDisplay('solid');
+    go(house, {}, { cutaway: true }, 2);
+    expect(shown(outline())).toBe(true);
+    go(house, {}, { cutaway: false });
+  });
+});
+
 describe('D8: the house opens as the overview, and fills a phone’s width', () => {
   const sizes: [string, number, number, number][] = [
     ['1280×800', 842, 678, 96],
@@ -653,4 +695,74 @@ describe('D19: « Toutes » on a phone keeps the labels that have room', () => {
       expect(mod.hotspots.every(anchorShown), `${name} labels back`).toBe(true);
     });
   }
+});
+
+describe('N2: the section’s cut faces follow the part they cut', () => {
+  const capsOf = (mod: SceneModule<HouseState>): THREE.Mesh[] => {
+    const out: THREE.Mesh[] = [];
+    mod.scene.traverse((o) => {
+      if (o.userData.cap && (o as THREE.Mesh).isMesh) out.push(o as THREE.Mesh);
+    });
+    return out;
+  };
+  const carrier = (m: THREE.Mesh): string => m.name.replace(/-cap$/, '');
+
+  it('shows every face with the cut on and nothing isolated, and the roof, the wall, the slab and the foundation each have some', () => {
+    go(house, {}, { cutaway: true });
+    const shownCaps = capsOf(house).filter((m) => m.visible);
+    expect(shownCaps.length).toBeGreaterThan(8);
+    const carriers = new Set(shownCaps.map(carrier));
+    for (const id of ['pitched-roof', 'north-wall', 'floor-slab', 'foundation', 'roof-insulation', 'south-facade'])
+      expect(carriers.has(id), `a face of ${id}`).toBe(true);
+  });
+
+  it('shows, with any one part isolated and the cut on, only that part’s faces and the earth’s', () => {
+    const reg = house.registry;
+    const bad: string[] = [];
+    for (const id of HOUSE_PARTS) {
+      isolateOne(reg, id, 'hidden');
+      go(house, {}, { cutaway: true }, 2);
+      for (const m of capsOf(house))
+        if (m.visible && carrier(m) !== id && carrier(m) !== 'caps')
+          bad.push(`${carrier(m)} stands with only ${id} drawn`);
+    }
+    expect(bad).toEqual([]);
+    reg.setAllDisplay('solid');
+    go(house, {}, { cutaway: true }, 2);
+    go(house, {}, { cutaway: false }, 2);
+    expect(capsOf(house).some((m) => m.visible)).toBe(false);
+  });
+
+  it('keeps the roof’s boards, rafters and slates together with the roof', () => {
+    const reg = house.registry;
+    isolateOne(reg, 'pitched-roof', 'hidden');
+    go(house, {}, { cutaway: true }, 2);
+    expect(capsOf(house).filter((m) => m.visible && carrier(m) === 'pitched-roof').length).toBe(6);
+    reg.setAllDisplay('solid');
+    go(house, {}, { cutaway: false }, 2);
+  });
+});
+
+describe('D19: on a phone and a tablet no label shown with « Toutes » runs past the edge of the view', () => {
+  afterEach(() => vi.unstubAllGlobals());
+  for (const [name, mod] of [
+    ['house', house],
+    ['wall', wall],
+    ['room', room],
+    ['site', site],
+  ] as const)
+    for (const lang of ['fr', 'en'] as const)
+      it(`${name}, ${lang}: at 390 px and at a tablet's 380 px of 3D`, () => {
+        vi.stubGlobal('window', { innerWidth: 390 });
+        go(mod);
+        for (const [w, h, toolbar] of [
+          [390, 632, 92],
+          [380, 902, 130],
+        ] as const) {
+          const bad = labelBoxes(mod, { w, h }, lang, toolbar)
+            .filter((b) => b.x1 > w || b.x0 < 0)
+            .map((b) => `${b.text} to x = ${Math.round(b.x1)}`);
+          expect(bad, `${name} ${w}`).toEqual([]);
+        }
+      });
 });

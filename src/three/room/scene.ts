@@ -68,7 +68,7 @@ const HOTSPOTS: HotspotDef[] = [
   { id: 'fresh-air-vent', fr: 'Entrée d’air frais', en: 'Fresh-air vent', minor: true, crowd: true },
   { id: 'room-floor', fr: 'Sol', en: 'Floor', minor: true },
   { id: 'room-ceiling', fr: 'Plafond', en: 'Ceiling', minor: true, crowd: true },
-  { id: 'armchair', fr: 'Fauteuil', en: 'Armchair', minor: true },
+  { id: 'armchair', fr: 'Fauteuil', en: 'Armchair', minor: true, crowd: true },
 ];
 
 /** The explode: the ceiling up, the floor down, the wall's face and the loop's streams out into the room, each instrument off its wall. */

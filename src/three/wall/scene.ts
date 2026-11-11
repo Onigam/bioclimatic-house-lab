@@ -64,11 +64,11 @@ const HOTSPOTS: HotspotDef[] = [
   { id: 'summer-flap', fr: 'Clapet d’été', en: 'Summer flap', minor: true },
   { id: 'head-beam', fr: 'Poutre de tête', en: 'Head beam', minor: true, crowd: true },
   { id: 'sill-beam', fr: 'Poutre d’appui', en: 'Sill beam', minor: true, crowd: true },
-  { id: 'wall-thermocouples', fr: 'Thermocouples du mur', en: 'Wall thermocouples', minor: true },
+  { id: 'wall-thermocouples', fr: 'Thermocouples du mur', en: 'Wall thermocouples', minor: true, crowd: true },
   { id: 'air-thermocouples', fr: 'Thermocouples d’air', en: 'Air thermocouples', minor: true, crowd: true },
-  { id: 'hot-wire-anemometer', fr: 'Anémomètre à fil chaud', en: 'Hot-wire anemometer', minor: true },
-  { id: 'storage-wall#t0', fr: `${HEAT_MIN} °C`, en: `${HEAT_MIN} °C`, minor: true },
-  { id: 'storage-wall#t70', fr: `${HEAT_MAX} °C`, en: `${HEAT_MAX} °C`, minor: true },
+  { id: 'hot-wire-anemometer', fr: 'Anémomètre à fil chaud', en: 'Hot-wire anemometer', minor: true, crowd: true },
+  { id: 'storage-wall#t0', fr: `${HEAT_MIN} °C`, en: `${HEAT_MIN} °C`, minor: true, crowd: true },
+  { id: 'storage-wall#t70', fr: `${HEAT_MAX} °C`, en: `${HEAT_MAX} °C`, minor: true, crowd: true },
 ];
 
 /** The explode: along the line the sun's heat takes, each layer out of the one behind it; what is inside the wall comes out to the room. */

@@ -117,7 +117,7 @@ const HOTSPOTS: HotspotDef[] = [
   { id: 'foundation', fr: 'Fondations', en: 'Foundation', wide: true },
   { id: 'south-facade', fr: 'Façade sud', en: 'South front', minor: true },
   { id: 'entrance-recess', fr: 'Entrée en retrait', en: 'Entrance recess', minor: true, crowd: true },
-  { id: 'east-gable', fr: 'Pignon est', en: 'East gable', minor: true },
+  { id: 'east-gable', fr: 'Pignon est', en: 'East gable', minor: true, crowd: true },
   { id: 'west-gable', fr: 'Pignon ouest', en: 'West gable', minor: true },
   { id: 'north-wall', fr: 'Mur nord', en: 'North wall', minor: true },
   { id: 'north-window', fr: 'Fenêtre nord', en: 'North window', minor: true, crowd: true },
@@ -125,7 +125,7 @@ const HOTSPOTS: HotspotDef[] = [
   { id: 'floor-slab', fr: 'Dalle', en: 'Floor slab', minor: true, crowd: true },
   { id: 'chimney', fr: 'Cheminée', en: 'Chimney', minor: true },
   { id: 'earth-tube-intake', fr: 'Prise d’air (et si…)', en: 'Intake (what if…)', minor: true, crowd: true },
-  { id: 'earth-tube-pipe', fr: 'Tuyau enterré (et si…)', en: 'Buried pipe (what if…)', minor: true },
+  { id: 'earth-tube-pipe', fr: 'Tuyau enterré (et si…)', en: 'Buried pipe (what if…)', minor: true, crowd: true },
   { id: 'earth-tube-drain', fr: 'Purge (et si…)', en: 'Drain (what if…)', minor: true, crowd: true },
 ];
 
@@ -293,7 +293,10 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
   const capsRoot = new THREE.Group();
   capsRoot.name = 'caps';
   scene.add(capsRoot);
-  const polyCap = (points: [number, number][], mat: THREE.Material): THREE.Mesh => {
+  // Each cut face belongs to the part it cuts, and shows only while that part is drawn solid: with the foundation, the balcony or the slab isolated, the roof's and the wall's faces must not stand in the air (they did: the kit
+  // hides parts, and the section's faces were scenery). The earth's own face is the land's, and stays.
+  type Carrier = Exclude<HousePart, 'earth-tube-intake' | 'earth-tube-pipe' | 'earth-tube-drain'>;
+  const polyCap = (points: [number, number][], mat: THREE.Material, part: Carrier): THREE.Mesh => {
     const shape = new THREE.Shape(points.map(([z, y]) => new THREE.Vector2(z, y)));
     const g = new THREE.ShapeGeometry(shape);
     const p = g.attributes.position as THREE.BufferAttribute;
@@ -304,9 +307,9 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
       p.setXYZ(i, CUT_X, y, z);
       uv.setXY(i, z, y);
     }
-    return caps.addScenery(capsRoot, g, mat);
+    return caps.add(part, capsRoot, g, mat);
   };
-  const rect = (z0: number, y0: number, z1: number, y1: number, mat: THREE.Material): THREE.Mesh =>
+  const rect = (z0: number, y0: number, z1: number, y1: number, mat: THREE.Material, part: Carrier): THREE.Mesh =>
     polyCap(
       [
         [z0, y0],
@@ -315,10 +318,11 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
         [z0, y1],
       ],
       mat,
+      part,
     );
   const L0 = elementLayout(spec0);
   const dynamicCaps: { mesh: THREE.Mesh; make: (s: ElementSpec) => THREE.BufferGeometry }[] = [];
-  const dyn = (make: (s: ElementSpec) => [number, number][], mat: THREE.Material): void => {
+  const dyn = (make: (s: ElementSpec) => [number, number][], mat: THREE.Material, part: Carrier): void => {
     const geo = (s: ElementSpec): THREE.BufferGeometry => {
       const pts = make(s);
       const g = new THREE.ShapeGeometry(new THREE.Shape(pts.map(([z, y]) => new THREE.Vector2(z, y))));
@@ -332,7 +336,7 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
       }
       return g;
     };
-    const mesh = caps.addScenery(capsRoot, geo(spec0), mat);
+    const mesh = caps.add(part, capsRoot, geo(spec0), mat);
     dynamicCaps.push({ mesh, make: geo });
   };
   const R = (z0: number, y0: number, z1: number, y1: number): [number, number][] => [
@@ -348,12 +352,21 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
   dyn(
     (s) => R(Z_SOUTH + elementLayout(s).inner, GROUND_SOUTH - FOOTING + 0.02, Z_SOUTH, elementLayout(s).yBottom),
     capMat(mats.plinth, -1),
+    'foundation',
   );
   dyn(
     (s) => R(Z_SOUTH + elementLayout(s).inner - 0.2, GROUND_SOUTH - FOOTING, Z_SOUTH + 0.15, GROUND_SOUTH + 0.02),
     capMat(mats.plinth, -1),
+    'foundation',
   );
-  rect(Z_NORTH - 0.12, GROUND_NORTH - FOOTING, Z_NORTH + WALL + 0.12, GROUND_NORTH, capMat(mats.plinth, -1));
+  rect(
+    Z_NORTH - 0.12,
+    GROUND_NORTH - FOOTING,
+    Z_NORTH + WALL + 0.12,
+    GROUND_NORTH,
+    capMat(mats.plinth, -1),
+    'foundation',
+  );
   dyn(
     (s) => [
       [Z_NORTH_IN, -SLAB],
@@ -362,22 +375,38 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
       [Z_NORTH_IN, groundY(0, Z_NORTH_IN)],
     ],
     capMat(mats.gravel, -1),
+    'foundation',
   );
   // slab, tile, ceiling, insulation
-  rect(Z_NORTH_IN, -SLAB, Z_RUN, -0.03, capMat(mats.plinth, -1));
-  rect(Z_NORTH_IN, -0.03, Z_RUN, 0, capMat(mats.tile, -2));
-  rect(Z_NORTH_IN, CEILING, Z_RUN, CEILING + CEILING_T, capMat(mats.ceiling, -1));
-  rect(Z_NORTH_IN, CEILING + CEILING_T, Z_RUN, CEILING + CEILING_T + 0.12, capMat(mats.insulation, -1));
+  rect(Z_NORTH_IN, -SLAB, Z_RUN, -0.03, capMat(mats.plinth, -1), 'floor-slab');
+  rect(Z_NORTH_IN, -0.03, Z_RUN, 0, capMat(mats.tile, -2), 'floor-slab');
+  rect(Z_NORTH_IN, CEILING, Z_RUN, CEILING + CEILING_T, capMat(mats.ceiling, -1), 'roof-insulation');
+  rect(
+    Z_NORTH_IN,
+    CEILING + CEILING_T,
+    Z_RUN,
+    CEILING + CEILING_T + 0.12,
+    capMat(mats.insulation, -1),
+    'roof-insulation',
+  );
   // the north wall, the head band
-  rect(Z_NORTH, GROUND_NORTH, Z_NORTH + WALL, Y_EAVE, capMat(mats.render, -1));
-  dyn((s) => R(Z_SOUTH + elementLayout(s).inner, elementLayout(s).yTop, Z_SOUTH, Y_EAVE), capMat(mats.concrete, -1));
+  rect(Z_NORTH, GROUND_NORTH, Z_NORTH + WALL, Y_EAVE, capMat(mats.render, -1), 'north-wall');
+  dyn(
+    (s) => R(Z_SOUTH + elementLayout(s).inner, elementLayout(s).yTop, Z_SOUTH, Y_EAVE),
+    capMat(mats.concrete, -1),
+    'south-facade',
+  );
   // the roof's boards and slates: two parallelograms each side
   const tv = (o: number) => o / Math.cos((24 * Math.PI) / 180);
   for (const sgn of [1, -1] as const) {
     const zE = sgn * (Z_SOUTH + 0.15);
     const layer = (o0: number, o1: number, mat: THREE.Material): void => {
       const a = (z: number, o: number): [number, number] => [z, roofUnder(z) + tv(o)];
-      polyCap(sgn > 0 ? [a(0, o0), a(zE, o0), a(zE, o1), a(0, o1)] : [a(zE, o0), a(0, o0), a(0, o1), a(zE, o1)], mat);
+      polyCap(
+        sgn > 0 ? [a(0, o0), a(zE, o0), a(zE, o1), a(0, o1)] : [a(zE, o0), a(0, o0), a(0, o1), a(zE, o1)],
+        mat,
+        'pitched-roof',
+      );
     };
     layer(ROOF.rafter, ROOF.rafter + 0.02, capMat(mats.timberDark, -1));
     layer(ROOF.rafter + 0.02, ROOF.rafter + 0.02 + ROOF.cover, capMat(mats.slate, -1));
@@ -406,6 +435,36 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
   gableEdges.raycast = () => {};
   gableEdges.visible = false;
   house.groups['east-gable'].add(gableEdges);
+  // The ghost must not hang in the void in the opening picture: it is the end of the removed half's body, so the body is drawn too, as an outline from the section's plane to the gable, along the gable's own profile (the
+  // eaves, the ridge, the floor, the foundation's steps): a ghost box that starts on the cut faces and ends in the gable, not a plate over nothing.
+  const removedHalf = ((): THREE.LineSegments => {
+    const pos = gableMesh.geometry.attributes.position as THREE.BufferAttribute;
+    const outer: [number, number][] = [];
+    for (let i = 0; i < pos.count; i++) {
+      if (Math.abs(pos.getX(i) - X_EAST) > 1e-4) continue;
+      const y = pos.getY(i);
+      const z = pos.getZ(i);
+      if (!outer.some(([a, b]) => Math.abs(a - y) < 1e-4 && Math.abs(b - z) < 1e-4)) outer.push([y, z]);
+    }
+    const seg: number[] = [];
+    for (const [y, z] of outer) seg.push(CUT_X, y, z, X_EAST, y, z);
+    const edges = gableEdges.geometry.attributes.position as THREE.BufferAttribute;
+    for (let i = 0; i + 1 < edges.count; i += 2) {
+      if (Math.abs(edges.getX(i) - X_EAST) > 1e-4 || Math.abs(edges.getX(i + 1) - X_EAST) > 1e-4) continue;
+      seg.push(CUT_X, edges.getY(i), edges.getZ(i), CUT_X, edges.getY(i + 1), edges.getZ(i + 1));
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.Float32BufferAttribute(seg, 3));
+    const lines = new THREE.LineSegments(
+      g,
+      new THREE.LineBasicMaterial({ color: 0x7d7566, transparent: true, opacity: 0.55 }),
+    );
+    lines.name = 'removed-half-outline';
+    lines.raycast = () => {};
+    lines.visible = false;
+    world.add(lines);
+    return lines;
+  })();
   const setGable = (cut: boolean): void => {
     gableMat.transparent = cut;
     gableMat.opacity = cut ? 0.14 : 1;
@@ -454,6 +513,8 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
     followers.add(mine['room-ceiling'], 'roof-insulation');
     // the balcony's chair and pots
     followers.add(yard.balcony, 'entrance-balcony');
+    // the removed half's outline goes with the gable it ends in, and shows only while the section is on
+    followers.add(removedHalf, 'east-gable', { moves: false, when: () => gableCut });
   }
   clip.clip(world);
   // the instruments' beads and leads lie in the plane: shown only while the section is on, never clipped

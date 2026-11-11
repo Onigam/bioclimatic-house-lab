@@ -50,8 +50,8 @@ export const FRAMING: Record<PlateauPart, PartFraming> = {
 const HOTSPOTS: HotspotDef[] = [
   { id: 'prototype-house', fr: 'La maison', en: 'The house', goto: 'house' },
   { id: 'twin-house', fr: 'Sa jumelle', en: 'Its twin', minor: true },
-  { id: 'solar-furnace', fr: 'Four solaire', en: 'Solar furnace', wide: true },
-  { id: 'heliostat-terraces', fr: 'Héliostats', en: 'Heliostats', minor: true },
+  { id: 'solar-furnace', fr: 'Four solaire', en: 'Solar furnace', wide: true, crowd: true },
+  { id: 'heliostat-terraces', fr: 'Héliostats', en: 'Heliostats', minor: true, crowd: true },
   { id: 'solar-houses-1974', fr: 'Maisons de 1974', en: 'Houses of 1974' },
   { id: 'far-ridge', fr: 'Crêtes', en: 'Ridges', minor: true, crowd: true },
   { id: 'granite-slope', fr: 'Pente de granit', en: 'Granite slope', minor: true, crowd: true },
