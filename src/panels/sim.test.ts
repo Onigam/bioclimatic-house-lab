@@ -4,10 +4,11 @@ import type { AppContext } from '@onigam/lab-kit/ui';
 import { HouseSim } from '../sim/engine';
 import { PRESET_IDS, RANGES, SCENARIO_IDS, SPEEDS } from '../sim/presets';
 import { MODEL_NOTE, SHARE_CLAIMS } from '../sim/texts';
+import { FACE_HOT, ROOM_COLD, ROOM_HOT } from '../sim/engine';
 import type { AlarmKey } from '../sim/types';
 import { mainReadouts, moreReadouts, niceCeil3, seasonKey, statusOf, wallProfile } from './model';
 import { SimPanel } from './sim';
-import { dateText, hourText, num, PANEL_STRINGS, st, sx } from './strings';
+import { dateText, hourText, num, PANEL_STRINGS, st, STRIP_ALARMS, sx } from './strings';
 import { STRIP_SPEEDS, stripAlarms, stripClock, stripValues } from './strip';
 import { FakeElement, installFakeDom } from './test-dom';
 
@@ -95,13 +96,22 @@ describe('what the panel offers', () => {
   it('shows the live figures, each marked, every one finite once a day has gone by', () => {
     const { root, sim, panel } = open();
     run(panel, sim, 1);
-    expect(root.find('.readout').length).toBeGreaterThanOrEqual(mainReadouts(sim.state).length);
+    expect(root.find('.readout').length).toBe(mainReadouts(sim.state).length);
     for (const r of [...mainReadouts(sim.state), ...moreReadouts(sim.state)]) {
-      // yesterday's efficiency and the followed lag are empty before a whole clear day: the panel writes a dash
-      if (r.key !== 'liveEff' && r.key !== 'moreLag') expect(Number.isFinite(r.value), r.key).toBe(true);
+      // the followed lag is empty before a whole clear day: the panel writes a dash
+      if (r.key !== 'moreLag') expect(Number.isFinite(r.value), r.key).toBe(true);
       expect(['', '†', '*']).toContain(r.mark);
     }
     expect(num(Number.NaN)).toBe('—');
+  });
+
+  it('says yesterday’s efficiency, with its word of caution, once a whole day has gone by', () => {
+    const { root, sim, panel } = open('en');
+    expect(root.textContent).not.toContain(st('liveEffNote'));
+    sim.applyScenario('christmas-1974');
+    run(panel, sim, 52);
+    expect(root.textContent).toContain(st('liveEffNote'));
+    expect(root.textContent).toContain(st('liveEff'));
   });
 
   it('draws five charts and the season’s button, who says what, and the places the model does not retrieve the source', () => {
@@ -214,7 +224,7 @@ describe('what the controls do', () => {
     expect(text).toContain(st('rungWall'));
     expect(text).toContain(st('claimsOurs'));
     const share = sim.ladder().all.share;
-    expect(text).toContain(`${num(share, 1)} % †`);
+    expect(text).toContain(`${num(share, 1)}\u00a0%\u00a0†`);
     // the physics' own figures: 32, 42.5, 47 % (docs/physics.md §5)
     expect(sim.ladder().wallOnly.share).toBeGreaterThan(30);
     expect(sim.ladder().wallOnly.share).toBeLessThan(34);
@@ -292,6 +302,24 @@ describe('what the model puts on the panel', () => {
 });
 
 describe('the bottom strip', () => {
+  it('says each alarm in a pill-sized phrase, with the thresholds of the engine, and the whole sentence stays in the panel', () => {
+    for (const [key, [fr, en]] of Object.entries(STRIP_ALARMS)) {
+      expect(fr.length, key).toBeLessThanOrEqual(28);
+      expect(en.length, key).toBeLessThanOrEqual(28);
+    }
+    expect(STRIP_ALARMS.roomHot[1]).toContain(String(ROOM_HOT));
+    expect(STRIP_ALARMS.roomCold[1]).toContain(String(ROOM_COLD));
+    expect(STRIP_ALARMS.faceHot[1]).toContain(String(FACE_HOT));
+    expect(Object.keys(STRIP_ALARMS).sort()).toEqual([
+      'faceHot',
+      'reverseFlow',
+      'roomCold',
+      'roomHot',
+      'wallTakesHeat',
+      'wrongSeason',
+    ]);
+  });
+
   it('shows the model’s six figures, each marked †, and the clock in both languages', () => {
     const sim = new HouseSim();
     setLang('en');
@@ -301,9 +329,9 @@ describe('the bottom strip', () => {
       expect(v.unit.endsWith('†'), v.label).toBe(true);
       expect(v.label.length).toBeGreaterThan(2);
     }
-    expect(stripClock(sim).sub).toMatch(/solar time/);
+    expect(stripClock(sim).sub).toBe('15 Jan, solar time');
     setLang('fr');
-    expect(stripClock(sim).sub).toMatch(/heure solaire/);
+    expect(stripClock(sim).sub).toBe('15 janv., h solaire');
     expect(stripValues(sim)[0]!.label).toBe('Soleil sur le mur');
   });
 

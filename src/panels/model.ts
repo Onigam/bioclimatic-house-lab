@@ -33,9 +33,11 @@ export function mainReadouts(s: HouseState): Readout[] {
     r('liveRoom', s.tRoom, 1, '°C'),
     r('liveAir', s.tOutside, 1, '°C'),
     r('liveElec', s.qAux / 1000, 1, 'kW'),
-    r('liveEff', s.dayEfficiency, 0, '%'),
   ];
 }
+
+/** Yesterday's efficiency, as a line of its own: its label is too long for a tile, and it is not a figure to read without its note. NaN before a whole day has gone by. */
+export const yesterday = (s: HouseState): Readout => r('liveEff', s.dayEfficiency, 0, '%');
 
 /** The rest, folded. */
 export function moreReadouts(s: HouseState): Readout[] {

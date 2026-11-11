@@ -1,6 +1,8 @@
 import { getLang, registerStrings, tx } from '@onigam/lab-kit/i18n';
 import { lf } from '../data/part-helpers';
 import { dayOfDate, monthOf, type RecordId } from '../sim/climate';
+import { FACE_HOT, ROOM_COLD, ROOM_HOT } from '../sim/engine';
+import type { AlarmKey } from '../sim/types';
 import {
   ALARM_TEXTS,
   MATERIAL_TEXTS,
@@ -19,6 +21,16 @@ import {
 // The words of the simulation panel, French and English written together: `key: [fr, en]`. The alarms, starting points, scenarios, the vents, the flap, the materials, the sites, the skies, the sliders' names and who says what about the share
 // are in src/sim/texts.ts, which the physics owns; the lab's title, the worlds and the notices of the Sources panel are in src/i18n/ui.ts. A figure of the model carries †, an estimate *, a reported one nothing, by `lf` (src/data/figures.ts), so that
 // a number cannot lose its mark. « This is a model » is said once, in MODEL_NOTE.
+
+/** The alarms as the bottom strip's pill says them: the pill is narrow and the panel's status line says the whole sentence (src/sim/texts.ts). The thresholds are the engine's. */
+export const STRIP_ALARMS: Record<AlarmKey, Pair> = {
+  roomHot: [`Pièce au-dessus de ${ROOM_HOT} °C`, `Room over ${ROOM_HOT} °C`],
+  roomCold: [`Pièce sous ${ROOM_COLD} °C`, `Room under ${ROOM_COLD} °C`],
+  faceHot: [`Peinture au-delà de ${FACE_HOT} °C`, `Paint over ${FACE_HOT} °C`],
+  reverseFlow: ['Courant inversé', 'Flow reversed'],
+  wrongSeason: ['Clapet d’hiver en été', 'Winter flap in summer'],
+  wallTakesHeat: ['Le mur prend de la chaleur', 'The wall takes heat'],
+};
 
 /** A text with {placeholders} of src/data/figures.ts, as a pair. */
 const pair = (fr: string, en: string): Pair => {
@@ -63,12 +75,16 @@ const PANEL = {
   liveSun: ['Soleil sur le mur', 'Sun on the wall'],
   liveOuter: ['Face noire', 'Black face'],
   liveInner: ['Face intérieure', 'Inner face'],
-  liveGapOut: ['Air sortant, en haut', 'Air leaving, at the top'],
-  liveFlow: ['Courant, par élément', 'Flow, per element'],
+  liveGapOut: ['Air sortant', 'Air leaving'],
+  liveFlow: ['Courant d’air', 'Air flow'],
   liveRoom: ['Pièce', 'Room'],
   liveAir: ['Air extérieur', 'Outside air'],
   liveElec: ['Électricité', 'Electricity'],
   liveEff: ['Rendement d’hier', 'Yesterday’s efficiency'],
+  liveEffNote: [
+    'Un rendement d’un seul jour dit peu de chose d’un mur qui a une mémoire.',
+    'A single day’s efficiency says little about a wall with a memory.',
+  ],
 
   // ---- the moment in detail, folded
   moreSunAlt: ['Hauteur du soleil', 'Sun’s height'],
@@ -113,6 +129,7 @@ const PANEL = {
     'The last three days, a point every quarter of an hour. The thicker the wall, the less the inner face follows the plate: at 60 cm it hardly moves, that is the slow wave. A negative flow runs down the gap.',
   ],
   unitDays: ['j', 'd'],
+  solarShort: ['h solaire', 'solar time'],
 
   // ---- the controls
   secClock: ['Le jour et l’heure', 'Day and hour'],
@@ -260,7 +277,10 @@ export const say = (pair: Pair): string => pair[getLang() === 'fr' ? 0 : 1];
 
 /** Who says what about the share, in the language of the moment. */
 export const claims = (): { who: string; value: string }[] =>
-  SHARE_CLAIMS.map((c) => ({ who: say(c.who), value: say(c.value) }));
+  SHARE_CLAIMS.map((c) => ({ who: say(c.who), value: tight(say(c.value)) }));
+
+/** A number and its unit stay on one line: « 35 à 45 % » is not cut before the sign in a narrow column. */
+export const tight = (text: string): string => text.replace(/ (?=%)/g, '\u00a0');
 
 /** A number with the decimal mark of the language; no "-0". */
 export function num(value: number, digits = 0): string {

@@ -28,6 +28,7 @@ import {
   seasonKey,
   statusOf,
   wallProfile,
+  yesterday,
   type Readout,
 } from './model';
 import { claims, dateText, hourText, num, st, sx, type PanelKey } from './strings';
@@ -53,6 +54,7 @@ export class SimPanel implements PanelController {
   private lesson = h('div', {});
   private status = h('div', {});
   private readouts = h('div', { class: 'readouts' });
+  private efficiency = h('div', {});
   private more = h('div', { class: 'loss-legend' });
   private season = h('div', {});
   private extras = h('div', {});
@@ -238,6 +240,7 @@ export class SimPanel implements PanelController {
       this.lesson,
       this.status,
       this.readouts,
+      this.efficiency,
       hint('speedHint'),
 
       h('div', { class: 'eyebrow' }, st('secClock')),
@@ -444,11 +447,19 @@ export class SimPanel implements PanelController {
           .join(' ')
           .replace(/^(?=.)/, ' '),
       );
+    const eff = yesterday(s);
     fill(
       this.readouts,
       ...mainReadouts(s).map((x) =>
         h('div', { class: 'readout' }, h('span', {}, st(x.key)), h('b', {}, num(x.value, x.digits), small(x))),
       ),
+    );
+    // a day's efficiency has a word of caution with it, and its label is too long for a tile
+    fill(
+      this.efficiency,
+      ...(Number.isFinite(eff.value)
+        ? [h('p', { class: 'hint' }, `${st(eff.key)} `, h('b', {}, `${num(eff.value)} % †`), `. ${st('liveEffNote')}`)]
+        : []),
     );
     fill(
       this.more,
@@ -462,9 +473,14 @@ export class SimPanel implements PanelController {
     const key = seasonKey(sim.params);
     const have = this.ladder && this.ladder.key === key ? this.ladder.value : null;
     const stale = this.ladder !== null && this.ladder.key !== key;
-    const pct = (v: number, digits = 0) => `${num(v, digits)} % †`;
-    const line = (label: string, value: string) =>
-      h('div', { class: 'readout' }, h('span', {}, label), h('b', {}, value));
+    const pct = (v: number, digits = 0) => `${num(v, digits)}\u00a0%\u00a0†`;
+    // label and value on one line, the label free to wrap: the tiles of `.readouts` cut a long label short
+    const list = (rows: [string, string][]) =>
+      h(
+        'div',
+        { class: 'loss-legend' },
+        ...rows.map(([label, value]) => h('span', {}, `${label} `, h('b', {}, value))),
+      );
     const l = this.ladder?.value;
     fill(
       this.season,
@@ -480,35 +496,29 @@ export class SimPanel implements PanelController {
       ...(stale ? [h('p', { class: 'hint' }, st('seasonStale'))] : []),
       ...(l
         ? [
-            h(
-              'div',
-              { class: 'readouts' },
-              line(st('rungWall'), pct(l.wallOnly.share, 1)),
-              line(st('rungWindows'), pct(l.wallAndWindows.share, 1)),
-              line(st('rungAll'), pct(l.all.share, 1)),
-              line(st('rungDark'), pct(l.allAgainstDark, 1)),
-            ),
+            list([
+              [st('rungWall'), pct(l.wallOnly.share, 1)],
+              [st('rungWindows'), pct(l.wallAndWindows.share, 1)],
+              [st('rungAll'), pct(l.all.share, 1)],
+              [st('rungDark'), pct(l.allAgainstDark, 1)],
+            ]),
             h('div', { class: 'eyebrow' }, st('linesTitle')),
-            h(
-              'div',
-              { class: 'readouts' },
-              line(st('lineWallAir'), pct(l.all.wallAirShare)),
-              line(st('lineWallConduction'), pct(l.all.wallConductionShare)),
-              line(st('lineWindows'), pct(l.all.windowShare)),
-              line(st('linePeople'), pct(l.all.gainsShare)),
-              line(st('lineElectric'), pct(l.all.auxShare)),
-              line(st('seasonLoad'), `${num(l.all.load)} kWh †`),
-              line(st('seasonAir'), `${num(l.all.airMean, 1)} °C †`),
-            ),
+            list([
+              [st('lineWallAir'), pct(l.all.wallAirShare)],
+              [st('lineWallConduction'), pct(l.all.wallConductionShare)],
+              [st('lineWindows'), pct(l.all.windowShare)],
+              [st('linePeople'), pct(l.all.gainsShare)],
+              [st('lineElectric'), pct(l.all.auxShare)],
+              [st('seasonLoad'), `${num(l.all.load)} kWh †`],
+              [st('seasonAir'), `${num(l.all.airMean, 1)} °C †`],
+            ]),
           ]
         : []),
       h('div', { class: 'eyebrow' }, st('claimsTitle')),
-      h(
-        'div',
-        { class: 'readouts' },
-        ...claims().map((c) => line(c.who, c.value)),
-        ...(have ? [line(st('claimsOurs'), pct(have.all.share))] : []),
-      ),
+      list([
+        ...claims().map((c): [string, string] => [c.who, c.value]),
+        ...(have ? ([[st('claimsOurs'), pct(have.all.share)]] as [string, string][]) : []),
+      ]),
       h('p', { class: 'hint' }, st('claimsHint')),
     );
   }
