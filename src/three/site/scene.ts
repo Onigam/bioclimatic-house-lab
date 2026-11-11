@@ -49,10 +49,10 @@ export const FRAMING: Record<PlateauPart, PartFraming> = {
 
 const HOTSPOTS: HotspotDef[] = [
   { id: 'prototype-house', fr: 'La maison', en: 'The house', goto: 'house' },
-  { id: 'twin-house', fr: 'Sa jumelle', en: 'Its twin', wide: true },
-  { id: 'solar-furnace', fr: 'Four solaire', en: 'Solar furnace', minor: true },
+  { id: 'twin-house', fr: 'Sa jumelle', en: 'Its twin', minor: true },
+  { id: 'solar-furnace', fr: 'Four solaire', en: 'Solar furnace', wide: true },
   { id: 'heliostat-terraces', fr: 'Héliostats', en: 'Heliostats', minor: true },
-  { id: 'solar-houses-1974', fr: 'Maisons de 1974', en: 'Houses of 1974', minor: true },
+  { id: 'solar-houses-1974', fr: 'Maisons de 1974', en: 'Houses of 1974' },
   { id: 'far-ridge', fr: 'Crêtes', en: 'Ridges', minor: true },
   { id: 'granite-slope', fr: 'Pente de granit', en: 'Granite slope', minor: true },
   { id: 'meadow-clearing', fr: 'Clairière', en: 'Clearing', minor: true },
@@ -312,8 +312,10 @@ export function createSiteScene(opts: SiteOptions = {}): SiteScene {
     2,
   );
   roots['granite-slope'].add(rocks);
-  roots['meadow-clearing'].add(meadowOverlay());
-  roots['access-road'].add(roadMesh());
+  const meadow = meadowOverlay();
+  const road = roadMesh();
+  roots['meadow-clearing'].add(meadow);
+  roots['access-road'].add(road);
 
   // ---- trees: pines on the slope to the north, oaks and bushes round the clearing, none on the houses, the road, the field or the buildings' shelves
   const r = rng(77);
@@ -409,6 +411,10 @@ export function createSiteScene(opts: SiteOptions = {}): SiteScene {
 
   // ---- registered
   for (const id of PLATEAU_PARTS) registry.add(id, roots[id], V(...EXPLODE[id]), undefined, FRAMING[id]);
+  // The ground, the meadow, the road, the far ridges and the far forest are the field the view lies in: a press on them is a press on nothing. The kit turns the camera round the point a press hits on a part, and a hit
+  // on a hill a kilometre off, or on the ground under the cursor, throws the pivot away from the part that is selected (313 m for the 1974 building, 2.75 km for the furnace): they are not hit, so the camera goes on
+  // turning round its target, the selected part. Their parts are still chosen by their chips and their labels.
+  for (const o of [land, meadow, road, ridges.mesh, pinesFar.group]) o.traverse((m) => (m.raycast = () => {}));
 
   // ---- labels
   const anchors: Record<string, THREE.Object3D> = {};
@@ -456,9 +462,11 @@ export function createSiteScene(opts: SiteOptions = {}): SiteScene {
     arcs: { december, june, disc },
     scenery: () => [land, rocks],
     trees: () => [...pinesNear.placements, ...oaks.placements, ...bushes.placements],
-    home: { position: V(-24, 12.5, 42), target: V(14, 3.4, -4) },
+    // The opening view shows the whole setting: the two houses at the foot of the slope, the 1974 building up to the west, the furnace and its field across the plateau to the east. The camera stands south-west and low, so
+    // the houses are in front and the furnace behind them, each with its label. A narrow view backs off along this line (`Stage.frameAll`): the far limit is wide enough for a phone.
+    home: { position: V(-94, 40, 212), target: V(58, 10, -58) },
     minDistance: 1.5,
-    maxDistance: 900,
+    maxDistance: 1500,
     near: 0.15,
     far: 12000,
     homePadding: 0.8,

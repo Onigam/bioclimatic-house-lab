@@ -12,11 +12,16 @@ import {
   ELEMENT_1967,
   GROUND_NORTH,
   GROUND_SOUTH,
+  LIVING_X0,
+  LIVING_X1,
+  PARTITION,
   SAMPLE_BAY,
   SITE,
+  STAIR_STEPS,
   Y_EAVE,
   Y_RIDGE,
   Z_NORTH,
+  Z_NORTH_IN,
   Z_SOUTH,
   bayX,
   elementLayout,
@@ -244,6 +249,26 @@ describe('attached and resting', () => {
     const cheeks = named(house.build.groups['entrance-balcony'], 'stair-cheeks');
     expect(meshBox(cheeks).min.y).toBeLessThan(g);
   });
+  it('the stair has STAIR_STEPS treads, and that is the count the ground gives: the last stands within a rise of the land, one more would go under it', () => {
+    const st = house.build.stair as { x: number; z: number; y: number }[];
+    expect(st.length).toBe(STAIR_STEPS);
+    const sxm = st[0]!.x;
+    // the rule the number was derived by: tread k (from 1) is the last one when the next would be lower than the land under it (with 2 cm of play)
+    let y = 0;
+    let z = st[0]!.z - BALCONY.tread / 2;
+    let n = 0;
+    while (n < 60) {
+      if (y - BALCONY.rise <= groundY(sxm, z + BALCONY.tread / 2) + 0.02) break;
+      y -= BALCONY.rise;
+      z += BALCONY.tread;
+      n++;
+    }
+    expect(n).toBe(STAIR_STEPS);
+    // the last tread is a few centimetres above the land, never more than a rise
+    const last = st.at(-1)!;
+    expect(last.y - groundY(last.x, last.z)).toBeGreaterThan(0);
+    expect(last.y - groundY(last.x, last.z)).toBeLessThan(BALCONY.rise);
+  });
   it('the downpipes end at the ground, on a splash block', () => {
     for (const d of house.build.downpipes as THREE.Vector3[]) {
       const g = groundY(d.x, d.z);
@@ -453,16 +478,28 @@ describe('what drives what is attached to it', () => {
     expect(touches(meshBox(liv.parts['warm-air-jet']), upper, 0.05)).toBe(true);
     expect(touches(meshBox(liv.parts['floor-return']), lower, 0.05)).toBe(true);
   });
-  it('the furniture stands on the floor and not in the wall’s ducts', () => {
+  it('the furniture stands on the floor and not in the wall’s ducts, and what hangs hangs on its wall', () => {
     const liv = room.living;
     liv.furniture.updateWorldMatrix(true, true);
-    for (const o of liv.furniture.children as THREE.Object3D[]) {
+    for (const o of liv.mounts.floor.children as THREE.Object3D[]) {
       const b = meshBox(o);
-      if (['curtains', 'picture', 'coat'].includes(o.name)) continue;
       expect(Math.abs(b.min.y), o.name).toBeLessThan(0.02);
     }
     const arm = meshBox(liv.parts.armchair);
     expect(Math.abs(arm.min.y)).toBeLessThan(0.02);
+    // what hangs is against its wall's room face, within 3 cm: a picture on the north wall, a coat on the west cross wall, a picture on the east one, the curtains at the south wall's inner face
+    const zIn = Z_SOUTH + elementLayout(ELEMENT_1967).inner;
+    const faces: [string, (b: THREE.Box3) => number][] = [
+      ['north', (b) => b.min.z - Z_NORTH_IN],
+      ['west', (b) => b.min.x - (LIVING_X0 + PARTITION.t)],
+      ['east', (b) => LIVING_X1 - PARTITION.t - b.max.x],
+      ['south', (b) => zIn - b.max.z],
+    ];
+    for (const [side, gap] of faces) {
+      const group = liv.mounts[side] as THREE.Group;
+      expect(group.children.length, side).toBeGreaterThan(0);
+      for (const o of group.children) expect(Math.abs(gap(meshBox(o))), `${side} ${o.name}`).toBeLessThan(0.03);
+    }
   });
 });
 

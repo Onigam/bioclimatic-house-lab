@@ -20,6 +20,7 @@ import { joined } from '../common';
 import { HEAT_MAX, HEAT_MIN, HeatStrip, heatColor } from '../heat';
 import { WALL_PARTS, type WallPart } from '../ids';
 import { makeMaterials } from '../materials';
+import { Followers } from '../follow';
 import { Caps, ClipSet } from '../section';
 import { Slots } from '../slots';
 import { makeRig } from '../sun';
@@ -138,7 +139,11 @@ export function createWallScene(opts: WallOptions = {}): WallScene {
   const stubs = new THREE.Group();
   stubs.name = 'stubs';
   scene.add(stubs);
-  const W = 0.635;
+  // The room round the element follows the element. At 1967 it is the house's own (a ceiling at `CEILING`, the head band up to the plate, `Y_EAVE`); a shorter element (the 1974 preset, 2.5 m) stands in a room that is
+  // only as high as it needs, a ceiling a hand's breadth over its head, so that no block of wall stands over the glass with nothing in it. The stubs are as wide as the element.
+  const ceilOf = (s: ElementSpec): number => Math.min(CEILING, elementLayout(s).yTop + 0.35);
+  const headTopOf = (s: ElementSpec): number => (ceilOf(s) < CEILING - 1e-6 ? ceilOf(s) + CEILING_T + 0.04 : Y_EAVE);
+  const half = (s: ElementSpec): number => s.width / 2;
   const stub = (
     mat: THREE.Material,
     make: (s: ElementSpec) => THREE.BufferGeometry,
@@ -155,38 +160,51 @@ export function createWallScene(opts: WallOptions = {}): WallScene {
   const ROOM_REACH = 2.4;
   stub(
     mats.plinth,
-    (s) => bx(-W, -1.3, elementLayout(s).inner, 0 + 0.0, elementLayout(s).yBottom, 0),
+    (s) => bx(-half(s), -1.3, elementLayout(s).inner, 0 + 0.0, elementLayout(s).yBottom, 0),
     'foundation-stub',
   );
   stub(
     mats.plinth,
-    (s) => bx(-W, -SLAB, elementLayout(s).inner - ROOM_REACH - 0.1, 0, -0.03, elementLayout(s).inner),
+    (s) => bx(-half(s), -SLAB, elementLayout(s).inner - ROOM_REACH - 0.1, 0, -0.03, elementLayout(s).inner),
     'slab-stub',
   );
   stub(
     mats.tile,
-    (s) => bx(-W, -0.03, elementLayout(s).inner - ROOM_REACH - 0.1, 0, 0, elementLayout(s).inner),
+    (s) => bx(-half(s), -0.03, elementLayout(s).inner - ROOM_REACH - 0.1, 0, 0, elementLayout(s).inner),
     'tile-stub',
     false,
   );
   stub(
     mats.gravel,
-    (s) => bx(-W, -1.3, elementLayout(s).inner - ROOM_REACH - 0.1, 0, -SLAB, elementLayout(s).inner),
+    (s) => bx(-half(s), -1.3, elementLayout(s).inner - ROOM_REACH - 0.1, 0, -SLAB, elementLayout(s).inner),
     'hardcore-stub',
     false,
   );
   stub(
     mats.ceiling,
-    (s) => bx(-W, CEILING, elementLayout(s).inner - ROOM_REACH - 0.1, 0, CEILING + CEILING_T, elementLayout(s).inner),
+    (s) =>
+      bx(
+        -half(s),
+        ceilOf(s),
+        elementLayout(s).inner - ROOM_REACH - 0.1,
+        0,
+        ceilOf(s) + CEILING_T,
+        elementLayout(s).inner,
+      ),
     'ceiling-stub',
   );
   // the room's far end: a plaster wall that carries the ceiling, so that nothing hangs in the air
   stub(
     mats.plaster,
-    (s) => bx(-W, 0, elementLayout(s).inner - ROOM_REACH - 0.1, 0, CEILING, elementLayout(s).inner - ROOM_REACH),
+    (s) =>
+      bx(-half(s), 0, elementLayout(s).inner - ROOM_REACH - 0.1, 0, ceilOf(s), elementLayout(s).inner - ROOM_REACH),
     'end-wall-stub',
   );
-  stub(mats.concrete, (s) => bx(-W, elementLayout(s).yTop, elementLayout(s).inner, 0, Y_EAVE, 0), 'head-band-stub');
+  stub(
+    mats.concrete,
+    (s) => bx(-half(s), elementLayout(s).yTop, elementLayout(s).inner, 0, headTopOf(s), 0),
+    'head-band-stub',
+  );
   // stubs' caps: concrete grey, flat
   const capMat = (m: THREE.MeshStandardMaterial): THREE.Material => {
     const c = m.clone();
@@ -215,14 +233,14 @@ export function createWallScene(opts: WallOptions = {}): WallScene {
   );
   rectCap((s) => [elementLayout(s).inner - ROOM_REACH - 0.1, -1.3, elementLayout(s).inner, -SLAB], capMat(mats.gravel));
   rectCap(
-    (s) => [elementLayout(s).inner - ROOM_REACH - 0.1, CEILING, elementLayout(s).inner, CEILING + CEILING_T],
+    (s) => [elementLayout(s).inner - ROOM_REACH - 0.1, ceilOf(s), elementLayout(s).inner, ceilOf(s) + CEILING_T],
     capMat(mats.ceiling),
   );
   rectCap(
-    (s) => [elementLayout(s).inner - ROOM_REACH - 0.1, 0, elementLayout(s).inner - ROOM_REACH, CEILING],
+    (s) => [elementLayout(s).inner - ROOM_REACH - 0.1, 0, elementLayout(s).inner - ROOM_REACH, ceilOf(s)],
     capMat(mats.plaster),
   );
-  rectCap((s) => [elementLayout(s).inner, elementLayout(s).yTop, 0, Y_EAVE], capMat(mats.concrete));
+  rectCap((s) => [elementLayout(s).inner, elementLayout(s).yTop, 0, headTopOf(s)], capMat(mats.concrete));
 
   // ---- the ground: paper, which takes the shadows
   const ground = new THREE.Mesh(
@@ -235,8 +253,8 @@ export function createWallScene(opts: WallOptions = {}): WallScene {
   ground.name = 'ground';
   ground.userData.notClipped = true;
   scene.add(ground);
-  const cs = contactShadow(W * 2 + 0.6, 1.6, 0.35, 0.3);
-  cs.position.set(-W / 2, -1.299, -0.35);
+  const cs = contactShadow(ELEMENT_1967.width + 0.6, 1.6, 0.35, 0.3);
+  cs.position.set(-ELEMENT_1967.width / 4, -1.299, -0.35);
   scene.add(cs);
 
   // ---- a stool, a coat on a nail, a mug: someone works in this room
@@ -285,11 +303,19 @@ export function createWallScene(opts: WallOptions = {}): WallScene {
   }
   scale.position.set(barX, 0, barZ);
   scene.add(scale);
+  // under a lower ceiling the post is shortened to stand under it (the bar's colours and its two labels, which hang on it, go with it)
+  const fitScale = (s: ElementSpec): void => {
+    scale.scale.y = Math.min(1, (ceilOf(s) - 0.15) / (BAR_Y0 + BAR_H + 0.1));
+  };
+  fitScale(spec);
 
   // ---- parts
   for (const id of WALL_PARTS) {
     registry.add(id, build.groups[id], V(...EXPLODE[id]), undefined, FRAMING[id]);
   }
+  // the coat hangs on the storage wall's inner face: with the wall isolated away, or not yet built in a guide's step, it would hang in the void. The wall does not explode, so the coat keeps its place
+  const followers = new Followers();
+  followers.add(lived.coat, 'storage-wall', { moves: false });
   clip.clip(build.root);
   clip.clip(stubs);
   // the instruments' beads and leads lie in the plane and are never clipped; the caps are made unclipped already
@@ -369,6 +395,7 @@ export function createWallScene(opts: WallOptions = {}): WallScene {
         flow.relayout(build.layout, spec);
         placeAnchors();
         scale.position.z = build.layout.inner - 2.0;
+        fitScale(spec);
         lived.attach(build.layout.inner);
         drawn.spec = spec;
       }
@@ -383,7 +410,9 @@ export function createWallScene(opts: WallOptions = {}): WallScene {
       strip.update(s.layers, s.tOuterFace, s.tInnerFace);
       flow.update(s, dt, view.slowMo, view.schematic);
       capsSet.update(true, registry);
-      for (const o of build.cutOnly) o.visible = true;
+      // the instruments' beads and leads lie in the plane: always there, but only while their part is
+      for (const o of build.cutOnly) o.visible = Followers.drawn(registry, registry.partOf(o) ?? '');
+      followers.update(registry);
       lived.update(s, view.time);
     },
   };

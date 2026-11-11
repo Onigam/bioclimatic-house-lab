@@ -649,22 +649,24 @@ export function buildElement(
   const refreshAnchors = (): void => {
     const L = ctx.lay;
     const zMid = (L.lastBack + L.face) / 2;
-    anchors.outerGlazing = new THREE.Vector3(x0, L.yBottom + 3.25, L.sheetFront[0]!);
+    // the labels' heights are set on the 1967 element (4.38 m); a shorter one (the 1974 preset, 2.5 m) keeps them at the same shares of its height, so that each stays on its part
+    const k = ctx.spec.height / ELEMENT_1967.height;
+    anchors.outerGlazing = new THREE.Vector3(x0, L.yBottom + 3.25 * k, L.sheetFront[0]!);
     anchors.innerGlazing = new THREE.Vector3(
       x0 - 0.5,
-      L.yBottom + 1.4,
+      L.yBottom + 1.4 * k,
       L.sheetFront[L.sheetFront.length - 1]! - ctx.spec.glass,
     );
     anchors.steelFrame = new THREE.Vector3(x0 + ctx.spec.width / 2, L.yTop - 0.02, -0.03);
-    anchors.airGap = new THREE.Vector3(x0 + 0.3, L.yDuctLow + 0.8, zMid);
-    anchors.blackPaint = new THREE.Vector3(x0 + 0.3, L.yDuctLow + 2.35, L.face);
-    anchors.storageWall = new THREE.Vector3(x0, L.yDuctLow + 1.55, (L.face + L.inner) / 2);
+    anchors.airGap = new THREE.Vector3(x0 + 0.3, L.yDuctLow + 0.8 * k, zMid);
+    anchors.blackPaint = new THREE.Vector3(x0 + 0.3, L.yDuctLow + 2.35 * k, L.face);
+    anchors.storageWall = new THREE.Vector3(x0, L.yDuctLow + 1.55 * k, (L.face + L.inner) / 2);
     anchors.upperDuct = new THREE.Vector3(x0, L.yDuctHigh, L.inner);
     anchors.lowerDuct = new THREE.Vector3(x0, L.yDuctLow, L.inner);
     anchors.summerFlap = new THREE.Vector3(x0, L.yHeadBottom - 0.01, L.face + 0.06);
     anchors.headBeam = new THREE.Vector3(x0 - 0.45, (L.yHeadBottom + L.yTop) / 2, L.inner);
     anchors.sillBeam = new THREE.Vector3(x0 - 0.45, (L.yBottom + L.ySillTop) / 2, L.inner);
-    anchors.wallThermocouples = new THREE.Vector3(x0 - 0.32, 1.5, L.inner - 0.04);
+    anchors.wallThermocouples = new THREE.Vector3(x0 - 0.32, Math.min(1.5, L.yTop - 0.5), L.inner - 0.04);
     anchors.airThermocouples = new THREE.Vector3(x0 - 0.25 + 0.055, L.yDuctLow + ctx.spec.ductSpan * 0.5, zMid);
     anchors.anemometer = new THREE.Vector3(x0 - 0.05, L.yDuctHigh, L.inner - 0.255);
   };

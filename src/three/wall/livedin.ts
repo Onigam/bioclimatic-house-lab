@@ -7,6 +7,8 @@ import { buildCoat, buildMug, buildStool } from '../props';
 
 export interface LivedIn {
   group: THREE.Group;
+  /** The coat hangs on the storage wall's inner face: it goes with the wall (hidden with it). The stool and the mug stand on the floor, which stays. */
+  coat: THREE.Object3D;
   update(state: HouseState, time: number): void;
   /** The coat hangs on the wall's face: move it when the wall's thickness does. */
   attach(innerZ: number): void;
@@ -28,6 +30,7 @@ export function buildLivedIn(mats: Mats, innerZ = -0.766): LivedIn {
   group.add(coat);
   return {
     group,
+    coat,
     update() {},
     attach(z) {
       coat.position.z = z;

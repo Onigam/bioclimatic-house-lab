@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { stick } from '../common';
 import {
+  STAIR_STEPS,
   BALCONY,
   BAY,
   BAY_KINDS,
@@ -590,9 +591,7 @@ export function buildHouse(mats: Mats, opts: HouseOptions = {}): HouseBuild {
     let step = 0;
     const x0s = sxm - stW / 2;
     const x1s = sxm + stW / 2;
-    while (true) {
-      const ground = groundY(sxm, z + BALCONY.tread * 0.5);
-      if (y - BALCONY.rise <= ground + 0.02 || step > 40) break;
+    while (step < STAIR_STEPS) {
       y -= BALCONY.rise;
       treads.push(bx(x0s, y - 0.04, z, x1s, y, z + BALCONY.tread));
       stair.push({ x: sxm, z: z + BALCONY.tread / 2, y });
@@ -851,19 +850,17 @@ export function buildHouse(mats: Mats, opts: HouseOptions = {}): HouseBuild {
       const pm = fixed('interior-partitions', mats.plaster.clone(), geo, name);
       (pm.material as THREE.Material).userData = { noShare: true };
     }
-    // door leaves, ajar: timber, hinged on the cross walls' north jamb
-    const leaves: THREE.BufferGeometry[] = [];
-    for (const [xc, sgn] of [
-      [LIVING_X0 + PT / 2, 1],
-      [LIVING_X1 - PT / 2, -1],
+    // door leaves, ajar: timber, hinged on the cross walls' north jamb; one mesh for each wall (the `room` world takes a wall's leaf away with the wall)
+    for (const [xc, sgn, name] of [
+      [LIVING_X0 + PT / 2, 1, 'door-west'],
+      [LIVING_X1 - PT / 2, -1, 'door-east'],
     ] as const) {
       const g = new THREE.BoxGeometry(0.04, doorH - 0.03, door - 0.02);
       g.translate(0, (doorH - 0.03) / 2, (door - 0.02) / 2);
       g.rotateY(sgn * 0.9);
       g.translate(xc, 0.01, -2.4 + 0.0);
-      leaves.push(g);
+      fixed('interior-partitions', mats.timber, g, name);
     }
-    fixed('interior-partitions', mats.timber, joined(leaves), 'doors');
   }
 
   // ---------------------------------------------------------------------------------------------- the layout again, when the visitor moves the wall, the gap, the sheets

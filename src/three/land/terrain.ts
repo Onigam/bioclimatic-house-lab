@@ -78,9 +78,19 @@ export function patchLand(mat: THREE.MeshStandardMaterial): void {
   mat.customProgramCacheKey = () => 'bioclimatic-land';
 }
 
+export interface Hole {
+  x0: number;
+  z0: number;
+  x1: number;
+  z1: number;
+}
+
 export interface Terrain {
   /** The surface. */
   top: THREE.Mesh;
+  /** The cut-away over the earth tube, snapped to the grid, and the surface that closes it, translucent (the same colours: the ground made see-through). Null without a hole. */
+  hole: Hole | null;
+  lid: THREE.Mesh | null;
   /** The four sides of the block, with the strata on them, or null for a landscape. */
   skirts: THREE.Mesh | null;
   material: THREE.MeshStandardMaterial;
@@ -106,6 +116,8 @@ export interface BlockOptions {
   bottom: number;
   cell: number;
   strata: THREE.MeshStandardMaterial;
+  /** Land to leave out of the surface (the earth tube's pit), in metres: it is snapped outwards to the grid, so that its edge runs along the surface's own cells. */
+  hole?: Hole;
 }
 
 /** The depth coordinate the strata map takes: 1 at the surface, falling by 1 per 8 m of depth, held at 0 below. */
@@ -131,9 +143,28 @@ export function buildBlock(o: BlockOptions): Terrain {
       col[k + 1] = c.g;
       col[k + 2] = c.b;
     }
+  // the hole: the cells that cover the rectangle asked for
+  let hole: Hole | null = null;
+  let hi0 = 0;
+  let hi1 = 0;
+  let hj0 = 0;
+  let hj1 = 0;
+  if (o.hole) {
+    hi0 = Math.floor((o.hole.x0 - o.x0) / ((o.x1 - o.x0) / nx) + 1e-9);
+    hi1 = Math.ceil((o.hole.x1 - o.x0) / ((o.x1 - o.x0) / nx) - 1e-9);
+    hj0 = Math.floor((o.hole.z0 - o.z0) / ((o.z1 - o.z0) / nz) + 1e-9);
+    hj1 = Math.ceil((o.hole.z1 - o.z0) / ((o.z1 - o.z0) / nz) - 1e-9);
+    hole = {
+      x0: o.x0 + (hi0 / nx) * (o.x1 - o.x0),
+      x1: o.x0 + (hi1 / nx) * (o.x1 - o.x0),
+      z0: o.z0 + (hj0 / nz) * (o.z1 - o.z0),
+      z1: o.z0 + (hj1 / nz) * (o.z1 - o.z0),
+    };
+  }
   const idx: number[] = [];
   for (let j = 0; j < nz; j++)
     for (let i = 0; i < nx; i++) {
+      if (o.hole && i >= hi0 && i < hi1 && j >= hj0 && j < hj1) continue;
       const a = j * (nx + 1) + i;
       const b = a + 1;
       const d = a + nx + 1;
@@ -152,6 +183,53 @@ export function buildBlock(o: BlockOptions): Terrain {
   top.name = 'land';
   top.receiveShadow = true;
   top.castShadow = false;
+
+  // the lid: the same cells and colours over the hole, translucent, so that what lies under the ground shows through it
+  let lid: THREE.Mesh | null = null;
+  if (hole) {
+    const wi = hi1 - hi0;
+    const wj = hj1 - hj0;
+    const lp = new Float32Array((wi + 1) * (wj + 1) * 3);
+    const lc = new Float32Array((wi + 1) * (wj + 1) * 3);
+    for (let j = 0; j <= wj; j++)
+      for (let i = 0; i <= wi; i++) {
+        const k = (j * (wi + 1) + i) * 3;
+        const src = ((hj0 + j) * (nx + 1) + hi0 + i) * 3;
+        lp[k] = pos[src]!;
+        lp[k + 1] = pos[src + 1]!;
+        lp[k + 2] = pos[src + 2]!;
+        lc[k] = col[src]!;
+        lc[k + 1] = col[src + 1]!;
+        lc[k + 2] = col[src + 2]!;
+      }
+    const li: number[] = [];
+    for (let j = 0; j < wj; j++)
+      for (let i = 0; i < wi; i++) {
+        const a = j * (wi + 1) + i;
+        li.push(a, a + wi + 1, a + 1, a + 1, a + wi + 1, a + wi + 2);
+      }
+    const lg = new THREE.BufferGeometry();
+    lg.setAttribute('position', new THREE.BufferAttribute(lp, 3));
+    lg.setAttribute('color', new THREE.BufferAttribute(lc, 3));
+    lg.setIndex(li);
+    lg.computeVertexNormals();
+    const lm = new THREE.MeshStandardMaterial({
+      color: 0xffffff,
+      vertexColors: true,
+      roughness: 1,
+      metalness: 0,
+      transparent: true,
+      opacity: 0.4,
+      depthWrite: false,
+    });
+    lm.userData.noShare = true;
+    patchLand(lm);
+    lid = new THREE.Mesh(lg, lm);
+    lid.name = 'ground-window';
+    lid.receiveShadow = true;
+    lid.castShadow = false;
+    lid.renderOrder = 9;
+  }
 
   // the sides: along each edge, the surface's own height above the underside, a strip per cell
   const sp: number[] = [];
@@ -201,7 +279,7 @@ export function buildBlock(o: BlockOptions): Terrain {
   skirts.name = 'land-sides';
   skirts.receiveShadow = true;
   skirts.castShadow = true;
-  return { top, skirts, material: mat, triangles: idx.length / 3 + si.length / 3, strata: o.strata };
+  return { top, hole, lid, skirts, material: mat, triangles: idx.length / 3 + si.length / 3, strata: o.strata };
 }
 
 /** A strip along z at plane x from the surface down to `bottom`: the section's earth. Faces +x. */

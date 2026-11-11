@@ -283,6 +283,12 @@ export const WINDOW = { w: BAY - 0.2, sill: 0.35, head: 3.71 } as const;
 export const RECESS = { door: 0.95, doorH: 2.2, head: 3.71, transom: 2.35 } as const;
 /** The balcony: the slab continued out from the floor, its depth beyond the front, the width, the rail, the stair. estimate */
 export const BALCONY = { depth: 1.3, width: 3.4, rail: 1.0, rise: 0.19, tread: 0.28, stairW: 1.1 } as const;
+/**
+ * Steps of the balcony's stair, from the deck to the ground: 14 treads. derived from the estimates above (the 0.19 m rise and the 0.28 m tread) and from the ground where the stair stands: it runs south from the deck's edge and
+ * the land keeps falling under it, to 2.75 m under the floor at the foot, so the last tread is the one that stands within a rise of the land (9 cm above it, on a footing block). `machine.test.ts` holds the number against the
+ * ground: one tread fewer and the last is more than a rise above the land, one more and it is below it. The 3D builds this many, the sheet PL-H01 counts this many, the part sheet says it.
+ */
+export const STAIR_STEPS = 14;
 /** Head band along the whole front: ring beam and fascia. estimate */
 export const HEAD_BAND = { h: 0.08, d: 0.2 } as const;
 
@@ -308,6 +314,22 @@ export const ROOM = {
   /** estimate: the fresh-air vent, low on the north wall. `x` is its centre along the wall. Where fresh air comes in is unknown (research §2.11). */
   freshVent: { x: 1.55, w: 0.3, h: 0.15, y: 0.2 },
 } as const;
+
+/**
+ * The earth tube's plan (a what-if, so its route is a choice, composed to read and to stay in the half of the house the section keeps): five parallel runs north of the house, `spacing` apart, joined by U-bends, the last one
+ * ending at the vent's riser on the north wall; the intake stands at the west end of the first, `zFar` from the middle of the plan. Five runs of 9.2 m and four bends make the model's 50 m within a few percent. A serpentine
+ * is how a long tube goes into a small plot; 0.8 m is four diameters between runs, the least that keeps one run from warming the next. estimate
+ */
+export const TUBE_PLAN = { runs: 5, spacing: 0.8, xWest: -7.6, xEast: ROOM.freshVent.x, zFar: -7.9 } as const;
+/** The ground cut away over the tube, so that the pipe can be seen where it lies: the plan's rectangle, with a margin all round. estimate */
+export const TUBE_PIT = {
+  x0: TUBE_PLAN.xWest - 0.8,
+  x1: TUBE_PLAN.xEast + 0.25,
+  z0: TUBE_PLAN.zFar - 0.6,
+  z1: Z_NORTH - 0.25,
+} as const;
+/** How far the pipe lies into its bed of sand (the bed's top is this far above the pipe's underside), m. estimate */
+export const TUBE_BED = 0.01;
 
 /** Depths of the thermocouples in the wall from its outer face, m, at the 0.60 m wall: the drawn wall scales them with its thickness. estimate: S1 gives 0.1 mm copper-constantan « at depths » (no list); a spread that shows the wave, the first and last a bead's radius and more from the faces. */
 export const THERMOCOUPLE_DEPTHS: readonly number[] = [0.014, 0.05, 0.15, 0.3, 0.45, 0.585];

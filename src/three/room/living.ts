@@ -55,9 +55,14 @@ import {
 
 const V = (x: number, y: number, z: number) => new THREE.Vector3(x, y, z);
 
+/** Where a piece of furniture is carried: standing on the floor, hung on a wall, or on the south wall's inner face. A world that takes the floor or a wall away takes what it carries with it. */
+export type Mount = 'floor' | 'north' | 'west' | 'east' | 'south';
+
 export interface Living {
   parts: Record<RoomPart, THREE.Group>;
   furniture: THREE.Group;
+  /** The furniture by what carries it: each is a child of `furniture`, at the origin. */
+  mounts: Record<Mount, THREE.Group>;
   roomLight: THREE.PointLight;
   /** The elements of the face and the streams follow the spec. */
   relayout(spec: ElementSpec): void;
@@ -202,10 +207,16 @@ export function buildLiving(mats: Mats, spec0: ElementSpec, o: { floorAndCeiling
   // furniture
   const furniture = new THREE.Group();
   furniture.name = 'furniture';
-  const put = (ob: THREE.Object3D, x: number, y: number, z: number, ry = 0): THREE.Object3D => {
+  const mounts = {} as Record<Mount, THREE.Group>;
+  for (const m of ['floor', 'north', 'west', 'east', 'south'] as const) {
+    mounts[m] = new THREE.Group();
+    mounts[m].name = `furniture-${m}`;
+    furniture.add(mounts[m]);
+  }
+  const put = (ob: THREE.Object3D, x: number, y: number, z: number, ry = 0, on: Mount = 'floor'): THREE.Object3D => {
     ob.position.set(x, y, z);
     ob.rotation.y = ry;
-    furniture.add(ob);
+    mounts[on].add(ob);
     return ob;
   };
   put(buildRug(), -1.1, 0, 0.9, 0.12);
@@ -221,11 +232,11 @@ export function buildLiving(mats: Mats, spec0: ElementSpec, o: { floorAndCeiling
   const lamp = buildLamp(mats);
   put(lamp.group, -2.28, 0, 1.45);
   put(buildPlant(), -1.0, 0, 2.28);
-  put(buildCurtains(mats, 0.52), bayX(4), 0, zIn - 0.07);
+  put(buildCurtains(mats, 0.52), bayX(4), 0, zIn - 0.07, 0, 'south');
   put(buildBookshelf(mats), LIVING_X0 + 0.1 + 0.14, 0, -0.95, Math.PI / 2);
-  put(buildPicture(), LIVING_X1 - 0.1 - 0.012, 1.65, 0.2, -Math.PI / 2);
-  put(buildPicture(), -0.6, 2.0, Z_NORTH_IN + 0.012, 0);
-  put(buildCoat(mats, 0x7a4a2e), LIVING_X0 + 0.1, 1.78, 1.9, Math.PI / 2);
+  put(buildPicture(), LIVING_X1 - 0.1 - 0.012, 1.65, 0.2, -Math.PI / 2, 'east');
+  put(buildPicture(), -0.6, 2.0, Z_NORTH_IN + 0.012, 0, 'north');
+  put(buildCoat(mats, 0x7a4a2e), LIVING_X0 + 0.1, 1.78, 1.9, Math.PI / 2, 'west');
   put(buildBoots(mats), 0.25, 0, 2.2, 0.3);
   put(buildToolbox(mats), 0.72, 0, 2.18, 0.2);
   put(buildDryingRack(mats), 2.2, 0, 1.55, 0.0);
@@ -242,6 +253,7 @@ export function buildLiving(mats: Mats, spec0: ElementSpec, o: { floorAndCeiling
   return {
     parts,
     furniture,
+    mounts,
     roomLight,
     desk: recorder.group,
     recorderInput: recorder.inputTop,

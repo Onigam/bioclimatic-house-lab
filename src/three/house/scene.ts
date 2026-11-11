@@ -20,6 +20,8 @@ import {
   WALL,
   X_EAST,
   X_WEST,
+  TUBE_PIT,
+  TUBE_PLAN,
   Y_EAVE,
   Z_NORTH,
   Z_NORTH_IN,
@@ -29,6 +31,7 @@ import {
   elementSpecOf,
   type ElementSpec,
 } from '../dims';
+import { Followers } from '../follow';
 import { HeatStrip } from '../heat';
 import { HOUSE_PARTS, type HousePart } from '../ids';
 import { groundY } from '../land/ground';
@@ -42,7 +45,7 @@ import { buildOtherRooms } from '../room/others';
 import { Caps, ClipSet } from '../section';
 import { makeRig } from '../sun';
 import { anchor, box, hotspots, viewFrom, type HotspotDef, type PartFraming } from '../world';
-import { buildEarthTube } from './earthtube';
+import { buildEarthTube, tubeRuns } from './earthtube';
 import { Z_RUN, buildHouse, roofUnder } from './shell';
 import { buildYard } from './yard';
 
@@ -76,9 +79,33 @@ export const FRAMING: Record<HousePart, PartFraming> = {
   foundation: { viewDir: viewFrom(8, 30) },
   'interior-partitions': { viewDir: viewFrom(45, 70) },
   chimney: { viewDir: viewFrom(18, 30) },
-  'earth-tube-intake': { viewDir: viewFrom(12, 40) },
-  'earth-tube-pipe': { viewDir: viewFrom(55, 160), frame: box(-18, -3, -9, 12, 0, -3) },
-  'earth-tube-drain': { viewDir: viewFrom(55, 20), frame: box(0.9, -2.2, -5.5, 2.3, 0.3, -3.9) },
+  // the what-if parts are framed on the window in the ground, from the north: the house is behind them
+  'earth-tube-intake': {
+    viewDir: viewFrom(22, 215),
+    frame: box(
+      TUBE_PLAN.xWest - 1.6,
+      groundY(TUBE_PLAN.xWest, TUBE_PLAN.zFar) - 0.8,
+      TUBE_PLAN.zFar - 1.6,
+      TUBE_PLAN.xWest + 1.6,
+      groundY(TUBE_PLAN.xWest, TUBE_PLAN.zFar) + 2.4,
+      TUBE_PLAN.zFar + 1.6,
+    ),
+  },
+  'earth-tube-pipe': {
+    viewDir: viewFrom(58, 195),
+    frame: box(TUBE_PIT.x0, -3.0, TUBE_PIT.z0, TUBE_PIT.x1, 0.8, TUBE_PIT.z1),
+  },
+  'earth-tube-drain': {
+    viewDir: viewFrom(38, 165),
+    frame: box(
+      TUBE_PLAN.xEast - 1.5,
+      tubeRuns()[TUBE_PLAN.runs - 1]!.y - 0.6,
+      tubeRuns()[TUBE_PLAN.runs - 1]!.z - 0.25,
+      TUBE_PLAN.xEast - 0.1,
+      groundY(TUBE_PLAN.xEast, Z_NORTH - 0.7) + 0.35,
+      tubeRuns()[TUBE_PLAN.runs - 1]!.z + 1.15,
+    ),
+  },
 };
 
 const HOTSPOTS: HotspotDef[] = [
@@ -119,9 +146,10 @@ export const EXPLODE: Record<HousePart, [number, number, number]> = {
   'interior-partitions': [0, 0.9, 0],
   'floor-slab': [0, -1.2, 0],
   foundation: [0, -3.0, 0],
-  'earth-tube-intake': [0, 1.6, 0],
-  'earth-tube-pipe': [0, -1.5, 0],
-  'earth-tube-drain': [0, -2.2, 0],
+  // the buried parts come up out of their window in the ground, each to its own height
+  'earth-tube-intake': [0, 1.4, 0],
+  'earth-tube-pipe': [0, 3.4, 0],
+  'earth-tube-drain': [0, 2.0, 0],
 };
 
 export interface HouseScene extends SceneModule<HouseState> {
@@ -132,7 +160,7 @@ export interface HouseScene extends SceneModule<HouseState> {
   yard: ReturnType<typeof buildYard>;
   living: ReturnType<typeof buildLiving>;
   strip: HeatStrip;
-  drawn: { flap: number; snow: number; cut: boolean; spec: ElementSpec };
+  drawn: { flap: number; snow: number; cut: boolean; tube: boolean; spec: ElementSpec };
   scenery(): THREE.Object3D[];
   trees(): Placement[];
 }
@@ -173,11 +201,11 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
   scene.add(world);
 
   // ---- the land: a block with its strata on the four sides, the boulders, a few trees, the yard
-  const land = buildBlock({ ...BLOCK, strata: mats.strata });
-  world.add(land.top, land.skirts!);
+  const land = buildBlock({ ...BLOCK, strata: mats.strata, hole: TUBE_PIT });
+  world.add(land.top, land.skirts!, land.lid!);
   const rocks = boulderMesh(
     [
-      ...scatterBoulders(11, 18, { x0: -24, x1: 24, z0: -22, z1: -9 }, { x0: -5, x1: 7, z0: -30, z1: 30 }, 0.5, 2.2),
+      ...scatterBoulders(11, 18, { x0: -24, x1: 24, z0: -22, z1: -9 }, { x0: -12, x1: 7, z0: -30, z1: 30 }, 0.5, 2.2),
       ...scatterBoulders(23, 9, { x0: -24, x1: 24, z0: 8, z1: 28 }, { x0: -14, x1: 8, z0: -30, z1: 30 }, 0.3, 0.9),
     ],
     mats.granite,
@@ -212,7 +240,7 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
     placements([
       [-11, 12, 1.0],
       [-14, 18, 1.2],
-      [-8, -8, 1.2],
+      [-11, -9, 1.2],
       [8, -9, 1.0],
       [-17, 3, 1.0],
       [-6, 20, 0.9],
@@ -227,11 +255,12 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
   world.add(house.root);
   const living = buildLiving(mats, spec0, { floorAndCeiling: false });
   for (const id of Object.keys(living.parts) as (keyof typeof living.parts)[]) world.add(living.parts[id]);
-  world.add(living.furniture, living.roomLight, buildOtherRooms(mats));
+  const others = buildOtherRooms(mats);
+  world.add(living.furniture, living.roomLight, others);
 
   // ---- the earth tube
-  const tube = buildEarthTube(mats);
-  world.add(tube.intake, tube.pipe, tube.drain);
+  const tube = buildEarthTube(mats, land.hole!);
+  world.add(tube.intake, tube.pipe, tube.drain, tube.pit);
 
   // ---- the air in the nine bays
   const flowHolder = new THREE.Group();
@@ -361,13 +390,71 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
   const elementCaps = addElementCaps(caps, capsParent, mats, strip, 0, spec0, () => 'collector-element');
   void L0;
 
+  // ---- the east gable: with the section on, the east half of the house is taken away, and the gable with it. A part the visitor can choose has to be readable in every view, so the gable stays as a pale ghost with its edges
+  // drawn, out of the section's reach: the part to select, outlined, when the cut is on; plain render when it is off.
+  const gableMesh = house.pieces['east-gable-wall']!;
+  const gableMat = (gableMesh.material as THREE.MeshStandardMaterial).clone();
+  gableMat.userData = { noShare: true };
+  gableMat.side = THREE.DoubleSide;
+  gableMesh.material = gableMat;
+  gableMesh.userData.notClipped = true;
+  const gableEdges = new THREE.LineSegments(
+    new THREE.EdgesGeometry(gableMesh.geometry, 25),
+    new THREE.LineBasicMaterial({ color: 0x7d7566, transparent: true, opacity: 0.8 }),
+  );
+  gableEdges.name = 'east-gable-edges';
+  gableEdges.raycast = () => {};
+  gableEdges.visible = false;
+  house.groups['east-gable'].add(gableEdges);
+  const setGable = (cut: boolean): void => {
+    gableMat.transparent = cut;
+    gableMat.opacity = cut ? 0.14 : 1;
+    gableMat.depthWrite = !cut;
+    gableEdges.visible = cut;
+  };
+
   // ---- registered parts
-  const earthParts = ['earth-tube-intake', 'earth-tube-pipe', 'earth-tube-drain'] as const;
   const groups: Record<HousePart, THREE.Object3D> = { ...house.groups } as Record<HousePart, THREE.Object3D>;
   groups['earth-tube-intake'] = tube.intake;
   groups['earth-tube-pipe'] = tube.pipe;
   groups['earth-tube-drain'] = tube.drain;
   for (const id of HOUSE_PARTS) registry.add(id, groups[id], V(...EXPLODE[id]), undefined, FRAMING[id]);
+
+  // ---- what is not a part follows the part that carries it: hidden with it, exploded with it (the kit moves the parts, never the props round them). The yard's things stand on the land, which is not a part: they stay.
+  const followers = new Followers();
+  {
+    const mine = living.parts;
+    const hung = living.mounts;
+    // the floor carries the furniture, the other rooms' beds and kitchen, the recorder's desk, the armchair, and the floor's finish
+    followers.add(hung.floor, 'floor-slab');
+    followers.add(others, 'floor-slab');
+    followers.add(mine['chart-recorder'], 'floor-slab');
+    followers.add(mine['armchair'], 'floor-slab');
+    for (const n of ['floor-tile', 'floor-oak']) followers.add(house.pieces[n]!, 'floor-slab');
+    // the north wall carries the heater and its panel, the thermostat, the vent, a picture and the skirting
+    for (const id of ['electric-heater', 'electric-panel', 'thermostat', 'fresh-air-vent'] as const)
+      followers.add(mine[id], 'north-wall');
+    followers.add(hung.north, 'north-wall');
+    followers.add(house.pieces['skirting-north']!, 'north-wall');
+    // the cross walls carry a coat and a picture
+    followers.add(hung.west, 'interior-partitions');
+    followers.add(hung.east, 'interior-partitions');
+    // the south wall's inner face carries the curtains, its plate with the ducts' holes, the instruments' jet and return
+    followers.add(hung.south, 'collector-element');
+    for (const id of [
+      'inner-wall-face',
+      'warm-air-jet',
+      'floor-return',
+      'room-air-probe',
+      'room-surface-probes',
+    ] as const)
+      followers.add(mine[id], 'collector-element');
+    // the ceiling hangs under the roof's insulation and carries the lamp
+    followers.add(house.pieces['ceiling']!.parent!, 'roof-insulation');
+    followers.add(mine['room-ceiling'], 'roof-insulation');
+    // the balcony's chair and pots
+    followers.add(yard.balcony, 'entrance-balcony');
+  }
   clip.clip(world);
   // the instruments' beads and leads lie in the plane: shown only while the section is on, never clipped
   for (const o of house.collector.cutOnly) o.userData.notClipped = true;
@@ -398,9 +485,9 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
   at('earth-tube-pipe', tube.route[1]!.clone().setY(groundY(tube.route[1]!.x, tube.route[1]!.z) + 0.1));
   at('earth-tube-drain', tube.drainAt);
 
-  const drawn = { flap: 0, snow: 0, cut: false, spec };
+  const drawn = { flap: 0, snow: 0, cut: false, tube: false, spec };
+  let gableCut = false;
   let flapNow = 0;
-  let tubeShown = true;
   const mod: HouseScene = {
     id: 'house',
     scene,
@@ -416,12 +503,14 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
     drawn,
     scenery: () => [land.top, land.skirts!, rocks],
     trees: () => [...pines.placements, ...oaks.placements, ...bushes.placements],
-    home: { position: V(24, 10, 28), target: V(0, 1.8, 0.6) },
+    // The opening is the overview: the kit frames the world once it is built, from this direction, on the box of every part (the earth tube's window in the ground north of the house included). The camera stands south-south-east
+    // and a little above, 24° off the south front's normal, so that the glass front reads square on, the cut faces and the stair show, and the front fills the width of a phone.
+    home: { position: V(15.3, 15.5, 34.9), target: V(0, 1.8, 0.6) },
     minDistance: 0.3,
     maxDistance: 120,
     near: 0.06,
     far: 400,
-    homePadding: 0.45,
+    homePadding: 0.8,
     declutter: true,
     update(s, dt, view) {
       const p = opts.params?.();
@@ -468,21 +557,20 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
       });
       yard.update(view.time, p?.wind ?? 2);
 
-      // the section: on with the tool
+      // the section: on with the tool. The instruments' beads and leads lie in the plane: shown while it is on, and only while their part is
       clip.set(view.cutaway);
       drawn.cut = view.cutaway;
       caps.update(view.cutaway, registry);
-      for (const o of house.collector.cutOnly) o.visible = view.cutaway;
+      for (const o of house.collector.cutOnly)
+        o.visible = view.cutaway && Followers.drawn(registry, registry.partOf(o) ?? '');
 
-      // the earth tube exists only in its scenario: off, its three parts collapse to a point in the house (the kit sets a part's display state back every frame, so it cannot be hidden that way): they are not drawn,
-      // cannot be hit, and do not count in the overview's frame
-      const wantTube = !!p?.earthTube;
-      if (wantTube !== tubeShown) {
-        for (const id of earthParts) {
-          groups[id].visible = wantTube;
-          groups[id].scale.setScalar(wantTube ? 1 : 1e-4);
-        }
-        tubeShown = wantTube;
+      // the earth tube is always drawn, pale: it is a what-if, and the scenario makes it firm. Never collapsed, never hidden: it has its size, its box and its place in every view
+      tube.setOn(!!p?.earthTube);
+      drawn.tube = !!p?.earthTube;
+      followers.update(registry);
+      if (gableCut !== view.cutaway) {
+        gableCut = view.cutaway;
+        setGable(gableCut);
       }
     },
   };

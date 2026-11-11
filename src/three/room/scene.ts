@@ -24,6 +24,7 @@ import {
 import { ROOM_PARTS, type RoomPart } from '../ids';
 import { Z_RUN, buildHouse } from '../house/shell';
 import { makeMaterials } from '../materials';
+import { Followers } from '../follow';
 import { Caps, ClipSet } from '../section';
 import { makeRig } from '../sun';
 import { anchor, box, hotspots, viewFrom, type HotspotDef, type PartFraming } from '../world';
@@ -190,6 +191,9 @@ export function createRoomScene(opts: RoomOptions = {}): RoomScene {
   flowHolder.add(flow.group);
 
   for (const id of ROOM_PARTS) registry.add(id, groups[id], V(...EXPLODE[id]), undefined, FRAMING[id]);
+  // the furniture stands on the room's floor: with the floor isolated away, or exploded, it goes with it
+  const followers = new Followers();
+  followers.add(living.mounts.floor, 'room-floor');
 
   // ---- labels
   const anchors: Record<string, THREE.Object3D> = {};
@@ -211,20 +215,43 @@ export function createRoomScene(opts: RoomOptions = {}): RoomScene {
   at('armchair', -1.95, 0.85, 2.05);
 
   // ---- the north wall and the cross walls stand aside by the side the camera is on: seen from outside, a wall goes to a pale ghost (the camera is inside the room at home, and sees them whole)
-  const wallSides: { mat: THREE.MeshStandardMaterial; visibleFrom: (c: THREE.Vector3) => boolean }[] = [
+  // What hangs on a wall goes with it: seen from outside, the wall is a pale ghost, and a heater, a panel, a window, a door or a picture left solid in front of it would hang in the air. Each wall carries its own fixtures
+  // (they are put back when the camera is on the room's side again); what stands on the floor stays.
+  const onWall: Record<'north' | 'west' | 'east', THREE.Object3D[]> = {
+    north: [
+      groups['electric-heater'],
+      groups['electric-panel'],
+      groups['thermostat'],
+      groups['fresh-air-vent'],
+      living.mounts.north,
+      house.groups['north-window'],
+      house.pieces['skirting-north']!,
+    ],
+    west: [living.mounts.west, house.pieces['door-west']!],
+    east: [living.mounts.east, house.pieces['door-east']!],
+  };
+  const wallSides: {
+    side: 'north' | 'west' | 'east';
+    mat: THREE.MeshStandardMaterial;
+    visibleFrom: (c: THREE.Vector3) => boolean;
+  }[] = [
     {
+      side: 'north',
       mat: house.pieces['north-wall']!.material as THREE.MeshStandardMaterial,
       visibleFrom: (c) => c.z > Z_NORTH + WALL * 0.5,
     },
     {
+      side: 'west',
       mat: house.pieces['partition-west']!.material as THREE.MeshStandardMaterial,
       visibleFrom: (c) => c.x > LIVING_X0 + 0.05,
     },
     {
+      side: 'east',
       mat: house.pieces['partition-east']!.material as THREE.MeshStandardMaterial,
       visibleFrom: (c) => c.x < LIVING_X1 - 0.05,
     },
   ];
+  const wallSolid = { north: true, west: true, east: true };
   // a wall that the camera goes through fades to its ghost and back over a fifth of a second, not in one frame (the clock is the view's)
   const opacity = new Map<THREE.Material, number>();
   let clock = 0;
@@ -250,6 +277,11 @@ export function createRoomScene(opts: RoomOptions = {}): RoomScene {
           w.mat.needsUpdate = true;
         }
         w.mat.depthWrite = next > 0.6;
+      }
+      const solid = (opacity.get(w.mat) ?? 1) > 0.5;
+      if (solid !== wallSolid[w.side]) {
+        wallSolid[w.side] = solid;
+        for (const o of onWall[w.side]) o.visible = solid;
       }
     }
     // the ceiling is hidden from above (and its lamp with it) unless it is shown on its own
@@ -309,6 +341,7 @@ export function createRoomScene(opts: RoomOptions = {}): RoomScene {
         forwardFlow: s.flowDir > 0 && s.flapOpen < 0.5,
       });
       caps.update(true, null);
+      followers.update(registry);
     },
   };
   return mod;

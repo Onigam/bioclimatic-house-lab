@@ -24,6 +24,8 @@ export interface Yard {
   group: THREE.Group;
   /** Things that stand on the ground, with where: for the tests (the lowest point of each against the land). */
   grounded: { object: THREE.Object3D; x: number; z: number }[];
+  /** The chair, the pots and the boots on the balcony, in a group of their own: they stand on the balcony, not on the land, and follow it (hidden with it, exploded with it). */
+  balcony: THREE.Group;
   /** The washing, swayed by the wind. */
   wash: THREE.Mesh[];
   update(time: number, wind: number): void;
@@ -201,11 +203,14 @@ export function buildYard(mats: Mats): Yard {
   }
 
   // ---- on the balcony: a chair, two pots of geraniums and a pair of boots at the rail
+  const balcony = new THREE.Group();
+  balcony.name = 'balcony-things';
+  group.add(balcony);
   {
     const chair = buildChair(mats);
     chair.position.set(bayX(RECESS_BAYS[0]!) + 0.3, 0.0, Z_SOUTH + 0.65);
     chair.rotation.y = Math.PI - 0.35;
-    group.add(chair);
+    balcony.add(chair);
     for (const [x, z] of [
       [bayX(RECESS_BAYS[1]!) + BAY * 0.38, Z_SOUTH + BALCONY.depth - 0.28],
       [bayX(RECESS_BAYS[0]!) - BAY * 0.38, Z_SOUTH + BALCONY.depth - 0.28],
@@ -230,7 +235,7 @@ export function buildYard(mats: Mats): Yard {
       }
       pot.add(part(joined(bloom), plain(0xc93a3a, 0.6)));
       pot.position.set(x, 0, z);
-      group.add(pot);
+      balcony.add(pot);
     }
   }
 
@@ -246,6 +251,7 @@ export function buildYard(mats: Mats): Yard {
   return {
     group,
     grounded,
+    balcony,
     wash,
     update(time, wind) {
       const a = 0.04 + 0.025 * Math.min(1, wind / 4);

@@ -37,7 +37,8 @@ export const WORLD = {
   house: {
     /** The section through the sample collector bay: always offered. */
     cutaway: true,
-    partPadding: 2.6,
+    /** A chosen part is framed by the sphere of its box times this: 1.6 puts the 15 m south front at about two fifths of a wide view and over half of a phone's (it was 2.6, and the front stood at 64 m, a quarter of the picture). */
+    partPadding: 1.6,
     stepFrame: { padding: 1.6, minRadius: 1.0 },
     /** X-ray opens the shells: the roof, the walls, the slab and the front glass; the collectors, the ducts, the partitions, the tube stay. */
     xrayShell: (id: string): boolean =>

@@ -133,3 +133,55 @@ export function labelBoxes(
       };
     });
 }
+
+/**
+ * Where the kit puts the camera when a part is chosen (`Stage.frameParts` for one part: its frame box, its own direction, the sphere fit with the world's `partPadding`), in a view of `size`, and the share of the free view
+ * that the part's own box covers across and up. Used by the tests to keep a chosen part framed close enough to read and inside the picture.
+ */
+export function partView(
+  mod: SceneModule<HouseState>,
+  id: string,
+  size: Size,
+  padding: number,
+  toolbar = 0,
+): { distance: number; across: number; up: number; inside: boolean } {
+  const narrow = narrowness(size);
+  const free = { w: size.w, h: size.h - toolbar * narrow };
+  const vFov = (FOV * Math.PI) / 180;
+  const half = Math.tan(vFov / 2);
+  const fov =
+    toolbar > 0
+      ? 2 * Math.atan(Math.min((half * free.h) / size.h, (half * free.w) / size.h))
+      : Math.min(vFov, 2 * Math.atan(half * (size.w / size.h)));
+  const reg = mod.registry;
+  const frame = reg.frameBounds(id);
+  const radius = Math.max(0.03, frame.getBoundingSphere(new THREE.Sphere()).radius);
+  const center = frame.getCenter(new THREE.Vector3());
+  const dir = (reg.get(id)?.viewDir ?? new THREE.Vector3(0.4, 0.4, 0.8)).clone().normalize();
+  const distance = Math.min(mod.maxDistance, Math.max(mod.minDistance, (radius * padding) / Math.sin(fov / 2)));
+  const camera = new THREE.PerspectiveCamera(
+    (2 * Math.atan((half * free.h) / size.h) * 180) / Math.PI,
+    free.w / free.h,
+    0.01,
+    1e6,
+  );
+  camera.position.copy(center).addScaledVector(dir, distance);
+  camera.lookAt(center);
+  camera.updateMatrixWorld(true);
+  camera.updateProjectionMatrix();
+  const box = reg.bounds(id);
+  const xs: number[] = [];
+  const ys: number[] = [];
+  let inside = true;
+  for (const x of [box.min.x, box.max.x])
+    for (const y of [box.min.y, box.max.y])
+      for (const z of [box.min.z, box.max.z]) {
+        const p = new THREE.Vector3(x, y, z).project(camera);
+        xs.push(p.x);
+        ys.push(p.y);
+        if (p.z > 1 || p.z < -1) inside = false;
+      }
+  const across = (Math.max(...xs) - Math.min(...xs)) / 2;
+  const up = (Math.max(...ys) - Math.min(...ys)) / 2;
+  return { distance, across, up, inside };
+}

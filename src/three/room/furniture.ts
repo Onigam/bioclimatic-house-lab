@@ -372,7 +372,12 @@ export function buildCurtains(mats: Mats, spread = 0.5): THREE.Group {
     m.position.set(s * spread, H / 2, 0);
     g.add(m);
   }
+  // the rod, and the two brackets that carry it off the wall: they reach back 7 cm, to the wall's face where the group is placed
   g.add(part(bx(-spread - 0.3, H + 0.03, -0.02, spread + 0.3, H + 0.045, 0.02), mats.brass));
+  for (const s of [-1, 1])
+    g.add(
+      part(bx(s * (spread + 0.26) - 0.012, H + 0.015, -0.02, s * (spread + 0.26) + 0.012, H + 0.06, 0.07), mats.brass),
+    );
   return g;
 }
 
