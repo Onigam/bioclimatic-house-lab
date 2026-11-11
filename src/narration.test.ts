@@ -351,6 +351,10 @@ describe('the starting-point label follows the values (qa D14)', () => {
     const sim = new HouseSim();
     runCue(sim, 'flap', 'summer');
     expect(sim.params.preset).toBe('custom');
+    // the clock runs between the two cues, as it does in the browser: the engine writes the day and the hour back into the parameters after every step
+    const hour = sim.params.hour;
+    sim.step(0.5);
+    expect(sim.params.hour, 'the clock has moved').not.toBe(hour);
     runCue(sim, 'flap', 'winter');
     expect(sim.params.preset).toBe('prototype-1967');
     // the same from another starting point: the label that comes back is the one the values are
@@ -592,6 +596,8 @@ describe.each(Object.keys(scripts))('narration script %s', (lang) => {
       for (const [, arg] of labCues) {
         const [name = '', ...rest] = arg.split(':');
         expect(runCue(sim, name, rest.join(':') || undefined), `${s.id}: ${arg}`).toBe(true);
+        // the clock runs while the voice speaks (an hour a second: the day and the hour move in the parameters)
+        sim.step(0.5);
       }
       expect(sim.params.preset, `${s.id} ends on « ${sim.params.preset} »`).toBe('prototype-1967');
       expect(startingPointOf(sim), s.id).toBe('prototype-1967');

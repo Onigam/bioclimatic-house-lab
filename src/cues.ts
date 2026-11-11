@@ -98,8 +98,11 @@ export function planCue(name: string, arg?: string): CuePlan {
   }
 }
 
-/** What a starting point is made of: the clock's own controls (speed, running, slow motion) and the label itself are not part of it. */
-const NOT_A_VALUE = ['slowMo', 'timeScale', 'running', 'preset'];
+/**
+ * What a starting point is made of: not the clock's own controls (speed, running, slow motion), not the label itself, and not the day and the hour either, which the engine writes back after every step as the clock runs
+ * (the first version compared them, and a restore never gave the label back in the browser, where the hour had moved on, while the tests, whose clock stands still, passed).
+ */
+const NOT_A_VALUE = ['slowMo', 'timeScale', 'running', 'preset', 'day', 'hour'];
 
 /**
  * The starting point whose values the simulation holds exactly, or null. A hand restore at the end of a segment (`flap:winter`, `vents:open`, `sheets:2`, `setpoint:20`, `earthtube:off`) puts every value back, but the engine
