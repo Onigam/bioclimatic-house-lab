@@ -86,7 +86,7 @@
       "scope": "part:access-road",
       "title": "Road",
       "scene": "site",
-      "text": "A dirt road, at the foot of the meadow. No source mentions it: it is an honest piece of scenery, composed so that you can read distances. [[isolate:on]] On its own, it gives the scale of the house and its twin. [[isolate:off]] Yet a wall of more than sixty-three tonnes does not come from nowhere: its materials arrived this way."
+      "text": "A dirt road, at the foot of the meadow. No source mentions it: it is an honest piece of scenery, composed so that you can read distances. [[isolate:on]] Alone on stage, it gives the scale of the house and its twin. [[isolate:off]] Yet a wall of more than sixty-three tonnes does not come from nowhere: its materials did arrive by lorry."
     },
     {
       "id": "part-solar-furnace",
@@ -100,7 +100,7 @@
       "scope": "part:heliostat-terraces",
       "title": "Heliostats",
       "scene": "site",
-      "text": "Sixty-three flat mirrors, on terraces in front of the furnace. Each one sets itself between the sun and the furnace, so that the light always lands on the same spot. [[lab:hour:8]] [[lab:speed:600]] Watch them turn together! At night they park facing the ground. Our wall, by contrast, takes the sun as it comes, and keeps it. [[lab:preset:prototype-1967]]"
+      "text": "Sixty-three flat mirrors, on terraces in front of the furnace. Each one tilts at every moment, so that the light always lands on the same spot. [[lab:hour:8]] [[lab:speed:600]] Watch them turn together! At night they park facing the ground. Our wall, by contrast, takes the sun as it comes, and keeps it. [[lab:preset:prototype-1967]]"
     },
     {
       "id": "part-solar-houses-1974",
@@ -142,7 +142,7 @@
       "scope": "part:entrance-recess",
       "title": "Entrance recess",
       "scene": "house",
-      "text": "In the middle of the front, two bays hollowed out: a glazed door, at the back of a recess, where the collector stops. [[xray:on]] Let’s make the front transparent: the door appears. [[xray:off]] It comes from a single photograph: its sizes are estimated. Double glazing of the time loses about three watts per square metre per degree."
+      "text": "In the middle of the front, two bays hollowed out: a glazed door, at the back of a recess, where the collector stops. [[xray:on]] The front turns transparent: here is the door. [[xray:off]] It comes from a single photograph: its sizes are estimated. Double glazing of the time loses about three watts per square metre per degree."
     },
     {
       "id": "part-entrance-balcony",
@@ -184,7 +184,7 @@
       "scope": "part:north-window",
       "title": "North window",
       "scene": "house",
-      "text": "A small window in the back wall: light, without sun. Few windows to the north, and small ones, advises an American architect. [[xray:on]] Let’s make the wall transparent: the window stays, with the convector beneath it. [[xray:off]] No source gives its size. In the calculation, it is counted with the other losses."
+      "text": "A small window in the back wall: light, without sun. Few windows to the north, and small ones, advises an American architect. [[xray:on]] The wall turns transparent: the window stays, with the convector beneath it. [[xray:off]] No source gives its size. In the calculation, it is counted with the other losses."
     },
     {
       "id": "part-pitched-roof",
@@ -226,7 +226,7 @@
       "scope": "part:chimney",
       "title": "Chimney",
       "scene": "house",
-      "text": "A brick flue, on the roof. What is it for? Nobody says. The heating is electric: a vent, perhaps, or a leftover. No guess is read from any source. [[xray:on]] Let’s make the roof transparent: the chimney stays, resting on the ceiling, with nothing under it. [[xray:off]] In the calculation, it does nothing. A question mark drawn in brick!"
+      "text": "A brick flue, on the roof. What is it for? Nobody says. The heating is electric: a vent, perhaps, or a leftover. No guess is read from any source. [[xray:on]] The roof fades away: the chimney stays, resting on the ceiling, with nothing under it. [[xray:off]] In the calculation, it does nothing. A question mark drawn in brick!"
     },
     {
       "id": "part-earth-tube-intake",
@@ -296,7 +296,7 @@
       "scope": "part:upper-duct",
       "title": "Upper duct",
       "scene": "wall",
-      "text": "A tunnel fifty-six centimetres by eleven, near the ceiling: the hot air of the gap passes through it. [[flows:on]] Why two ducts, and not one? A single one would let hot air rise and cold air fall in the same hole: they would get in each other’s way. With one below and one above, the column turns one way only. [[flows:off]] The jet stays warm two hours after the sun."
+      "text": "The hot air comes out here: a tunnel fifty-six centimetres by eleven, near the ceiling. [[flows:on]] Why two ducts, and not one? A single one would let hot air rise and cold air fall in the same hole: they would get in each other’s way. With one below and one above, the column turns one way only. [[flows:off]] The jet stays warm two hours after the sun."
     },
     {
       "id": "part-lower-duct",
@@ -352,7 +352,7 @@
       "scope": "part:inner-wall-face",
       "title": "Inner face of the wall",
       "scene": "room",
-      "text": "The back of the wall, room side: barely warm, and almost still. [[xray:on]] Let’s make the floor, the ceiling and this face transparent: the ducts appear behind. [[xray:off]] [[lab:scenario:christmas-1974]] On the twenty-fourth of December, hardly any sun. Yet the wall gives back nearly five times what it received: four hundred and seventy-eight per cent! That is not a mistake: it is the sun of the day before, still in the concrete. Our model finds three hundred and sixty-seven: the phenomenon, not the figure. [[lab:preset:prototype-1967]]"
+      "text": "The back of the wall, room side: barely warm, and almost still. [[xray:on]] The floor, the ceiling and this face fade away: behind them, the ducts. [[xray:off]] [[lab:scenario:christmas-1974]] On the twenty-fourth of December, hardly any sun. Yet the wall gives back nearly five times what it received: four hundred and seventy-eight per cent! That is not a mistake: it is the sun of the day before, still in the concrete. Our model finds three hundred and sixty-seven: the phenomenon, not the figure. [[lab:preset:prototype-1967]]"
     },
     {
       "id": "part-warm-air-jet",
@@ -422,7 +422,7 @@
       "scope": "part:room-floor",
       "title": "Floor",
       "scene": "room",
-      "text": "A tiled slab, about twenty centimetres thick. The floor, the partitions and the furniture together form a mass: a third of what the wall holds. [[xray:on]] Let’s make the floor transparent: beneath, the slab and the foundation. [[xray:off]] A heavy floor in the sun does what the wall does, only faster: that is direct gain. The wall moves less, and later."
+      "text": "A tiled slab, about twenty centimetres thick. The floor, the partitions and the furniture together form a mass: a third of what the wall holds. [[xray:on]] The floor fades away: beneath, the slab and the foundation. [[xray:off]] A heavy floor in the sun does what the wall does, only faster: that is direct gain. The wall moves less, and later."
     },
     {
       "id": "part-room-ceiling",

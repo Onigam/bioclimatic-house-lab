@@ -86,7 +86,7 @@
       "scope": "part:access-road",
       "title": "Route",
       "scene": "site",
-      "text": "Une route de terre, au bas du pré. Aucune source n’en parle : c’est un décor honnête, composé pour qu’on lise les distances. [[isolate:on]] Isolée, elle donne l’échelle de la maison et de sa jumelle. [[isolate:off]] Pourtant, un mur de plus de soixante-trois tonnes ne vient pas de nulle part : ses matériaux sont arrivés par là."
+      "text": "Une route de terre, au bas du pré. Aucune source n’en parle : c’est un décor honnête, composé pour qu’on lise les distances. [[isolate:on]] Seule en scène, elle donne l’échelle de la maison et de sa jumelle. [[isolate:off]] Pourtant, un mur de plus de soixante-trois tonnes ne vient pas de nulle part : ses matériaux sont bien arrivés par camion."
     },
     {
       "id": "part-solar-furnace",
@@ -100,7 +100,7 @@
       "scope": "part:heliostat-terraces",
       "title": "Héliostats",
       "scene": "site",
-      "text": "Soixante-trois miroirs plans, sur des terrasses devant le four. Chacun se place entre le soleil et le four, pour que la lumière retombe toujours au même point. [[lab:hour:8]] [[lab:speed:600]] Regardez-les tourner ensemble ! La nuit, ils se rangent face au sol. Notre mur, lui, reçoit le soleil comme il vient, et le garde. [[lab:preset:prototype-1967]]"
+      "text": "Soixante-trois miroirs plans, sur des terrasses devant le four. Chacun s’incline à chaque instant, pour que la lumière retombe toujours au même point. [[lab:hour:8]] [[lab:speed:600]] Regardez-les tourner ensemble ! La nuit, ils se rangent face au sol. Notre mur, lui, reçoit le soleil comme il vient, et le garde. [[lab:preset:prototype-1967]]"
     },
     {
       "id": "part-solar-houses-1974",
@@ -142,7 +142,7 @@
       "scope": "part:entrance-recess",
       "title": "Entrée en retrait",
       "scene": "house",
-      "text": "Au milieu de la façade, deux travées creusées : une porte vitrée, au fond d’un retrait, là où le capteur s’arrête. [[xray:on]] Mettons la façade en transparence : la porte apparaît. [[xray:off]] Elle ne vient que d’une photographie : ses mesures sont estimées. Un double vitrage de l’époque perd environ trois watts par mètre carré et par degré."
+      "text": "Au milieu de la façade, deux travées creusées : une porte vitrée, au fond d’un retrait, là où le capteur s’arrête. [[xray:on]] La façade devient transparente : voici la porte. [[xray:off]] Elle ne vient que d’une photographie : ses mesures sont estimées. Un double vitrage de l’époque perd environ trois watts par mètre carré et par degré."
     },
     {
       "id": "part-entrance-balcony",
@@ -184,7 +184,7 @@
       "scope": "part:north-window",
       "title": "Fenêtre nord",
       "scene": "house",
-      "text": "Une petite fenêtre sur le mur du fond : de la lumière, sans soleil. Peu de fenêtres au nord, et petites, conseille un architecte américain. [[xray:on]] Mettons le mur en transparence : la fenêtre reste, avec le convecteur sous elle. [[xray:off]] Aucune source n’en donne les mesures. Dans le calcul, elle est comptée avec les autres pertes."
+      "text": "Une petite fenêtre sur le mur du fond : de la lumière, sans soleil. Peu de fenêtres au nord, et petites, conseille un architecte américain. [[xray:on]] Le mur devient transparent : la fenêtre reste, avec le convecteur sous elle. [[xray:off]] Aucune source n’en donne les mesures. Dans le calcul, elle est comptée avec les autres pertes."
     },
     {
       "id": "part-pitched-roof",
@@ -226,7 +226,7 @@
       "scope": "part:chimney",
       "title": "Cheminée",
       "scene": "house",
-      "text": "Un conduit de brique, sur le toit. À quoi sert-il ? Personne ne le dit. Le chauffage est électrique : une ventilation, peut-être, ou un reste. Aucune hypothèse n’est lue. [[xray:on]] Mettons le toit en transparence : la cheminée reste, posée sur le plafond, avec rien sous elle. [[xray:off]] Dans le calcul, elle ne fait rien. Un point d’interrogation dessiné en brique !"
+      "text": "Un conduit de brique, sur le toit. À quoi sert-il ? Personne ne le dit. Le chauffage est électrique : une ventilation, peut-être, ou un reste. Aucune hypothèse n’est lue. [[xray:on]] Le toit s’efface : la cheminée reste, posée sur le plafond, avec rien sous elle. [[xray:off]] Dans le calcul, elle ne fait rien. Un point d’interrogation dessiné en brique !"
     },
     {
       "id": "part-earth-tube-intake",
@@ -296,7 +296,7 @@
       "scope": "part:upper-duct",
       "title": "Conduit haut",
       "scene": "wall",
-      "text": "Un tunnel de cinquante-six centimètres sur onze, près du plafond : l’air chaud de la lame passe par là. [[flows:on]] Pourquoi deux conduits, et pas un ? Un seul laisserait l’air chaud monter et l’air froid descendre dans le même trou : ils se gêneraient. Avec un en bas et un en haut, la colonne tourne dans un seul sens. [[flows:off]] Le jet reste chaud deux heures après le soleil."
+      "text": "L’air chaud sort par ici : un tunnel de cinquante-six centimètres sur onze, près du plafond. [[flows:on]] Pourquoi deux conduits, et pas un ? Un seul laisserait l’air chaud monter et l’air froid descendre dans le même trou : ils se gêneraient. Avec un en bas et un en haut, la colonne tourne dans un seul sens. [[flows:off]] Le jet reste chaud deux heures après le soleil."
     },
     {
       "id": "part-lower-duct",
@@ -352,7 +352,7 @@
       "scope": "part:inner-wall-face",
       "title": "Face intérieure du mur",
       "scene": "room",
-      "text": "Le dos du mur, côté pièce : à peine tiède, et presque immobile. [[xray:on]] Mettons le sol, le plafond et cette face en transparence : les conduits apparaissent, derrière. [[xray:off]] [[lab:scenario:christmas-1974]] Le vingt-quatre décembre, presque pas de soleil. Pourtant, le mur rend presque cinq fois ce qu’il a reçu : quatre cent soixante-dix-huit pour cent ! Ce n’est pas une erreur : c’est le soleil de la veille, encore dans le béton. Notre modèle trouve trois cent soixante-sept : le phénomène, pas le chiffre. [[lab:preset:prototype-1967]]"
+      "text": "Le dos du mur, côté pièce : à peine tiède, et presque immobile. [[xray:on]] Le sol, le plafond et cette face s’effacent : derrière, les conduits. [[xray:off]] [[lab:scenario:christmas-1974]] Le vingt-quatre décembre, presque pas de soleil. Pourtant, le mur rend presque cinq fois ce qu’il a reçu : quatre cent soixante-dix-huit pour cent ! Ce n’est pas une erreur : c’est le soleil de la veille, encore dans le béton. Notre modèle trouve trois cent soixante-sept : le phénomène, pas le chiffre. [[lab:preset:prototype-1967]]"
     },
     {
       "id": "part-warm-air-jet",
@@ -422,7 +422,7 @@
       "scope": "part:room-floor",
       "title": "Sol",
       "scene": "room",
-      "text": "Une dalle carrelée, d’environ vingt centimètres. Le sol, les cloisons, les meubles forment ensemble une masse : un tiers de ce que tient le mur. [[xray:on]] Mettons le sol en transparence : dessous, la dalle et la fondation. [[xray:off]] Un sol lourd au soleil fait ce que fait le mur, en plus vite : c’est le gain direct. Le mur bouge moins, et plus tard."
+      "text": "Une dalle carrelée, d’environ vingt centimètres. Le sol, les cloisons, les meubles forment ensemble une masse : un tiers de ce que tient le mur. [[xray:on]] Le sol s’efface : dessous, la dalle et la fondation. [[xray:off]] Un sol lourd au soleil fait ce que fait le mur, en plus vite : c’est le gain direct. Le mur bouge moins, et plus tard."
     },
     {
       "id": "part-room-ceiling",
