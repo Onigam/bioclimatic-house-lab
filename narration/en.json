@@ -23,7 +23,7 @@
       "scope": "scene:site",
       "title": "The plateau: a furnace that concentrates, a house that keeps",
       "scene": "site",
-      "text": "[[home]] The plateau of Odeillo: a mown meadow, on a slope of rock. [[frame:prototype-house,twin-house]] Here is the house of nineteen sixty-seven, and its twin. [[frame:solar-furnace,heliostat-terraces]] Further off, the solar furnace and its mirrors: the same laboratory built one to concentrate the sun, the other to keep it. [[frame:solar-houses-1974]] Higher up, the houses of nineteen seventy-four: you can see them, you cannot go in. [[home]] [[lab:day:355]] [[lab:hour:8]] [[lab:speed:600]] Watch the sun: two arcs, the low one of December, the high one of June. The mirrors follow it, and the snow follows the month. All of it comes from the sun of our model. The plateau itself is composed: nothing here says where the houses stand. [[lab:preset:prototype-1967]]"
+      "text": "[[home]] The plateau of Odeillo: a mown meadow, on a slope of rock. [[frame:prototype-house,twin-house]] Here is the house of nineteen sixty-seven, and its twin. [[frame:solar-furnace,heliostat-terraces]] Further off, the solar furnace and its mirrors: the same laboratory built one to concentrate the sun, the other to keep it. [[frame:solar-houses-1974]] Higher up, the houses of nineteen seventy-four: you can see them, you cannot go in. [[home]] [[lab:day:355]] [[lab:hour:9]] [[lab:speed:600]] Watch the sun: two arcs, the low one of December, the high one of June. The mirrors follow it, and the snow follows the month. All of it comes from the sun of our model. The plateau itself is composed: nothing here says where the houses stand. [[lab:preset:prototype-1967]]"
     },
     {
       "id": "scene-house",
@@ -100,7 +100,7 @@
       "scope": "part:heliostat-terraces",
       "title": "Heliostats",
       "scene": "site",
-      "text": "Sixty-three flat mirrors, on terraces in front of the furnace. Each one tilts at every moment, so that the light always lands on the same spot. [[lab:hour:8]] [[lab:speed:600]] Watch them turn together! At night they park facing the ground. Our wall, by contrast, takes the sun as it comes, and keeps it. [[lab:preset:prototype-1967]]"
+      "text": "Sixty-three flat mirrors, on terraces in front of the furnace. Each one tilts at every moment, so that the light always lands on the same spot. [[lab:hour:9]] [[lab:speed:600]] Watch them turn together! At night they park facing the ground. Our wall, by contrast, takes the sun as it comes, and keeps it. [[lab:preset:prototype-1967]]"
     },
     {
       "id": "part-solar-houses-1974",
@@ -310,7 +310,7 @@
       "scope": "part:summer-flap",
       "title": "Summer flap",
       "scene": "wall",
-      "text": "[[flows:on]] In winter, this plate lies flat: the hot air goes into the room. [[lab:flap:summer]] In summer, it hangs in front of the duct: the air escapes through the head of the wall, drawing the room’s air with it. [[lab:flap:winter]] And at night? [[lab:scenario:the-night]] Our model finds that the air of the gap falls back towards the room, on clear winter nights: twelve litres a second, for five hours. Watch the air dots: they come back down! The curves of nineteen sixty-seven show none. The model keeps its result, and says so. [[flows:off]] [[lab:preset:prototype-1967]]"
+      "text": "[[flows:on]] In winter, this plate lies flat: the hot air goes into the room. [[lab:flap:summer]] In summer, it hangs in front of the duct: the air escapes through the head of the wall, drawing the room’s air with it. [[lab:flap:winter]] And at night? [[lab:scenario:the-night]] Our model finds that the air of the gap falls back towards the room, on clear winter nights: twelve litres a second, for five hours. The curves of nineteen sixty-seven show none. The model keeps its result, and says so. Watch the air dots: they come back down! [[flows:off]] [[lab:preset:prototype-1967]]"
     },
     {
       "id": "part-head-beam",

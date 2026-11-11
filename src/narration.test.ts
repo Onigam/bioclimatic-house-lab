@@ -199,7 +199,7 @@ const FIGURES: [value: number, said: number, tolerance: number, fr: RegExp, en: 
   [FIG.gains.v, 500, 0, /cinq cents watts/, /five hundred watts/, ['part-armchair']],
   [FIG.glassSpacing.v, 25, 0.5, /vingt-cinq millimètres/, /twenty-five millimetres/, ['part-inner-glazing']],
   [FIG.frameFace.v, 22, 0.5, /vingt-deux millimètres/, /twenty-two millimetres/, ['part-steel-frame']],
-  [FIG.thermoCount.v, 6, 0, /en noie six/, /sets six in the concrete/, ['part-wall-thermocouples']],
+  [FIG.thermoCount.v, 6, 0, /met six perles/, /sets six in the concrete/, ['part-wall-thermocouples']],
   [
     FIG.surfacesT.v,
     18,
@@ -477,7 +477,7 @@ describe.each(Object.keys(scripts))('narration script %s', (lang) => {
       fr: /notre (modèle|calcul|simulation|scénario|estimation)|le modèle/i,
       en: /our (model|calculation|simulation|scenario|estimate)|the model/i,
     }[lang as 'fr' | 'en'];
-    expect(where(ours).length).toBeLessThanOrEqual(32);
+    expect(where(ours).length).toBeLessThanOrEqual(24);
   });
 
   it('is anonymous: no person, channel, company, brand, institution or series, in a text or a title', () => {

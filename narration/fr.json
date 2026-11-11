@@ -23,14 +23,14 @@
       "scope": "scene:site",
       "title": "Le plateau : un four qui concentre, une maison qui garde",
       "scene": "site",
-      "text": "[[home]] Le plateau d’Odeillo : un pré fauché, sur une pente de roche. [[frame:prototype-house,twin-house]] Voici la maison de mille neuf cent soixante-sept, et sa jumelle. [[frame:solar-furnace,heliostat-terraces]] Plus loin, le four solaire et ses miroirs. Le même laboratoire a bâti l’un pour concentrer le soleil, l’autre pour le garder. [[frame:solar-houses-1974]] Plus haut, les maisons de mille neuf cent soixante-quatorze : on les voit, on n’y entre pas. [[home]] [[lab:day:355]] [[lab:hour:8]] [[lab:speed:600]] Regardez le soleil : deux arcs, le bas de décembre, le haut de juin. Les miroirs le suivent, et la neige suit le mois. Tout cela vient du soleil de notre modèle. Le plateau, lui, est composé : rien ici ne dit où se trouvent les maisons. [[lab:preset:prototype-1967]]"
+      "text": "[[home]] Le plateau d’Odeillo : un pré fauché, sur une pente de roche. [[frame:prototype-house,twin-house]] Voici la maison de mille neuf cent soixante-sept, et sa jumelle. [[frame:solar-furnace,heliostat-terraces]] Plus loin, le four solaire et ses miroirs. Le même laboratoire a bâti l’un pour concentrer le soleil, l’autre pour le garder. [[frame:solar-houses-1974]] Plus haut, les maisons de mille neuf cent soixante-quatorze : on les voit, on n’y entre pas. [[home]] [[lab:day:355]] [[lab:hour:9]] [[lab:speed:600]] Regardez le soleil : deux arcs, le bas de décembre, le haut de juin. Les miroirs le suivent, et la neige suit le mois. Tout cela vient du soleil de notre modèle. Le plateau, lui, est composé : rien ici ne dit où se trouvent les maisons. [[lab:preset:prototype-1967]]"
     },
     {
       "id": "scene-house",
       "scope": "scene:house",
       "title": "La maison, coupée par le milieu d’une travée",
       "scene": "house",
-      "text": "[[home]] La machine, coupée par le milieu d’une travée : la moitié est a été retirée. [[frame:south-facade]] Au sud, neuf travées de capteur, une de fenêtre, deux d’entrée. [[frame:pitched-roof,roof-insulation]] Au-dessus, le toit, et son isolant, posé sur le plafond. [[frame:floor-slab,foundation]] Dessous, la dalle, et la fondation qui porte tout. [[home]] [[flows:on]] Voici l’air : il entre par le bas, monte derrière chaque vitre, et ressort en haut. [[lab:flap:summer]] Un clapet, et c’est l’été : l’air part dehors. [[lab:flap:winter]] [[flows:off]] La maison dessinée reste celle de mille neuf cent soixante-sept : les curseurs changent les chiffres, pas la forme. Et le puits canadien, ce tuyau enterré, n’a jamais existé ici : c’est un et si, qui n’apparaît que dans son scénario."
+      "text": "[[home]] La machine, coupée par le milieu d’une travée : la moitié est a été retirée. [[frame:south-facade]] Au sud, neuf travées de capteur, une de fenêtre, deux d’entrée. [[frame:pitched-roof,roof-insulation]] Au-dessus, le toit, et son isolant, posé sur le plafond. [[frame:floor-slab,foundation]] Dessous, la dalle, et la fondation qui porte tout. [[home]] [[flows:on]] Voici l’air : il entre par le bas, monte derrière chaque vitre, et ressort en haut. [[lab:flap:summer]] Un clapet, et c’est l’été : l’air part dehors. [[lab:flap:winter]] [[flows:off]] La maison dessinée reste celle de mille neuf cent soixante-sept : les curseurs changent les chiffres, pas la forme. Et le puits canadien, ce tuyau enterré, n’a jamais existé ici : c’est une hypothèse, qui n’apparaît que dans son propre scénario."
     },
     {
       "id": "scene-wall",
@@ -72,7 +72,7 @@
       "scope": "part:meadow-clearing",
       "title": "Clairière",
       "scene": "site",
-      "text": "Tout commence par ce pré : une maison solaire a besoin d’un sud dégagé, avant même d’avoir un mur noir. Le soleil d’hiver y passe sans rien devant. [[lab:day:355]] En décembre, la neige couvre l’herbe ; [[lab:day:180]] en juin, elle a fondu. Cette neige n’est qu’un décor : notre calcul n’en tient pas compte. [[lab:preset:prototype-1967]] Gardez ce pré fauché, et la ligne du sud bien basse."
+      "text": "Tout commence par ce pré : une maison solaire a besoin d’un sud dégagé, avant même d’avoir un mur noir. Le soleil d’hiver y arrive sans obstacle. [[lab:day:355]] En décembre, la neige couvre l’herbe ; [[lab:day:180]] en juin, elle a fondu. Cette neige n’est qu’un décor : notre calcul n’en tient pas compte. [[lab:preset:prototype-1967]] Gardez ce pré fauché, et la ligne du sud bien basse."
     },
     {
       "id": "part-tree-clumps",
@@ -100,7 +100,7 @@
       "scope": "part:heliostat-terraces",
       "title": "Héliostats",
       "scene": "site",
-      "text": "Soixante-trois miroirs plans, sur des terrasses devant le four. Chacun s’incline à chaque instant, pour que la lumière retombe toujours au même point. [[lab:hour:8]] [[lab:speed:600]] Regardez-les tourner ensemble ! La nuit, ils se rangent face au sol. Notre mur, lui, reçoit le soleil comme il vient, et le garde. [[lab:preset:prototype-1967]]"
+      "text": "Soixante-trois miroirs plans, sur des terrasses devant le four. Chacun s’incline à chaque instant, pour que la lumière retombe toujours au même point. [[lab:hour:9]] [[lab:speed:600]] Regardez-les tourner ensemble ! La nuit, ils se rangent face au sol. Notre mur, lui, reçoit le soleil comme il vient, et le garde. [[lab:preset:prototype-1967]]"
     },
     {
       "id": "part-solar-houses-1974",
@@ -310,7 +310,7 @@
       "scope": "part:summer-flap",
       "title": "Clapet d’été",
       "scene": "wall",
-      "text": "[[flows:on]] En hiver, cette plaque est à plat : l’air chaud entre dans la pièce. [[lab:flap:summer]] En été, elle pend devant le conduit : l’air s’échappe par la tête du mur, en tirant celui de la pièce. [[lab:flap:winter]] Et la nuit ? [[lab:scenario:the-night]] Notre modèle trouve que l’air de la lame retombe vers la pièce, par les nuits claires d’hiver : douze litres par seconde, cinq heures. Regardez les points d’air : ils redescendent ! Les courbes de mille neuf cent soixante-sept n’en montrent aucun. Le modèle garde son résultat, et le dit. [[flows:off]] [[lab:preset:prototype-1967]]"
+      "text": "[[flows:on]] En hiver, cette plaque est à plat : l’air chaud entre dans la pièce. [[lab:flap:summer]] En été, elle pend devant le conduit : l’air s’échappe par la tête du mur, en tirant celui de la pièce. [[lab:flap:winter]] Et la nuit ? [[lab:scenario:the-night]] Notre modèle trouve que l’air de la lame retombe vers la pièce, par les nuits claires d’hiver : douze litres par seconde, cinq heures. Les courbes de mille neuf cent soixante-sept n’en montrent aucun. Le modèle garde son résultat, et le dit. Regardez les points d’air : ils redescendent ! [[flows:off]] [[lab:preset:prototype-1967]]"
     },
     {
       "id": "part-head-beam",
@@ -331,7 +331,7 @@
       "scope": "part:wall-thermocouples",
       "title": "Thermocouples du mur",
       "scene": "wall",
-      "text": "Des fils de cuivre et de constantan, d’un dixième de millimètre : si fins qu’ils changent à peine ce qu’ils mesurent. Deux métaux soudés au bout, et leur contact donne une petite tension, qui dépend de la température. [[isolate:on]] Notre dessin en noie six dans le béton, de la peinture à la pièce : on suit la vague de perle en perle. [[isolate:off]] Une perle cassée y reste pour toujours."
+      "text": "Des fils de cuivre et de constantan, d’un dixième de millimètre : si fins qu’ils changent à peine ce qu’ils mesurent. Deux métaux soudés au bout, et leur contact donne une petite tension, qui dépend de la température. [[isolate:on]] Notre dessin met six perles dans le béton, de la peinture à la pièce : on suit la vague de perle en perle. [[isolate:off]] Une perle cassée y reste pour toujours."
     },
     {
       "id": "part-air-thermocouples",
