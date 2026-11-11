@@ -30,7 +30,7 @@
       "scope": "scene:house",
       "title": "La maison, coupée par le milieu d’une travée",
       "scene": "house",
-      "text": "[[home]] La machine, coupée par le milieu d’une travée : la moitié est a été retirée. [[frame:south-facade]] Au sud, lues sur une photographie : neuf travées de capteur, une de fenêtre, deux d’entrée. [[frame:pitched-roof,roof-insulation]] Au-dessus, le toit, et son isolant, posé sur le plafond. [[frame:floor-slab,foundation]] Dessous, la dalle, et la fondation qui porte tout. [[home]] [[flows:on]] Voici l’air : il entre par le bas, monte derrière chaque vitre, et ressort en haut. [[lab:flap:summer]] Un clapet, et c’est l’été : l’air part dehors. [[lab:flap:winter]] [[flows:off]] La maison dessinée reste celle de mille neuf cent soixante-sept : les curseurs changent les chiffres, pas la forme. Et le puits canadien, ce tuyau enterré : aucune source n’en mentionne ici. C’est une hypothèse : dessiné pâle, il ne se raffermit que dans son propre scénario."
+      "text": "[[home]] La machine, coupée par le milieu d’une travée : la moitié est a été retirée. [[frame:south-facade]] Au sud, lues sur une photographie : neuf travées de capteur, une de fenêtre, deux d’entrée. [[frame:pitched-roof,roof-insulation]] Au-dessus, le toit, et son isolant, posé sur le plafond. [[frame:floor-slab,foundation]] Dessous, la dalle, et la fondation qui porte tout. [[home]] [[flows:on]] Voici l’air : il entre par le bas, monte derrière chaque vitre, et ressort en haut. [[lab:flap:summer]] Un clapet, et c’est l’été : l’air part dehors. [[lab:flap:winter]] [[flows:off]] La maison dessinée reste celle de mille neuf cent soixante-sept : les curseurs changent les chiffres, pas la forme. Et le puits canadien, ce tuyau enterré : aucune source n’en mentionne ici. C’est une hypothèse : dessiné pâle, il n’est ferme que dans son propre scénario."
     },
     {
       "id": "scene-wall",
@@ -233,7 +233,7 @@
       "scope": "part:earth-tube-intake",
       "title": "Prise d’air (et si…)",
       "scene": "house",
-      "text": "[[lab:earthtube:on]] La voilà qui se raffermit : le début du puits canadien. Une colonne sur la pente, avec un capuchon contre la pluie, et une grille contre les insectes et les feuilles. À cette altitude, la neige compte pour la hauteur de la prise. [[lab:earthtube:off]]"
+      "text": "[[lab:earthtube:on]] La voilà plus ferme : le début du puits canadien. Une colonne sur la pente, avec un capuchon contre la pluie, et une grille contre les insectes et les feuilles. À cette altitude, la neige compte pour la hauteur de la prise. [[lab:earthtube:off]]"
     },
     {
       "id": "part-earth-tube-pipe",
