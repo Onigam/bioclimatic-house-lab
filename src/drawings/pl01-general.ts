@@ -12,6 +12,7 @@ import {
   ELEMENT_1967,
   EAVE,
   FRAME,
+  GROUND_NORTH,
   GROUND_SOUTH,
   HEAD_BAND,
   LENGTH,
@@ -150,7 +151,8 @@ function plan(d: Drawing): View {
   });
   v.leader(P(LIVING_X0 + 0.9, Z_NORTH_IN + 1.3), 0, 26, l('salon', 'living room'), { size: 1.9 });
   v.leader(P(CHIMNEY.x, CHIMNEY.z), -8, -16, l('cheminée', 'chimney'), { size: 1.9 });
-  v.leader(P(nwx.x, Z_NORTH + 0.1), 0, -14, l('fenêtre nord', 'north window'), { size: 1.9 });
+  // to the left of the length's figure, which sits above the middle of the north wall
+  v.leader(P(nwx.x, Z_NORTH + 0.1), -22, -13, l('fenêtre nord', 'north window'), { size: 1.9 });
   v.leader(P(X_WEST + WALL / 2, -0.9), 8, 3, l('pignon', 'gable'), { size: 1.9 });
   v.caption(E(0, -9.0), l('PLAN, AU NIVEAU DE LA DALLE', 'PLAN, AT THE LEVEL OF THE SLAB'), '1:110');
   return v;
@@ -311,7 +313,11 @@ export const generalSheet: DrawingSheet = {
           cat(mL(BALCONY.depth, '*', 1), ' × ', mL(BALCONY.width, '*', 1)),
         ],
         [l('Escalier, nombre de marches', 'Stair, number of steps'), cat(String(RISERS), '*')],
-        [l('Chute du terrain', 'Fall of the ground'), mL(-GROUND_SOUTH, '*', 1)],
+        [l('Sol sous la dalle, façade sud', 'Ground below the slab, south front'), mL(-GROUND_SOUTH, '*', 1)],
+        [
+          l('Chute du terrain sur l’emprise', 'Fall of the ground over the footprint'),
+          mL(GROUND_NORTH - GROUND_SOUTH, '*', 1),
+        ],
       ],
       { size: 1.8 },
     );
