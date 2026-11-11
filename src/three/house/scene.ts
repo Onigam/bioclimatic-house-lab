@@ -487,6 +487,9 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
 
   const drawn = { flap: 0, snow: 0, cut: false, tube: false, spec };
   let gableCut = false;
+  let lidOpen = true;
+  const lidMat = land.lid!.material as THREE.MeshStandardMaterial;
+  const LID_OPACITY = lidMat.opacity;
   let flapNow = 0;
   const phoneLabels = crowdLabels(HOTSPOTS, anchors);
   const mod: HouseScene = {
@@ -569,6 +572,15 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
       // the earth tube is always drawn, pale: it is a what-if, and the scenario makes it firm. Never collapsed, never hidden: it has its size, its box and its place in every view
       tube.setOn(!!p?.earthTube);
       drawn.tube = !!p?.earthTube;
+      // the window in the ground is open while the pipe is drawn; with the pipe isolated away or not yet built, the lid closes it: the ground is whole, with nothing in it to look at
+      const open = Followers.drawn(registry, 'earth-tube-pipe');
+      if (open !== lidOpen) {
+        lidOpen = open;
+        lidMat.opacity = open ? LID_OPACITY : 1;
+        lidMat.transparent = open;
+        lidMat.depthWrite = !open;
+        tube.pit.visible = open;
+      }
       followers.update(registry);
       if (gableCut !== view.cutaway) {
         gableCut = view.cutaway;

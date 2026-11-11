@@ -430,6 +430,23 @@ describe('D2, D16: the earth tube is a buried pipe in a window of the ground', (
       ).toBe(false);
   });
 
+  it('closes the window with an opaque lid when the pipe is isolated away, and opens it again', () => {
+    go(house);
+    const lid = H.tube.pit.parent!.children.find((c) => c.name === 'ground-window') as THREE.Mesh;
+    const mat = lid.material as THREE.MeshStandardMaterial;
+    expect(mat.transparent).toBe(true);
+    isolateOne(house.registry, 'foundation', 'hidden');
+    go(house, {}, {}, 2);
+    expect(mat.opacity).toBe(1);
+    expect(mat.transparent).toBe(false);
+    expect(H.tube.pit.visible).toBe(false);
+    house.registry.setAllDisplay('solid');
+    go(house, {}, {}, 2);
+    expect(mat.transparent).toBe(true);
+    expect(mat.opacity).toBeLessThan(0.7);
+    expect(H.tube.pit.visible).toBe(true);
+  });
+
   it('explodes up out of its window, each part to its own height, and comes back', () => {
     const reg = house.registry;
     reg.setAllFactors(1);
@@ -642,7 +659,7 @@ describe('D19: « Toutes » on a phone keeps the labels that have room', () => {
     ['room', room],
     ['site', site],
   ] as const) {
-    it(`${name}: puts the crowd labels away under 700 px, puts them back above, and never touches a main label`, () => {
+    it(`${name}: puts the crowd labels away under 1100 px, puts them back above, and never touches a main label`, () => {
       vi.stubGlobal('window', { innerWidth: 390 });
       go(mod);
       const anchorShown = (h: { anchor: THREE.Object3D }): boolean => h.anchor.visible;
