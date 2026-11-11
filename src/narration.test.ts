@@ -66,8 +66,8 @@ const ONCE: Record<string, Record<string, [RegExp, string]>> = {
   fr: {
     reconstruction: [/reconstitution pédagogique/i, 'intro'],
     noPlan: [/aucun plan à suivre/i, 'intro'],
-    figures: [/les autres viennent de notre simulation/i, 'intro'],
-    calculations: [/des calculs, pas des mesures/i, 'intro'],
+    figures: [/les autres viennent de données ouvertes/i, 'intro'],
+    calculations: [/aucun n’a été mesuré par nous/i, 'intro'],
     notTuned: [/ne l’avons pas réglée pour y arriver/i, 'intro'],
     sources: [/panneau Sources/i, 'intro'],
     honestAnswer: [/une bonne part, selon qui compte/i, 'intro'],
@@ -97,8 +97,8 @@ const ONCE: Record<string, Record<string, [RegExp, string]>> = {
   en: {
     reconstruction: [/educational reconstruction/i, 'intro'],
     noPlan: [/no plan to follow/i, 'intro'],
-    figures: [/the others come from our simulation/i, 'intro'],
-    calculations: [/calculations, not measurements/i, 'intro'],
+    figures: [/the others come from open data/i, 'intro'],
+    calculations: [/none was measured by us/i, 'intro'],
     notTuned: [/not tuned it to get there/i, 'intro'],
     sources: [/Sources panel/i, 'intro'],
     honestAnswer: [/a good part of the way, depending on who counts/i, 'intro'],
@@ -159,6 +159,12 @@ const WENT_PAST: Record<string, [RegExp, string][]> = {
     ],
     [/les inventeurs annoncent/i, 'the paper says the sun can save 60 to 70 per cent'],
     [/conseille un architecte/i, 'the architect kept window area to a minimum, the north above all'],
+    [/ni conduit, ni prise/i, 'the earth tube’s last run ends at the fresh-air grille in the 3D'],
+    [
+      /des calculs, pas des mesures/i,
+      'open data and our arithmetic are not all simulation or estimates: none was measured by us',
+    ],
+    [/nous lisons environ dix-sept/i, 'the 17.5 is derived from the paper’s figures, not read on a curve'],
   ],
   en: [
     [
@@ -181,6 +187,12 @@ const WENT_PAST: Record<string, [RegExp, string][]> = {
     ],
     [/the inventors announce/i, 'the paper says the sun can save 60 to 70 per cent'],
     [/advises an american architect/i, 'the architect kept window area to a minimum, the north above all'],
+    [/neither duct nor intake/i, 'the earth tube’s last run ends at the fresh-air grille in the 3D'],
+    [
+      /calculations, not measurements/i,
+      'open data and our arithmetic are not all simulation or estimates: none was measured by us',
+    ],
+    [/we read about seventeen/i, 'the 17.5 is derived from the paper’s figures, not read on a curve'],
   ],
 };
 
@@ -207,7 +219,11 @@ const KEPT_TO_THE_SOURCE: Record<string, [id: string, RegExp][]> = {
     ['part-east-gable', /ne laisse du pignon qu’un fantôme pâle/],
     ['scene-house', /dessiné pâle, il n’est ferme que/],
     ['part-earth-tube-intake', /la voilà plus ferme/],
-    ['part-room-surface-probes', /nous lisons environ dix-sept et demi/],
+    ['part-room-surface-probes', /nous calculons environ dix-sept et demi/],
+    ['intro', /données ouvertes, de notre simulation ou de nos estimations/],
+    ['part-fresh-air-vent', /sauf dans l’hypothèse du puits canadien, dont le dernier tronçon finit ici/],
+    ['part-granite-slope', /d’environ deux mètres : une estimation/],
+    ['part-earth-tube-pipe', /sous terre : nos estimations/],
     ['part-fresh-air-vent', /dans notre modèle, la position d’été/],
     ['part-electric-heater', /le soleil peut économiser soixante à soixante-dix pour cent/],
     ['part-roof-insulation', /ce qui compte le plus/],
@@ -235,7 +251,11 @@ const KEPT_TO_THE_SOURCE: Record<string, [id: string, RegExp][]> = {
     ['part-east-gable', /leaves only a pale ghost of the gable/],
     ['scene-house', /drawn pale, it firms up only in/],
     ['part-earth-tube-intake', /there it firms up/],
-    ['part-room-surface-probes', /we read about seventeen and a half/],
+    ['part-room-surface-probes', /we work out about seventeen and a half/],
+    ['intro', /open data, our simulation or our estimates/],
+    ['part-fresh-air-vent', /except in the what-if earth tube, whose last run ends here/],
+    ['part-granite-slope', /about two metres: an estimate/],
+    ['part-earth-tube-pipe', /underground: our estimates/],
     ['part-fresh-air-vent', /in our model, the summer position/],
     ['part-electric-heater', /the sun can save sixty to seventy per cent/],
     ['part-roof-insulation', /what counts most/],

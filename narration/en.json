@@ -16,7 +16,7 @@
       "scope": "intro",
       "title": "Introduction to the lab",
       "scene": "site",
-      "text": "[[home]] Picture a December night on the plateau of Odeillo. Outside, it is freezing. Inside, a great wall of black concrete is still warm, as if the midday sun had never left. [[frame:prototype-house]] Can a house really heat itself? Let’s follow one small ray of sunshine. [[scene:wall]] It passes through two sheets of glass, one after the other, [[frame:black-paint]] and lands on black paint: there, it turns into heat. [[frame:air-gap,upper-duct]] Two roads open before it. By the air: it rises behind the glass, and comes out hot through a duct, at the top. Quick work! [[frame:storage-wall]] Or through the concrete… and our ray chooses to take its time. There, heat does not jump: it walks, at about four centimetres an hour. Sixty centimetres of wall: some fifteen hours! [[scene:room]] It comes out on the room side in the dead of night, just when you feel the cold. [[scene:house]] That is the whole story: a ray, black paint, a wall with a memory… and a warm room in the small hours. [[home]] There are four views: the plateau, the house, the wall and the room. Click on a part: its sheet opens, and you can hear its story. Explode, X-ray, Section and Flows show the inside and follow the air. [[mode:assembly]] The assembly guide builds the house in twenty steps. [[mode:install]] The installation guide takes ten. [[mode:sim]] The simulation changes the thickness of the wall, the glass, the day, and runs twelve scenarios. [[mode:lessons]] Seven lessons, with quizzes, explain the physics. [[mode:plans]] Eight sheets gather the drawings. [[mode:explore]] One last thing: this lab is an educational reconstruction. It explains, it gives no plan to follow. The inventors’ figures are theirs. The others come from our simulation or our estimates: calculations, not measurements. Where it does not match the inventors’ measurements, we say so, and we have not tuned it to get there. The Sources panel says who said what. So, can a house heat itself? The honest answer: a good part of the way, depending on who counts, and what. [[select:none]] Go and see for yourself: the wall is still warm!"
+      "text": "[[home]] Picture a December night on the plateau of Odeillo. Outside, it is freezing. Inside, a great wall of black concrete is still warm, as if the midday sun had never left. [[frame:prototype-house]] Can a house really heat itself? Let’s follow one small ray of sunshine. [[scene:wall]] It passes through two sheets of glass, one after the other, [[frame:black-paint]] and lands on black paint: there, it turns into heat. [[frame:air-gap,upper-duct]] Two roads open before it. By the air: it rises behind the glass, and comes out hot through a duct, at the top. Quick work! [[frame:storage-wall]] Or through the concrete… and our ray chooses to take its time. There, heat does not jump: it walks, at about four centimetres an hour. Sixty centimetres of wall: some fifteen hours! [[scene:room]] It comes out on the room side in the dead of night, just when you feel the cold. [[scene:house]] That is the whole story: a ray, black paint, a wall with a memory… and a warm room in the small hours. [[home]] There are four views: the plateau, the house, the wall and the room. Click on a part: its sheet opens, and you can hear its story. Explode, X-ray, Section and Flows show the inside and follow the air. [[mode:assembly]] The assembly guide builds the house in twenty steps. [[mode:install]] The installation guide takes ten. [[mode:sim]] The simulation changes the thickness of the wall, the glass, the day, and runs twelve scenarios. [[mode:lessons]] Seven lessons, with quizzes, explain the physics. [[mode:plans]] Eight sheets gather the drawings. [[mode:explore]] One last thing: this lab is an educational reconstruction. It explains, it gives no plan to follow. The inventors’ figures are theirs. The others come from open data, our simulation or our estimates: none was measured by us. Where it does not match the inventors’ measurements, we say so, and we have not tuned it to get there. The Sources panel says who said what. So, can a house heat itself? The honest answer: a good part of the way, depending on who counts, and what. [[select:none]] Go and see for yourself: the wall is still warm!"
     },
     {
       "id": "scene-site",
@@ -65,7 +65,7 @@
       "scope": "part:granite-slope",
       "title": "Granite slope",
       "scene": "site",
-      "text": "The ground falls away to the south, by about two metres. [[isolate:on]] On its own, the slope shows itself: it gives the house its level slab, its steps, its balcony. [[isolate:off]] The granite is our choice: the photograph shows blocks, not what they are made of. Turn water away before the house, never against it."
+      "text": "The ground falls away to the south, by about two metres: an estimate. [[isolate:on]] On its own, the slope shows itself: it gives the house its level slab, its steps, its balcony. [[isolate:off]] The granite is our choice: the photograph shows blocks, not what they are made of. Turn water away before the house, never against it."
     },
     {
       "id": "part-meadow-clearing",
@@ -226,7 +226,7 @@
       "scope": "part:chimney",
       "title": "Chimney",
       "scene": "house",
-      "text": "Our drawing adds a brick flue: aerial views seem to show one. What is it for? Nobody says. The heating is electric: a vent, perhaps, or a leftover. No guess is read from any source. [[xray:on]] The roof fades away: the chimney stays, resting on the ceiling, with nothing under it. [[xray:off]] In the calculation, it does nothing. A question mark drawn in brick!"
+      "text": "Our drawing adds a brick flue: aerial views seem to show one. What is it for? Nobody says. The heating is electric: a vent, perhaps, or a leftover. [[xray:on]] The roof fades away: the chimney stays, resting on the ceiling, with nothing under it. [[xray:off]] In the calculation, it does nothing. A question mark drawn in brick!"
     },
     {
       "id": "part-earth-tube-intake",
@@ -240,7 +240,7 @@
       "scope": "part:earth-tube-pipe",
       "title": "Buried pipe (what if…)",
       "scene": "house",
-      "text": "[[lab:earthtube:on]] Fifty metres of pipe, two metres underground. At Odeillo, in January, the outside air is at minus one degree, and it leaves at three. In July, with fifteen outside, it leaves at ten. Over a year: six hundred and twenty-five kilowatt-hours, against a load of fifty-seven thousand. About one point of share. No earth tube measured on a house has reached us: these figures are the calculation’s. [[lab:earthtube:off]]"
+      "text": "[[lab:earthtube:on]] Fifty metres of pipe, two metres underground: our estimates. At Odeillo, in January, the outside air is at minus one degree, and it leaves at three. In July, with fifteen outside, it leaves at ten. Over a year: six hundred and twenty-five kilowatt-hours, against a load of fifty-seven thousand. About one point of share. No earth tube measured on a house has reached us: these figures are the calculation’s. [[lab:earthtube:off]]"
     },
     {
       "id": "part-earth-tube-drain",
@@ -261,7 +261,7 @@
       "scope": "part:inner-glazing",
       "title": "Inner glazing",
       "scene": "wall",
-      "text": "The second pane, near the wall, doubles the first, about twenty-five millimetres behind it: the paper only says two panes. [[isolate:on]] It is the one the hot air of the gap touches. [[isolate:off]] Both its faces are shut in between the frame, the other pane and the wall: they cannot be wiped. A design problem before a cleaning problem."
+      "text": "The second pane, near the wall, doubles the first, about twenty-five millimetres behind it: the paper only says two panes. [[isolate:on]] It is the one the hot air of the gap touches. [[isolate:off]] Both its faces are shut in between the frame, the other pane and the wall: they cannot be wiped."
     },
     {
       "id": "part-steel-frame",
@@ -380,7 +380,7 @@
       "scope": "part:electric-heater",
       "title": "Electric heater",
       "scene": "room",
-      "text": "The backup heating pays for what the sun, the wall and the people have not given. Over the heating season, our calculation has it pay fifty-three per cent of the load. The inventors say the sun can save sixty to seventy per cent, depending on the year. The model reaches the bottom of their range only if the site’s air is five degrees warmer than the calculation’s. It says so, and does not decide."
+      "text": "The backup heating pays for what the sun, the wall and the people have not given. Over the heating season, our calculation has it pay fifty-three per cent of the load. The inventors say the sun can save sixty to seventy per cent, depending on the year. The model reaches the bottom of their range only if the site’s air is five degrees warmer than the calculation’s."
     },
     {
       "id": "part-electric-panel",
@@ -401,7 +401,7 @@
       "scope": "part:room-surface-probes",
       "title": "Surface probes",
       "scene": "room",
-      "text": "A warm wall radiates to everything it sees: the floor, the ceiling, the neighbouring walls. What it gives depends on their temperature: eighteen degrees for our model. On the paper’s curves, we read about seventeen and a half. The two agree to within half a degree. [[isolate:on]] The two probes of our drawing are ours. [[isolate:off]] Stuck flat, in the shade: a badly stuck probe reads the air behind it."
+      "text": "A warm wall radiates to everything it sees: the floor, the ceiling, the neighbouring walls. What it gives depends on their temperature: eighteen degrees for our model. From the paper’s figures, we work out about seventeen and a half. The two agree to within half a degree. [[isolate:on]] The two probes of our drawing are ours. [[isolate:off]] Stuck flat, in the shade: a badly stuck probe reads the air behind it."
     },
     {
       "id": "part-chart-recorder",
@@ -415,7 +415,7 @@
       "scope": "part:fresh-air-vent",
       "title": "Fresh-air vent",
       "scene": "room",
-      "text": "A small low grille on the north wall, and behind it… nothing: we draw neither duct nor intake. Where did the fresh air come from? The sources are silent. The wall’s loop renews nothing: it takes back the room’s own air. [[lab:flap:summer]] In our model, the summer position draws the room’s air out two to three times an hour: the only renewal it shows. [[lab:flap:winter]] A real inlet cannot be guessed: it is drawn, and measured."
+      "text": "A small low grille on the north wall, and behind it… nothing, except in the what-if earth tube, whose last run ends here. Where did the fresh air come from? The sources are silent. The wall’s loop renews nothing: it takes back the room’s own air. [[lab:flap:summer]] In our model, the summer position draws the room’s air out two to three times an hour: the only renewal it shows. [[lab:flap:winter]] A real inlet cannot be guessed: it is drawn, and measured."
     },
     {
       "id": "part-room-floor",

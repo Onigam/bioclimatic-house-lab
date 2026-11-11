@@ -16,7 +16,7 @@
       "scope": "intro",
       "title": "Présentation du labo",
       "scene": "site",
-      "text": "[[home]] Imaginez une nuit de décembre, sur le plateau d’Odeillo. Dehors, il gèle. Dedans, un grand mur de béton noir est encore tiède, comme si le soleil de midi n’était jamais parti. [[frame:prototype-house]] Une maison peut-elle se chauffer seule ? Suivons un petit rayon de soleil. [[scene:wall]] Il traverse deux vitres, l’une après l’autre, [[frame:black-paint]] et tombe sur une peinture noire : là, il devient chaleur. [[frame:air-gap,upper-duct]] Deux chemins s’ouvrent à lui. Par l’air : il monte derrière la vitre, et ressort chaud par un conduit, en haut. Vite fait ! [[frame:storage-wall]] Ou par le béton… et notre rayon choisit la lenteur. Là, la chaleur ne saute pas : elle marche, à environ quatre centimètres par heure. Soixante centimètres de mur : une quinzaine d’heures ! [[scene:room]] Il sort côté pièce en pleine nuit, juste quand on a froid. [[scene:house]] Voilà toute l’histoire : un rayon, une peinture noire, un mur qui a de la mémoire… et une pièce tiède au petit matin. [[home]] Il y a quatre vues : le plateau, la maison, le mur et la pièce. Cliquez sur une pièce : sa fiche s’ouvre, et vous pouvez écouter son histoire. Éclaté, Transparence, Coupe et Flux montrent l’intérieur et suivent l’air. [[mode:assembly]] Le guide de montage bâtit la maison en vingt étapes. [[mode:install]] Celui d’installation en compte dix. [[mode:sim]] La simulation change l’épaisseur du mur, les vitres, le jour, et lance douze scénarios. [[mode:lessons]] Sept leçons, avec des quiz, expliquent la physique. [[mode:plans]] Huit planches réunissent les dessins. [[mode:explore]] Une dernière chose : ce laboratoire est une reconstitution pédagogique. Il explique, il ne donne aucun plan à suivre. Les chiffres des inventeurs sont les leurs. Les autres viennent de notre simulation ou de nos estimations : des calculs, pas des mesures. Là où elle ne retrouve pas les mesures des inventeurs, nous le disons, et nous ne l’avons pas réglée pour y arriver. Le panneau Sources dit qui a dit quoi. Alors, une maison peut-elle se chauffer seule ? La réponse honnête : une bonne part, selon qui compte, et quoi. [[select:none]] Allez voir par vous-même : le mur est encore tiède !"
+      "text": "[[home]] Imaginez une nuit de décembre, sur le plateau d’Odeillo. Dehors, il gèle. Dedans, un grand mur de béton noir est encore tiède, comme si le soleil de midi n’était jamais parti. [[frame:prototype-house]] Une maison peut-elle se chauffer seule ? Suivons un petit rayon de soleil. [[scene:wall]] Il traverse deux vitres, l’une après l’autre, [[frame:black-paint]] et tombe sur une peinture noire : là, il devient chaleur. [[frame:air-gap,upper-duct]] Deux chemins s’ouvrent à lui. Par l’air : il monte derrière la vitre, et ressort chaud par un conduit, en haut. Vite fait ! [[frame:storage-wall]] Ou par le béton… et notre rayon choisit la lenteur. Là, la chaleur ne saute pas : elle marche, à environ quatre centimètres par heure. Soixante centimètres de mur : une quinzaine d’heures ! [[scene:room]] Il sort côté pièce en pleine nuit, juste quand on a froid. [[scene:house]] Voilà toute l’histoire : un rayon, une peinture noire, un mur qui a de la mémoire… et une pièce tiède au petit matin. [[home]] Il y a quatre vues : le plateau, la maison, le mur et la pièce. Cliquez sur une pièce : sa fiche s’ouvre, et vous pouvez écouter son histoire. Éclaté, Transparence, Coupe et Flux montrent l’intérieur et suivent l’air. [[mode:assembly]] Le guide de montage bâtit la maison en vingt étapes. [[mode:install]] Celui d’installation en compte dix. [[mode:sim]] La simulation change l’épaisseur du mur, les vitres, le jour, et lance douze scénarios. [[mode:lessons]] Sept leçons, avec des quiz, expliquent la physique. [[mode:plans]] Huit planches réunissent les dessins. [[mode:explore]] Une dernière chose : ce laboratoire est une reconstitution pédagogique. Il explique, il ne donne aucun plan à suivre. Les chiffres des inventeurs sont les leurs. Les autres viennent de données ouvertes, de notre simulation ou de nos estimations : aucun n’a été mesuré par nous. Là où elle ne retrouve pas les mesures des inventeurs, nous le disons, et nous ne l’avons pas réglée pour y arriver. Le panneau Sources dit qui a dit quoi. Alors, une maison peut-elle se chauffer seule ? La réponse honnête : une bonne part, selon qui compte, et quoi. [[select:none]] Allez voir par vous-même : le mur est encore tiède !"
     },
     {
       "id": "scene-site",
@@ -65,7 +65,7 @@
       "scope": "part:granite-slope",
       "title": "Pente de granit",
       "scene": "site",
-      "text": "Le terrain tombe vers le sud, d’environ deux mètres. [[isolate:on]] Isolée, la pente se montre seule : c’est elle qui donne à la maison sa dalle de niveau, ses gradins, son balcon. [[isolate:off]] Le granit est notre choix : la photographie montre des blocs, pas leur nature. Détournez l’eau avant la maison, jamais contre elle."
+      "text": "Le terrain tombe vers le sud, d’environ deux mètres : une estimation. [[isolate:on]] Isolée, la pente se montre seule : c’est elle qui donne à la maison sa dalle de niveau, ses gradins, son balcon. [[isolate:off]] Le granit est notre choix : la photographie montre des blocs, pas leur nature. Détournez l’eau avant la maison, jamais contre elle."
     },
     {
       "id": "part-meadow-clearing",
@@ -226,7 +226,7 @@
       "scope": "part:chimney",
       "title": "Cheminée",
       "scene": "house",
-      "text": "Notre dessin ajoute un conduit de brique : les vues aériennes semblent en montrer un. À quoi sert-il ? Personne ne le dit. Le chauffage est électrique : une ventilation, peut-être, ou un reste. Aucune hypothèse n’est lue. [[xray:on]] Le toit s’efface : la cheminée reste, posée sur le plafond, avec rien sous elle. [[xray:off]] Dans le calcul, elle ne fait rien. Un point d’interrogation dessiné en brique !"
+      "text": "Notre dessin ajoute un conduit de brique : les vues aériennes semblent en montrer un. À quoi sert-il ? Personne ne le dit. Le chauffage est électrique : une ventilation, peut-être, ou un reste. [[xray:on]] Le toit s’efface : la cheminée reste, posée sur le plafond, avec rien sous elle. [[xray:off]] Dans le calcul, elle ne fait rien. Un point d’interrogation dessiné en brique !"
     },
     {
       "id": "part-earth-tube-intake",
@@ -240,7 +240,7 @@
       "scope": "part:earth-tube-pipe",
       "title": "Tuyau enterré (et si…)",
       "scene": "house",
-      "text": "[[lab:earthtube:on]] Cinquante mètres de tuyau, à deux mètres sous terre. À Odeillo, en janvier, l’air du dehors est à moins un degré, et il sort à trois. En juillet, à quinze dehors, il sort à dix. Sur une année : six cent vingt-cinq kilowattheures, pour une charge de cinquante-sept mille. Environ un point de part. Aucun puits canadien mesuré sur une maison ne nous est parvenu : ces chiffres sont ceux du calcul. [[lab:earthtube:off]]"
+      "text": "[[lab:earthtube:on]] Cinquante mètres de tuyau, à deux mètres sous terre : nos estimations. À Odeillo, en janvier, l’air du dehors est à moins un degré, et il sort à trois. En juillet, à quinze dehors, il sort à dix. Sur une année : six cent vingt-cinq kilowattheures, pour une charge de cinquante-sept mille. Environ un point de part. Aucun puits canadien mesuré sur une maison ne nous est parvenu : ces chiffres sont ceux du calcul. [[lab:earthtube:off]]"
     },
     {
       "id": "part-earth-tube-drain",
@@ -261,7 +261,7 @@
       "scope": "part:inner-glazing",
       "title": "Vitrage intérieur",
       "scene": "wall",
-      "text": "La seconde vitre, près du mur, double la première, à environ vingt-cinq millimètres : l’article dit seulement deux vitres. [[isolate:on]] C’est elle que l’air chaud de la lame touche. [[isolate:off]] Ses deux faces sont enfermées entre le cadre, l’autre vitre et le mur : on ne peut pas les essuyer. Un souci de conception, avant d’être un souci de lavage."
+      "text": "La seconde vitre, près du mur, double la première, à environ vingt-cinq millimètres : l’article dit seulement deux vitres. [[isolate:on]] C’est elle que l’air chaud de la lame touche. [[isolate:off]] Ses deux faces sont enfermées entre le cadre, l’autre vitre et le mur : on ne peut pas les essuyer."
     },
     {
       "id": "part-steel-frame",
@@ -380,7 +380,7 @@
       "scope": "part:electric-heater",
       "title": "Radiateur électrique",
       "scene": "room",
-      "text": "Le chauffage d’appoint paie ce que le soleil, le mur et les gens n’ont pas donné. Sur la saison de chauffe, notre calcul lui fait payer cinquante-trois pour cent de la charge. Les inventeurs disent que le soleil peut économiser soixante à soixante-dix pour cent, selon les années. Le modèle n’atteint le bas de leur fourchette que si l’air du site est plus chaud de cinq degrés que celui du calcul. Il le dit, il ne tranche pas."
+      "text": "Le chauffage d’appoint paie ce que le soleil, le mur et les gens n’ont pas donné. Sur la saison de chauffe, notre calcul lui fait payer cinquante-trois pour cent de la charge. Les inventeurs disent que le soleil peut économiser soixante à soixante-dix pour cent, selon les années. Le modèle n’atteint le bas de leur fourchette que si l’air du site est plus chaud de cinq degrés que celui du calcul."
     },
     {
       "id": "part-electric-panel",
@@ -401,7 +401,7 @@
       "scope": "part:room-surface-probes",
       "title": "Sondes de surface",
       "scene": "room",
-      "text": "Un mur chaud rayonne vers tout ce qu’il voit : le sol, le plafond, les murs voisins. Ce qu’il donne dépend de leur température : dix-huit degrés pour notre modèle. Sur les courbes de l’article, nous lisons environ dix-sept et demi. Les deux s’accordent à un demi-degré près. [[isolate:on]] Les deux sondes de notre dessin sont les nôtres. [[isolate:off]] Collées à plat, à l’ombre : une sonde mal collée lit l’air derrière elle."
+      "text": "Un mur chaud rayonne vers tout ce qu’il voit : le sol, le plafond, les murs voisins. Ce qu’il donne dépend de leur température : dix-huit degrés pour notre modèle. Avec les chiffres de l’article, nous calculons environ dix-sept et demi. Les deux s’accordent à un demi-degré près. [[isolate:on]] Les deux sondes de notre dessin sont les nôtres. [[isolate:off]] Collées à plat, à l’ombre : une sonde mal collée lit l’air derrière elle."
     },
     {
       "id": "part-chart-recorder",
@@ -415,7 +415,7 @@
       "scope": "part:fresh-air-vent",
       "title": "Entrée d’air frais",
       "scene": "room",
-      "text": "Une petite grille basse sur le mur nord, et derrière elle… rien : nous ne dessinons ni conduit, ni prise. D’où venait l’air neuf ? Les sources se taisent. La boucle du mur ne renouvelle rien : elle reprend l’air de la pièce. [[lab:flap:summer]] Dans notre modèle, la position d’été tire l’air de la pièce deux à trois fois par heure : le seul renouvellement qu’il montre. [[lab:flap:winter]] Une vraie entrée ne se devine pas : elle se dessine, et se mesure."
+      "text": "Une petite grille basse sur le mur nord, et derrière elle… rien, sauf dans l’hypothèse du puits canadien, dont le dernier tronçon finit ici. D’où venait l’air neuf ? Les sources se taisent. La boucle du mur ne renouvelle rien : elle reprend l’air de la pièce. [[lab:flap:summer]] Dans notre modèle, la position d’été tire l’air de la pièce deux à trois fois par heure : le seul renouvellement qu’il montre. [[lab:flap:winter]] Une vraie entrée ne se devine pas : elle se dessine, et se mesure."
     },
     {
       "id": "part-room-floor",
