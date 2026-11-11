@@ -168,10 +168,12 @@ describe('the lessons', () => {
     expect(en).toMatch(/renews nothing/);
     expect(en).toMatch(/has reached us/);
     expect(en).toMatch(/could only transcribe roughly/);
-    expect(en).toMatch(/radon zone 3, the highest of three/);
-    expect(en).toMatch(/checked on Légifrance and Géorisques/);
+    expect(en).toMatch(/Radon, a gas that comes out of the ground, can collect in spaces in contact with the earth/);
+    expect(en).toMatch(/Rules differ by country and site: ask your local authority/);
+    expect(en).not.toMatch(/zone 3|commune|Légifrance/);
     const all = LESSONS.flatMap((x) => x.body.map((b) => b.en)).join(' ');
-    expect((all.match(/radon/gi) ?? []).length).toBe(2);
-    expect((all.match(/zone 3/g) ?? []).length).toBe(1);
+    expect((all.match(/radon/gi) ?? []).length).toBe(1);
+    expect((all.match(/zone 3/g) ?? []).length).toBe(0);
+    expect((all.match(/ask your local authority/g) ?? []).length).toBe(1);
   });
 });

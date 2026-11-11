@@ -102,10 +102,26 @@ describe('no place beyond « Odeillo » is named: not a commune, a département,
   it('holds the rule on the Sources panel’s links: no address of a record, a town hall or a regional host', () => {
     const sources = everything.find(([f]) => f.endsWith('data/sources.ts'))![1];
     const hrefs = [...sources.matchAll(/'(https:\/\/[^']+)'/g)].map((m) => m[1]!);
-    expect(hrefs.length).toBeGreaterThan(20);
+    expect(hrefs.length).toBeGreaterThan(15);
     for (const href of hrefs) {
       expect(href).not.toMatch(/\/notice\//);
       expect(href).not.toMatch(/mairie|developpement-durable\.gouv\.fr/i);
+      // the furnace's pages print its address, its coordinates or its commune: it is credited by title and year, never linked
+      expect(href).not.toMatch(/cnrs\.fr|Four_solaire|odeillo/i);
+      // and no national text: the lab says that rules differ by country and site
+      expect(href).not.toMatch(/legifrance|georisques|journal-officiel/i);
     }
+  });
+
+  it('cites no national text of law or regulation: the lab is international and says that rules differ by country and site', () => {
+    const app = everything.filter(([f]) => !f.includes('/docs/'));
+    const found = app.flatMap(([file, text]) =>
+      /l[ée]gifrance|g[ée]orisques|\bRE ?2020\b|code du patrimoine|heritage code|\barr[êe]t[ée] du\b|order of \d+ \w+ \d{4}|\bJORF/i.test(
+        text,
+      )
+        ? [file]
+        : [],
+    );
+    expect(found).toEqual([]);
   });
 });

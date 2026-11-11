@@ -57,10 +57,10 @@ export const LAB_STRINGS = {
     'Comment lire les chiffres. Sans marque, un chiffre est rapporté par une source (l’article, un brevet, des données ouvertes), nommée en toutes lettres. † : calculé, à partir de chiffres publiés ou par le modèle, jamais réglé pour retrouver une source. * : estimé, les sources se taisent et le choix est le nôtre. « À l’œil » : lu sur une courbe publiée, à quelques pour cent près. Le modèle est simple, un mur, une lame d’air, une pièce : là où il ne retrouve pas une source, il le dit.',
     'How to read the figures. With no mark, a figure is reported by a source (the paper, a patent, open data), named in words. †: computed, from published figures or by the model, never set to match a source. *: estimated, the sources are silent and the choice is ours. “By eye”: read off a published curve, to within a few per cent. The model is simple, one wall, one air gap, one room: where it does not retrieve a source, it says so.',
   ],
-  lawTitle: ['Le droit et les normes : ce que nous en avons lu', 'The law and the standards: what we read of them'],
+  lawTitle: ['Le droit et les normes : les règles varient', 'The law and the standards: rules differ'],
   legal: [
-    'Rien de ce qui suit n’a été vérifié par un juriste, et ce n’est pas un avis juridique : chaque ligne dit comment nous l’avons atteinte. Les règles de votre pays s’appliquent, et ce sont celles des autorités qui protègent un bâtiment, de l’assureur et du professionnel qui signe.',
-    'None of what follows has been checked by a lawyer, and this is not legal advice: each line says how we reached it. The rules of your country apply, and they are those of the authorities that protect a building, of the insurer and of the professional who signs.',
+    'Ce n’est pas un avis juridique, et ce lab ne cite aucun texte national : les règles de votre pays et de votre site s’appliquent, celles de l’autorité locale, de l’assureur et du professionnel qui signe.',
+    'This is not legal advice, and this lab cites no national text: the rules of your country and your site apply, those of the local authority, of the insurer and of the professional who signs.',
   ],
   mainSource: ['Source principale :', 'Main source:'],
   mainSourceNote: [
@@ -68,8 +68,8 @@ export const LAB_STRINGS = {
     'the 1976 paper by the team that built it, on OSTI. None of the videos we looked at shows this house: the lab therefore has no main film. Its figures come from that paper, from open satellite and terrain data, from a few other measurements, and from our model.',
   ],
   sourcesNotLinked: [
-    'Ne sont pas liées ici, volontairement : les pages qui vendent des plans ou des documents. Nous ne reprenons aucune image ni aucun film d’aucune source, et nous ne situons les maisons du lab nulle part au-delà d’Odeillo : aucune adresse, aucune notice de bâtiment n’est liée.',
-    'Left unlinked on purpose: pages that sell plans or documents. We reuse no image and no film from any source, and we place the lab’s houses nowhere beyond Odeillo: no address and no building record is linked.',
+    'Ne sont pas liées ici, volontairement : les pages qui vendent des plans ou des documents, et celles qui donnent l’adresse ou les coordonnées d’un bâtiment, citées par leur titre et leur année. Nous ne reprenons aucune image ni aucun film d’aucune source, et nous ne situons les maisons du lab nulle part au-delà d’Odeillo : aucune adresse, aucune notice de bâtiment n’est liée.',
+    'Left unlinked on purpose: pages that sell plans or documents, and pages that give a building’s address or coordinates, credited by their title and year. We reuse no image and no film from any source, and we place the lab’s houses nowhere beyond Odeillo: no address and no building record is linked.',
   ],
   sourcesCredits: [
     'Merci à F. Trombe, J.-F. Robert, M. Cabanat et B. Sesolis, à J. Michel, l’architecte ; à D. Kelbaugh, B. Anderson, J. D. Balcomb et ses collègues de Los Alamos ; à W. Feist et au Passive House Institute ; à J. Pfafferott ; à E. S. Morse ; à PVGIS et à l’IGN ; à Stéphen Mure ; à Penn Ar Web, dont nous n’avons pas encore vu le film. Les conceptions citées restent celles de leurs auteurs. Les planches sont refaites d’après nos dimensions.',

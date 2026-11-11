@@ -291,7 +291,7 @@ describe('the sources', () => {
     ])
       expect(labels, who).toMatch(new RegExp(who));
     expect(items.some((s) => /osti\.gov\/servlets\/purl\/7287449/.test(s.href ?? ''))).toBe(true);
-    expect(LAW.length).toBeGreaterThanOrEqual(5);
+    expect(LAW.length).toBeGreaterThanOrEqual(2);
   });
 
   it('writes every label in both languages: what we write around a title is translated, a title keeps its language, the quotes follow the language', () => {

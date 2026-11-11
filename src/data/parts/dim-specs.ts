@@ -28,9 +28,6 @@ export const DIM_SPECS: Record<string, Spec[]> = {
     sp('Hauteur du miroir dessinée', 'Mirror’s height drawn', lenM('*', SITE.furnace.mirrorHeight)),
     sp('Profondeur dessinée', 'Depth drawn', lenM('', SITE.furnace.depth)),
   ],
-  'solar-houses-1974': [
-    sp('Boîte dessinée', 'Box drawn', lenM('*', SITE.monument.length, SITE.monument.depth, SITE.monument.height)),
-  ],
   'heliostat-terraces': [
     sp('Premier rang, devant le four', 'First row, in front of the furnace', lenM('*', Math.abs(SITE.field.z0))),
     sp('Écart entre deux terrasses', 'Gap between two terraces', lenM('*', SITE.field.dz)),

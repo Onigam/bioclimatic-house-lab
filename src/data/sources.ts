@@ -4,8 +4,7 @@
 // the national database by its home page, never by the page of a building's record (those print an address); no link, label or text names a commune, a département, a region or a town of the houses (`src/guard.test.ts` holds it).
 // `src/data/about.ts` builds the panel from this for `about` in src/lab.ts.
 
-export type Access =
-  'read' | 'summary' | 'abstract' | 'extract' | 'search' | 'found' | 'transcript' | 'queried' | 'title' | 'none';
+export type Access = 'read' | 'summary' | 'abstract' | 'search' | 'transcript' | 'queried' | 'title' | 'none';
 
 /** A label that is French and English: a title in a language is kept, what we write around it is translated. A plain string is the same in both, but for the quotes around a title (« » in French, “ ” in English). */
 export type Label = string | readonly [fr: string, en: string];
@@ -26,9 +25,7 @@ export const ACCESS: Record<Access, readonly [string, string]> = {
   read: ['texte lu', 'text read'],
   summary: ['lu en résumé, à relire', 'read in summary, to re-read'],
   abstract: ['résumé lu, article non lu', 'abstract read, paper not read'],
-  extract: ['articles lus en extraits', 'articles read as extracts'],
   search: ['vu dans un résumé de recherche seulement', 'seen in a search summary only'],
-  found: ['trouvé et daté, texte non lu', 'found and dated, text not read'],
   transcript: ['transcription locale, chiffres à vérifier à l’oreille', 'a local transcript, figures to check by ear'],
   queried: ['interrogé par nous', 'queried by us'],
   title: ['titre et chaîne seulement, non vu', 'title and channel only, not watched'],
@@ -83,30 +80,33 @@ export const SOURCES: { fr: string; en: string; items: SourceEntry[] }[] = [
         'none',
       ),
       s(
-        'https://www.insis.cnrs.fr/sites/institut_insis/files/news/2022-02/CP%20FOUR%20SOLAIRE%20D%27ODEILLO%202022.pdf',
+        undefined,
         [
           'La Poste avec le CNRS, communiqué « Four solaire d’Odeillo », février 2022',
           'La Poste with the CNRS, press release “Four solaire d’Odeillo”, February 2022',
         ],
-        'Le bâtiment de 48 m de haut et 54 m de large, inauguré en 1969, 1 000 kW.',
-        'The building 48 m high and 54 m wide, inaugurated in 1969, 1,000 kW.',
+        'Le bâtiment de 48 m de haut et 54 m de large, inauguré en 1969, 1 000 kW. Cité par son titre et sa date, sans lien : ses pages donnent l’adresse du bâtiment.',
+        'The building 48 m high and 54 m wide, inaugurated in 1969, 1,000 kW. Credited by title and date, with no link: its pages give the building’s address.',
         'read',
       ),
       s(
-        'https://images.cnrs.fr/en/photo/20180105_0002',
+        undefined,
         [
-          'CNRS Images, légendes du four solaire ; Wikipédia, « Odeillo solar furnace »',
-          'CNRS Images, captions of the solar furnace; Wikipedia, “Odeillo solar furnace”',
+          'CNRS Images, légendes d’une photographie du champ d’héliostats du four solaire, 2018 ; Wikipédia anglais, « Odeillo solar furnace »',
+          'CNRS Images, captions of a photograph of the solar furnace’s heliostat field, 2018; English Wikipedia, “Odeillo solar furnace”',
         ],
-        'Le miroir de 1 830 m², la distance focale de 18 m, les 63 héliostats pour 2 835 m². Le CNRS parle d’une mise en service en 1970.',
-        'The mirror of 1,830 m², the 18 m focal length, the 63 heliostats for 2,835 m². The CNRS speaks of entering service in 1970.',
+        'Le miroir de 1 830 m², la distance focale de 18 m, les 63 héliostats pour 2 835 m². Le CNRS parle d’une mise en service en 1970. Cités par leur titre et leur année, sans lien.',
+        'The mirror of 1,830 m², the 18 m focal length, the 63 heliostats for 2,835 m². The CNRS speaks of entering service in 1970. Credited by title and year, with no link.',
         'summary',
       ),
       s(
-        'https://fr.wikipedia.org/wiki/Four_solaire_d%27Odeillo',
-        ['Wikipédia, « Four solaire d’Odeillo »', 'Wikipedia, “Four solaire d’Odeillo” (in French)'],
-        'Le four solaire est inscrit au titre des monuments historiques depuis mai 2009.',
-        'The solar furnace has been listed as a historic monument since May 2009.',
+        undefined,
+        [
+          'Wikipédia, « Four solaire d’Odeillo », consulté en 2026',
+          'Wikipedia, “Four solaire d’Odeillo” (in French), consulted in 2026',
+        ],
+        'Le four solaire est inscrit au titre des monuments historiques depuis mai 2009. Cité par son titre, sans lien : l’article donne l’adresse et les coordonnées du four.',
+        'The solar furnace has been listed as a historic monument since May 2009. Credited by title, with no link: the article gives the furnace’s address and coordinates.',
         'summary',
       ),
       s(
@@ -244,6 +244,16 @@ export const SOURCES: { fr: string; en: string; items: SourceEntry[] }[] = [
         'Two buildings with Trombe walls, designed with NREL: a visitor centre and a site-entrance building. The paper’s site did not answer.',
         'abstract',
       ),
+      s(
+        'https://fr.wikipedia.org/wiki/Puits_canadien',
+        [
+          'Wikipédia, « Puits canadien », qui cite l’ADEME (2012)',
+          'Wikipedia, “Puits canadien” (in French), citing ADEME (2012)',
+        ],
+        'L’entretien d’un filtre, la condensation et les moisissures, l’étanchéité à l’air contre le radon, la pente et la purge, d’après cette page secondaire. Le guide de l’ADEME et les fiches d’xpair et d’une direction régionale de l’environnement n’ont pas été lus.',
+        'Filter upkeep, condensation and mould, airtightness against radon, slope and drain, according to this secondary page. The ADEME guide and the sheets of xpair and of a regional environment directorate were not read.',
+        'summary',
+      ),
     ],
   },
   {
@@ -266,97 +276,17 @@ export const SOURCES: { fr: string; en: string; items: SourceEntry[] }[] = [
       ),
     ],
   },
-  {
-    fr: 'Les règles et leur lecture',
-    en: 'The rules and how they were read',
-    items: [
-      s(
-        'https://fr.wikipedia.org/wiki/R%C3%A9glementation_environnementale_2020',
-        [
-          'Wikipédia, « Réglementation environnementale 2020 »',
-          'Wikipedia, “Réglementation environnementale 2020” (in French)',
-        ],
-        'Un indicateur de confort d’été en degrés-heures, avec un seuil bas de 350 °C·h et, dans le cas le plus courant, un plafond de 1 250 °C·h : lus dans cette page secondaire seulement. Le décret et l’arrêté ne sont pas lus.',
-        'A summer-comfort indicator in degree-hours, with a low threshold of 350 °C·h and, in the commonest case, a ceiling of 1,250 °C·h: read in this secondary page only. The decree and the order are not read.',
-        'summary',
-      ),
-      s(
-        'https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000037131346/',
-        [
-          'Légifrance, arrêté du 27 juin 2018 portant délimitation des zones à potentiel radon du territoire français',
-          'Légifrance, order of 27 June 2018 delimiting the radon-potential zones of French territory',
-        ],
-        'Les communes sont classées en trois zones, la zone 3 étant la plus haute. Odeillo se trouve dans une commune de la zone 3 : lu sur Légifrance et sur Géorisques.',
-        'Communes are classed in three zones, zone 3 being the highest. Odeillo lies in a commune of zone 3: read on Légifrance and on Géorisques.',
-        'read',
-      ),
-      s(
-        'https://www.georisques.gouv.fr/consulter-les-dossiers-thematiques/radon',
-        ['Géorisques, dossier thématique « Radon »', 'Géorisques, thematic file “Radon”'],
-        'Le potentiel radon par commune, établi par l’IRSN et fixé par l’arrêté ci-dessus.',
-        'The radon potential by commune, established by the IRSN and fixed by the order above.',
-        'read',
-      ),
-      s(
-        'https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006074236',
-        [
-          'Légifrance, Code du patrimoine, articles L621-27 et L621-30 à L621-32',
-          'Légifrance, Heritage Code, articles L621-27 and L621-30 to L621-32',
-        ],
-        'Les travaux sur un immeuble inscrit (L621-27), puis les abords et les travaux qui s’y font (L621-30 à L621-32) : les articles existent et disent bien cela ; ils ne sont lus qu’en extraits.',
-        'Works on a listed building (L621-27), then its surroundings and the works done in them (L621-30 to L621-32): the articles exist and say so; they are read as extracts only.',
-        'extract',
-      ),
-      s(
-        'https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000862344',
-        [
-          'Légifrance, arrêté du 24 mars 1982 relatif à l’aération des logements',
-          'Légifrance, order of 24 March 1982 on the ventilation of dwellings',
-        ],
-        'Le texte existe, consolidé et en vigueur ; nous ne l’avons pas lu en détail.',
-        'The text exists, consolidated and in force; we have not read it in detail.',
-        'found',
-      ),
-      s(
-        'https://fr.wikipedia.org/wiki/Puits_canadien',
-        [
-          'Wikipédia, « Puits canadien », qui cite l’ADEME (2012)',
-          'Wikipedia, “Puits canadien” (in French), citing ADEME (2012)',
-        ],
-        'L’entretien d’un filtre, la condensation et les moisissures, l’étanchéité à l’air contre le radon, la pente et la purge, d’après cette page secondaire. Le guide de l’ADEME et les fiches d’xpair et d’une direction régionale de l’environnement n’ont pas été lus.',
-        'Filter upkeep, condensation and mould, airtightness against radon, slope and drain, according to this secondary page. The ADEME guide and the sheets of xpair and of a regional environment directorate were not read.',
-        'summary',
-      ),
-    ],
-  },
 ];
 
-/** The law and the rules, place by place, and how each line was reached. [place fr, place en], then the line. A line says what was read and what was not, and « à vérifier » where nothing was. */
+/**
+ * The rules: the lab is international, so it carries no national text. Where it says that rules exist (radon, protected buildings, thermal regulation, electrical work, building codes) it says that they differ by country and site and sends the reader to the local
+ * authority; what was read in a national text before, and could not be checked in a primary one, is gone. [place fr, place en], then the line.
+ */
 export const LAW: [place: readonly [string, string], fr: string, en: string][] = [
   [
-    ['France, le patrimoine', 'France, heritage'],
-    'Le bâtiment de 1974 est inscrit depuis le 25 mai 2011 (façades, toits, système du mur), d’après la base nationale du patrimoine, le four depuis mai 2009, d’après Wikipédia. Les travaux sur un immeuble inscrit et dans ses abords relèvent du Code du patrimoine : L621-27 (travaux sur un immeuble inscrit) et L621-30 à L621-32 (les abords et les travaux qui s’y font) existent et disent cela, lus en extraits sur Légifrance.',
-    'The building of 1974 has been listed since 25 May 2011 (façades, roofs, the wall system), according to the national heritage database, the furnace since May 2009, according to Wikipedia. Works on a listed building and in its surroundings fall under the Heritage Code: L621-27 (works on a listed building) and L621-30 to L621-32 (the surroundings and the works done in them) exist and say so, read as extracts on Légifrance.',
-  ],
-  [
-    ['France, la construction', 'France, building'],
-    'Une maison neuve relève de la RE2020, qui a un indicateur de confort d’été en degrés-heures : ses seuils, 350 et 1 250 °C·h, ne sont lus que dans une page secondaire, le décret et l’arrêté ne sont pas lus. L’arrêté du 24 mars 1982 sur l’aération des logements existe, consolidé et en vigueur, et n’est pas lu en détail. Ce que demandent des travaux de façade, une déclaration ou un permis : à vérifier.',
-    'A new house falls under the RE2020, which has a summer-comfort indicator in degree-hours: its thresholds, 350 and 1,250 °C·h, are read in a secondary page only, the decree and the order are not read. The order of 24 March 1982 on the ventilation of dwellings exists, consolidated and in force, and is not read in detail. What façade works ask for, a declaration or a permit: to check.',
-  ],
-  [
-    ['France, le radon', 'France, radon'],
-    'Odeillo se trouve dans une commune classée en zone 3 du potentiel radon, la plus haute des trois, par l’arrêté du 27 juin 2018 : lu sur Légifrance et sur Géorisques. Les obligations d’information à la vente et à la location qui s’y attachent : à vérifier.',
-    'Odeillo lies in a commune classed in radon-potential zone 3, the highest of three, by the order of 27 June 2018: read on Légifrance and on Géorisques. The duties to inform on sale and rental that go with it: to check.',
-  ],
-  [
-    ['L’architecture et l’image', 'Architecture and images'],
-    'L’œuvre d’un architecte peut être protégée. L’exception de panorama du droit français ne couvre que les personnes physiques, hors usage commercial ; celle de l’Allemagne est plus large pour les extérieurs : lu dans Wikipédia, une source secondaire. Ce que cela change pour une reconstitution publique à partir de données publiées, sans but lucratif, n’est pas tranché ici : à vérifier, et un film monétisé est une autre question.',
-    'An architect’s work may be protected. The French panorama exception covers natural persons only, outside commercial use; Germany’s is wider for exteriors: read in Wikipedia, a secondary source. What this changes for a public reconstruction from published data, not for profit, is not settled here: to check, and a monetised film is another question.',
-  ],
-  [
-    ['Ailleurs', 'Elsewhere'],
-    'Allemagne, Suisse, Union européenne, États-Unis : les normes de l’énergie et de la construction y existent aussi, nous les nommons sans les avoir lues. La certification de maison passive est une norme privée. Les règles de votre pays s’appliquent.',
-    'Germany, Switzerland, the European Union, the United States: energy and building standards exist there too, we name them without having read them. Passive House certification is a private standard. The rules of your country apply.',
+    ['Partout', 'Everywhere'],
+    'Le radon, la protection des bâtiments, la réglementation thermique, les travaux électriques, les règles de construction : chacun relève de règles locales. Les règles varient selon le pays et le site : voyez votre autorité locale. Ce lab ne cite aucun texte national.',
+    'Radon, the protection of buildings, thermal regulation, electrical work, building codes: each falls under local rules. Rules differ by country and site: ask your local authority. This lab cites no national text.',
   ],
   [
     ['Les données', 'The data'],

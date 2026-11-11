@@ -374,16 +374,16 @@ export const SITE_PARTS: PartInfo[] = [
       'The listed building of three dwellings, higher up the slope: it is seen, not entered, and it is not the 1967 house.',
     ),
     description: lf(
-      'C’est le bâtiment que le ministère de la Culture a inscrit au titre des monuments historiques le 25 mai 2011 : trois logements, des façades et des toits, et le système du mur. Il est en béton armé, avec des fondations en gradins dans le rocher ; les données ouvertes lui donnent 333 m² d’emprise, dans un rectangle d’environ 37 sur 14 m (l’emprise n’en remplit pas tout), et 12,9 m de haut. Les trois maisons de 1974 de l’article, que nous lisons comme celles de ce bâtiment, ont de deux à trois étages, six ou sept pièces, de 450 à 650 m³, un mur de 37 cm et un coefficient G de 1,00 W/m³·K : c’est le mur « trop court » de l’article. Son plan n’est dans aucune source : la 3D le compose, en boîte à façade sud vitrée, sur le rectangle entier et non sur l’emprise ; la cote « Encombrement » de cette fiche est mesurée sur cette boîte, avec les saillies de son toit et de son capteur. C’est une propriété privée, et le lab ne vous y invite pas.',
-      'This is the building the Ministry of Culture listed as a historic monument on 25 May 2011: three dwellings, the façades and roofs, and the wall system. It is of reinforced concrete, with stepped foundations in the rock; open data give it a footprint of 333 m², inside a rectangle of about 37 by 14 m (the footprint does not fill all of it), and 12.9 m high. The paper’s three houses of 1974, which we read as those of this building, have two to three storeys, six or seven rooms, 450 to 650 m³, a wall of 37 cm and a G coefficient of 1.00 W/m³·K: it is the paper’s “too short” wall. Its plan is in no source: the 3D composes it, as a box with a glazed south front, on the whole rectangle and not on the footprint; the “Envelope” line of this sheet is measured on that box, with the overhangs of its roof and its collector. It is private property, and the lab does not invite you there.',
+      'C’est le bâtiment que le ministère de la Culture a inscrit au titre des monuments historiques le 25 mai 2011 : trois logements, des façades et des toits, et le système du mur. Il est en béton armé, avec des fondations en gradins dans le rocher ; les données ouvertes lui donnent 333 m² d’emprise, dans un rectangle d’environ 37 sur 14 m (l’emprise n’en remplit pas tout), et 12,9 m de haut. Les trois maisons de 1974 de l’article, que nous lisons comme celles de ce bâtiment, ont de deux à trois étages, six ou sept pièces, de 450 à 650 m³, un mur de 37 cm et un coefficient G de 1,00 W/m³·K : c’est le mur « trop court » de l’article. Son plan n’est dans aucune source : la 3D le compose, en boîte à façade sud vitrée, sur le rectangle entier et non sur l’emprise ; la cote « Encombrement » de cette fiche est mesurée sur cette boîte, avec les saillies de son toit et de son capteur : ce n’est donc pas le rectangle des données ouvertes, et les deux nombres ne se comparent pas. C’est une propriété privée, et le lab ne vous y invite pas.',
+      'This is the building the Ministry of Culture listed as a historic monument on 25 May 2011: three dwellings, the façades and roofs, and the wall system. It is of reinforced concrete, with stepped foundations in the rock; open data give it a footprint of 333 m², inside a rectangle of about 37 by 14 m (the footprint does not fill all of it), and 12.9 m high. The paper’s three houses of 1974, which we read as those of this building, have two to three storeys, six or seven rooms, 450 to 650 m³, a wall of 37 cm and a G coefficient of 1.00 W/m³·K: it is the paper’s “too short” wall. Its plan is in no source: the 3D composes it, as a box with a glazed south front, on the whole rectangle and not on the footprint; the “Envelope” line of this sheet is measured on that box, with the overhangs of its roof and its collector: it is therefore not the open-data rectangle, and the two numbers are not to be compared. It is private property, and the lab does not invite you there.',
     ),
     material: l('Béton armé, dessin composé', 'Reinforced concrete, a composed drawing'),
     specs: [
       sp('Logements, étages', 'Dwellings, storeys', l('3, de 2 à 3', '3, 2 to 3')),
       sp('Emprise, données ouvertes', 'Footprint, open data', l('333 m²', '333 m²')),
       sp(
-        'Rectangle qui la contient, données ouvertes',
-        'Rectangle that holds it, open data',
+        'Rectangle qui la contient, données ouvertes (la base de notre boîte)',
+        'Rectangle that holds it, open data (the base of our box)',
         l('environ 37 × 14 m', 'about 37 × 14 m'),
       ),
       sp('Hauteur, données ouvertes', 'Height, open data', '12,9 m'),
@@ -395,14 +395,13 @@ export const SITE_PARTS: PartInfo[] = [
         failure:
           'L’eau restée dans le béton : le mur de 1974 en a souffert, disent ses auteurs, et la fiche du mur de stockage le raconte. Pour le reste, nous n’avons aucune source sur l’entretien de ce bâtiment.',
         check:
-          'Un bâtiment inscrit ne se touche pas sans les autorités qui le protègent : les travaux sur ses façades, ses toits et son mur relèvent de leurs règles.',
+          'Les règles pour des travaux sur un bâtiment protégé varient selon le pays et le site : voyez votre autorité locale.',
         care: 'Le lab n’a rien à y entretenir : on le regarde de loin.',
       },
       {
         failure:
           'The water still in the concrete: the 1974 wall suffered from it, say its authors, and the storage wall’s sheet tells it. For the rest, we have no source on the upkeep of this building.',
-        check:
-          'A listed building is not touched without the authorities that protect it: works on its façades, roofs and wall fall under their rules.',
+        check: 'The rules for works on a protected building differ by country and site: ask your local authority.',
         care: 'The lab has nothing to maintain there: it is looked at from afar.',
       },
     ),
