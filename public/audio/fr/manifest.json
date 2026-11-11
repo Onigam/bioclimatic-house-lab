@@ -1,12 +1,12 @@
 {
   "lang": "fr",
   "model": "qwen3-tts-1.7B",
-  "generatedAt": "2026-11-11T14:35:20.557Z",
+  "generatedAt": "2026-11-11T16:02:54.453Z",
   "voiceLabel": {
     "fr": "Voix de synthèse",
     "en": "Synthetic voice"
   },
-  "totalSeconds": 1394.39,
+  "totalSeconds": 1393.87,
   "segments": [
     {
       "id": "intro",
@@ -14,178 +14,183 @@
       "title": "Présentation du labo",
       "scene": "site",
       "file": "intro.mp3",
-      "duration": 112.97,
-      "chars": 1907,
-      "hash": "c0a0e32aaffa33ed",
+      "duration": 113.53,
+      "chars": 1929,
+      "hash": "67ba29c34e302d85",
       "captions": [
         {
           "t0": 0,
-          "t1": 3.72,
+          "t1": 3.44,
           "text": "Imaginez une nuit de décembre, sur le plateau d’Odeillo."
         },
         {
-          "t0": 3.72,
-          "t1": 5.18,
+          "t0": 3.44,
+          "t1": 5.26,
           "text": "Dehors, il gèle."
         },
         {
-          "t0": 5.18,
-          "t1": 10.68,
+          "t0": 5.26,
+          "t1": 11.26,
           "text": "Dedans, un grand mur de béton noir est encore tiède, comme si le soleil de midi n’était jamais parti."
         },
         {
-          "t0": 10.68,
-          "t1": 12.9,
+          "t0": 11.26,
+          "t1": 13.42,
           "text": "Une maison peut-elle se chauffer seule ?"
         },
         {
-          "t0": 12.9,
-          "t1": 15.1,
+          "t0": 13.42,
+          "t1": 15.4,
           "text": "Suivons un petit rayon de soleil."
         },
         {
-          "t0": 15.1,
-          "t1": 21.4,
+          "t0": 15.4,
+          "t1": 21.56,
           "text": "Il traverse deux vitres, l’une après l’autre, et tombe sur une peinture noire : là, il devient chaleur."
         },
         {
-          "t0": 21.4,
-          "t1": 23.16,
+          "t0": 21.56,
+          "t1": 23.12,
           "text": "Deux chemins s’ouvrent à lui."
         },
         {
-          "t0": 23.16,
-          "t1": 27.08,
+          "t0": 23.12,
+          "t1": 27.44,
           "text": "Par l’air : il monte derrière la vitre, et ressort chaud par un conduit, en haut."
         },
         {
-          "t0": 27.08,
-          "t1": 28.14,
+          "t0": 27.44,
+          "t1": 28.76,
           "text": "Vite fait !"
         },
         {
-          "t0": 28.14,
-          "t1": 29.2,
+          "t0": 28.76,
+          "t1": 30.04,
           "text": "Ou par le béton…"
         },
         {
-          "t0": 29.2,
-          "t1": 31.42,
+          "t0": 30.04,
+          "t1": 32.44,
           "text": "et notre rayon choisit la lenteur."
         },
         {
-          "t0": 31.42,
-          "t1": 36.22,
+          "t0": 32.44,
+          "t1": 37.42,
           "text": "Là, la chaleur ne saute pas : elle marche, à environ quatre centimètres par heure."
         },
         {
-          "t0": 36.22,
-          "t1": 40.18,
+          "t0": 37.42,
+          "t1": 40.87,
           "text": "Soixante centimètres de mur : une quinzaine d’heures !"
         },
         {
-          "t0": 40.18,
-          "t1": 43.44,
+          "t0": 40.87,
+          "t1": 43.56,
           "text": "Il sort côté pièce en pleine nuit, juste quand on a froid."
         },
         {
-          "t0": 43.44,
-          "t1": 48.52,
+          "t0": 43.56,
+          "t1": 48.72,
           "text": "Voilà toute l’histoire : un rayon, une peinture noire, un mur qui a de la mémoire…"
         },
         {
-          "t0": 48.52,
-          "t1": 50.82,
+          "t0": 48.72,
+          "t1": 51.04,
           "text": "et une pièce tiède au petit matin."
         },
         {
-          "t0": 50.82,
-          "t1": 55.34,
+          "t0": 51.04,
+          "t1": 55.06,
           "text": "Il y a quatre vues : le plateau, la maison, le mur et la pièce."
         },
         {
-          "t0": 55.34,
-          "t1": 60.16,
+          "t0": 55.06,
+          "t1": 60.22,
           "text": "Cliquez sur une pièce : sa fiche s’ouvre, et vous pouvez écouter son histoire."
         },
         {
-          "t0": 60.16,
-          "t1": 64.94,
+          "t0": 60.22,
+          "t1": 64.64,
           "text": "Éclaté, Transparence, Coupe et Flux montrent l’intérieur et suivent l’air."
         },
         {
-          "t0": 64.94,
-          "t1": 67.86,
+          "t0": 64.64,
+          "t1": 67.62,
           "text": "Le guide de montage bâtit la maison en vingt étapes."
         },
         {
-          "t0": 67.86,
-          "t1": 70.32,
+          "t0": 67.62,
+          "t1": 70.08,
           "text": "Celui d’installation en compte dix."
         },
         {
-          "t0": 70.32,
-          "t1": 76.1,
+          "t0": 70.08,
+          "t1": 75.44,
           "text": "La simulation change l’épaisseur du mur, les vitres, le jour, et lance douze scénarios."
         },
         {
-          "t0": 76.1,
-          "t1": 79.56,
+          "t0": 75.44,
+          "t1": 79.2,
           "text": "Sept leçons, avec des quiz, expliquent la physique."
         },
         {
-          "t0": 79.56,
-          "t1": 81.76,
+          "t0": 79.2,
+          "t1": 81.32,
           "text": "Huit planches réunissent les dessins."
         },
         {
-          "t0": 81.76,
-          "t1": 85.3,
+          "t0": 81.32,
+          "t1": 85.44,
           "text": "Une dernière chose : ce laboratoire est une reconstitution pédagogique."
         },
         {
-          "t0": 85.3,
-          "t1": 88.12,
+          "t0": 85.44,
+          "t1": 88.22,
           "text": "Il explique, il ne donne aucun plan à suivre."
         },
         {
-          "t0": 88.12,
-          "t1": 89.72,
+          "t0": 88.22,
+          "t1": 90.16,
           "text": "Les chiffres des inventeurs sont les leurs."
         },
         {
-          "t0": 89.72,
-          "t1": 95.28,
-          "text": "Les autres viennent de notre simulation ou de nos estimations : des calculs, pas des mesures."
+          "t0": 90.16,
+          "t1": 92.04,
+          "text": "Les autres viennent de données ouvertes,"
         },
         {
-          "t0": 95.28,
-          "t1": 98.67,
+          "t0": 92.14,
+          "t1": 96.74,
+          "text": "de notre simulation ou de nos estimations : aucun n’a été mesuré par nous."
+        },
+        {
+          "t0": 96.74,
+          "t1": 100.04,
           "text": "Là où elle ne retrouve pas les mesures des inventeurs, nous le disons,"
         },
         {
-          "t0": 98.84,
-          "t1": 101.24,
+          "t0": 100.22,
+          "t1": 102.22,
           "text": "et nous ne l’avons pas réglée pour y arriver."
         },
         {
-          "t0": 101.24,
-          "t1": 103.32,
+          "t0": 102.22,
+          "t1": 104.24,
           "text": "Le panneau Sources dit qui a dit quoi."
         },
         {
-          "t0": 103.32,
-          "t1": 106.04,
+          "t0": 104.24,
+          "t1": 107.04,
           "text": "Alors, une maison peut-elle se chauffer seule ?"
         },
         {
-          "t0": 106.04,
-          "t1": 110.26,
+          "t0": 107.04,
+          "t1": 111.18,
           "text": "La réponse honnête : une bonne part, selon qui compte, et quoi."
         },
         {
-          "t0": 110.26,
-          "t1": 112.97,
+          "t0": 111.18,
+          "t1": 113.53,
           "text": "Allez voir par vous-même : le mur est encore tiède !"
         }
       ],
@@ -197,7 +202,7 @@
           }
         },
         {
-          "t": 10.68,
+          "t": 11.26,
           "do": {
             "frame": [
               "prototype-house"
@@ -205,13 +210,13 @@
           }
         },
         {
-          "t": 15.1,
+          "t": 15.4,
           "do": {
             "scene": "wall"
           }
         },
         {
-          "t": 17.7,
+          "t": 18.16,
           "do": {
             "frame": [
               "black-paint"
@@ -219,7 +224,7 @@
           }
         },
         {
-          "t": 21.4,
+          "t": 21.56,
           "do": {
             "frame": [
               "air-gap",
@@ -228,7 +233,7 @@
           }
         },
         {
-          "t": 28.14,
+          "t": 28.76,
           "do": {
             "frame": [
               "storage-wall"
@@ -236,61 +241,61 @@
           }
         },
         {
-          "t": 40.18,
+          "t": 40.87,
           "do": {
             "scene": "room"
           }
         },
         {
-          "t": 43.44,
+          "t": 43.56,
           "do": {
             "scene": "house"
           }
         },
         {
-          "t": 50.82,
+          "t": 51.04,
           "do": {
             "home": true
           }
         },
         {
-          "t": 64.94,
+          "t": 64.64,
           "do": {
             "mode": "assembly"
           }
         },
         {
-          "t": 67.86,
+          "t": 67.62,
           "do": {
             "mode": "install"
           }
         },
         {
-          "t": 70.32,
+          "t": 70.08,
           "do": {
             "mode": "sim"
           }
         },
         {
-          "t": 76.1,
+          "t": 75.44,
           "do": {
             "mode": "lessons"
           }
         },
         {
-          "t": 79.56,
+          "t": 79.2,
           "do": {
             "mode": "plans"
           }
         },
         {
-          "t": 81.76,
+          "t": 81.32,
           "do": {
             "mode": "explore"
           }
         },
         {
-          "t": 110.26,
+          "t": 111.18,
           "do": {
             "select": null
           }
@@ -850,45 +855,45 @@
       "title": "Pente de granit",
       "scene": "site",
       "file": "part-granite-slope.mp3",
-      "duration": 18.16,
-      "chars": 297,
-      "hash": "e21af5520718b77b",
+      "duration": 18.88,
+      "chars": 314,
+      "hash": "d79417ceb773c9f3",
       "captions": [
         {
           "t0": 0,
-          "t1": 3.12,
-          "text": "Le terrain tombe vers le sud, d’environ deux mètres."
+          "t1": 4.64,
+          "text": "Le terrain tombe vers le sud, d’environ deux mètres : une estimation."
         },
         {
-          "t0": 3.12,
-          "t1": 8.38,
+          "t0": 4.64,
+          "t1": 9.88,
           "text": "Isolée, la pente se montre seule : c’est elle qui donne à la maison sa dalle de niveau,"
         },
         {
-          "t0": 8.56,
-          "t1": 10.52,
+          "t0": 10.08,
+          "t1": 12.02,
           "text": "ses gradins, son balcon."
         },
         {
-          "t0": 10.52,
-          "t1": 15.32,
+          "t0": 12.02,
+          "t1": 16.6,
           "text": "Le granit est notre choix : la photographie montre des blocs, pas leur nature."
         },
         {
-          "t0": 15.32,
-          "t1": 18.16,
+          "t0": 16.6,
+          "t1": 18.88,
           "text": "Détournez l’eau avant la maison, jamais contre elle."
         }
       ],
       "cues": [
         {
-          "t": 3.12,
+          "t": 4.64,
           "do": {
             "isolate": true
           }
         },
         {
-          "t": 10.52,
+          "t": 12.02,
           "do": {
             "isolate": false
           }
@@ -1972,60 +1977,55 @@
       "title": "Cheminée",
       "scene": "house",
       "file": "part-chimney.mp3",
-      "duration": 23.44,
-      "chars": 382,
-      "hash": "56c0ec3eeefeda29",
+      "duration": 20.2,
+      "chars": 354,
+      "hash": "59316ede37460a85",
       "captions": [
         {
           "t0": 0,
-          "t1": 5.36,
+          "t1": 5.04,
           "text": "Notre dessin ajoute un conduit de brique : les vues aériennes semblent en montrer un."
         },
         {
-          "t0": 5.36,
-          "t1": 6.58,
+          "t0": 5.04,
+          "t1": 6.28,
           "text": "À quoi sert-il ?"
         },
         {
-          "t0": 6.58,
-          "t1": 7.98,
+          "t0": 6.28,
+          "t1": 7.44,
           "text": "Personne ne le dit."
         },
         {
-          "t0": 7.98,
-          "t1": 12.28,
+          "t0": 7.44,
+          "t1": 11.42,
           "text": "Le chauffage est électrique : une ventilation, peut-être, ou un reste."
         },
         {
-          "t0": 12.28,
-          "t1": 14.02,
-          "text": "Aucune hypothèse n’est lue."
-        },
-        {
-          "t0": 14.02,
-          "t1": 18.76,
+          "t0": 11.42,
+          "t1": 16.14,
           "text": "Le toit s’efface : la cheminée reste, posée sur le plafond, avec rien sous elle."
         },
         {
-          "t0": 18.76,
-          "t1": 21,
+          "t0": 16.14,
+          "t1": 18.24,
           "text": "Dans le calcul, elle ne fait rien."
         },
         {
-          "t0": 21,
-          "t1": 23.44,
+          "t0": 18.24,
+          "t1": 20.2,
           "text": "Un point d’interrogation dessiné en brique !"
         }
       ],
       "cues": [
         {
-          "t": 14.02,
+          "t": 11.42,
           "do": {
             "xray": true
           }
         },
         {
-          "t": 18.76,
+          "t": 16.14,
           "do": {
             "xray": false
           }
@@ -2081,38 +2081,38 @@
       "title": "Tuyau enterré (et si…)",
       "scene": "house",
       "file": "part-earth-tube-pipe.mp3",
-      "duration": 23.52,
-      "chars": 395,
-      "hash": "fb2484297d680881",
+      "duration": 25.6,
+      "chars": 413,
+      "hash": "3877da57e3e2454b",
       "captions": [
         {
           "t0": 0,
-          "t1": 3.2,
-          "text": "Cinquante mètres de tuyau, à deux mètres sous terre."
+          "t1": 4.38,
+          "text": "Cinquante mètres de tuyau, à deux mètres sous terre : nos estimations."
         },
         {
-          "t0": 3.2,
-          "t1": 8.74,
+          "t0": 4.38,
+          "t1": 9.88,
           "text": "À Odeillo, en janvier, l’air du dehors est à moins un degré, et il sort à trois."
         },
         {
-          "t0": 8.74,
-          "t1": 11.76,
+          "t0": 9.88,
+          "t1": 13.38,
           "text": "En juillet, à quinze dehors, il sort à dix."
         },
         {
-          "t0": 11.76,
-          "t1": 16.44,
+          "t0": 13.38,
+          "t1": 18.54,
           "text": "Sur une année : six cent vingt-cinq kilowattheures, pour une charge de cinquante-sept mille."
         },
         {
-          "t0": 16.44,
-          "t1": 18.28,
+          "t0": 18.54,
+          "t1": 20.32,
           "text": "Environ un point de part."
         },
         {
-          "t0": 18.28,
-          "t1": 23.52,
+          "t0": 20.32,
+          "t1": 25.6,
           "text": "Aucun puits canadien mesuré sur une maison ne nous est parvenu : ces chiffres sont ceux du calcul."
         }
       ],
@@ -2125,7 +2125,7 @@
           }
         },
         {
-          "t": 23.52,
+          "t": 25.6,
           "do": {
             "lab": "earthtube",
             "arg": "off"
@@ -2269,45 +2269,40 @@
       "title": "Vitrage intérieur",
       "scene": "wall",
       "file": "part-inner-glazing.mp3",
-      "duration": 18.96,
-      "chars": 325,
-      "hash": "ba993be772f2d4c8",
+      "duration": 16,
+      "chars": 268,
+      "hash": "fea1b96756e8552f",
       "captions": [
         {
           "t0": 0,
-          "t1": 2.86,
+          "t1": 3.24,
           "text": "La seconde vitre, près du mur, double la première,"
         },
         {
-          "t0": 2.86,
-          "t1": 7.44,
+          "t0": 3.24,
+          "t1": 7.82,
           "text": "à environ vingt-cinq millimètres : l’article dit seulement deux vitres."
         },
         {
-          "t0": 7.44,
-          "t1": 9.82,
+          "t0": 7.82,
+          "t1": 9.93,
           "text": "C’est elle que l’air chaud de la lame touche."
         },
         {
-          "t0": 9.82,
-          "t1": 16.04,
+          "t0": 9.93,
+          "t1": 16,
           "text": "Ses deux faces sont enfermées entre le cadre, l’autre vitre et le mur : on ne peut pas les essuyer."
-        },
-        {
-          "t0": 16.04,
-          "t1": 18.96,
-          "text": "Un souci de conception, avant d’être un souci de lavage."
         }
       ],
       "cues": [
         {
-          "t": 7.44,
+          "t": 7.82,
           "do": {
             "isolate": true
           }
         },
         {
-          "t": 9.82,
+          "t": 9.93,
           "do": {
             "isolate": false
           }
@@ -3241,34 +3236,29 @@
       "title": "Radiateur électrique",
       "scene": "room",
       "file": "part-electric-heater.mp3",
-      "duration": 22.48,
-      "chars": 428,
-      "hash": "486f048ae99ba058",
+      "duration": 21.12,
+      "chars": 398,
+      "hash": "28472fda729363c0",
       "captions": [
         {
           "t0": 0,
-          "t1": 4.48,
+          "t1": 4.74,
           "text": "Le chauffage d’appoint paie ce que le soleil, le mur et les gens n’ont pas donné."
         },
         {
-          "t0": 4.48,
-          "t1": 9.36,
+          "t0": 4.74,
+          "t1": 9.46,
           "text": "Sur la saison de chauffe, notre calcul lui fait payer cinquante-trois pour cent de la charge."
         },
         {
-          "t0": 9.36,
-          "t1": 14.66,
+          "t0": 9.46,
+          "t1": 14.96,
           "text": "Les inventeurs disent que le soleil peut économiser soixante à soixante-dix pour cent, selon les années."
         },
         {
-          "t0": 14.66,
-          "t1": 20.92,
+          "t0": 14.96,
+          "t1": 21.12,
           "text": "Le modèle n’atteint le bas de leur fourchette que si l’air du site est plus chaud de cinq degrés que celui du calcul."
-        },
-        {
-          "t0": 20.92,
-          "t1": 22.48,
-          "text": "Il le dit, il ne tranche pas."
         }
       ],
       "cues": []
@@ -3363,50 +3353,50 @@
       "title": "Sondes de surface",
       "scene": "room",
       "file": "part-room-surface-probes.mp3",
-      "duration": 23.52,
-      "chars": 397,
-      "hash": "d966d37cba13a689",
+      "duration": 23.92,
+      "chars": 402,
+      "hash": "4a792b2f3856931f",
       "captions": [
         {
           "t0": 0,
-          "t1": 5.58,
+          "t1": 5.54,
           "text": "Un mur chaud rayonne vers tout ce qu’il voit : le sol, le plafond, les murs voisins."
         },
         {
-          "t0": 5.58,
-          "t1": 10.02,
+          "t0": 5.54,
+          "t1": 10.14,
           "text": "Ce qu’il donne dépend de leur température : dix-huit degrés pour notre modèle."
         },
         {
-          "t0": 10.02,
-          "t1": 13.68,
-          "text": "Sur les courbes de l’article, nous lisons environ dix-sept et demi."
+          "t0": 10.14,
+          "t1": 14.28,
+          "text": "Avec les chiffres de l’article, nous calculons environ dix-sept et demi."
         },
         {
-          "t0": 13.68,
-          "t1": 16.26,
+          "t0": 14.28,
+          "t1": 16.88,
           "text": "Les deux s’accordent à un demi-degré près."
         },
         {
-          "t0": 16.26,
-          "t1": 18.74,
+          "t0": 16.88,
+          "t1": 19.48,
           "text": "Les deux sondes de notre dessin sont les nôtres."
         },
         {
-          "t0": 18.74,
-          "t1": 23.52,
+          "t0": 19.48,
+          "t1": 23.92,
           "text": "Collées à plat, à l’ombre : une sonde mal collée lit l’air derrière elle."
         }
       ],
       "cues": [
         {
-          "t": 16.26,
+          "t": 16.88,
           "do": {
             "isolate": true
           }
         },
         {
-          "t": 18.74,
+          "t": 19.48,
           "do": {
             "isolate": false
           }
@@ -3472,56 +3462,56 @@
       "title": "Entrée d’air frais",
       "scene": "room",
       "file": "part-fresh-air-vent.mp3",
-      "duration": 24.64,
-      "chars": 418,
-      "hash": "9eb83d4ce9a9c931",
+      "duration": 27.92,
+      "chars": 453,
+      "hash": "aae21bd4edd4fd4b",
       "captions": [
         {
           "t0": 0,
-          "t1": 3.64,
+          "t1": 3.42,
           "text": "Une petite grille basse sur le mur nord, et derrière elle…"
         },
         {
-          "t0": 3.64,
-          "t1": 7.46,
-          "text": "rien : nous ne dessinons ni conduit, ni prise."
+          "t0": 3.42,
+          "t1": 8.82,
+          "text": "rien, sauf dans l’hypothèse du puits canadien, dont le dernier tronçon finit ici."
         },
         {
-          "t0": 7.46,
-          "t1": 8.84,
+          "t0": 8.82,
+          "t1": 10.58,
           "text": "D’où venait l’air neuf ?"
         },
         {
-          "t0": 8.84,
-          "t1": 10.44,
+          "t0": 10.58,
+          "t1": 12.32,
           "text": "Les sources se taisent."
         },
         {
-          "t0": 10.44,
-          "t1": 14.4,
+          "t0": 12.32,
+          "t1": 16.66,
           "text": "La boucle du mur ne renouvelle rien : elle reprend l’air de la pièce."
         },
         {
-          "t0": 14.4,
-          "t1": 20.74,
+          "t0": 16.66,
+          "t1": 23.78,
           "text": "Dans notre modèle, la position d’été tire l’air de la pièce deux à trois fois par heure : le seul renouvellement qu’il montre."
         },
         {
-          "t0": 20.74,
-          "t1": 24.64,
+          "t0": 23.78,
+          "t1": 27.92,
           "text": "Une vraie entrée ne se devine pas : elle se dessine, et se mesure."
         }
       ],
       "cues": [
         {
-          "t": 14.4,
+          "t": 16.66,
           "do": {
             "lab": "flap",
             "arg": "summer"
           }
         },
         {
-          "t": 20.74,
+          "t": 23.78,
           "do": {
             "lab": "flap",
             "arg": "winter"

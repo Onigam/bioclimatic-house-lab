@@ -1,12 +1,12 @@
 {
   "lang": "en",
   "model": "qwen3-tts-1.7B",
-  "generatedAt": "2026-11-11T14:09:27.647Z",
+  "generatedAt": "2026-11-11T16:21:55.790Z",
   "voiceLabel": {
     "fr": "Voix de synthèse",
     "en": "Synthetic voice"
   },
-  "totalSeconds": 1343.1,
+  "totalSeconds": 1339.98,
   "segments": [
     {
       "id": "intro",
@@ -14,9 +14,9 @@
       "title": "Introduction to the lab",
       "scene": "site",
       "file": "intro.mp3",
-      "duration": 108.14,
-      "chars": 1828,
-      "hash": "b29f10e877ef72da",
+      "duration": 106.22,
+      "chars": 1832,
+      "hash": "d7ad88ba7d6a5ec4",
       "captions": [
         {
           "t0": 0,
@@ -95,97 +95,97 @@
         },
         {
           "t0": 44.16,
-          "t1": 48.22,
+          "t1": 48,
           "text": "That is the whole story: a ray, black paint, a wall with a memory…"
         },
         {
-          "t0": 48.22,
-          "t1": 50.52,
+          "t0": 48,
+          "t1": 50.06,
           "text": "and a warm room in the small hours."
         },
         {
-          "t0": 50.52,
-          "t1": 54.44,
+          "t0": 50.06,
+          "t1": 53.38,
           "text": "There are four views: the plateau, the house, the wall and the room."
         },
         {
-          "t0": 54.44,
-          "t1": 58.6,
+          "t0": 53.38,
+          "t1": 57.3,
           "text": "Click on a part: its sheet opens, and you can hear its story."
         },
         {
-          "t0": 58.6,
-          "t1": 62.86,
+          "t0": 57.3,
+          "t1": 61.68,
           "text": "Explode, X-ray, Section and Flows show the inside and follow the air."
         },
         {
-          "t0": 62.86,
-          "t1": 65.66,
+          "t0": 61.68,
+          "t1": 64.66,
           "text": "The assembly guide builds the house in twenty steps."
         },
         {
-          "t0": 65.66,
-          "t1": 67.9,
+          "t0": 64.66,
+          "t1": 66.78,
           "text": "The installation guide takes ten."
         },
         {
-          "t0": 67.9,
-          "t1": 73.24,
+          "t0": 66.78,
+          "t1": 72,
           "text": "The simulation changes the thickness of the wall, the glass, the day, and runs twelve scenarios."
         },
         {
-          "t0": 73.24,
-          "t1": 76.08,
+          "t0": 72,
+          "t1": 74.58,
           "text": "Seven lessons, with quizzes, explain the physics."
         },
         {
-          "t0": 76.08,
-          "t1": 78.04,
+          "t0": 74.58,
+          "t1": 76.14,
           "text": "Eight sheets gather the drawings."
         },
         {
-          "t0": 78.04,
-          "t1": 81.48,
+          "t0": 76.14,
+          "t1": 79.02,
           "text": "One last thing: this lab is an educational reconstruction."
         },
         {
-          "t0": 81.48,
-          "t1": 83.76,
+          "t0": 79.02,
+          "t1": 81.54,
           "text": "It explains, it gives no plan to follow."
         },
         {
-          "t0": 83.76,
-          "t1": 85.48,
+          "t0": 81.54,
+          "t1": 83.16,
           "text": "The inventors’ figures are theirs."
         },
         {
-          "t0": 85.48,
-          "t1": 89.94,
-          "text": "The others come from our simulation or our estimates: calculations, not measurements."
+          "t0": 83.16,
+          "t1": 88.04,
+          "text": "The others come from open data, our simulation or our estimates: none was measured by us."
         },
         {
-          "t0": 89.94,
-          "t1": 95.36,
+          "t0": 88.04,
+          "t1": 93.44,
           "text": "Where it does not match the inventors’ measurements, we say so, and we have not tuned it to get there."
         },
         {
-          "t0": 95.36,
-          "t1": 98.14,
+          "t0": 93.44,
+          "t1": 96.22,
           "text": "The Sources panel says who said what."
         },
         {
-          "t0": 98.14,
-          "t1": 100.36,
+          "t0": 96.22,
+          "t1": 98.4,
           "text": "So, can a house heat itself?"
         },
         {
-          "t0": 100.36,
-          "t1": 105.52,
+          "t0": 98.4,
+          "t1": 103.6,
           "text": "The honest answer: a good part of the way, depending on who counts, and what."
         },
         {
-          "t0": 105.52,
-          "t1": 108.14,
+          "t0": 103.6,
+          "t1": 106.22,
           "text": "Go and see for yourself: the wall is still warm!"
         }
       ],
@@ -248,49 +248,49 @@
           }
         },
         {
-          "t": 50.52,
+          "t": 50.06,
           "do": {
             "home": true
           }
         },
         {
-          "t": 62.86,
+          "t": 61.68,
           "do": {
             "mode": "assembly"
           }
         },
         {
-          "t": 65.66,
+          "t": 64.66,
           "do": {
             "mode": "install"
           }
         },
         {
-          "t": 67.9,
+          "t": 66.78,
           "do": {
             "mode": "sim"
           }
         },
         {
-          "t": 73.24,
+          "t": 72,
           "do": {
             "mode": "lessons"
           }
         },
         {
-          "t": 76.08,
+          "t": 74.58,
           "do": {
             "mode": "plans"
           }
         },
         {
-          "t": 78.04,
+          "t": 76.14,
           "do": {
             "mode": "explore"
           }
         },
         {
-          "t": 105.52,
+          "t": 103.6,
           "do": {
             "select": null
           }
@@ -845,40 +845,40 @@
       "title": "Granite slope",
       "scene": "site",
       "file": "part-granite-slope.mp3",
-      "duration": 16.72,
-      "chars": 286,
-      "hash": "5bf7f2637b1e5236",
+      "duration": 17.44,
+      "chars": 299,
+      "hash": "4002521e88322559",
       "captions": [
         {
           "t0": 0,
-          "t1": 2.78,
-          "text": "The ground falls away to the south, by about two metres."
+          "t1": 4.26,
+          "text": "The ground falls away to the south, by about two metres: an estimate."
         },
         {
-          "t0": 2.78,
-          "t1": 9.06,
+          "t0": 4.26,
+          "t1": 10.46,
           "text": "On its own, the slope shows itself: it gives the house its level slab, its steps, its balcony."
         },
         {
-          "t0": 9.06,
-          "t1": 13.9,
+          "t0": 10.46,
+          "t1": 14.82,
           "text": "The granite is our choice: the photograph shows blocks, not what they are made of."
         },
         {
-          "t0": 13.9,
-          "t1": 16.72,
+          "t0": 14.82,
+          "t1": 17.44,
           "text": "Turn water away before the house, never against it."
         }
       ],
       "cues": [
         {
-          "t": 2.78,
+          "t": 4.26,
           "do": {
             "isolate": true
           }
         },
         {
-          "t": 9.06,
+          "t": 10.46,
           "do": {
             "isolate": false
           }
@@ -1957,60 +1957,55 @@
       "title": "Chimney",
       "scene": "house",
       "file": "part-chimney.mp3",
-      "duration": 21.28,
-      "chars": 337,
-      "hash": "ef4fcfbb10a6ff4d",
+      "duration": 19.36,
+      "chars": 303,
+      "hash": "164245c88a49c4e1",
       "captions": [
         {
           "t0": 0,
-          "t1": 4.04,
+          "t1": 4.36,
           "text": "Our drawing adds a brick flue: aerial views seem to show one."
         },
         {
-          "t0": 4.04,
-          "t1": 4.88,
+          "t0": 4.36,
+          "t1": 5.54,
           "text": "What is it for?"
         },
         {
-          "t0": 4.88,
-          "t1": 6.02,
+          "t0": 5.54,
+          "t1": 6.64,
           "text": "Nobody says."
         },
         {
-          "t0": 6.02,
-          "t1": 9.82,
+          "t0": 6.64,
+          "t1": 10.38,
           "text": "The heating is electric: a vent, perhaps, or a leftover."
         },
         {
-          "t0": 9.82,
-          "t1": 12.26,
-          "text": "No guess is read from any source."
-        },
-        {
-          "t0": 12.26,
-          "t1": 17.34,
+          "t0": 10.38,
+          "t1": 15.64,
           "text": "The roof fades away: the chimney stays, resting on the ceiling, with nothing under it."
         },
         {
-          "t0": 17.34,
-          "t1": 19.74,
+          "t0": 15.64,
+          "t1": 17.88,
           "text": "In the calculation, it does nothing."
         },
         {
-          "t0": 19.74,
-          "t1": 21.28,
+          "t0": 17.88,
+          "t1": 19.36,
           "text": "A question mark drawn in brick!"
         }
       ],
       "cues": [
         {
-          "t": 12.26,
+          "t": 10.38,
           "do": {
             "xray": true
           }
         },
         {
-          "t": 17.34,
+          "t": 15.64,
           "do": {
             "xray": false
           }
@@ -2066,38 +2061,38 @@
       "title": "Buried pipe (what if…)",
       "scene": "house",
       "file": "part-earth-tube-pipe.mp3",
-      "duration": 23.52,
-      "chars": 392,
-      "hash": "bc83da32b38098dc",
+      "duration": 26.16,
+      "chars": 407,
+      "hash": "fb5f7df61493bf1e",
       "captions": [
         {
           "t0": 0,
-          "t1": 3.28,
-          "text": "Fifty metres of pipe, two metres underground."
+          "t1": 3.72,
+          "text": "Fifty metres of pipe, two metres underground: our estimates."
         },
         {
-          "t0": 3.28,
-          "t1": 8.32,
+          "t0": 3.72,
+          "t1": 10.26,
           "text": "At Odeillo, in January, the outside air is at minus one degree, and it leaves at three."
         },
         {
-          "t0": 8.32,
-          "t1": 11.9,
+          "t0": 10.26,
+          "t1": 13.82,
           "text": "In July, with fifteen outside, it leaves at ten."
         },
         {
-          "t0": 11.9,
-          "t1": 17.78,
+          "t0": 13.82,
+          "t1": 19.7,
           "text": "Over a year: six hundred and twenty-five kilowatt-hours, against a load of fifty-seven thousand."
         },
         {
-          "t0": 17.78,
-          "t1": 19.36,
+          "t0": 19.7,
+          "t1": 21.48,
           "text": "About one point of share."
         },
         {
-          "t0": 19.36,
-          "t1": 23.52,
+          "t0": 21.48,
+          "t1": 26.16,
           "text": "No earth tube measured on a house has reached us: these figures are the calculation’s."
         }
       ],
@@ -2110,7 +2105,7 @@
           }
         },
         {
-          "t": 23.52,
+          "t": 26.16,
           "do": {
             "lab": "earthtube",
             "arg": "off"
@@ -2254,45 +2249,40 @@
       "title": "Inner glazing",
       "scene": "wall",
       "file": "part-inner-glazing.mp3",
-      "duration": 17.52,
-      "chars": 309,
-      "hash": "f595a0360382605e",
+      "duration": 15.36,
+      "chars": 265,
+      "hash": "404fd275e5f955cd",
       "captions": [
         {
           "t0": 0,
-          "t1": 2.5,
+          "t1": 2.94,
           "text": "The second pane, near the wall, doubles the first,"
         },
         {
-          "t0": 2.5,
-          "t1": 7.48,
+          "t0": 2.94,
+          "t1": 7.4,
           "text": "about twenty-five millimetres behind it: the paper only says two panes."
         },
         {
-          "t0": 7.48,
-          "t1": 9.96,
+          "t0": 7.4,
+          "t1": 10.42,
           "text": "It is the one the hot air of the gap touches."
         },
         {
-          "t0": 9.96,
-          "t1": 15.26,
+          "t0": 10.42,
+          "t1": 15.36,
           "text": "Both its faces are shut in between the frame, the other pane and the wall: they cannot be wiped."
-        },
-        {
-          "t0": 15.26,
-          "t1": 17.52,
-          "text": "A design problem before a cleaning problem."
         }
       ],
       "cues": [
         {
-          "t": 7.48,
+          "t": 7.4,
           "do": {
             "isolate": true
           }
         },
         {
-          "t": 9.96,
+          "t": 10.42,
           "do": {
             "isolate": false
           }
@@ -3211,34 +3201,29 @@
       "title": "Electric heater",
       "scene": "room",
       "file": "part-electric-heater.mp3",
-      "duration": 21.52,
-      "chars": 399,
-      "hash": "6436d06b028f683c",
+      "duration": 19.68,
+      "chars": 366,
+      "hash": "135914fba7d86b42",
       "captions": [
         {
           "t0": 0,
-          "t1": 4.28,
+          "t1": 4.62,
           "text": "The backup heating pays for what the sun, the wall and the people have not given."
         },
         {
-          "t0": 4.28,
-          "t1": 9.38,
+          "t0": 4.62,
+          "t1": 9.9,
           "text": "Over the heating season, our calculation has it pay fifty-three per cent of the load."
         },
         {
-          "t0": 9.38,
-          "t1": 14.02,
+          "t0": 9.9,
+          "t1": 14.34,
           "text": "The inventors say the sun can save sixty to seventy per cent, depending on the year."
         },
         {
-          "t0": 14.02,
-          "t1": 19.8,
+          "t0": 14.34,
+          "t1": 19.68,
           "text": "The model reaches the bottom of their range only if the site’s air is five degrees warmer than the calculation’s."
-        },
-        {
-          "t0": 19.8,
-          "t1": 21.52,
-          "text": "It says so, and does not decide."
         }
       ],
       "cues": []
@@ -3333,50 +3318,50 @@
       "title": "Surface probes",
       "scene": "room",
       "file": "part-room-surface-probes.mp3",
-      "duration": 21.36,
-      "chars": 376,
-      "hash": "178c19bb58a0c7b9",
+      "duration": 23.2,
+      "chars": 383,
+      "hash": "dbaeee61d0838a8a",
       "captions": [
         {
           "t0": 0,
-          "t1": 6.2,
+          "t1": 6.18,
           "text": "A warm wall radiates to everything it sees: the floor, the ceiling, the neighbouring walls."
         },
         {
-          "t0": 6.2,
-          "t1": 10.18,
+          "t0": 6.18,
+          "t1": 10.88,
           "text": "What it gives depends on their temperature: eighteen degrees for our model."
         },
         {
-          "t0": 10.18,
-          "t1": 12.98,
-          "text": "On the paper’s curves, we read about seventeen and a half."
+          "t0": 10.88,
+          "t1": 14.28,
+          "text": "From the paper’s figures, we work out about seventeen and a half."
         },
         {
-          "t0": 12.98,
-          "t1": 15.08,
+          "t0": 14.28,
+          "t1": 16.7,
           "text": "The two agree to within half a degree."
         },
         {
-          "t0": 15.08,
-          "t1": 17.62,
+          "t0": 16.7,
+          "t1": 19.14,
           "text": "The two probes of our drawing are ours."
         },
         {
-          "t0": 17.62,
-          "t1": 21.36,
+          "t0": 19.14,
+          "t1": 23.2,
           "text": "Stuck flat, in the shade: a badly stuck probe reads the air behind it."
         }
       ],
       "cues": [
         {
-          "t": 15.08,
+          "t": 16.7,
           "do": {
             "isolate": true
           }
         },
         {
-          "t": 17.62,
+          "t": 19.14,
           "do": {
             "isolate": false
           }
@@ -3442,56 +3427,56 @@
       "title": "Fresh-air vent",
       "scene": "room",
       "file": "part-fresh-air-vent.mp3",
-      "duration": 24.4,
-      "chars": 392,
-      "hash": "1bab1256807d2421",
+      "duration": 23.92,
+      "chars": 419,
+      "hash": "6cd9e02c0d205e03",
       "captions": [
         {
           "t0": 0,
-          "t1": 2.9,
+          "t1": 2.96,
           "text": "A small low grille on the north wall, and behind it…"
         },
         {
-          "t0": 2.9,
-          "t1": 6.28,
-          "text": "nothing: we draw neither duct nor intake."
+          "t0": 2.96,
+          "t1": 7.44,
+          "text": "nothing, except in the what-if earth tube, whose last run ends here."
         },
         {
-          "t0": 6.28,
-          "t1": 8.18,
+          "t0": 7.44,
+          "t1": 9.22,
           "text": "Where did the fresh air come from?"
         },
         {
-          "t0": 8.18,
-          "t1": 9.9,
+          "t0": 9.22,
+          "t1": 10.62,
           "text": "The sources are silent."
         },
         {
-          "t0": 9.9,
-          "t1": 13.88,
+          "t0": 10.62,
+          "t1": 14.54,
           "text": "The wall’s loop renews nothing: it takes back the room’s own air."
         },
         {
-          "t0": 13.88,
-          "t1": 20.86,
+          "t0": 14.54,
+          "t1": 20.74,
           "text": "In our model, the summer position draws the room’s air out two to three times an hour: the only renewal it shows."
         },
         {
-          "t0": 20.86,
-          "t1": 24.4,
+          "t0": 20.74,
+          "t1": 23.92,
           "text": "A real inlet cannot be guessed: it is drawn, and measured."
         }
       ],
       "cues": [
         {
-          "t": 13.88,
+          "t": 14.54,
           "do": {
             "lab": "flap",
             "arg": "summer"
           }
         },
         {
-          "t": 20.86,
+          "t": 20.74,
           "do": {
             "lab": "flap",
             "arg": "winter"
