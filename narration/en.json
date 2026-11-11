@@ -296,7 +296,7 @@
       "scope": "part:upper-duct",
       "title": "Upper duct",
       "scene": "wall",
-      "text": "Hot air comes out here, through a tunnel fifty-six centimetres by eleven, near the ceiling. [[flows:on]] There are two ducts because a single one would let hot air rise and cold air fall in the same hole, and they would get in each other’s way. With one below and one above, the column turns one way only. [[flows:off]] The flow goes on for two to three hours after the sun."
+      "text": "Hot air comes out here, through a tunnel fifty-six centimetres by eleven, near the ceiling. [[flows:on]] There are two ducts. A single one would let hot air rise and cold air fall in the same hole, and they would get in each other’s way. With one below and one above, the column turns one way only. [[flows:off]] The flow goes on for two to three hours after the sun."
     },
     {
       "id": "part-lower-duct",
