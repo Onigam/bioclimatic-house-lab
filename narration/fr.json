@@ -30,7 +30,7 @@
       "scope": "scene:house",
       "title": "La maison, coupée par le milieu d’une travée",
       "scene": "house",
-      "text": "[[home]] La machine, coupée par le milieu d’une travée : la moitié est a été retirée. [[frame:south-facade]] Au sud, lues sur une photographie : neuf travées de capteur, une de fenêtre, deux d’entrée. [[frame:pitched-roof,roof-insulation]] Au-dessus, le toit, et son isolant, posé sur le plafond. [[frame:floor-slab,foundation]] Dessous, la dalle, et la fondation qui porte tout. [[home]] [[flows:on]] Voici l’air : il entre par le bas, monte derrière chaque vitre, et ressort en haut. [[lab:flap:summer]] Un clapet, et c’est l’été : l’air part dehors. [[lab:flap:winter]] [[flows:off]] La maison dessinée reste celle de mille neuf cent soixante-sept : les curseurs changent les chiffres, pas la forme. Et le puits canadien, ce tuyau enterré : aucune source n’en mentionne ici. C’est une hypothèse, qui n’apparaît que dans son propre scénario."
+      "text": "[[home]] La machine, coupée par le milieu d’une travée : la moitié est a été retirée. [[frame:south-facade]] Au sud, lues sur une photographie : neuf travées de capteur, une de fenêtre, deux d’entrée. [[frame:pitched-roof,roof-insulation]] Au-dessus, le toit, et son isolant, posé sur le plafond. [[frame:floor-slab,foundation]] Dessous, la dalle, et la fondation qui porte tout. [[home]] [[flows:on]] Voici l’air : il entre par le bas, monte derrière chaque vitre, et ressort en haut. [[lab:flap:summer]] Un clapet, et c’est l’été : l’air part dehors. [[lab:flap:winter]] [[flows:off]] La maison dessinée reste celle de mille neuf cent soixante-sept : les curseurs changent les chiffres, pas la forme. Et le puits canadien, ce tuyau enterré : aucune source n’en mentionne ici. C’est une hypothèse : dessiné pâle, il ne se raffermit que dans son propre scénario."
     },
     {
       "id": "scene-wall",
@@ -163,7 +163,7 @@
       "scope": "part:east-gable",
       "title": "Pignon est",
       "scene": "house",
-      "text": "Le mur du bout, à l’est : un triangle jusqu’au faîtage, sur une fondation en gradins. On ne sait rien de lui : trente centimètres, enduit, à notre idée. Pour la maison, c’est une perte parmi d’autres. [[cutaway:on]] La coupe l’emporte, avec toute la moitié est. [[cutaway:off]] En hiver, au sud-est, le soleil se lève derrière une crête de près de six degrés."
+      "text": "Le mur du bout, à l’est : un triangle jusqu’au faîtage, sur une fondation en gradins. On ne sait rien de lui : trente centimètres, enduit, à notre idée. Pour la maison, c’est une perte parmi d’autres. [[cutaway:on]] La coupe emporte toute la moitié est, et ne laisse du pignon qu’un fantôme pâle. [[cutaway:off]] En hiver, au sud-est, le soleil se lève derrière une crête de près de six degrés."
     },
     {
       "id": "part-west-gable",
@@ -233,7 +233,7 @@
       "scope": "part:earth-tube-intake",
       "title": "Prise d’air (et si…)",
       "scene": "house",
-      "text": "[[lab:earthtube:on]] La voilà qui apparaît, pâle et translucide : le début du puits canadien. Une colonne sur la pente, avec un capuchon contre la pluie, et une grille contre les insectes et les feuilles. À cette altitude, la neige compte pour la hauteur de la prise. [[lab:earthtube:off]]"
+      "text": "[[lab:earthtube:on]] La voilà qui se raffermit : le début du puits canadien. Une colonne sur la pente, avec un capuchon contre la pluie, et une grille contre les insectes et les feuilles. À cette altitude, la neige compte pour la hauteur de la prise. [[lab:earthtube:off]]"
     },
     {
       "id": "part-earth-tube-pipe",
@@ -289,7 +289,7 @@
       "scope": "part:storage-wall",
       "title": "Mur de stockage",
       "scene": "wall",
-      "text": "[[lab:speed:86400]] Soixante centimètres de béton noir. Notre rayon, devenu chaleur, n’y saute pas : il marche, à environ quatre centimètres par heure. Regardez les couleurs descendre ! Le soleil de midi traverse le mur en quatorze à seize heures : il arrive côté pièce dans la nuit. [[lab:thickness:45]] Les inventeurs voulaient quarante à quarante-cinq centimètres, et un retard d’environ douze heures. Par notre calcul, quarante-cinq centimètres en donnent onze. [[lab:preset:prototype-1967]] Reste l’eau, que notre modèle ne simule pas. Le mur de mille neuf cent soixante-quatorze a rendu huit à dix points de moins : une partie, dit l’article, tenait à l’eau restée dans le béton."
+      "text": "[[lab:speed:86400]] Soixante centimètres de béton noir. Notre rayon, devenu chaleur, n’y saute pas : il marche, à environ quatre centimètres par heure. Regardez les couleurs descendre ! Le soleil de midi traverse le mur en quatorze à seize heures : il arrive côté pièce dans la nuit. [[lab:thickness:45]] Les inventeurs voulaient quarante à quarante-cinq centimètres, et un retard d’environ douze heures. Par notre calcul, quarante-cinq centimètres en donnent onze. [[lab:preset:prototype-1967]] Reste l’eau, que notre modèle ne simule pas. Le mur de mille neuf cent soixante-quatorze a rendu huit à dix points de moins. Une partie, dit l’article, tenait à l’eau restée dans le béton."
     },
     {
       "id": "part-upper-duct",
@@ -345,7 +345,7 @@
       "scope": "part:hot-wire-anemometer",
       "title": "Anémomètre à fil chaud",
       "scene": "wall",
-      "text": "Un fil fin, chauffé par un courant, au centre d’un conduit : l’article le met dans le conduit bas, notre dessin dans le haut. L’air qui passe le refroidit : plus il va vite, plus il faut de courant pour garder le fil chaud. [[isolate:on]] L’appareil lit de moins soixante à plus soixante centimètres par seconde. Il pourrait donc voir un courant inversé : les enregistrements n’en montrent aucun. [[isolate:off]] Un fil chaud se salit : la lecture dérive, sans que rien ne se voie."
+      "text": "Un fil fin, chauffé par un courant, au centre du conduit bas, là où l’article le met. L’air qui passe le refroidit : plus il va vite, plus il faut de courant pour garder le fil chaud. [[isolate:on]] L’appareil lit de moins soixante à plus soixante centimètres par seconde. Il pourrait donc voir un courant inversé : les enregistrements n’en montrent aucun. [[isolate:off]] Un fil chaud se salit : la lecture dérive, sans que rien ne se voie."
     },
     {
       "id": "part-inner-wall-face",

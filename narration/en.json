@@ -30,7 +30,7 @@
       "scope": "scene:house",
       "title": "The house, cut through the middle of a bay",
       "scene": "house",
-      "text": "[[home]] The machine, cut through the middle of a bay: the east half has been taken away. [[frame:south-facade]] On the south side, read from a photograph: nine bays of collector, one of window, two of entrance. [[frame:pitched-roof,roof-insulation]] Above, the roof, and its insulation, laid on the ceiling. [[frame:floor-slab,foundation]] Below, the slab, and the foundation that carries it all. [[home]] [[flows:on]] Here is the air: it enters at the bottom, rises behind each pane, and leaves at the top. [[lab:flap:summer]] One flap, and it is summer: the air goes outdoors. [[lab:flap:winter]] [[flows:off]] The house we draw stays the one of nineteen sixty-seven: the sliders change the figures, not the shape. And the earth tube, that buried pipe: no source mentions one in this house. It is a what-if, and it only appears in its own scenario."
+      "text": "[[home]] The machine, cut through the middle of a bay: the east half has been taken away. [[frame:south-facade]] On the south side, read from a photograph: nine bays of collector, one of window, two of entrance. [[frame:pitched-roof,roof-insulation]] Above, the roof, and its insulation, laid on the ceiling. [[frame:floor-slab,foundation]] Below, the slab, and the foundation that carries it all. [[home]] [[flows:on]] Here is the air: it enters at the bottom, rises behind each pane, and leaves at the top. [[lab:flap:summer]] One flap, and it is summer: the air goes outdoors. [[lab:flap:winter]] [[flows:off]] The house we draw stays the one of nineteen sixty-seven: the sliders change the figures, not the shape. And the earth tube, that buried pipe: no source mentions one in this house. It is a what-if: drawn pale, it firms up only in its own scenario."
     },
     {
       "id": "scene-wall",
@@ -163,7 +163,7 @@
       "scope": "part:east-gable",
       "title": "East gable",
       "scene": "house",
-      "text": "The end wall, to the east: a triangle up to the ridge, on a stepped foundation. We know nothing of it: thirty centimetres, rendered, as we imagine it. For the house, it is one loss among others. [[cutaway:on]] The section takes it away, with the whole east half. [[cutaway:off]] In winter, to the south-east, the sun rises behind a ridge of nearly six degrees."
+      "text": "The end wall, to the east: a triangle up to the ridge, on a stepped foundation. We know nothing of it: thirty centimetres, rendered, as we imagine it. For the house, it is one loss among others. [[cutaway:on]] The section takes the whole east half away, and leaves only a pale ghost of the gable. [[cutaway:off]] In winter, to the south-east, the sun rises behind a ridge of nearly six degrees."
     },
     {
       "id": "part-west-gable",
@@ -233,7 +233,7 @@
       "scope": "part:earth-tube-intake",
       "title": "Intake (what if…)",
       "scene": "house",
-      "text": "[[lab:earthtube:on]] There it appears, pale and translucent: the start of the earth tube. A column on the slope, with a cap against the rain, and a grille against insects and leaves. At this altitude, snow decides how high the intake must stand. [[lab:earthtube:off]]"
+      "text": "[[lab:earthtube:on]] There it firms up: the start of the earth tube. A column on the slope, with a cap against the rain, and a grille against insects and leaves. At this altitude, snow decides how high the intake must stand. [[lab:earthtube:off]]"
     },
     {
       "id": "part-earth-tube-pipe",
@@ -289,7 +289,7 @@
       "scope": "part:storage-wall",
       "title": "Storage wall",
       "scene": "wall",
-      "text": "[[lab:speed:86400]] Sixty centimetres of black concrete. Our ray, now heat, does not jump in it: it walks, at about four centimetres an hour. Watch the colours go down! Midday sun crosses the wall in fourteen to sixteen hours: it reaches the room side in the night. [[lab:thickness:45]] The inventors wanted forty to forty-five centimetres, and a delay of about twelve hours. By our calculation, forty-five centimetres give eleven. [[lab:preset:prototype-1967]] What remains is water, which our model does not simulate. The wall of nineteen seventy-four gave back eight to ten points less: part of it, says the paper, was the water still in the concrete."
+      "text": "[[lab:speed:86400]] Sixty centimetres of black concrete. Our ray, now heat, does not jump in it: it walks, at about four centimetres an hour. Watch the colours go down! Midday sun crosses the wall in fourteen to sixteen hours: it reaches the room side in the night. [[lab:thickness:45]] The inventors wanted forty to forty-five centimetres, and a delay of about twelve hours. By our calculation, forty-five centimetres give eleven. [[lab:preset:prototype-1967]] What remains is water, which our model does not simulate. The wall of nineteen seventy-four gave back eight to ten points less. Part of it, says the paper, was the water still in the concrete."
     },
     {
       "id": "part-upper-duct",
@@ -345,7 +345,7 @@
       "scope": "part:hot-wire-anemometer",
       "title": "Hot-wire anemometer",
       "scene": "wall",
-      "text": "A fine wire, heated by a current, at the centre of a duct: the paper puts it in the lower one, our drawing in the upper. The air that passes cools it: the faster it goes, the more current it takes to keep the wire hot. [[isolate:on]] The instrument reads from minus sixty to plus sixty centimetres a second. It could therefore see a reverse flow: the recordings show none. [[isolate:off]] A hot wire gets dirty: the reading drifts, and nothing shows it."
+      "text": "A fine wire, heated by a current, at the centre of the lower duct, where the paper puts it. The air that passes cools it: the faster it goes, the more current it takes to keep the wire hot. [[isolate:on]] The instrument reads from minus sixty to plus sixty centimetres a second. It could therefore see a reverse flow: the recordings show none. [[isolate:off]] A hot wire gets dirty: the reading drifts, and nothing shows it."
     },
     {
       "id": "part-inner-wall-face",
