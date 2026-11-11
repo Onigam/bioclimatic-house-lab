@@ -318,7 +318,7 @@ export function scenarioSetup(id: ScenarioId): ScenarioSetup {
         {
           events: [
             { at: 24, patch: { day: dayOfDate(6, 15), mode: 'summer' } },
-            { at: 48, patch: { site: 'perpignan', day: dayOfDate(0, 15), mode: 'winter' } },
+            { at: 48, patch: { site: 'sealevel', day: dayOfDate(0, 15), mode: 'winter' } },
             { at: 72, patch: { day: dayOfDate(6, 15), mode: 'summer' } },
           ],
         },

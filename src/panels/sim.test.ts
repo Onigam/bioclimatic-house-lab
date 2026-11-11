@@ -304,8 +304,8 @@ describe('what the model puts on the panel', () => {
 describe('the bottom strip', () => {
   it('says each alarm in a pill-sized phrase, with the thresholds of the engine, and the whole sentence stays in the panel', () => {
     for (const [key, [fr, en]] of Object.entries(STRIP_ALARMS)) {
-      expect(fr.length, key).toBeLessThanOrEqual(28);
-      expect(en.length, key).toBeLessThanOrEqual(28);
+      expect(fr.length, key).toBeLessThanOrEqual(22);
+      expect(en.length, key).toBeLessThanOrEqual(22);
     }
     expect(STRIP_ALARMS.roomHot[1]).toContain(String(ROOM_HOT));
     expect(STRIP_ALARMS.roomCold[1]).toContain(String(ROOM_COLD));

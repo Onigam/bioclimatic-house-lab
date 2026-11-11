@@ -221,7 +221,7 @@ describe('what the scenarios say, as the model finds it', () => {
     expect(Math.abs(e[2]! - 37)).toBeLessThan(1);
     expect(e[2]! - e[1]!).toBeLessThan(e[1]! - e[0]!);
   });
-  it('« Isoler d’abord »: 47, 74 and 94 %, and a window has to open', () => {
+  it('« La même maison, mieux isolée »: 47, 74 and 94 %, and a window has to open', () => {
     const p = presetParams('prototype-1967');
     const a = seasonRun(p);
     const b = seasonRun({ ...p, G: 1 });
@@ -231,7 +231,7 @@ describe('what the scenarios say, as the model finds it', () => {
     expect(Math.abs(c.share - 94)).toBeLessThan(1);
     expect(c.vented).toBeGreaterThan(a.vented * 10);
   });
-  it('« Sous les nuages de la Meuse »: a quarter of the sun of January, about 32 %', () => {
+  it('« Sous les nuages de Chauvency »: a quarter of the sun of January, about 32 %', () => {
     expect(32.5 / 129.6).toBeCloseTo(0.25, 2);
     expect(Math.abs(seasonRun(presetParams('at-chauvency')).share - 32)).toBeLessThan(1);
   });
@@ -243,7 +243,7 @@ describe('what the scenarios say, as the model finds it', () => {
     expect(Math.abs(y.airJul - 15)).toBeLessThan(0.5);
     const p = presetParams('prototype-1967');
     expect(Math.abs(seasonRun({ ...p, earthTube: true }).share - seasonRun(p).share - 1)).toBeLessThan(0.5);
-    const low = tubeYear('perpignan');
+    const low = tubeYear('sealevel');
     expect(low.coolingKWh).toBeGreaterThan(0);
     expect(y.coolingKWh).toBe(0);
     expect(low.heatingKWh / low.loadKWh).toBeGreaterThan(y.heatingKWh / y.loadKWh);

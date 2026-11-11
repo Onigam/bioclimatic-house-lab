@@ -22,14 +22,15 @@ import {
 // are in src/sim/texts.ts, which the physics owns; the lab's title, the worlds and the notices of the Sources panel are in src/i18n/ui.ts. A figure of the model carries †, an estimate *, a reported one nothing, by `lf` (src/data/figures.ts), so that
 // a number cannot lose its mark. « This is a model » is said once, in MODEL_NOTE.
 
-/** The alarms as the bottom strip's pill says them: the pill is narrow and the panel's status line says the whole sentence (src/sim/texts.ts). The thresholds are the engine's. */
+/** The alarms as the bottom strip's pill says them: the pill is narrow and the panel's status line says the whole sentence (src/sim/texts.ts). Two of them must fit beside the clock, the speeds and the six values at 1280 px, so each is a few words,
+ * 22 characters at most; the thresholds are the engine's, and the star is the paint's estimate. */
 export const STRIP_ALARMS: Record<AlarmKey, Pair> = {
-  roomHot: [`Pièce au-dessus de ${ROOM_HOT} °C`, `Room over ${ROOM_HOT} °C`],
-  roomCold: [`Pièce sous ${ROOM_COLD} °C`, `Room under ${ROOM_COLD} °C`],
-  faceHot: [`Peinture au-delà de ${FACE_HOT} °C`, `Paint over ${FACE_HOT} °C`],
+  roomHot: [`Pièce > ${ROOM_HOT} °C`, `Room > ${ROOM_HOT} °C`],
+  roomCold: [`Pièce < ${ROOM_COLD} °C`, `Room < ${ROOM_COLD} °C`],
+  faceHot: [`Peinture > ${FACE_HOT} °C*`, `Paint > ${FACE_HOT} °C*`],
   reverseFlow: ['Courant inversé', 'Flow reversed'],
-  wrongSeason: ['Clapet d’hiver en été', 'Winter flap in summer'],
-  wallTakesHeat: ['Le mur prend de la chaleur', 'The wall takes heat'],
+  wrongSeason: ['Mode hiver en été', 'Winter mode in summer'],
+  wallTakesHeat: ['Mur plus froid', 'Wall colder'],
 };
 
 /** A text with {placeholders} of src/data/figures.ts, as a pair. */

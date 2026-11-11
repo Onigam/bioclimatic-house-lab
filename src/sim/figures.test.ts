@@ -304,7 +304,7 @@ describe('K34, K55 to K57: the sun', () => {
   });
   it('K57 the horizon: a beam stops under it, and the clear day shrinks by under 3 %', () => {
     const o = SITES.odeillo;
-    const none = clearDay({ ...o, id: 'perpignan', horizon: undefined }, 15);
+    const none = clearDay({ ...o, id: 'sealevel', horizon: undefined }, 15);
     expect(clearDay(o, 15).total / none.total).toBeGreaterThan(0.97);
     expect(clearDay(o, 15).total / none.total).toBeLessThan(1);
   });
@@ -873,8 +873,8 @@ describe('K49 to K54, K88 to K91: the earth tube, a what-if', () => {
     expect(y.coolingKWh).toBe(0);
     expect(HOUSE_TUBE.flow).toBe(150);
   });
-  it('K90 at sea level, Perpignan: January 8 → 12 °C, July 25 → 20 °C, 731 kWh of heat, 484 kWh of cooling', () => {
-    const y = tubeYear('perpignan');
+  it('K90 at sea level: January 8 → 12 °C, July 25 → 20 °C, 731 kWh of heat, 484 kWh of cooling', () => {
+    const y = tubeYear('sealevel');
     expect(y.outJan).toBeCloseTo(12, 0);
     expect(y.outJul).toBeCloseTo(20.1, 0);
     expect(y.heatingKWh).toBeCloseTo(731, -1);

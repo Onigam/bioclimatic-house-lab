@@ -17,7 +17,7 @@ export const ALARM_TEXTS: Record<AlarmKey, { text: Pair; severe: boolean }> = {
   roomHot: { text: ['La pièce dépasse 27 °C', 'The room is over 27 °C'], severe: false },
   roomCold: { text: ['La pièce passe sous 14 °C', 'The room is under 14 °C'], severe: false },
   faceHot: {
-    text: ['La peinture noire dépasse 70 °C', 'The black paint is over 70 °C'],
+    text: ['La peinture noire dépasse 70 °C (seuil estimé)', 'The black paint is over 70 °C (an estimated threshold)'],
     severe: true,
   },
   reverseFlow: {
@@ -44,11 +44,12 @@ export const ALARM_TEXTS: Record<AlarmKey, { text: Pair; severe: boolean }> = {
 };
 
 export const PRESET_TEXTS: Record<PresetId, Pair> = {
-  'prototype-1967': ['Le prototype de 1967 (60 cm)', 'The 1967 prototype (60 cm)'],
-  'building-1974': ['Le mur et la maison de 1974 (37 cm)', 'The wall and the house of 1974 (37 cm)'],
-  'wall-45': ['45 cm, le souhait des inventeurs', '45 cm, the inventors’ wish'],
-  insulated: ['La maison de 1967 isolée comme en 1974', 'The 1967 house insulated as in 1974'],
-  'at-chauvency': ['La même maison à Chauvency, dans la Meuse', 'The same house at Chauvency, in the Meuse'],
+  // the select cuts a label at about 22 characters on a tablet (docs/qa.md, D18)
+  'prototype-1967': ['Prototype de 1967', 'The 1967 prototype'],
+  'building-1974': ['Maison de 1974 (37 cm)', '1974 house (37 cm)'],
+  'wall-45': ['45 cm, leur souhait', '45 cm, their wish'],
+  insulated: ['Isolée comme en 1974', 'Insulated as in 1974'],
+  'at-chauvency': ['Même maison, Chauvency', 'Same house, Chauvency'],
 };
 
 export const SCENARIO_TEXTS: Record<ScenarioId, { name: Pair; lesson: Pair }> = {
@@ -90,15 +91,15 @@ export const SCENARIO_TEXTS: Record<ScenarioId, { name: Pair; lesson: Pair }> = 
   drying: {
     name: ['Le béton qui sèche', 'The concrete that dries'],
     lesson: [
-      'Le mur de 1974, plus mince, a rendu 8 à 10 points de moins que celui de 1967 : il restait de l’eau dans le béton coulé sur place, et la chaleur servait à la déplacer. Le modèle ne connaît que du béton sec : il donne au mur de 1974 environ 36 % †, et 35 % † à celui de 1967. Tout l’écart mesuré reste donc à expliquer par l’eau : le modèle ne le simule pas.',
-      'The thinner 1974 wall gave 8 to 10 points less than the 1967 one: water remained in the concrete poured on site, and the heat went into moving it. The model only knows dry concrete: it gives the 1974 wall about 36 % †, and the 1967 one 35 % †. So the whole measured gap is still left for the water to explain: the model does not simulate it.',
+      'Le mur de 1974 a rendu 8 à 10 points de moins que celui de 1967. Les auteurs en donnent deux raisons : moins de circulation d’air (une surface d’échange plus petite, 3,25 contre 4,50 m²) et moins de chaleur restituée par le béton, qu’ils rattachent à l’eau qui y reste et qu’ils attendent de voir partir en un ou deux ans. Le modèle ne connaît que du béton sec : il donne 36 % † à ce mur, un point de plus que celui de 1967 (35 % †), et ne retrouve donc pas l’écart.',
+      'The 1974 wall gave back 8 to 10 points less than the 1967 one. The authors give two reasons: less air circulation (a smaller exchange surface, 3.25 against 4.50 m²) and less heat coming through the concrete, which they trace to the water still in it and expect to go in a year or two. The model only knows dry concrete: it gives this wall 36 % †, a point above the 1967 one’s 35 % †, and so does not retrieve the gap.',
     ],
   },
   'no-vents': {
     name: ['Sans ouvertures', 'No vents'],
     lesson: [
-      'Février, ciel clair, sans chauffage, sans fenêtres : la pièce d’essai. Les ouvertures fermées, l’air de la pièce bouge d’environ 2 K † et culmine vers 21 h †. Ouvertes, il bouge de plus de 6 K † et culmine vers 15 h †. Mesuré à Los Alamos sur de petites pièces : 5 K à 22 h, et 14 K à 16 h. Moins de chaleur en tout, mais plus tard : à vous de choisir.',
-      'February, clear sky, no heating, no windows: the test room. With the vents shut, the room’s air moves by about 2 K † and peaks around 9 p.m. †. Open, it moves by over 6 K † and peaks around 3 p.m. †. Measured at Los Alamos in small rooms: 5 K at 10 p.m., and 14 K at 4 p.m. Less heat overall, but later: your choice.',
+      'Février, ciel clair, sans chauffage, sans fenêtres : la pièce d’essai. Les ouvertures fermées, l’air de la pièce bouge d’environ 2 K † et culmine vers 21 h †. Ouvertes, il bouge de plus de 6 K † et culmine vers 15 h †. Mesuré à Los Alamos : 5 K à 22 h, et 14 K à 16 h. Moins de chaleur en tout, mais plus tard.',
+      'February, clear sky, no heating, no windows: the test room. With the vents shut, the room’s air moves by about 2 K † and peaks around 9 p.m. †. Open, it moves by over 6 K † and peaks around 3 p.m. †. Measured at Los Alamos: 5 K at 10 p.m., and 14 K at 4 p.m. Less heat overall, but later.',
     ],
   },
   'the-night': {
@@ -116,14 +117,14 @@ export const SCENARIO_TEXTS: Record<ScenarioId, { name: Pair; lesson: Pair }> = 
     ],
   },
   'insulate-first': {
-    name: ['Isoler d’abord', 'Insulate first'],
+    name: ['La même maison, mieux isolée', 'The same house, better insulated'],
     lesson: [
       'Rien ne change sur le mur, la maison perd seulement moins. Sur la saison de chauffe, la part que l’électricité ne paie pas passe d’environ 47 % † à 74 % † avec l’isolation de 1974. Plus loin, à 0,6 W/m³·K, environ 94 % †, mais il faut ouvrir les fenêtres : il y a plus de soleil que la maison n’en peut prendre. Pas un rayon de plus.',
       'Nothing changes on the wall, the house simply loses less. Over the heating season the share electricity does not pay for goes from about 47 % † to 74 % † with the insulation of 1974. Further on, at 0.6 W/m³·K, about 94 % †, but windows must be opened: there is more sun than the house can take. Not one ray more.',
     ],
   },
   chauvency: {
-    name: ['Sous les nuages de la Meuse', 'Under the clouds of the Meuse'],
+    name: ['Sous les nuages de Chauvency', 'Under the clouds of Chauvency'],
     lesson: [
       'La même maison, à Chauvency-le-Château. En janvier le soleil sur ce mur tombe à un quart de celui d’Odeillo, et le mur prend souvent à la pièce plus qu’il ne lui donne. Sur la saison, le modèle trouve environ 32 % †, là où les inventeurs annoncent 35 à 45 % pour leur maison de là-bas, dont il ignore l’isolation.',
       'The same house, at Chauvency-le-Château. In January the sun on this wall falls to a quarter of Odeillo’s, and the wall often takes more from the room than it gives. Over the season the model finds about 32 % †, where the inventors report 35 to 45 % for their house there, whose insulation it does not know.',
@@ -132,8 +133,8 @@ export const SCENARIO_TEXTS: Record<ScenarioId, { name: Pair; lesson: Pair }> = 
   'earth-tube': {
     name: ['Et si : un puits canadien', 'What if: an earth tube'],
     lesson: [
-      'Cette maison n’en avait pas : c’est une hypothèse. L’air neuf passe par un tuyau de 50 m * enterré à 2 m *. À Odeillo, en janvier il sort à environ 3 °C † quand il fait −1 °C, en juillet à 10 °C † quand il fait 15 °C. Sur la saison : environ 1 point † de plus. Au niveau de la mer, à Perpignan, il compte davantage, et il rafraîchit vraiment l’été. Il ne remplace ni l’aération ni l’isolation.',
-      'This house had none: it is an assumption. Fresh air comes through a pipe of 50 m * buried at 2 m *. At Odeillo, in January it leaves at about 3 °C † when it is −1 °C, in July at 10 °C † when it is 15 °C. Over the season: about 1 point † more. At sea level, at Perpignan, it counts for more, and it truly cools the summer. It replaces neither ventilation nor insulation.',
+      'Aucune source ne mentionne de puits canadien dans cette maison : c’est une hypothèse. L’air neuf passe par un tuyau de 50 m * enterré à 2 m *. À Odeillo, en janvier il sort à environ 3 °C † quand il fait −1 °C, en juillet à 10 °C † quand il fait 15 °C. Sur une année : environ 1 point † de plus. Au niveau de la mer, il compte davantage, et il rafraîchit vraiment l’été. Il ne remplace ni l’aération ni l’isolation.',
+      'No source mentions an earth tube in this house: it is an assumption. Fresh air comes through a pipe of 50 m * buried at 2 m *. At Odeillo, in January it leaves at about 3 °C † when it is −1 °C, in July at 10 °C † when it is 15 °C. Over a year: about 1 point † more. At sea level it counts for more, and it truly cools the summer. It replaces neither ventilation nor insulation.',
     ],
   },
 };
@@ -158,9 +159,9 @@ export const MATERIAL_TEXTS: Record<WallMaterialId, Pair> = {
 
 export const SITE_TEXTS: Record<SiteId, Pair> = {
   odeillo: ['Odeillo, 1 550 m', 'Odeillo, 1,550 m'],
-  chauvency: ['Chauvency-le-Château, Meuse', 'Chauvency-le-Château, Meuse'],
+  chauvency: ['Chauvency-le-Château', 'Chauvency-le-Château'],
   darmstadt: ['Darmstadt', 'Darmstadt'],
-  perpignan: ['Perpignan, au niveau de la mer', 'Perpignan, at sea level'],
+  sealevel: ['Au niveau de la mer', 'At sea level'],
 };
 
 export const SKY_TEXTS: Record<SkyMode, Pair> = {
@@ -191,8 +192,14 @@ export const PARAM_TEXTS: Partial<Record<keyof HouseParams, { label: Pair; unit:
 export const SHARE_CLAIMS: { who: Pair; value: Pair }[] = [
   { who: ['Les inventeurs, Odeillo', 'The inventors, Odeillo'], value: ['60 à 70 %', '60 to 70 %'] },
   { who: ['Les inventeurs, Chauvency', 'The inventors, Chauvency'], value: ['35 à 45 %', '35 to 45 %'] },
-  { who: ['Un collègue, estimation', 'A colleague, an estimate'], value: ['75 à 90 %', '75 to 90 %'] },
-  { who: ['Une simulation de 1978', 'A simulation of 1978'], value: ['autour de 40 %', 'around 40 %'] },
+  {
+    who: ['Un collègue, maisons de ce genre', 'A colleague, houses of that kind'],
+    value: ['75 à 90 %', '75 to 90 %'],
+  },
+  {
+    who: ['Une simulation de 1978, non lue', 'A simulation of 1978, unread'],
+    value: ['autour de 40 %, d’après un résumé', 'around 40 %, per a summary'],
+  },
   {
     who: ['L’encyclopédie, à travers un livre de 2013', 'The encyclopaedia, through a book of 2013'],
     value: ['70 %', '70 %'],

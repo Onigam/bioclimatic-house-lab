@@ -13,8 +13,8 @@ import {
 // The weather. Four towns from PVGIS, and the days the inventors recorded in 1974–75. Nothing here reads a clock or an unseeded random: the same inputs give the same weather. Each day has a shape
 // (the clear-sky model of the day) and a total (a record's, or the month's from PVGIS): the shape is scaled and shared between beam and diffuse so that the day comes out at its total.
 
-export type SiteId = 'odeillo' | 'chauvency' | 'darmstadt' | 'perpignan';
-export const SITE_IDS: SiteId[] = ['odeillo', 'chauvency', 'darmstadt', 'perpignan'];
+export type SiteId = 'odeillo' | 'chauvency' | 'darmstadt' | 'sealevel';
+export const SITE_IDS: SiteId[] = ['odeillo', 'chauvency', 'darmstadt', 'sealevel'];
 
 export interface Site {
   id: SiteId;
@@ -79,8 +79,8 @@ export const SITES: Record<SiteId, Site> = {
     air: [2.0, 2.6, 5.7, 10.1, 14.2, 18.3, 20.1, 19.2, 15.5, 11.0, 6.0, 3.1],
   },
   // the same latitude at sea level, a stand-in for « what if this wall were lower down »
-  perpignan: {
-    id: 'perpignan',
+  sealevel: {
+    id: 'sealevel',
     latitude: 42.7,
     altitude: 48,
     vertical: [121.6, 124.0, 124.1, 106.3, 91.4, 83.7, 94.1, 110.8, 122.2, 125.3, 115.5, 117.5],
