@@ -288,7 +288,7 @@ const KEPT_TO_THE_SOURCE: Record<string, [id: string, RegExp][]> = {
     ['intro', /selon qui compte, et ce qu’on compte/],
     ['intro', /cliquez sur un élément/],
     ['part-upper-duct', /il y a deux conduits/],
-    ['scene-house', /on lui a retiré sa moitié est/],
+    ['scene-house', /on lui a retiré sa moitié à l’est/],
     ['part-south-window', /l’article ne donne pas la surface des fenêtres/],
     ['part-south-facade', /ses mois de décembre et de janvier sont huit à douze points trop bas/],
     ['part-fresh-air-vent', /dans notre modèle, la position d’été/],
