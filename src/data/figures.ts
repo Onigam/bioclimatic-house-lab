@@ -319,7 +319,8 @@ export const FIG = {
   april44: m(44, 0, ' °C'),
   april27: m(27, 0, pct),
   juneRoomRange: words('model', '13 à 19 °C, avec un air de 8 à 18 °C', '13 to 19 °C, with the air at 8 to 18 °C'),
-  winterLowPts: words('model', '8 à 12 points', '8 to 12 points'),
+  // December 8, January 12; November (7) and February (6) are smaller, so the months are named (docs/physics.md §4.5; held in figures.test.ts)
+  winterLowPts: words('model', '8 à 12 points en décembre et janvier', '8 to 12 points in December and January'),
   summerHighPts: words('model', '5 à 11 points', '5 to 11 points'),
   tubeSeaLoad: m(22000, 0, ' kWh'),
 } as const;

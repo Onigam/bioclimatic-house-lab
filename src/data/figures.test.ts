@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { MONTH_EFF_EYE, MONTH_EFF_MODEL } from '../drawings/model-tables';
 import { SITES } from '../sim/climate';
 import { tubeYear } from '../sim/earth-tube';
 import { HouseSim } from '../sim/engine';
@@ -236,11 +237,25 @@ describe('the rest is held to the lines of docs/physics.md and to the scenarios�
       '13–19 °C',
       '8–18 °C',
       '9 points against 18',
-      '8 to 12 points low',
       '5 to 11 points high',
       '−12 L/s for 5 h',
     );
     expect(SIM_TEST).toContain('outer face ± 17 K');
+    // the year's gaps, from the two rows of §4.5 (held to the document by drawings.test.ts): the winter months are 6 to 12 points low,
+    // November to February, but 8 to 12 only in December and January, so the texts say « December and January »
+    const low = (month: number): number => MONTH_EFF_EYE[month]! - MONTH_EFF_MODEL[month]!;
+    expect([10, 11, 0, 1].map(low)).toEqual([7, 8, 12, 6]);
+    const decJan = [low(11), low(0)];
+    expect(FIG.winterLowPts.t).toEqual([
+      `${Math.min(...decJan)} à ${Math.max(...decJan)} points en décembre et janvier`,
+      `${Math.min(...decJan)} to ${Math.max(...decJan)} points in December and January`,
+    ]);
+    // the summer's, July to September: 5 to 11 points high
+    const high = [6, 7, 8].map((month) => MONTH_EFF_MODEL[month]! - MONTH_EFF_EYE[month]!);
+    expect(FIG.summerHighPts.t).toEqual([
+      `${Math.min(...high)} à ${Math.max(...high)} points`,
+      `${Math.min(...high)} to ${Math.max(...high)} points`,
+    ]);
     expect(SIM_TEST).toMatch(/shrinks by under 3 %/);
     expect(FIG.surfacesT.v).toBe(18);
     close('flowHalfDuct', 25, 0.5);

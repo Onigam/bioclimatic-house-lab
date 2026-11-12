@@ -188,11 +188,11 @@ export const sunSheet: DrawingSheet = {
           'The paper gives about 36 % in winter and 15 % in June. The model finds the fall from winter to May–June, ',
         ),
         fig('monthFall'),
-        l(' contre 18 lus ; ses mois d’hiver sont ', ' against 18 read; its winter months are '),
+        l(' contre 18 lus ; il est trop bas de ', ' against 18 read; it is too low by '),
         fig('winterLowPts'),
-        l(' trop bas, ceux d’été ', ' too low, its summer ones '),
+        l(', et ses mois d’été sont trop hauts de ', ', and its summer months are too high by '),
         fig('summerHighPts'),
-        l(' trop hauts, sans que l’on sache pourquoi.', ' too high, and we do not know why.'),
+        l(', sans que l’on sache pourquoi.', ', and we do not know why.'),
       ),
     );
     marksLegend(d, 24, 206, 118);

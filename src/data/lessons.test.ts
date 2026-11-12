@@ -134,8 +134,9 @@ describe('the lessons', () => {
     const en = body('low-sun-high-sun', 'en');
     expect(en).toMatch(/1\.65 times† more in the depth of winter/);
     expect(en).toMatch(/from satellites, not from a sensor on this wall/);
-    expect(en).toMatch(/too low/);
-    expect(en).toMatch(/too high/);
+    expect(en).toMatch(/too low by 8 to 12 points in December and January†/);
+    expect(en).toMatch(/too high by 5 to 11 points†/);
+    expect(body('low-sun-high-sun', 'fr')).toMatch(/trop bas de 8 à 12 points en décembre et janvier†/);
     expect(en).toMatch(/does not trace the paper/);
     expect(en).toMatch(/cools it too far/);
   });

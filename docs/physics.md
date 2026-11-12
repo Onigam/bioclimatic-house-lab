@@ -242,7 +242,7 @@ I would not touch this. It is the most interesting thing the model found, and it
 | Model, PVGIS series, % | 25  | 29  | 24  | 20  | 18  | 20  | 28  | 29  | 32  | 34  | 29  | 28  |
 | Model, a clear day, %  | 32  |     | 30  | 25  | 21  | 22  | 27  | 31  | 34  | 37  |     |     |
 
-The fall from winter to May–June is there, 9 points against 18. **In winter the model's months are 8 to 12 points low**, the air and the cloud of PVGIS against S1's sequences (the same model is at 35.0 % on S1's own days). **In July to September it is 5 to 11 points high**, and I don't know why: the model holds the room at 20 °C and credits air warmed from 17 °C, as S1 says it does, but the houses were lived in at some other temperature, in some other position, and the frame's shading is only the head's. Reported.
+The fall from winter to May–June is there, 9 points against 18. **In winter the model's months are 6 to 12 points low** (November to February: 7, 8, 12 and 6; 8 to 12 in December and January), the air and the cloud of PVGIS against S1's sequences (the same model is at 35.0 % on S1's own days). **In July to September it is 5 to 11 points high**, and I don't know why: the model holds the room at 20 °C and credits air warmed from 17 °C, as S1 says it does, but the houses were lived in at some other temperature, in some other position, and the frame's shading is only the head's. Reported.
 
 ### 4.6 The earth tube
 
