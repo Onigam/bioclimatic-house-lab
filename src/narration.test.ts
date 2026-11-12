@@ -303,25 +303,32 @@ const KEPT_TO_THE_SOURCE: Record<string, [id: string, RegExp][]> = {
     ['part-foundation', /environ soixante-trois tonnes/],
     // the eighth pass (attribution is spoken only where it does work): the hedge is still said, in a form that names no source again
     ['part-twin-house', /l’article des inventeurs parle de prototypes, sans dire combien/],
-    ['part-twin-house', /rien n’indique qu’on les ait comparées/],
+    ['part-twin-house', /rien n’indique que les prototypes aient été comparés entre eux/],
     ['part-tree-clumps', /notre choix : nous ignorons ce qui poussait là/],
-    ['part-far-ridge', /suivent le relief du site/],
-    ['part-solar-houses-1974', /un an de relevés/],
+    ['part-far-ridge', /viennent d’un modèle de terrain/],
+    ['part-solar-houses-1974', /a été suivie pendant un an/],
     ['part-south-facade', /deux d’entrée, selon notre lecture/],
     ['part-collector-element', /quarante-huit mètres carrés de capteur/],
     ['part-north-window', /nous n’en connaissons pas les dimensions/],
     ['part-roof-insulation', /les pertes ne sont connues que pour la maison entière/],
     ['part-foundation', /nous n’en avons trouvé aucun plan/],
     ['part-interior-partitions', /mais sans plan : notre dessin pose les cloisons/],
-    ['part-inner-glazing', /l’article des inventeurs ne dit que deux vitres/],
+    [
+      'part-inner-glazing',
+      /à environ vingt-cinq millimètres dans notre dessin\. l’article des inventeurs ne dit que deux vitres/,
+    ],
     ['part-steel-frame', /le profil mince de vingt-deux millimètres est notre dessin/],
-    ['part-storage-wall', /on visait quarante à quarante-cinq centimètres/],
+    ['part-storage-wall', /mieux vaudrait quarante à quarante-cinq centimètres, pour un retard d’environ douze heures/],
+    ['part-head-beam', /sur la figure d’origine, deux lettres la marquent/],
     ['part-head-beam', /c’est notre lecture, et la figure ne la donne pas/],
-    ['part-sill-beam', /aucun chiffre n’en est donné, et notre calcul ne le compte pas/],
-    ['part-air-thermocouples', /les inventeurs mettent les leurs dans les conduits/],
+    ['part-sill-beam', /nous n’en avons trouvé aucun chiffre, et notre calcul ne le compte pas/],
+    [
+      'part-air-thermocouples',
+      /les inventeurs mettent les leurs dans les conduits\. nous ne savons ni combien, ni à quelle hauteur/,
+    ],
     ['part-hot-wire-anemometer', /les enregistrements n’en montrent aucun/],
-    ['part-electric-panel', /c’est notre dessin, aux dimensions estimées/],
-    ['part-room-surface-probes', /avec les chiffres des inventeurs, nous calculons environ dix-sept et demi/],
+    ['part-electric-panel', /accroché à une cloison : c’est notre dessin\. sa petite lampe/],
+    ['part-room-surface-probes', /avec les chiffres publiés, nous calculons environ dix-sept et demi/],
   ],
   en: [
     ['intro', /in the small hours/],
@@ -364,26 +371,30 @@ const KEPT_TO_THE_SOURCE: Record<string, [id: string, RegExp][]> = {
     ['part-access-road', /about sixty-three tonnes/],
     ['part-foundation', /about sixty-three tonnes/],
     // the eighth pass (attribution is spoken only where it does work): the hedge is still said, in a form that names no source again
-    ['part-twin-house', /the inventors’ paper speaks of prototypes, without saying how many/],
-    ['part-twin-house', /nothing suggests the two were ever compared/],
+    ['part-twin-house', /the paper by the inventors speaks of prototypes, without saying how many/],
+    ['part-twin-house', /nothing suggests the prototypes were ever compared with each other/],
     ['part-tree-clumps', /our choice: we do not know what grew there/],
-    ['part-far-ridge', /follow the relief of the site/],
-    ['part-solar-houses-1974', /a year of readings/],
+    ['part-far-ridge', /come from a terrain model/],
+    ['part-solar-houses-1974', /was monitored for a year/],
     ['part-south-facade', /two of entrance, by our reading/],
     ['part-collector-element', /forty-eight square metres of collector/],
     ['part-north-window', /we do not know its size/],
     ['part-roof-insulation', /the losses are known only for the whole house/],
     ['part-foundation', /we found no plan of it/],
     ['part-interior-partitions', /but no plan: our drawing puts in partitions/],
-    ['part-inner-glazing', /the inventors’ paper only says two panes/],
+    [
+      'part-inner-glazing',
+      /twenty-five millimetres behind it in our drawing\. the paper by the inventors only says two panes/,
+    ],
     ['part-steel-frame', /the slim profile of twenty-two millimetres is our drawing/],
-    ['part-storage-wall', /the aim was forty to forty-five centimetres/],
+    ['part-storage-wall', /forty to forty-five centimetres would be better, for a delay of about twelve hours/],
+    ['part-head-beam', /on the original figure, two letters mark it/],
     ['part-head-beam', /that is our reading, and the figure does not give it/],
-    ['part-sill-beam', /no figure is given for it, and our calculation does not count it/],
-    ['part-air-thermocouples', /the inventors put theirs in the ducts/],
+    ['part-sill-beam', /we found no figure for it, and our calculation does not count it/],
+    ['part-air-thermocouples', /the inventors put theirs in the ducts\. we do not know how many, or how high/],
     ['part-hot-wire-anemometer', /the recordings show none/],
-    ['part-electric-panel', /it is our drawing, with estimated sizes/],
-    ['part-room-surface-probes', /from the inventors’ figures, we work out about seventeen and a half/],
+    ['part-electric-panel', /hung on a partition: it is our drawing\. its small lamp/],
+    ['part-room-surface-probes', /from the published figures, we work out about seventeen and a half/],
   ],
 };
 
@@ -492,43 +503,58 @@ const FIGURES: [value: number, said: number, tolerance: number, fr: RegExp, en: 
  * Attribution is spoken only where it does work (the owner, 12 November: naming the source clip after clip is a tic when the clips are heard in sequence; docs/narration-notes.md, « Eighth pass »). A source is
  * introduced in full once in each world, in the first segment of that world that needs it; everywhere else the published fact is a plain statement with its figure, and the sheet's source tag and the Sources
  * panel carry where it comes from. What stays is short and has a reason: the source is silent or says only part of it, the source and the model sit side by side, a hedge the fact-check pinned, a single-source figure.
- * The lab's own hedges (« notre dessin », « notre choix », « notre lecture », « une estimation », « notre modèle ») are not attributions and are not counted here.
+ * The lab's own hedges (« notre dessin », « notre choix », « notre lecture », « une estimation », « notre modèle ») are not attributions and are not counted here. Nor are the silences said in the lab's own voice (« nous n'en avons
+ * trouvé aucun plan », « nous ignorons », « personne ne dit »): the owner decided on 12 November that these honesty clauses stay (docs/narration-notes.md, « Eighth pass, the correction round »).
+ * The count is made the way a listener hears it: the paper's full formula sends to the paper and to the inventors both, and « la figure d'origine », « les chiffres publiés » and « un an de relevés » are sources too.
  */
 const unicode = (alternatives: string): RegExp => new RegExp(`(?<!\\p{L})(?:${alternatives})(?!\\p{L})`, 'giu');
-/** The words that send the listener to a source, by language: the paper, the inventors, the recordings, a reported measuring, the sources, a photograph, a published template, an architect, a terrain model, aerial views. */
+/**
+ * The words that send the listener to a source, by language: the paper (and its figure), the inventors, the recordings (and the readings of the 1967 house), a reported measuring, the sources, a photograph, the published figures,
+ * a published template, an architect, a terrain model, aerial views.
+ */
 const SOURCE_MARKS: Record<'fr' | 'en', [name: string, re: RegExp][]> = {
   fr: [
-    ['paper', unicode('article')],
+    ['paper', unicode('article|figure d’origine')],
     ['inventors', unicode('inventeurs')],
-    ['recordings', unicode('les enregistrements|courbes de mille neuf cent soixante-sept')],
+    ['recordings', unicode('les enregistrements|courbes de mille neuf cent soixante-sept|relevés')],
     ['measured', unicode('mesurée?s?|les mesures des')],
     ['sources', unicode('sources?')],
     ['photograph', unicode('photographie')],
+    ['published', unicode('chiffres publiés')],
     ['template', unicode('gabarit publié')],
     ['architect', unicode('architecte américain')],
     ['terrain', unicode('modèle de terrain')],
     ['aerial', unicode('vues aériennes')],
   ],
   en: [
-    ['paper', unicode('paper')],
+    ['paper', unicode('paper|original figure')],
     ['inventors', unicode('inventors')],
-    ['recordings', unicode('the recordings|curves of nineteen sixty-seven')],
+    ['recordings', unicode('the recordings|curves of nineteen sixty-seven|readings')],
     ['measured', unicode('measured (?:by|for|on)|measurements')],
     ['sources', unicode('sources?')],
     ['photograph', unicode('photograph')],
+    ['published', unicode('published figures')],
     ['template', unicode('published template')],
     ['architect', unicode('american architect')],
     ['terrain', unicode('terrain model')],
     ['aerial', unicode('aerial views')],
   ],
 };
-/** The paper in full: its authors with it. The introduction names it a second way, with its year, once, and no other segment says the year. */
-const PAPER_IN_FULL = { fr: unicode('l’article des inventeurs'), en: unicode('the inventors’ paper') };
+/**
+ * The paper in full: its authors with it. The introduction names it a second way, with its year, once, and no other segment says the year. The English has two forms: « the inventors' paper » (a plural possessive cannot be heard,
+ * the noun after it carries the meaning) and « the paper by the inventors », used in the clips that were redone in the correction round.
+ */
+const PAPER_IN_FULL = {
+  fr: unicode('l’article des inventeurs'),
+  en: unicode('the inventors’ paper|the paper by the inventors'),
+};
+/** The word itself, for the ceiling on its mentions (« la figure d'origine » is a source, not a mention of the word). */
+const PAPER_WORD = { fr: unicode('article'), en: unicode('paper') };
 const PAPER_YEAR = { fr: /mille neuf cent soixante-seize/i, en: /nineteen seventy-six/i };
-/** Segments of 61 that may name a source (39 before the eighth pass, 24 after), and mentions of the paper in the whole guide (20 before, 7 after). */
+/** Segments of 61 that may name a source (39 before the eighth pass, 26 by the corrected count after the correction round), and mentions of the paper in the whole guide (20 before, 7 after). */
 const ATTRIBUTION_CEILING = 26;
 const PAPER_CEILING = 8;
-/** Where two sources are named in one segment on purpose: the introduction, the house (the source of nearly every figure), and the house's overview (two hedges the fact-check pinned, the photograph and the earth tube). */
+/** Where two sources are named in one segment on purpose: the house (the source of nearly every figure) and the house's overview (two hedges the fact-check pinned, the photograph and the earth tube); the introduction is exempt. */
 const TWO_SOURCES = new Set(['scene-house', 'part-prototype-house']);
 
 describe('narration wiring', () => {
@@ -868,16 +894,28 @@ describe.each(Object.keys(scripts))('narration script %s', (lang) => {
   describe('attribution is spoken only where it does work', () => {
     const marks = SOURCE_MARKS[lang as 'fr' | 'en'];
     const inFull = PAPER_IN_FULL[lang as 'fr' | 'en'];
-    const paper = marks.find(([name]) => name === 'paper')![1];
-    /** The sources a segment names: the paper in full counts once (it carries its authors with it). */
-    const named = (s: Segment): string[] => {
+    const paperWord = PAPER_WORD[lang as 'fr' | 'en'];
+    /**
+     * What a listener hears named in a segment. `phrases` are the attributions (the paper in full is one phrase, with its authors); `heard` are the sources they send to (the full formula sends to the paper and to the inventors
+     * both, so the inventors named in the segment before it are the same source again).
+     */
+    const named = (s: Segment): { phrases: string[]; heard: string[] } => {
       const text = spokenOf(s);
-      const names = new Set<string>(text.search(inFull) >= 0 ? ['paper'] : []);
+      const phrases = new Set<string>();
+      const heard = new Set<string>();
+      if (text.search(inFull) >= 0) {
+        phrases.add('paper');
+        heard.add('paper').add('inventors');
+      }
       const rest = text.replace(inFull, ' ');
-      for (const [name, re] of marks) if (rest.search(re) >= 0) names.add(name);
-      return [...names];
+      for (const [name, re] of marks)
+        if (rest.search(re) >= 0) {
+          phrases.add(name);
+          heard.add(name);
+        }
+      return { phrases: [...phrases], heard: [...heard] };
     };
-    const papers = (s: Segment): number => spokenOf(s).match(paper)?.length ?? 0;
+    const papers = (s: Segment): number => spokenOf(s).match(paperWord)?.length ?? 0;
     const parts = (w: string): Segment[] => script.segments.filter((s) => s.scene === w && s.scope !== 'intro');
     const visit = [
       seg('intro'),
@@ -885,24 +923,26 @@ describe.each(Object.keys(scripts))('narration script %s', (lang) => {
     ];
 
     it(`names a source in at most ${ATTRIBUTION_CEILING} segments of 61, and in at most half of the segments of each world`, () => {
-      expect(script.segments.filter((s) => named(s).length > 0).length).toBeLessThanOrEqual(ATTRIBUTION_CEILING);
+      expect(script.segments.filter((s) => named(s).heard.length > 0).length).toBeLessThanOrEqual(ATTRIBUTION_CEILING);
       for (const w of sceneIds) {
         const inWorld = parts(w);
-        const count = inWorld.filter((s) => named(s).length > 0).length;
+        const count = inWorld.filter((s) => named(s).heard.length > 0).length;
         expect(count, `${w}: ${count} of ${inWorld.length}`).toBeLessThanOrEqual(Math.floor(inWorld.length / 2));
       }
     });
 
     it('names one source in a segment, never two: the introduction aside, and the two segments where the house itself, or the house’s two pinned hedges, are the point', () => {
       for (const s of script.segments.filter((x) => x.id !== 'intro'))
-        expect(named(s).length, `${s.id}: ${named(s)}`).toBeLessThanOrEqual(TWO_SOURCES.has(s.id) ? 2 : 1);
+        expect(named(s).phrases.length, `${s.id}: ${named(s).phrases}`).toBeLessThanOrEqual(
+          TWO_SOURCES.has(s.id) ? 2 : 1,
+        );
     });
 
     it('never names the same source in two segments in a row, in the order of the script or in the order of a visit', () => {
       for (const order of [script.segments, visit])
         for (let k = 1; k < order.length; k++) {
-          const before = named(order[k - 1]!);
-          for (const name of named(order[k]!))
+          const before = named(order[k - 1]!).heard;
+          for (const name of named(order[k]!).heard)
             expect(before, `${order[k - 1]!.id} then ${order[k]!.id}: ${name}`).not.toContain(name);
         }
     });

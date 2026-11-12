@@ -58,7 +58,7 @@
       "scope": "part:twin-house",
       "title": "Sa jumelle",
       "scene": "site",
-      "text": "L’article des inventeurs parle de prototypes, sans dire combien. Notre jumelle est donc une copie du même dessin, décalée le long de la façade. [[isolate:on]] Elle aide l’œil à lire l’échelle, sans entrer dans le calcul. [[isolate:off]] Rien n’indique qu’on les ait comparées."
+      "text": "L’article des inventeurs parle de prototypes, sans dire combien. Notre jumelle est donc une copie du même dessin, décalée le long de la façade. [[isolate:on]] Elle aide l’œil à lire l’échelle, sans entrer dans le calcul. [[isolate:off]] Rien n’indique que les prototypes aient été comparés entre eux."
     },
     {
       "id": "part-granite-slope",
@@ -107,7 +107,7 @@
       "scope": "part:solar-houses-1974",
       "title": "Maisons de 1974",
       "scene": "site",
-      "text": "Plus haut sur la pente, un bâtiment protégé, de trois logements, avec le même système de mur. C’est une propriété privée : on le voit, on n’y entre pas. Son plan n’est dans aucune source. Notre dessin le compose en simple boîte vitrée. La maison de mille neuf cent soixante-sept, elle, a un an de relevés."
+      "text": "Plus haut sur la pente, un bâtiment protégé, de trois logements, avec le même système de mur. C’est une propriété privée : on le voit, on n’y entre pas. Son plan n’est dans aucune source. Notre dessin le compose en simple boîte vitrée. La maison de mille neuf cent soixante-sept, elle, a été suivie pendant un an."
     },
     {
       "id": "part-pyranometer",
@@ -121,7 +121,7 @@
       "scope": "part:far-ridge",
       "title": "Crêtes",
       "scene": "site",
-      "text": "Les montagnes du fond suivent le relief du site : plein sud, elles montent à peine à trois degrés. [[lab:day:15]] [[lab:hour:6]] [[lab:speed:600]] Aucune ne fait d’ombre à midi en hiver. Elles coupent seulement l’aube et le soir : le rayon direct n’arrive qu’une fois le soleil au-dessus de la ligne. Moins de trois pour cent d’un jour clair. C’est le seul décor dont les chiffres comptent. [[lab:preset:prototype-1967]]"
+      "text": "Les montagnes du fond viennent d’un modèle de terrain : plein sud, elles montent à peine à trois degrés. [[lab:day:15]] [[lab:hour:6]] [[lab:speed:600]] Aucune ne fait d’ombre à midi en hiver. Elles coupent seulement l’aube et le soir : le rayon direct n’arrive qu’une fois le soleil au-dessus de la ligne. Moins de trois pour cent d’un jour clair. C’est le seul décor dont les chiffres comptent. [[lab:preset:prototype-1967]]"
     },
     {
       "id": "part-south-facade",
@@ -261,7 +261,7 @@
       "scope": "part:inner-glazing",
       "title": "Vitrage intérieur",
       "scene": "wall",
-      "text": "La seconde vitre, près du mur, double la première, à environ vingt-cinq millimètres. L’article des inventeurs ne dit que deux vitres. [[isolate:on]] C’est elle que l’air chaud de la lame touche. [[isolate:off]] Ses deux faces sont enfermées entre le cadre, l’autre vitre et le mur : on ne peut pas les essuyer."
+      "text": "La seconde vitre, près du mur, double la première, à environ vingt-cinq millimètres dans notre dessin. L’article des inventeurs ne dit que deux vitres. [[isolate:on]] C’est elle que l’air chaud de la lame touche. [[isolate:off]] Ses deux faces sont enfermées entre le cadre, l’autre vitre et le mur : on ne peut pas les essuyer."
     },
     {
       "id": "part-steel-frame",
@@ -289,7 +289,7 @@
       "scope": "part:storage-wall",
       "title": "Mur de stockage",
       "scene": "wall",
-      "text": "[[lab:speed:86400]] Soixante centimètres de béton noir. Notre rayon, devenu chaleur, y avance à environ quatre centimètres par heure. Les couleurs descendent dans le mur. Le soleil de midi traverse le mur en quatorze à seize heures, et arrive côté pièce dans la nuit. [[lab:thickness:45]] On visait quarante à quarante-cinq centimètres, et un retard d’environ douze heures. Par notre calcul, quarante-cinq centimètres en donnent onze. [[lab:preset:prototype-1967]] Reste l’eau, que notre modèle ne simule pas. Le mur de mille neuf cent soixante-quatorze a rendu huit à dix points de moins. Une partie, dit l’article, tenait à l’eau restée dans le béton."
+      "text": "[[lab:speed:86400]] Soixante centimètres de béton noir. Notre rayon, devenu chaleur, y avance à environ quatre centimètres par heure. Les couleurs descendent dans le mur. Le soleil de midi traverse le mur en quatorze à seize heures, et arrive côté pièce dans la nuit. [[lab:thickness:45]] Mieux vaudrait quarante à quarante-cinq centimètres, pour un retard d’environ douze heures. Par notre calcul, quarante-cinq centimètres en donnent onze. [[lab:preset:prototype-1967]] Reste l’eau, que notre modèle ne simule pas. Le mur de mille neuf cent soixante-quatorze a rendu huit à dix points de moins. Une partie, dit l’article, tenait à l’eau restée dans le béton."
     },
     {
       "id": "part-upper-duct",
@@ -317,14 +317,14 @@
       "scope": "part:head-beam",
       "title": "Poutre de tête",
       "scene": "wall",
-      "text": "La bande de béton qui ferme le haut du mur. [[isolate:on]] Elle tient les équerres du cadre, ferme le haut de la lame d’air, et reçoit le pied du toit. [[isolate:off]] Sur la figure, deux lettres la marquent, dont nous ne connaissons pas le sens. Nous lisons tête et pied, parce que la maçonnerie hachurée est à ces deux endroits. C’est notre lecture, et la figure ne la donne pas."
+      "text": "La bande de béton qui ferme le haut du mur. [[isolate:on]] Elle tient les équerres du cadre, ferme le haut de la lame d’air, et reçoit le pied du toit. [[isolate:off]] Sur la figure d’origine, deux lettres la marquent, dont nous ne connaissons pas le sens. Nous lisons tête et pied, parce que la maçonnerie hachurée est à ces deux endroits. C’est notre lecture, et la figure ne la donne pas."
     },
     {
       "id": "part-sill-beam",
       "scope": "part:sill-beam",
       "title": "Poutre d’appui",
       "scene": "wall",
-      "text": "L’autre bande hachurée, celle du bas : le pied du mur. Elle repose sur la fondation et tient le pied du cadre. [[isolate:on]] Un pied de mur lourd, posé sur la terre, est un pont possible entre le mur chaud et le sol. [[isolate:off]] Aucun chiffre n’en est donné, et notre calcul ne le compte pas. Après la fonte des neiges, regardez le bas du mur : une ligne sombre dit que l’eau remonte."
+      "text": "L’autre bande hachurée, celle du bas : le pied du mur. Elle repose sur la fondation et tient le pied du cadre. [[isolate:on]] Un pied de mur lourd, posé sur la terre, est un pont possible entre le mur chaud et le sol. [[isolate:off]] Nous n’en avons trouvé aucun chiffre, et notre calcul ne le compte pas. Après la fonte des neiges, regardez le bas du mur : une ligne sombre dit que l’eau remonte."
     },
     {
       "id": "part-wall-thermocouples",
@@ -338,7 +338,7 @@
       "scope": "part:air-thermocouples",
       "title": "Thermocouples d’air",
       "scene": "wall",
-      "text": "Mesurer l’air devant un mur à soixante degrés est délicat : le fil reçoit les rayons du mur. Il finit par lire sa propre chaleur. D’où des écrans d’aluminium, qui les renvoient. [[isolate:on]] Trois sondes pendent dans la lame, loin des parois : l’entrée, le milieu, la sortie. [[isolate:off]] Les inventeurs mettent les leurs dans les conduits, sans dire combien ni à quelle hauteur : ces trois-là sont les nôtres."
+      "text": "Mesurer l’air devant un mur à soixante degrés est délicat : le fil reçoit les rayons du mur. Il finit par lire sa propre chaleur. D’où des écrans d’aluminium, qui les renvoient. [[isolate:on]] Trois sondes pendent dans la lame, loin des parois : l’entrée, le milieu, la sortie. [[isolate:off]] Les inventeurs mettent les leurs dans les conduits. Nous ne savons ni combien, ni à quelle hauteur : ces trois-là sont les nôtres."
     },
     {
       "id": "part-hot-wire-anemometer",
@@ -387,7 +387,7 @@
       "scope": "part:electric-panel",
       "title": "Tableau électrique",
       "scene": "room",
-      "text": "Le coffret où arrive le courant, accroché à une cloison : c’est notre dessin, aux dimensions estimées. Sa petite lampe s’allume quand le thermostat appelle le chauffage. Fermé, étiqueté : son contrôle est le travail d’un électricien."
+      "text": "Le coffret où arrive le courant, accroché à une cloison : c’est notre dessin. Sa petite lampe s’allume quand le thermostat appelle le chauffage, donc quand le soleil et le mur ne suffisent plus. Fermé, étiqueté : son contrôle est le travail d’un électricien."
     },
     {
       "id": "part-room-air-probe",
@@ -401,7 +401,7 @@
       "scope": "part:room-surface-probes",
       "title": "Sondes de surface",
       "scene": "room",
-      "text": "Un mur chaud rayonne vers tout ce qu’il voit : le sol, le plafond, les murs voisins. Ce qu’il donne dépend de leur température : dix-huit degrés pour notre modèle. Avec les chiffres des inventeurs, nous calculons environ dix-sept et demi. Les deux s’accordent à un demi-degré près. [[isolate:on]] Les deux sondes de notre dessin sont les nôtres. [[isolate:off]] Collées à plat, à l’ombre : une sonde mal collée lit l’air derrière elle."
+      "text": "Un mur chaud rayonne vers tout ce qu’il voit : le sol, le plafond, les murs voisins. Ce qu’il donne dépend de leur température : dix-huit degrés pour notre modèle. Avec les chiffres publiés, nous calculons environ dix-sept et demi. Les deux s’accordent à un demi-degré près. [[isolate:on]] Les deux sondes de notre dessin sont les nôtres. [[isolate:off]] Collées à plat, à l’ombre : une sonde mal collée lit l’air derrière elle."
     },
     {
       "id": "part-chart-recorder",

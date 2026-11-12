@@ -58,7 +58,7 @@
       "scope": "part:twin-house",
       "title": "Its twin",
       "scene": "site",
-      "text": "The inventors’ paper speaks of prototypes, without saying how many. Our twin is a copy of the same drawing, set along the front. [[isolate:on]] It helps the eye read the scale, and takes no part in the calculation. [[isolate:off]] Nothing suggests the two were ever compared."
+      "text": "The paper by the inventors speaks of prototypes, without saying how many. Our twin is a copy of the same drawing, set along the front. [[isolate:on]] It helps the eye read the scale, and takes no part in the calculation. [[isolate:off]] Nothing suggests the prototypes were ever compared with each other."
     },
     {
       "id": "part-granite-slope",
@@ -107,7 +107,7 @@
       "scope": "part:solar-houses-1974",
       "title": "Houses of 1974",
       "scene": "site",
-      "text": "Higher up the slope, a protected building of three homes, with the same wall system. It is private property: you can see it, you cannot go in. Its plan is in no source. Our drawing composes it as a simple glazed box. The house of nineteen sixty-seven, by contrast, has a year of readings."
+      "text": "Higher up the slope, a protected building of three homes, with the same wall system. It is private property: you can see it, you cannot go in. Its plan is in no source. Our drawing composes it as a simple glazed box. The house of nineteen sixty-seven, by contrast, was monitored for a year."
     },
     {
       "id": "part-pyranometer",
@@ -121,7 +121,7 @@
       "scope": "part:far-ridge",
       "title": "Ridges",
       "scene": "site",
-      "text": "The mountains in the background follow the relief of the site: due south, they barely rise three degrees. [[lab:day:15]] [[lab:hour:6]] [[lab:speed:600]] None casts a shadow at midday in winter. They only cut dawn and dusk: the direct beam arrives once the sun clears the line. Less than three per cent of a clear day. It is the only scenery whose figures count. [[lab:preset:prototype-1967]]"
+      "text": "The mountains in the background come from a terrain model: due south, they barely rise three degrees. [[lab:day:15]] [[lab:hour:6]] [[lab:speed:600]] None casts a shadow at midday in winter. They only cut dawn and dusk: the direct beam arrives once the sun clears the line. Less than three per cent of a clear day. It is the only scenery whose figures count. [[lab:preset:prototype-1967]]"
     },
     {
       "id": "part-south-facade",
@@ -261,7 +261,7 @@
       "scope": "part:inner-glazing",
       "title": "Inner glazing",
       "scene": "wall",
-      "text": "The second pane, near the wall, doubles the first, about twenty-five millimetres behind it. The inventors’ paper only says two panes. [[isolate:on]] It is the one the hot air of the gap touches. [[isolate:off]] Both its faces are shut in between the frame, the other pane and the wall: they cannot be wiped."
+      "text": "The second pane, near the wall, doubles the first, about twenty-five millimetres behind it in our drawing. The paper by the inventors only says two panes. [[isolate:on]] It is the one the hot air of the gap touches. [[isolate:off]] Both its faces are shut in between the frame, the other pane and the wall: they cannot be wiped."
     },
     {
       "id": "part-steel-frame",
@@ -289,7 +289,7 @@
       "scope": "part:storage-wall",
       "title": "Storage wall",
       "scene": "wall",
-      "text": "[[lab:speed:86400]] Sixty centimetres of black concrete. Our ray, now heat, moves through it at about four centimetres an hour. The colours go down into the wall. Midday sun crosses the wall in fourteen to sixteen hours, and reaches the room side in the night. [[lab:thickness:45]] The aim was forty to forty-five centimetres, and a delay of about twelve hours. By our calculation, forty-five centimetres give eleven. [[lab:preset:prototype-1967]] What remains is water, which our model does not simulate. The wall of nineteen seventy-four gave back eight to ten points less. Part of it, says the paper, was the water still in the concrete."
+      "text": "[[lab:speed:86400]] Sixty centimetres of black concrete. Our ray, now heat, moves through it at about four centimetres an hour. The colours go down into the wall. Midday sun crosses the wall in fourteen to sixteen hours, and reaches the room side in the night. [[lab:thickness:45]] Forty to forty-five centimetres would be better, for a delay of about twelve hours. By our calculation, forty-five centimetres give eleven. [[lab:preset:prototype-1967]] What remains is water, which our model does not simulate. The wall of nineteen seventy-four gave back eight to ten points less. Part of it, says the paper, was the water still in the concrete."
     },
     {
       "id": "part-upper-duct",
@@ -317,14 +317,14 @@
       "scope": "part:head-beam",
       "title": "Head beam",
       "scene": "wall",
-      "text": "A band of concrete closes the top of the wall. [[isolate:on]] It holds the frame’s brackets, closes the top of the air gap, and takes the foot of the roof. [[isolate:off]] On the figure, two letters mark it, and we do not know what they mean. We read them as head and foot, because the hatched masonry sits in those two places. That is our reading, and the figure does not give it."
+      "text": "A band of concrete closes the top of the wall. [[isolate:on]] It holds the frame’s brackets, closes the top of the air gap, and takes the foot of the roof. [[isolate:off]] On the original figure, two letters mark it, and we do not know what they mean. We read them as head and foot, because the hatched masonry sits in those two places. That is our reading, and the figure does not give it."
     },
     {
       "id": "part-sill-beam",
       "scope": "part:sill-beam",
       "title": "Sill beam",
       "scene": "wall",
-      "text": "The other hatched band, the lower one: the foot of the wall. It rests on the foundation and holds the foot of the frame. [[isolate:on]] The foot of a heavy wall, set on the ground, may be a bridge between the hot wall and the earth. [[isolate:off]] No figure is given for it, and our calculation does not count it. After the thaw, look at the bottom of the wall: a dark line says water is rising."
+      "text": "The other hatched band, the lower one: the foot of the wall. It rests on the foundation and holds the foot of the frame. [[isolate:on]] The foot of a heavy wall, set on the ground, may be a bridge between the hot wall and the earth. [[isolate:off]] We found no figure for it, and our calculation does not count it. After the thaw, look at the bottom of the wall: a dark line says water is rising."
     },
     {
       "id": "part-wall-thermocouples",
@@ -338,7 +338,7 @@
       "scope": "part:air-thermocouples",
       "title": "Air thermocouples",
       "scene": "wall",
-      "text": "Measuring the air in front of a wall at sixty degrees is delicate: the wire catches the wall’s rays. It ends up reading its own heat. Aluminium screens send the rays back. [[isolate:on]] Three probes hang in the gap, away from the walls: inlet, middle, outlet. [[isolate:off]] The inventors put theirs in the ducts, without saying how many or how high: these three are ours."
+      "text": "Measuring the air in front of a wall at sixty degrees is delicate: the wire catches the wall’s rays. It ends up reading its own heat. Aluminium screens send the rays back. [[isolate:on]] Three probes hang in the gap, away from the walls: inlet, middle, outlet. [[isolate:off]] The inventors put theirs in the ducts. We do not know how many, or how high: these three are ours."
     },
     {
       "id": "part-hot-wire-anemometer",
@@ -387,7 +387,7 @@
       "scope": "part:electric-panel",
       "title": "Electric panel",
       "scene": "room",
-      "text": "The box where the current arrives, hung on a partition: it is our drawing, with estimated sizes. Its small lamp lights when the thermostat calls for heat. Closed, labelled: checking it is an electrician’s job."
+      "text": "The box where the current arrives, hung on a partition: it is our drawing. Its small lamp lights when the thermostat calls for heat, so when the sun and the wall no longer suffice. Closed, labelled: checking it is an electrician’s job."
     },
     {
       "id": "part-room-air-probe",
@@ -401,7 +401,7 @@
       "scope": "part:room-surface-probes",
       "title": "Surface probes",
       "scene": "room",
-      "text": "A warm wall radiates to everything it sees: the floor, the ceiling, the neighbouring walls. What it gives depends on their temperature: eighteen degrees for our model. From the inventors’ figures, we work out about seventeen and a half. The two agree to within half a degree. [[isolate:on]] The two probes of our drawing are ours. [[isolate:off]] Stuck flat, in the shade: a badly stuck probe reads the air behind it."
+      "text": "A warm wall radiates to everything it sees: the floor, the ceiling, the neighbouring walls. What it gives depends on their temperature: eighteen degrees for our model. From the published figures, we work out about seventeen and a half. The two agree to within half a degree. [[isolate:on]] The two probes of our drawing are ours. [[isolate:off]] Stuck flat, in the shade: a badly stuck probe reads the air behind it."
     },
     {
       "id": "part-chart-recorder",
