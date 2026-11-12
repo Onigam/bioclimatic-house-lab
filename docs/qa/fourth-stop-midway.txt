@@ -1,0 +1,19 @@
+Fourth pass, 2026-11-12, commit d8bdfb6 (HEAD a49c509 changes docs/fact-check.md only). Dev server on port 5941, headless Chrome for
+Testing 154, French. A clip is started as a visitor presses « Écouter », then stopped in the middle by the cross of the transport bar
+(the last trial: by selecting another part). `engine.reset()` of my harness does not stop a running scenario, so trials 3 to 5 start
+with the night scenario left by trial 2; the lines that matter are the first two trials and the thickness of trial 3.
+
+part:earth-tube-pipe stopped at 6 s by X of the bar
+   during: preset custom, earthTube true, flap winter, vents open, glazing 2, thickness 0.6, scenario null, status playing
+   after : preset custom, earthTube true, flap winter, vents open, glazing 2, thickness 0.6, scenario null, status idle
+part:summer-flap stopped at 14 s by X of the bar
+   during: preset custom, earthTube false, flap winter, scenario the-night, flows on, status playing
+   after : preset custom, earthTube false, flap winter, scenario the-night, flows on, status idle
+part:storage-wall stopped at 16 s by X of the bar
+   during: preset custom, thickness 0.45 (the cue at 13.48 s), scenario the-night (left by the previous trial), status playing
+   after : preset custom, thickness 0.45, status idle
+part:outer-glazing stopped at 17 s by X of the bar
+   during and after: preset custom, glazing 2 (the cue sheets:2 at 16.86 s), scenario the-night (left by trial 2)
+part:earth-tube-pipe stopped at 6 s by selecting another part (south-facade)
+   during: preset custom, earthTube true; after: preset custom, earthTube true, selected south-facade, status idle
+errors: 0
