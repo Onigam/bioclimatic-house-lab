@@ -93,7 +93,7 @@
       "scope": "part:solar-furnace",
       "title": "Solar furnace",
       "scene": "site",
-      "text": "The house’s big brother. The same laboratory built this furnace. Its curved mirror, of eighteen hundred and thirty square metres, concentrates light onto a single point. A thousand kilowatts. The house only keeps the heat. Its silhouette is composed from a published template."
+      "text": "The house’s big brother. The same laboratory built this furnace. Its curved mirror, of eighteen hundred and thirty square metres, concentrates light onto a single point. A thousand kilowatts. The house keeps the heat instead of concentrating it. Its silhouette is composed from a published template."
     },
     {
       "id": "part-heliostat-terraces",
@@ -240,7 +240,7 @@
       "scope": "part:earth-tube-pipe",
       "title": "Buried pipe (what if…)",
       "scene": "house",
-      "text": "[[lab:earthtube:on]] Fifty metres of pipe, two metres underground: our estimates. At Odeillo, in January, the outside air is at minus one degree, and it leaves at three. In July, with fifteen outside, it leaves at ten. Over a year: six hundred and twenty-five kilowatt-hours, against a load of fifty-seven thousand. That adds about one point to the sun’s share. No earth tube measured on a house has reached us. [[lab:earthtube:off]] These figures come from the calculation."
+      "text": "[[lab:earthtube:on]] Fifty metres of pipe, two metres underground: our estimates. At Odeillo, in January, the outside air is at minus one degree, and it leaves at three. In July, with fifteen outside, it leaves at ten. Over a year: six hundred and twenty-five kilowatt-hours, against a load of fifty-seven thousand. That adds about one point to the share that electricity does not pay. No earth tube measured on a house has reached us. [[lab:earthtube:off]] These figures come from the calculation."
     },
     {
       "id": "part-earth-tube-drain",

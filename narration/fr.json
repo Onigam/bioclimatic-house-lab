@@ -93,7 +93,7 @@
       "scope": "part:solar-furnace",
       "title": "Four solaire",
       "scene": "site",
-      "text": "Le grand frère de la maison. Le même laboratoire a bâti ce four. Son miroir courbe, de mille huit cent trente mètres carrés, concentre la lumière sur un seul point. Mille kilowatts. La maison se contente de garder la chaleur. Sa silhouette est composée d’après un gabarit publié."
+      "text": "Le grand frère de la maison. Le même laboratoire a bâti ce four. Son miroir courbe, de mille huit cent trente mètres carrés, concentre la lumière sur un seul point. Mille kilowatts. La maison, elle, garde la chaleur au lieu de la concentrer. Sa silhouette est composée d’après un gabarit publié."
     },
     {
       "id": "part-heliostat-terraces",
@@ -240,7 +240,7 @@
       "scope": "part:earth-tube-pipe",
       "title": "Tuyau enterré (et si…)",
       "scene": "house",
-      "text": "[[lab:earthtube:on]] Cinquante mètres de tuyau, à deux mètres sous terre : nos estimations. À Odeillo, en janvier, l’air du dehors est à moins un degré, et il sort à trois. En juillet, à quinze dehors, il sort à dix. Sur une année : six cent vingt-cinq kilowattheures, pour une charge de cinquante-sept mille. Cela ajoute environ un point à la part du soleil. Aucun puits canadien mesuré sur une maison ne nous est parvenu. [[lab:earthtube:off]] Ces chiffres sont ceux du calcul."
+      "text": "[[lab:earthtube:on]] Cinquante mètres de tuyau, à deux mètres sous terre : nos estimations. À Odeillo, en janvier, l’air du dehors est à moins un degré, et il sort à trois. En juillet, à quinze dehors, il sort à dix. Sur une année : six cent vingt-cinq kilowattheures, pour une charge de cinquante-sept mille. Cela ajoute environ un point à la part que l’électricité ne paie pas. Aucun puits canadien mesuré sur une maison ne nous est parvenu. [[lab:earthtube:off]] Ces chiffres sont ceux du calcul."
     },
     {
       "id": "part-earth-tube-drain",
