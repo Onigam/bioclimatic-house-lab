@@ -1,12 +1,12 @@
 {
   "lang": "fr",
   "model": "qwen3-tts-1.7B",
-  "generatedAt": "2026-11-12T16:05:10.143Z",
+  "generatedAt": "2026-11-12T17:26:52.914Z",
   "voiceLabel": {
     "fr": "Voix de synthèse",
     "en": "Synthetic voice"
   },
-  "totalSeconds": 1350.73,
+  "totalSeconds": 1347.37,
   "segments": [
     {
       "id": "intro",
@@ -1175,34 +1175,29 @@
       "title": "Maisons de 1974",
       "scene": "site",
       "file": "part-solar-houses-1974.mp3",
-      "duration": 18.08,
-      "chars": 313,
-      "hash": "b34821e827a7532b",
+      "duration": 13.44,
+      "chars": 235,
+      "hash": "96a1d988a746c093",
       "captions": [
         {
           "t0": 0,
-          "t1": 5.74,
+          "t1": 5.2,
           "text": "Plus haut sur la pente, un bâtiment protégé, de trois logements, avec le même système de mur."
         },
         {
-          "t0": 5.74,
-          "t1": 9.22,
+          "t0": 5.2,
+          "t1": 8.98,
           "text": "C’est une propriété privée : on le voit, on n’y entre pas."
         },
         {
-          "t0": 9.22,
-          "t1": 11.3,
+          "t0": 8.98,
+          "t1": 10.9,
           "text": "Son plan n’est dans aucune source."
         },
         {
-          "t0": 11.3,
-          "t1": 14.2,
+          "t0": 10.9,
+          "t1": 13.44,
           "text": "Notre dessin le compose en simple boîte vitrée."
-        },
-        {
-          "t0": 14.2,
-          "t1": 18.08,
-          "text": "La maison de mille neuf cent soixante-sept, elle, a été suivie pendant un an."
         }
       ],
       "cues": []
@@ -2269,40 +2264,45 @@
       "title": "Vitrage intérieur",
       "scene": "wall",
       "file": "part-inner-glazing.mp3",
-      "duration": 18.48,
-      "chars": 297,
-      "hash": "8ed9477aab4d0fc4",
+      "duration": 19.68,
+      "chars": 316,
+      "hash": "7f40dae9d163f999",
       "captions": [
         {
           "t0": 0,
-          "t1": 6.32,
+          "t1": 6.4,
           "text": "La seconde vitre, près du mur, double la première, à environ vingt-cinq millimètres dans notre dessin."
         },
         {
-          "t0": 6.32,
-          "t1": 9.3,
+          "t0": 6.4,
+          "t1": 9.34,
           "text": "L’article des inventeurs ne dit que deux vitres."
         },
         {
-          "t0": 9.3,
-          "t1": 11.64,
+          "t0": 9.34,
+          "t1": 12.24,
           "text": "C’est elle que l’air chaud de la lame touche."
         },
         {
-          "t0": 11.64,
-          "t1": 18.48,
-          "text": "Ses deux faces sont enfermées entre le cadre, l’autre vitre et le mur : on ne peut pas les essuyer."
+          "t0": 12.24,
+          "t1": 16.21,
+          "text": "Dans notre dessin, ses deux faces sont enfermées entre le cadre,"
+        },
+        {
+          "t0": 16.42,
+          "t1": 19.68,
+          "text": "l’autre vitre et le mur : on ne peut pas les essuyer."
         }
       ],
       "cues": [
         {
-          "t": 9.3,
+          "t": 9.34,
           "do": {
             "isolate": true
           }
         },
         {
-          "t": 11.64,
+          "t": 12.24,
           "do": {
             "isolate": false
           }
@@ -2736,45 +2736,45 @@
       "title": "Poutre de tête",
       "scene": "wall",
       "file": "part-head-beam.mp3",
-      "duration": 20.16,
-      "chars": 360,
-      "hash": "c7a53b7c7c45805c",
+      "duration": 19.12,
+      "chars": 339,
+      "hash": "4b617b56a283c57f",
       "captions": [
         {
           "t0": 0,
-          "t1": 2.7,
+          "t1": 2.58,
           "text": "La bande de béton qui ferme le haut du mur."
         },
         {
-          "t0": 2.7,
-          "t1": 8.04,
+          "t0": 2.58,
+          "t1": 8.16,
           "text": "Elle tient les équerres du cadre, ferme le haut de la lame d’air, et reçoit le pied du toit."
         },
         {
-          "t0": 8.04,
-          "t1": 12.74,
-          "text": "Sur la figure d’origine, deux lettres la marquent, dont nous ne connaissons pas le sens."
+          "t0": 8.16,
+          "t1": 11.48,
+          "text": "Deux lettres la marquent, dont nous ne connaissons pas le sens."
         },
         {
-          "t0": 12.74,
-          "t1": 17.34,
+          "t0": 11.48,
+          "t1": 16.62,
           "text": "Nous lisons tête et pied, parce que la maçonnerie hachurée est à ces deux endroits."
         },
         {
-          "t0": 17.34,
-          "t1": 20.16,
-          "text": "C’est notre lecture, et la figure ne la donne pas."
+          "t0": 16.62,
+          "t1": 19.12,
+          "text": "C’est notre lecture, et nos sources ne la donnent pas."
         }
       ],
       "cues": [
         {
-          "t": 2.7,
+          "t": 2.58,
           "do": {
             "isolate": true
           }
         },
         {
-          "t": 8.04,
+          "t": 8.16,
           "do": {
             "isolate": false
           }
@@ -2945,45 +2945,45 @@
       "title": "Anémomètre à fil chaud",
       "scene": "wall",
       "file": "part-hot-wire-anemometer.mp3",
-      "duration": 22.72,
-      "chars": 386,
-      "hash": "d728c3ee921fd203",
+      "duration": 23.44,
+      "chars": 378,
+      "hash": "0a137df62700a1dc",
       "captions": [
         {
           "t0": 0,
-          "t1": 4.22,
+          "t1": 4.6,
           "text": "Un fil fin, chauffé par un courant, au centre du conduit bas."
         },
         {
-          "t0": 4.22,
-          "t1": 9.78,
+          "t0": 4.6,
+          "t1": 11.04,
           "text": "L’air qui passe le refroidit : plus il va vite, plus il faut de courant pour garder le fil chaud."
         },
         {
-          "t0": 9.78,
-          "t1": 13.62,
+          "t0": 11.04,
+          "t1": 15.02,
           "text": "L’appareil lit de moins soixante à plus soixante centimètres par seconde."
         },
         {
-          "t0": 13.62,
-          "t1": 18.28,
-          "text": "Il pourrait donc voir un courant inversé : les enregistrements n’en montrent aucun."
+          "t0": 15.02,
+          "t1": 19.38,
+          "text": "Il pourrait donc voir un courant inversé : nos sources n’en montrent aucun."
         },
         {
-          "t0": 18.28,
-          "t1": 22.72,
+          "t0": 19.38,
+          "t1": 23.44,
           "text": "Un fil chaud se salit : la lecture dérive, sans que rien ne se voie."
         }
       ],
       "cues": [
         {
-          "t": 9.78,
+          "t": 11.04,
           "do": {
             "isolate": true
           }
         },
         {
-          "t": 18.28,
+          "t": 19.38,
           "do": {
             "isolate": false
           }
@@ -3343,50 +3343,50 @@
       "title": "Sondes de surface",
       "scene": "room",
       "file": "part-room-surface-probes.mp3",
-      "duration": 23.92,
-      "chars": 397,
-      "hash": "556f2861e0e90940",
+      "duration": 24.32,
+      "chars": 402,
+      "hash": "42ec9745c6b78503",
       "captions": [
         {
           "t0": 0,
-          "t1": 6.2,
+          "t1": 5.52,
           "text": "Un mur chaud rayonne vers tout ce qu’il voit : le sol, le plafond, les murs voisins."
         },
         {
-          "t0": 6.2,
-          "t1": 10.88,
+          "t0": 5.52,
+          "t1": 10,
           "text": "Ce qu’il donne dépend de leur température : dix-huit degrés pour notre modèle."
         },
         {
-          "t0": 10.88,
-          "t1": 14.72,
-          "text": "Avec les chiffres publiés, nous calculons environ dix-sept et demi."
+          "t0": 10,
+          "t1": 14.14,
+          "text": "Avec les chiffres de la maison, nous calculons environ dix-sept et demi."
         },
         {
-          "t0": 14.72,
-          "t1": 17.1,
+          "t0": 14.14,
+          "t1": 16.8,
           "text": "Les deux s’accordent à un demi-degré près."
         },
         {
-          "t0": 17.1,
-          "t1": 19.44,
+          "t0": 16.8,
+          "t1": 19.54,
           "text": "Les deux sondes de notre dessin sont les nôtres."
         },
         {
-          "t0": 19.44,
-          "t1": 23.92,
+          "t0": 19.54,
+          "t1": 24.32,
           "text": "Collées à plat, à l’ombre : une sonde mal collée lit l’air derrière elle."
         }
       ],
       "cues": [
         {
-          "t": 17.1,
+          "t": 16.8,
           "do": {
             "isolate": true
           }
         },
         {
-          "t": 19.44,
+          "t": 19.54,
           "do": {
             "isolate": false
           }

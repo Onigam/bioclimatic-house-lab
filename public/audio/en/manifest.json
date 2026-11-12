@@ -1,12 +1,12 @@
 {
   "lang": "en",
   "model": "qwen3-tts-1.7B",
-  "generatedAt": "2026-11-12T15:57:50.702Z",
+  "generatedAt": "2026-11-12T17:55:03.539Z",
   "voiceLabel": {
     "fr": "Voix de synthèse",
     "en": "Synthetic voice"
   },
-  "totalSeconds": 1309.9,
+  "totalSeconds": 1308.22,
   "segments": [
     {
       "id": "intro",
@@ -1165,34 +1165,29 @@
       "title": "Houses of 1974",
       "scene": "site",
       "file": "part-solar-houses-1974.mp3",
-      "duration": 17.2,
-      "chars": 290,
-      "hash": "67af73d2a861d8ac",
+      "duration": 13.28,
+      "chars": 216,
+      "hash": "91175359b8b1f8c1",
       "captions": [
         {
           "t0": 0,
-          "t1": 5.48,
+          "t1": 5.16,
           "text": "Higher up the slope, a protected building of three homes, with the same wall system."
         },
         {
-          "t0": 5.48,
-          "t1": 8.68,
+          "t0": 5.16,
+          "t1": 8.48,
           "text": "It is private property: you can see it, you cannot go in."
         },
         {
-          "t0": 8.68,
-          "t1": 10.54,
+          "t0": 8.48,
+          "t1": 10.3,
           "text": "Its plan is in no source."
         },
         {
-          "t0": 10.54,
-          "t1": 13.6,
+          "t0": 10.3,
+          "t1": 13.28,
           "text": "Our drawing composes it as a simple glazed box."
-        },
-        {
-          "t0": 13.6,
-          "t1": 17.2,
-          "text": "The house of nineteen sixty-seven, by contrast, was monitored for a year."
         }
       ],
       "cues": []
@@ -1486,38 +1481,38 @@
       "title": "South window",
       "scene": "house",
       "file": "part-south-window.mp3",
-      "duration": 21.6,
-      "chars": 392,
-      "hash": "2e964bf7fabbfdfc",
+      "duration": 22.48,
+      "chars": 398,
+      "hash": "95f3bc98335deb75",
       "captions": [
         {
           "t0": 0,
-          "t1": 4.8,
+          "t1": 4.76,
           "text": "A tall window, beside the collector, lets the sun straight in, and the heat out."
         },
         {
-          "t0": 4.8,
-          "t1": 7.48,
-          "text": "The inventors’ paper does not give the area of the windows."
+          "t0": 4.76,
+          "t1": 7.8,
+          "text": "The paper by the inventors does not give the area of the windows."
         },
         {
-          "t0": 7.48,
-          "t1": 10.5,
+          "t0": 7.8,
+          "t1": 10.62,
           "text": "We take sixteen and a half square metres, an estimate."
         },
         {
-          "t0": 10.5,
-          "t1": 15.34,
+          "t0": 10.62,
+          "t1": 16.2,
           "text": "With plain wall in their place, the people still there, the season is covered at forty-two per cent."
         },
         {
-          "t0": 15.34,
-          "t1": 17.2,
+          "t0": 16.2,
+          "t1": 18.04,
           "text": "With them, forty-seven."
         },
         {
-          "t0": 17.2,
-          "t1": 21.6,
+          "t0": 18.04,
+          "t1": 22.48,
           "text": "A window gains by day and loses by night: close the shutters at sunset."
         }
       ],
@@ -2249,40 +2244,45 @@
       "title": "Inner glazing",
       "scene": "wall",
       "file": "part-inner-glazing.mp3",
-      "duration": 17.36,
-      "chars": 297,
-      "hash": "4b48aeb2a89b17d1",
+      "duration": 19.44,
+      "chars": 313,
+      "hash": "d75d52c395c55f42",
       "captions": [
         {
           "t0": 0,
-          "t1": 5.68,
+          "t1": 6.34,
           "text": "The second pane, near the wall, doubles the first, about twenty-five millimetres behind it in our drawing."
         },
         {
-          "t0": 5.68,
-          "t1": 8.66,
+          "t0": 6.34,
+          "t1": 9.8,
           "text": "The paper by the inventors only says two panes."
         },
         {
-          "t0": 8.66,
-          "t1": 11.22,
+          "t0": 9.8,
+          "t1": 12.26,
           "text": "It is the one the hot air of the gap touches."
         },
         {
-          "t0": 11.22,
-          "t1": 17.36,
-          "text": "Both its faces are shut in between the frame, the other pane and the wall: they cannot be wiped."
+          "t0": 12.26,
+          "t1": 15.77,
+          "text": "In our drawing, both its faces are shut in between the frame,"
+        },
+        {
+          "t0": 16.08,
+          "t1": 19.44,
+          "text": "the other pane and the wall: they cannot be wiped."
         }
       ],
       "cues": [
         {
-          "t": 8.66,
+          "t": 9.8,
           "do": {
             "isolate": true
           }
         },
         {
-          "t": 11.22,
+          "t": 12.26,
           "do": {
             "isolate": false
           }
@@ -2726,45 +2726,45 @@
       "title": "Head beam",
       "scene": "wall",
       "file": "part-head-beam.mp3",
-      "duration": 19.2,
-      "chars": 359,
-      "hash": "33b0aa35ef86fd1d",
+      "duration": 18.64,
+      "chars": 334,
+      "hash": "235bdf7a224a95ff",
       "captions": [
         {
           "t0": 0,
-          "t1": 3.02,
+          "t1": 3.2,
           "text": "A band of concrete closes the top of the wall."
         },
         {
-          "t0": 3.02,
-          "t1": 7.88,
+          "t0": 3.2,
+          "t1": 8.38,
           "text": "It holds the frame’s brackets, closes the top of the air gap, and takes the foot of the roof."
         },
         {
-          "t0": 7.88,
-          "t1": 12.38,
-          "text": "On the original figure, two letters mark it, and we do not know what they mean."
+          "t0": 8.38,
+          "t1": 11.28,
+          "text": "Two letters mark it, and we do not know what they mean."
         },
         {
-          "t0": 12.38,
-          "t1": 16.84,
+          "t0": 11.28,
+          "t1": 16.14,
           "text": "We read them as head and foot, because the hatched masonry sits in those two places."
         },
         {
-          "t0": 16.84,
-          "t1": 19.2,
-          "text": "That is our reading, and the figure does not give it."
+          "t0": 16.14,
+          "t1": 18.64,
+          "text": "That is our reading, and our sources do not give it."
         }
       ],
       "cues": [
         {
-          "t": 3.02,
+          "t": 3.2,
           "do": {
             "isolate": true
           }
         },
         {
-          "t": 7.88,
+          "t": 8.38,
           "do": {
             "isolate": false
           }
@@ -2930,9 +2930,9 @@
       "title": "Hot-wire anemometer",
       "scene": "wall",
       "file": "part-hot-wire-anemometer.mp3",
-      "duration": 21.36,
-      "chars": 368,
-      "hash": "4917510e0f366a9e",
+      "duration": 21.2,
+      "chars": 365,
+      "hash": "015fe1a0786659a3",
       "captions": [
         {
           "t0": 0,
@@ -2941,34 +2941,34 @@
         },
         {
           "t0": 4.18,
-          "t1": 10.16,
+          "t1": 9.92,
           "text": "The air that passes cools it: the faster it goes, the more current it takes to keep the wire hot."
         },
         {
-          "t0": 10.16,
-          "t1": 14.26,
+          "t0": 9.92,
+          "t1": 14.36,
           "text": "The instrument reads from minus sixty to plus sixty centimetres a second."
         },
         {
-          "t0": 14.26,
-          "t1": 17.72,
-          "text": "It could therefore see a reverse flow: the recordings show none."
+          "t0": 14.36,
+          "t1": 17.84,
+          "text": "It could therefore see a reverse flow: our sources show none."
         },
         {
-          "t0": 17.72,
-          "t1": 21.36,
+          "t0": 17.84,
+          "t1": 21.2,
           "text": "A hot wire gets dirty: the reading drifts, and nothing shows it."
         }
       ],
       "cues": [
         {
-          "t": 10.16,
+          "t": 9.92,
           "do": {
             "isolate": true
           }
         },
         {
-          "t": 17.72,
+          "t": 17.84,
           "do": {
             "isolate": false
           }
@@ -3323,50 +3323,50 @@
       "title": "Surface probes",
       "scene": "room",
       "file": "part-room-surface-probes.mp3",
-      "duration": 23.04,
-      "chars": 385,
-      "hash": "1362fef4e25ff066",
+      "duration": 22.88,
+      "chars": 387,
+      "hash": "640bc84841a96510",
       "captions": [
         {
           "t0": 0,
-          "t1": 6.12,
+          "t1": 5.84,
           "text": "A warm wall radiates to everything it sees: the floor, the ceiling, the neighbouring walls."
         },
         {
-          "t0": 6.12,
-          "t1": 10.72,
+          "t0": 5.84,
+          "t1": 9.9,
           "text": "What it gives depends on their temperature: eighteen degrees for our model."
         },
         {
-          "t0": 10.72,
-          "t1": 13.96,
-          "text": "From the published figures, we work out about seventeen and a half."
+          "t0": 9.9,
+          "t1": 13.68,
+          "text": "From the house’s own figures, we work out about seventeen and a half."
         },
         {
-          "t0": 13.96,
-          "t1": 16.28,
+          "t0": 13.68,
+          "t1": 15.94,
           "text": "The two agree to within half a degree."
         },
         {
-          "t0": 16.28,
-          "t1": 18.76,
+          "t0": 15.94,
+          "t1": 18.5,
           "text": "The two probes of our drawing are ours."
         },
         {
-          "t0": 18.76,
-          "t1": 23.04,
+          "t0": 18.5,
+          "t1": 22.88,
           "text": "Stuck flat, in the shade: a badly stuck probe reads the air behind it."
         }
       ],
       "cues": [
         {
-          "t": 16.28,
+          "t": 15.94,
           "do": {
             "isolate": true
           }
         },
         {
-          "t": 18.76,
+          "t": 18.5,
           "do": {
             "isolate": false
           }
@@ -3379,56 +3379,56 @@
       "title": "Chart recorder",
       "scene": "room",
       "file": "part-chart-recorder.mp3",
-      "duration": 19.28,
-      "chars": 306,
-      "hash": "dcf3487329e11e6d",
+      "duration": 19.44,
+      "chars": 312,
+      "hash": "4731db394cc1ed26",
       "captions": [
         {
           "t0": 0,
-          "t1": 4.34,
+          "t1": 4.38,
           "text": "The recorder traces the inner face, on a roll that moves on with the day."
         },
         {
-          "t0": 4.34,
-          "t1": 5.82,
+          "t0": 4.38,
+          "t1": 5.72,
           "text": "A day a second."
         },
         {
-          "t0": 5.82,
-          "t1": 9.68,
-          "text": "The inventors’ paper speaks of recordings and describes no recorder."
+          "t0": 5.72,
+          "t1": 9.94,
+          "text": "The paper by the inventors speaks of recordings and describes no recorder."
         },
         {
-          "t0": 9.68,
-          "t1": 12.74,
+          "t0": 9.94,
+          "t1": 12.9,
           "text": "So the desk and the roll are our drawing."
         },
         {
-          "t0": 12.74,
-          "t1": 15.56,
+          "t0": 12.9,
+          "t1": 15.74,
           "text": "Four runs of four days, from December to June."
         },
         {
-          "t0": 15.56,
-          "t1": 18.16,
+          "t0": 15.74,
+          "t1": 18.42,
           "text": "A wall this slow cannot be read in one day."
         },
         {
-          "t0": 18.16,
-          "t1": 19.28,
+          "t0": 18.42,
+          "t1": 19.44,
           "text": "You need runs."
         }
       ],
       "cues": [
         {
-          "t": 4.34,
+          "t": 4.38,
           "do": {
             "lab": "speed",
             "arg": "86400"
           }
         },
         {
-          "t": 19.28,
+          "t": 19.44,
           "do": {
             "lab": "preset",
             "arg": "prototype-1967"
