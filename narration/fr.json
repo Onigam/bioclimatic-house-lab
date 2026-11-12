@@ -16,7 +16,7 @@
       "scope": "intro",
       "title": "Présentation du labo",
       "scene": "site",
-      "text": "[[home]] Une nuit de décembre, sur le plateau d’Odeillo. Dehors, il gèle. Dedans, un grand mur de béton noir est encore tiède, comme si le soleil de midi n’était jamais parti. [[frame:prototype-house]] Une maison peut-elle se chauffer seule ? Un seul rayon de soleil suffit à le montrer. [[scene:wall]] Il traverse deux vitres, l’une après l’autre, [[frame:black-paint]] et tombe sur une peinture noire, où il devient chaleur. [[frame:air-gap,upper-duct]] Cette chaleur a deux chemins. Le premier passe par l’air, qui monte derrière la vitre et ressort chaud par un conduit, en haut. C’est rapide. [[frame:storage-wall]] Le second passe par le béton, beaucoup plus lentement : la chaleur y avance d’environ quatre centimètres par heure. Soixante centimètres de mur, c’est une quinzaine d’heures. [[scene:room]] La chaleur sort côté pièce en pleine nuit, juste quand on a froid. [[scene:house]] Au petit matin, la pièce est encore tiède. [[home]] Le plateau, la maison, le mur et la pièce forment les quatre vues. Cliquez sur une pièce : sa fiche s’ouvre, et vous pouvez écouter son histoire. Éclaté, Transparence, Coupe et Flux montrent l’intérieur et suivent l’air. [[mode:assembly]] Le guide de montage bâtit la maison en vingt étapes. [[mode:install]] Celui d’installation en compte dix. [[mode:sim]] La simulation change l’épaisseur du mur, les vitres, le jour, et lance douze scénarios. [[mode:lessons]] Sept leçons, avec des quiz, expliquent la physique. [[mode:plans]] Huit planches réunissent les dessins. [[mode:explore]] Ce laboratoire est une reconstitution pédagogique. Il explique, il ne donne aucun plan à suivre. Les chiffres des inventeurs sont les leurs. Les autres viennent de données ouvertes, de notre simulation ou de nos estimations, et aucun n’a été mesuré par nous. Là où elle ne retrouve pas les mesures des inventeurs, nous le disons, et nous ne l’avons pas réglée pour y arriver. Le panneau Sources dit qui a dit quoi. Une maison peut-elle donc se chauffer seule ? Une bonne part, selon qui compte, et quoi. [[select:none]] Le mur, lui, est encore tiède."
+      "text": "[[home]] Une nuit de décembre, sur le plateau d’Odeillo. Dehors, il gèle. Dedans, un grand mur de béton noir reste tiède, comme si le soleil de midi n’était jamais parti. [[frame:prototype-house]] Une maison peut-elle se chauffer seule ? Un seul rayon de soleil suffit à montrer comment. [[scene:wall]] Il traverse deux vitres, l’une après l’autre, [[frame:black-paint]] et tombe sur une peinture noire, où il devient chaleur. [[frame:air-gap,upper-duct]] Cette chaleur a deux chemins. Le premier passe par l’air, qui monte derrière la vitre et ressort chaud par un conduit, en haut. C’est rapide. [[frame:storage-wall]] Le second passe par le béton, beaucoup plus lentement : la chaleur y avance d’environ quatre centimètres par heure. Soixante centimètres de mur, c’est une quinzaine d’heures. [[scene:room]] La chaleur du béton sort côté pièce en pleine nuit, juste quand on a froid. [[scene:house]] Au petit matin, la pièce garde sa chaleur. [[home]] Le plateau, la maison, le mur et la pièce forment les quatre vues. Cliquez sur un élément : sa fiche s’ouvre, et vous pouvez écouter son histoire. Éclaté, Transparence, Coupe et Flux montrent l’intérieur et suivent l’air. [[mode:assembly]] Le guide de montage bâtit la maison en vingt étapes. [[mode:install]] Celui d’installation en compte dix. [[mode:sim]] La simulation change l’épaisseur du mur, les vitres, le jour, et lance douze scénarios. [[mode:lessons]] Sept leçons, avec des quiz, expliquent la physique. [[mode:plans]] Huit planches réunissent les dessins. [[mode:explore]] Ce laboratoire est une reconstitution pédagogique. Il explique, il ne donne aucun plan à suivre. Certains chiffres sont ceux des inventeurs, tirés de leur article de mille neuf cent soixante-seize. Les autres viennent de données ouvertes, de notre simulation ou de nos estimations, et aucun n’a été mesuré par nous. Là où elle ne retrouve pas les mesures des inventeurs, nous le disons, et nous ne l’avons pas réglée pour y arriver. Le panneau Sources dit qui a dit quoi. Une maison peut-elle donc se chauffer seule ? Une bonne part, selon qui compte, et ce qu’on compte. [[select:none]] Le mur, lui, est encore tiède."
     },
     {
       "id": "scene-site",
@@ -30,7 +30,7 @@
       "scope": "scene:house",
       "title": "La maison, coupée par le milieu d’une travée",
       "scene": "house",
-      "text": "[[home]] La machine est coupée par le milieu d’une travée, et la moitié est a été retirée. [[frame:south-facade]] Au sud, lues sur une photographie : neuf travées de capteur, une de fenêtre, deux d’entrée. [[frame:pitched-roof,roof-insulation]] Au-dessus, le toit et son isolant, posé sur le plafond. [[frame:floor-slab,foundation]] Dessous, la dalle, et la fondation qui porte tout. [[home]] [[flows:on]] L’air entre par le bas, monte derrière chaque vitre et ressort en haut. [[lab:flap:summer]] Un clapet, et c’est l’été. L’air part dehors. [[lab:flap:winter]] [[flows:off]] La maison dessinée reste celle de mille neuf cent soixante-sept, et les curseurs changent les chiffres sans changer la forme. Quant au puits canadien, ce tuyau enterré, aucune source n’en mentionne ici. C’est une hypothèse. Dessiné pâle, il n’est ferme que dans son propre scénario."
+      "text": "[[home]] La machine est coupée par le milieu d’une travée, et on lui a retiré sa moitié est. [[frame:south-facade]] Au sud, lues sur une photographie : neuf travées de capteur, une de fenêtre, deux d’entrée. [[frame:pitched-roof,roof-insulation]] Au-dessus, le toit et son isolant, posé sur le plafond. [[frame:floor-slab,foundation]] Dessous, la dalle, et la fondation qui porte tout. [[home]] [[flows:on]] L’air entre par le bas, monte derrière chaque vitre et ressort en haut. [[lab:flap:summer]] Un clapet, et c’est l’été. L’air part dehors. [[lab:flap:winter]] [[flows:off]] La maison dessinée reste celle de mille neuf cent soixante-sept, et les curseurs changent les chiffres sans changer la forme. Quant au puits canadien, ce tuyau enterré, aucune source n’en mentionne ici. C’est une hypothèse. Dessiné pâle, il ne devient net que dans son propre scénario."
     },
     {
       "id": "scene-wall",
@@ -79,7 +79,7 @@
       "scope": "part:tree-clumps",
       "title": "Bosquets",
       "scene": "site",
-      "text": "Des pins et des chênes, par notre choix : aucune source ne dit ce qui poussait là. [[lab:day:15]] En hiver, les chênes sont nus. [[lab:day:200]] En été, ils sont couverts. C’est une vieille idée, de l’ombre l’été et du soleil l’hiver. Mais notre modèle ne compte aucun arbre. Un pin trop près de la façade ferait de l’ombre là où il n’en voit pas. [[lab:preset:prototype-1967]]"
+      "text": "Des pins et des chênes, notre choix : aucune source ne dit ce qui poussait là. [[lab:day:15]] En hiver, les chênes sont nus. [[lab:day:200]] En été, ils sont couverts. C’est une vieille idée, de l’ombre l’été et du soleil l’hiver. Mais notre modèle ne compte aucun arbre. Un pin trop près de la façade ferait de l’ombre là où il n’en voit pas. [[lab:preset:prototype-1967]]"
     },
     {
       "id": "part-access-road",
@@ -93,7 +93,7 @@
       "scope": "part:solar-furnace",
       "title": "Four solaire",
       "scene": "site",
-      "text": "Le grand frère de la maison. Le même laboratoire a bâti ce four. Son miroir courbe, de mille huit cent trente mètres carrés, concentre la lumière sur un seul point. Mille kilowatts. La maison ne concentre rien : elle garde la chaleur. Sa silhouette est composée d’après un gabarit publié."
+      "text": "Le grand frère de la maison. Le même laboratoire a bâti ce four. Son miroir courbe, de mille huit cent trente mètres carrés, concentre la lumière sur un seul point. Mille kilowatts. La maison se contente de garder la chaleur. Sa silhouette est composée d’après un gabarit publié."
     },
     {
       "id": "part-heliostat-terraces",
@@ -114,7 +114,7 @@
       "scope": "part:pyranometer",
       "title": "Pyranomètre",
       "scene": "site",
-      "text": "Un petit dôme sur un pied, loin de tout : il mesure la puissance du soleil. À la pointe d’un jour clair d’hiver, dans le plan du mur, environ neuf cent cinquante watts par mètre carré. [[isolate:on]] Notre modèle, lui, ne lit rien : il calcule le soleil, et trouve un peu moins. [[isolate:off]] Essuyez le dôme : une fiente, et il lit trop bas toute la journée."
+      "text": "Un petit dôme sur un pied, loin de tout : il mesure la puissance du soleil. À la pointe d’un jour clair d’hiver, dans le plan du mur, environ neuf cent cinquante watts par mètre carré. [[isolate:on]] Notre modèle calcule le soleil au lieu de le lire, et trouve un peu moins. [[isolate:off]] Essuyez le dôme : une fiente, et il lit trop bas toute la journée."
     },
     {
       "id": "part-far-ridge",
@@ -128,7 +128,7 @@
       "scope": "part:south-facade",
       "title": "Façade sud",
       "scene": "house",
-      "text": "Douze travées de un mètre vingt-sept, face au midi : neuf de capteur, une de fenêtre, deux d’entrée, d’après une photographie. En décembre, le soleil de midi frappe la façade presque de face ; en juin, de très biais. Le mur reçoit donc plus d’une fois et demie plus de soleil en janvier qu’en juin. Notre modèle retrouve cette baisse, mais ses mois d’hiver sont huit à douze points trop bas."
+      "text": "Douze travées de un mètre vingt-sept, face au midi : neuf de capteur, une de fenêtre, deux d’entrée, d’après une photographie. En décembre, le soleil de midi frappe la façade presque de face ; en juin, de très biais. Le mur reçoit donc plus d’une fois et demie plus de soleil en janvier qu’en juin. Notre modèle retrouve la baisse du rendement de l’hiver à juin. Mais ses mois de décembre et de janvier sont huit à douze points trop bas."
     },
     {
       "id": "part-collector-element",
@@ -156,7 +156,7 @@
       "scope": "part:south-window",
       "title": "Fenêtre sud",
       "scene": "house",
-      "text": "Une fenêtre haute, à côté du capteur, laisse entrer le soleil droit dans la pièce, et sortir la chaleur. Personne ne publie la surface des fenêtres. Nous prenons seize mètres carrés et demi, une estimation. Avec du mur plein à leur place, les gens toujours là, la saison est couverte à quarante-deux pour cent. Avec elles, quarante-sept. Une fenêtre gagne le jour et perd la nuit : fermez les volets au coucher du soleil."
+      "text": "Une fenêtre haute, à côté du capteur, laisse entrer le soleil droit dans la pièce, et sortir la chaleur. L’article ne donne pas la surface des fenêtres. Nous prenons seize mètres carrés et demi, une estimation. Avec du mur plein à leur place, les gens toujours là, la saison est couverte à quarante-deux pour cent. Avec elles, quarante-sept. Une fenêtre gagne le jour et perd la nuit : fermez les volets au coucher du soleil."
     },
     {
       "id": "part-east-gable",
@@ -177,7 +177,7 @@
       "scope": "part:north-wall",
       "title": "Mur nord",
       "scene": "house",
-      "text": "Le mur du fond n’a rien à gagner : la maison lui tourne le dos. Mais ici se cache le chiffre le plus lourd : les pertes de toute la maison, un virgule soixante-trois watt par mètre cube et par degré. Personne ne dit si ce chiffre contient déjà le mur noir et les fenêtres. Nous avons choisi que oui. Lu autrement, la saison donnerait vingt-quatre pour cent au lieu de quarante-sept. C’est l’hypothèse la plus lourde du modèle."
+      "text": "La maison tourne le dos au nord, et le mur du fond n’a rien à y gagner. Mais ici se cache le chiffre le plus lourd : les pertes de toute la maison, un virgule soixante-trois watt par mètre cube et par degré. Personne ne dit si ce chiffre contient déjà le mur noir et les fenêtres. Nous avons choisi que oui. Lu autrement, la saison donnerait vingt-quatre pour cent au lieu de quarante-sept. C’est l’hypothèse la plus lourde du modèle."
     },
     {
       "id": "part-north-window",
@@ -198,7 +198,7 @@
       "scope": "part:roof-insulation",
       "title": "Isolation du toit",
       "scene": "house",
-      "text": "L’article ne donne que les pertes de la maison entière. Cette couche est notre dessin, dix centimètres sur le plafond. [[isolate:on]] Elle montre seulement ce qui compte le plus, l’isolation de toute la maison. [[isolate:off]] Le mur ne change pas. Avec les pertes de mille neuf cent soixante-quatorze, la part de la saison monte de quarante-sept à soixante-quatorze pour cent. Pas un rayon de plus : la maison perd moins."
+      "text": "L’article ne donne que les pertes de la maison entière. Cette couche est notre dessin, dix centimètres sur le plafond. [[isolate:on]] Elle montre seulement ce qui compte le plus, l’isolation de toute la maison. [[isolate:off]] Le mur ne change pas. Avec les pertes de mille neuf cent soixante-quatorze, la part de la saison monte de quarante-sept à soixante-quatorze pour cent. Le même rayon tombe sur le mur, et la maison perd moins."
     },
     {
       "id": "part-floor-slab",
@@ -233,21 +233,21 @@
       "scope": "part:earth-tube-intake",
       "title": "Prise d’air (et si…)",
       "scene": "house",
-      "text": "[[lab:earthtube:on]] La voilà plus ferme : le début du puits canadien. Une colonne sur la pente, avec un capuchon contre la pluie, et une grille contre les insectes et les feuilles. [[lab:earthtube:off]] À cette altitude, la neige compte pour la hauteur de la prise."
+      "text": "[[lab:earthtube:on]] La voilà plus nette : le début du puits canadien. Une colonne sur la pente, avec un capuchon contre la pluie, et une grille contre les insectes et les feuilles. [[lab:earthtube:off]] À cette altitude, la neige compte pour la hauteur de la prise."
     },
     {
       "id": "part-earth-tube-pipe",
       "scope": "part:earth-tube-pipe",
       "title": "Tuyau enterré (et si…)",
       "scene": "house",
-      "text": "[[lab:earthtube:on]] Cinquante mètres de tuyau, à deux mètres sous terre : nos estimations. À Odeillo, en janvier, l’air du dehors est à moins un degré, et il sort à trois. En juillet, à quinze dehors, il sort à dix. Sur une année : six cent vingt-cinq kilowattheures, pour une charge de cinquante-sept mille. Environ un point de part. Aucun puits canadien mesuré sur une maison ne nous est parvenu. [[lab:earthtube:off]] Ces chiffres sont ceux du calcul."
+      "text": "[[lab:earthtube:on]] Cinquante mètres de tuyau, à deux mètres sous terre : nos estimations. À Odeillo, en janvier, l’air du dehors est à moins un degré, et il sort à trois. En juillet, à quinze dehors, il sort à dix. Sur une année : six cent vingt-cinq kilowattheures, pour une charge de cinquante-sept mille. Cela ajoute environ un point à la part du soleil. Aucun puits canadien mesuré sur une maison ne nous est parvenu. [[lab:earthtube:off]] Ces chiffres sont ceux du calcul."
     },
     {
       "id": "part-earth-tube-drain",
       "scope": "part:earth-tube-drain",
       "title": "Purge (et si…)",
       "scene": "house",
-      "text": "[[lab:earthtube:on]] Le point bas du tuyau : un regard, sous un couvercle à ras du terrain. L’air chaud qui passe dans un tuyau froid y laisse de l’eau. Elle doit couler quelque part : sinon viennent les moisissures, et c’est ce qu’on respire ensuite. Notre modèle ne simule pas la condensation. [[lab:earthtube:off]] Là où le radon est un sujet, une mesure s’impose avant tout tuyau."
+      "text": "[[lab:earthtube:on]] Le point bas du tuyau : un regard, sous un couvercle à ras du terrain. L’air chaud qui passe dans un tuyau froid y laisse de l’eau. Elle doit couler quelque part : sinon viennent les moisissures, et c’est ce qu’on respire ensuite. Notre modèle ne simule pas la condensation. [[lab:earthtube:off]] Là où le radon pose problème, une mesure s’impose avant tout tuyau."
     },
     {
       "id": "part-outer-glazing",
@@ -282,7 +282,7 @@
       "scope": "part:black-paint",
       "title": "Peinture noire",
       "scene": "wall",
-      "text": "Une couche d’acrylique noir sur le béton : c’est elle qui change notre rayon en chaleur. En début d’après-midi, en hiver, la plaque monte vers soixante-cinq degrés. Le noir n’est pas neuf : en mille huit cent quatre-vingt-un, un zoologiste a breveté une plaque noire derrière du verre. Fermons les évents un jour clair : [[lab:vents:closed]] la plaque frôle soixante-dix degrés, l’alarme de peinture. [[lab:vents:open]]"
+      "text": "Une couche d’acrylique noir sur le béton : c’est elle qui change notre rayon en chaleur. En début d’après-midi, en hiver, la plaque monte vers soixante-cinq degrés. En mille huit cent quatre-vingt-un déjà, un zoologiste a breveté une plaque noire derrière du verre. Un jour clair, évents fermés, [[lab:vents:closed]] la plaque frôle soixante-dix degrés, l’alarme de peinture. [[lab:vents:open]]"
     },
     {
       "id": "part-storage-wall",
@@ -296,7 +296,7 @@
       "scope": "part:upper-duct",
       "title": "Conduit haut",
       "scene": "wall",
-      "text": "L’air chaud sort ici, par un tunnel de cinquante-six centimètres sur onze, près du plafond. [[flows:on]] Il faut deux conduits. Un seul laisserait l’air chaud monter et l’air froid descendre dans le même trou, et ils se gêneraient. Avec un en bas et un en haut, la colonne tourne dans un seul sens. [[flows:off]] Le courant dure deux à trois heures après le soleil."
+      "text": "L’air chaud sort ici, par un tunnel de cinquante-six centimètres sur onze, près du plafond. [[flows:on]] Il y a deux conduits. Un seul laisserait l’air chaud monter et l’air froid descendre dans le même trou, et ils se gêneraient. Avec un en bas et un en haut, la colonne tourne dans un seul sens. [[flows:off]] Le courant dure deux à trois heures après le soleil."
     },
     {
       "id": "part-lower-duct",
@@ -359,14 +359,14 @@
       "scope": "part:warm-air-jet",
       "title": "Jet d’air chaud",
       "scene": "room",
-      "text": "[[flows:on]] La chaleur prend son premier chemin dans le jet, l’air sorti du conduit haut, vers quarante degrés, qui file sous le plafond. [[flows:off]] Pour les inventeurs, il compte pour trente à trente-cinq pour cent de la chaleur rendue. Notre modèle trouve cinquante et un, et encore quarante-trois avec leur débit. L’écart ne vient donc pas que du débit. Nous ne le fermons pas."
+      "text": "[[flows:on]] La chaleur prend son premier chemin dans le jet, l’air sorti du conduit haut, vers quarante degrés, qui file sous le plafond. [[flows:off]] Pour les inventeurs, il compte pour trente à trente-cinq pour cent de la chaleur rendue. Notre modèle trouve cinquante et un, et encore quarante-trois avec leur débit. L’écart ne vient donc pas que du débit. Nous ne le réduisons pas."
     },
     {
       "id": "part-floor-return",
       "scope": "part:floor-return",
       "title": "Retour au sol",
       "scene": "room",
-      "text": "Le mur ne donne pas d’air neuf à la pièce : il reprend le sien. [[flows:on]] L’air le plus frais, près du sol, file vers la grille basse. Il monte derrière la vitre, revient en haut, et la boucle recommence. [[flows:off]] Environ deux fois par heure, l’air de la pièce fait le tour du mur. Quand l’article dit air frais, c’est de cet air-là qu’il parle. Un tapis devant la grille, et la prise s’étouffe."
+      "text": "Ce mur reprend l’air de la pièce, sans en apporter de neuf. [[flows:on]] L’air le plus frais, près du sol, file vers la grille basse. Il monte derrière la vitre, revient en haut, et la boucle recommence. [[flows:off]] Environ deux fois par heure, l’air de la pièce fait le tour du mur. Quand l’article dit air frais, c’est de cet air-là qu’il parle. Un tapis devant la grille, et la prise s’étouffe."
     },
     {
       "id": "part-thermostat",
@@ -408,7 +408,7 @@
       "scope": "part:chart-recorder",
       "title": "Enregistreur",
       "scene": "room",
-      "text": "Un tracé sur papier. La plume suit la face intérieure, et le papier avance avec le jour. [[lab:speed:86400]] Un jour par seconde. L’article parle d’enregistrements et ne décrit aucun appareil, si bien que le bureau et le rouleau sont notre dessin. Quatre suites de quatre jours, de décembre à juin. Un mur aussi lent ne se lit pas en un jour, il faut des suites. [[lab:preset:prototype-1967]]"
+      "text": "La plume suit la face intérieure, sur un rouleau qui avance avec le jour. [[lab:speed:86400]] Un jour par seconde. L’article parle d’enregistrements et ne décrit aucun enregistreur, si bien que le bureau et le rouleau sont notre dessin. Quatre suites de quatre jours, de décembre à juin. Un mur aussi lent ne se lit pas en un jour, il faut des suites. [[lab:preset:prototype-1967]]"
     },
     {
       "id": "part-fresh-air-vent",
