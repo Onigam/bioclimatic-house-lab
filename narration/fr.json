@@ -107,7 +107,7 @@
       "scope": "part:solar-houses-1974",
       "title": "Maisons de 1974",
       "scene": "site",
-      "text": "Plus haut sur la pente, un bâtiment protégé, de trois logements, avec le même système de mur. C’est une propriété privée : on le voit, on n’y entre pas. Son plan n’est dans aucune source. Notre dessin le compose en simple boîte vitrée. La maison de mille neuf cent soixante-sept, elle, a été suivie pendant un an."
+      "text": "Plus haut sur la pente, un bâtiment protégé, de trois logements, avec le même système de mur. C’est une propriété privée : on le voit, on n’y entre pas. Son plan n’est dans aucune source. Notre dessin le compose en simple boîte vitrée."
     },
     {
       "id": "part-pyranometer",
@@ -261,7 +261,7 @@
       "scope": "part:inner-glazing",
       "title": "Vitrage intérieur",
       "scene": "wall",
-      "text": "La seconde vitre, près du mur, double la première, à environ vingt-cinq millimètres dans notre dessin. L’article des inventeurs ne dit que deux vitres. [[isolate:on]] C’est elle que l’air chaud de la lame touche. [[isolate:off]] Ses deux faces sont enfermées entre le cadre, l’autre vitre et le mur : on ne peut pas les essuyer."
+      "text": "La seconde vitre, près du mur, double la première, à environ vingt-cinq millimètres dans notre dessin. L’article des inventeurs ne dit que deux vitres. [[isolate:on]] C’est elle que l’air chaud de la lame touche. [[isolate:off]] Dans notre dessin, ses deux faces sont enfermées entre le cadre, l’autre vitre et le mur : on ne peut pas les essuyer."
     },
     {
       "id": "part-steel-frame",
@@ -317,7 +317,7 @@
       "scope": "part:head-beam",
       "title": "Poutre de tête",
       "scene": "wall",
-      "text": "La bande de béton qui ferme le haut du mur. [[isolate:on]] Elle tient les équerres du cadre, ferme le haut de la lame d’air, et reçoit le pied du toit. [[isolate:off]] Sur la figure d’origine, deux lettres la marquent, dont nous ne connaissons pas le sens. Nous lisons tête et pied, parce que la maçonnerie hachurée est à ces deux endroits. C’est notre lecture, et la figure ne la donne pas."
+      "text": "La bande de béton qui ferme le haut du mur. [[isolate:on]] Elle tient les équerres du cadre, ferme le haut de la lame d’air, et reçoit le pied du toit. [[isolate:off]] Deux lettres la marquent, dont nous ne connaissons pas le sens. Nous lisons tête et pied, parce que la maçonnerie hachurée est à ces deux endroits. C’est notre lecture, et nos sources ne la donnent pas."
     },
     {
       "id": "part-sill-beam",
@@ -345,7 +345,7 @@
       "scope": "part:hot-wire-anemometer",
       "title": "Anémomètre à fil chaud",
       "scene": "wall",
-      "text": "Un fil fin, chauffé par un courant, au centre du conduit bas. L’air qui passe le refroidit : plus il va vite, plus il faut de courant pour garder le fil chaud. [[isolate:on]] L’appareil lit de moins soixante à plus soixante centimètres par seconde. Il pourrait donc voir un courant inversé : les enregistrements n’en montrent aucun. [[isolate:off]] Un fil chaud se salit : la lecture dérive, sans que rien ne se voie."
+      "text": "Un fil fin, chauffé par un courant, au centre du conduit bas. L’air qui passe le refroidit : plus il va vite, plus il faut de courant pour garder le fil chaud. [[isolate:on]] L’appareil lit de moins soixante à plus soixante centimètres par seconde. Il pourrait donc voir un courant inversé : nos sources n’en montrent aucun. [[isolate:off]] Un fil chaud se salit : la lecture dérive, sans que rien ne se voie."
     },
     {
       "id": "part-inner-wall-face",
@@ -401,7 +401,7 @@
       "scope": "part:room-surface-probes",
       "title": "Sondes de surface",
       "scene": "room",
-      "text": "Un mur chaud rayonne vers tout ce qu’il voit : le sol, le plafond, les murs voisins. Ce qu’il donne dépend de leur température : dix-huit degrés pour notre modèle. Avec les chiffres publiés, nous calculons environ dix-sept et demi. Les deux s’accordent à un demi-degré près. [[isolate:on]] Les deux sondes de notre dessin sont les nôtres. [[isolate:off]] Collées à plat, à l’ombre : une sonde mal collée lit l’air derrière elle."
+      "text": "Un mur chaud rayonne vers tout ce qu’il voit : le sol, le plafond, les murs voisins. Ce qu’il donne dépend de leur température : dix-huit degrés pour notre modèle. Avec les chiffres de la maison, nous calculons environ dix-sept et demi. Les deux s’accordent à un demi-degré près. [[isolate:on]] Les deux sondes de notre dessin sont les nôtres. [[isolate:off]] Collées à plat, à l’ombre : une sonde mal collée lit l’air derrière elle."
     },
     {
       "id": "part-chart-recorder",

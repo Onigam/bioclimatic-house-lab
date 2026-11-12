@@ -306,7 +306,7 @@ const KEPT_TO_THE_SOURCE: Record<string, [id: string, RegExp][]> = {
     ['part-twin-house', /rien n’indique que les prototypes aient été comparés entre eux/],
     ['part-tree-clumps', /notre choix : nous ignorons ce qui poussait là/],
     ['part-far-ridge', /viennent d’un modèle de terrain/],
-    ['part-solar-houses-1974', /a été suivie pendant un an/],
+    ['part-solar-houses-1974', /notre dessin le compose en simple boîte vitrée/],
     ['part-south-facade', /deux d’entrée, selon notre lecture/],
     ['part-collector-element', /quarante-huit mètres carrés de capteur/],
     ['part-north-window', /nous n’en connaissons pas les dimensions/],
@@ -317,18 +317,19 @@ const KEPT_TO_THE_SOURCE: Record<string, [id: string, RegExp][]> = {
       'part-inner-glazing',
       /à environ vingt-cinq millimètres dans notre dessin\. l’article des inventeurs ne dit que deux vitres/,
     ],
+    ['part-inner-glazing', /dans notre dessin, ses deux faces sont enfermées entre le cadre, l’autre vitre et le mur/],
     ['part-steel-frame', /le profil mince de vingt-deux millimètres est notre dessin/],
     ['part-storage-wall', /mieux vaudrait quarante à quarante-cinq centimètres, pour un retard d’environ douze heures/],
-    ['part-head-beam', /sur la figure d’origine, deux lettres la marquent/],
-    ['part-head-beam', /c’est notre lecture, et la figure ne la donne pas/],
+    ['part-head-beam', /deux lettres la marquent, dont nous ne connaissons pas le sens/],
+    ['part-head-beam', /c’est notre lecture, et nos sources ne la donnent pas/],
     ['part-sill-beam', /nous n’en avons trouvé aucun chiffre, et notre calcul ne le compte pas/],
     [
       'part-air-thermocouples',
       /les inventeurs mettent les leurs dans les conduits\. nous ne savons ni combien, ni à quelle hauteur/,
     ],
-    ['part-hot-wire-anemometer', /les enregistrements n’en montrent aucun/],
+    ['part-hot-wire-anemometer', /nos sources n’en montrent aucun/],
     ['part-electric-panel', /accroché à une cloison : c’est notre dessin\. sa petite lampe/],
-    ['part-room-surface-probes', /avec les chiffres publiés, nous calculons environ dix-sept et demi/],
+    ['part-room-surface-probes', /avec les chiffres de la maison, nous calculons environ dix-sept et demi/],
   ],
   en: [
     ['intro', /in the small hours/],
@@ -363,7 +364,7 @@ const KEPT_TO_THE_SOURCE: Record<string, [id: string, RegExp][]> = {
     ['intro', /some figures are the inventors’, taken from their paper of nineteen seventy-six/],
     ['intro', /depending on who counts, and what they count/],
     ['intro', /the installation guide takes ten/],
-    ['part-south-window', /the inventors’ paper does not give the area of the windows/],
+    ['part-south-window', /the paper by the inventors does not give the area of the windows/],
     ['part-south-facade', /its december and january are eight to twelve points too low/],
     ['part-fresh-air-vent', /in our model, the summer position/],
     ['part-electric-heater', /the sun can save sixty to seventy per cent/],
@@ -375,7 +376,7 @@ const KEPT_TO_THE_SOURCE: Record<string, [id: string, RegExp][]> = {
     ['part-twin-house', /nothing suggests the prototypes were ever compared with each other/],
     ['part-tree-clumps', /our choice: we do not know what grew there/],
     ['part-far-ridge', /come from a terrain model/],
-    ['part-solar-houses-1974', /was monitored for a year/],
+    ['part-solar-houses-1974', /our drawing composes it as a simple glazed box/],
     ['part-south-facade', /two of entrance, by our reading/],
     ['part-collector-element', /forty-eight square metres of collector/],
     ['part-north-window', /we do not know its size/],
@@ -386,15 +387,16 @@ const KEPT_TO_THE_SOURCE: Record<string, [id: string, RegExp][]> = {
       'part-inner-glazing',
       /twenty-five millimetres behind it in our drawing\. the paper by the inventors only says two panes/,
     ],
+    ['part-inner-glazing', /in our drawing, both its faces are shut in between the frame, the other pane and the wall/],
     ['part-steel-frame', /the slim profile of twenty-two millimetres is our drawing/],
     ['part-storage-wall', /forty to forty-five centimetres would be better, for a delay of about twelve hours/],
-    ['part-head-beam', /on the original figure, two letters mark it/],
-    ['part-head-beam', /that is our reading, and the figure does not give it/],
+    ['part-head-beam', /two letters mark it, and we do not know what they mean/],
+    ['part-head-beam', /that is our reading, and our sources do not give it/],
     ['part-sill-beam', /we found no figure for it, and our calculation does not count it/],
     ['part-air-thermocouples', /the inventors put theirs in the ducts\. we do not know how many, or how high/],
-    ['part-hot-wire-anemometer', /the recordings show none/],
+    ['part-hot-wire-anemometer', /our sources show none/],
     ['part-electric-panel', /hung on a partition: it is our drawing\. its small lamp/],
-    ['part-room-surface-probes', /from the published figures, we work out about seventeen and a half/],
+    ['part-room-surface-probes', /from the house’s own figures, we work out about seventeen and a half/],
   ],
 };
 
@@ -519,6 +521,7 @@ const SOURCE_MARKS: Record<'fr' | 'en', [name: string, re: RegExp][]> = {
     ['recordings', unicode('les enregistrements|courbes de mille neuf cent soixante-sept|relevés')],
     ['measured', unicode('mesurée?s?|les mesures des')],
     ['sources', unicode('sources?')],
+    ['monitored', unicode('suivie')],
     ['photograph', unicode('photographie')],
     ['published', unicode('chiffres publiés')],
     ['template', unicode('gabarit publié')],
@@ -532,6 +535,7 @@ const SOURCE_MARKS: Record<'fr' | 'en', [name: string, re: RegExp][]> = {
     ['recordings', unicode('the recordings|curves of nineteen sixty-seven|readings')],
     ['measured', unicode('measured (?:by|for|on)|measurements')],
     ['sources', unicode('sources?')],
+    ['monitored', unicode('monitored')],
     ['photograph', unicode('photograph')],
     ['published', unicode('published figures')],
     ['template', unicode('published template')],
@@ -541,12 +545,21 @@ const SOURCE_MARKS: Record<'fr' | 'en', [name: string, re: RegExp][]> = {
   ],
 };
 /**
- * The paper in full: its authors with it. The introduction names it a second way, with its year, once, and no other segment says the year. The English has two forms: « the inventors' paper » (a plural possessive cannot be heard,
- * the noun after it carries the meaning) and « the paper by the inventors », used in the clips that were redone in the correction round.
+ * The paper in full: its authors with it. The introduction names it a second way, with its year, once, and no other segment says the year. The English has one form, « the paper by the inventors »: « the inventors' paper »
+ * cannot be heard (a plural possessive has no sound, the noun after it carries the meaning).
  */
-const PAPER_IN_FULL = {
-  fr: unicode('l’article des inventeurs'),
-  en: unicode('the inventors’ paper|the paper by the inventors'),
+const PAPER_IN_FULL = { fr: unicode('l’article des inventeurs'), en: unicode('the paper by the inventors') };
+/**
+ * The source each word points to. The paper, its inventors, its recordings and its published figures are one source (the paper of the 1967 house), so « les courbes de 1967 » then « la figure d'origine », or « les inventeurs »
+ * then « les enregistrements », are the same source in two clips in a row even though the words differ (the seventh review's N1). The year of measuring of the 1967 house (« mesurée », « suivie ») is its own source.
+ */
+const SOURCE_OF: Record<string, string> = {
+  paper: 'the paper',
+  inventors: 'the paper',
+  recordings: 'the paper',
+  published: 'the paper',
+  measured: 'the measuring',
+  monitored: 'the measuring',
 };
 /** The word itself, for the ceiling on its mentions (« la figure d'origine » is a source, not a mention of the word). */
 const PAPER_WORD = { fr: unicode('article'), en: unicode('paper') };
@@ -899,7 +912,7 @@ describe.each(Object.keys(scripts))('narration script %s', (lang) => {
      * What a listener hears named in a segment. `phrases` are the attributions (the paper in full is one phrase, with its authors); `heard` are the sources they send to (the full formula sends to the paper and to the inventors
      * both, so the inventors named in the segment before it are the same source again).
      */
-    const named = (s: Segment): { phrases: string[]; heard: string[] } => {
+    const named = (s: Segment): { phrases: string[]; heard: string[]; sources: string[] } => {
       const text = spokenOf(s);
       const phrases = new Set<string>();
       const heard = new Set<string>();
@@ -913,7 +926,11 @@ describe.each(Object.keys(scripts))('narration script %s', (lang) => {
           phrases.add(name);
           heard.add(name);
         }
-      return { phrases: [...phrases], heard: [...heard] };
+      return {
+        phrases: [...phrases],
+        heard: [...heard],
+        sources: [...new Set([...heard].map((k) => SOURCE_OF[k] ?? k))],
+      };
     };
     const papers = (s: Segment): number => spokenOf(s).match(paperWord)?.length ?? 0;
     const parts = (w: string): Segment[] => script.segments.filter((s) => s.scene === w && s.scope !== 'intro');
@@ -941,8 +958,8 @@ describe.each(Object.keys(scripts))('narration script %s', (lang) => {
     it('never names the same source in two segments in a row, in the order of the script or in the order of a visit', () => {
       for (const order of [script.segments, visit])
         for (let k = 1; k < order.length; k++) {
-          const before = named(order[k - 1]!).heard;
-          for (const name of named(order[k]!).heard)
+          const before = named(order[k - 1]!).sources;
+          for (const name of named(order[k]!).sources)
             expect(before, `${order[k - 1]!.id} then ${order[k]!.id}: ${name}`).not.toContain(name);
         }
     });

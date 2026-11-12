@@ -107,7 +107,7 @@
       "scope": "part:solar-houses-1974",
       "title": "Houses of 1974",
       "scene": "site",
-      "text": "Higher up the slope, a protected building of three homes, with the same wall system. It is private property: you can see it, you cannot go in. Its plan is in no source. Our drawing composes it as a simple glazed box. The house of nineteen sixty-seven, by contrast, was monitored for a year."
+      "text": "Higher up the slope, a protected building of three homes, with the same wall system. It is private property: you can see it, you cannot go in. Its plan is in no source. Our drawing composes it as a simple glazed box."
     },
     {
       "id": "part-pyranometer",
@@ -156,7 +156,7 @@
       "scope": "part:south-window",
       "title": "South window",
       "scene": "house",
-      "text": "A tall window, beside the collector, lets the sun straight in, and the heat out. The inventors’ paper does not give the area of the windows. We take sixteen and a half square metres, an estimate. With plain wall in their place, the people still there, the season is covered at forty-two per cent. With them, forty-seven. A window gains by day and loses by night: close the shutters at sunset."
+      "text": "A tall window, beside the collector, lets the sun straight in, and the heat out. The paper by the inventors does not give the area of the windows. We take sixteen and a half square metres, an estimate. With plain wall in their place, the people still there, the season is covered at forty-two per cent. With them, forty-seven. A window gains by day and loses by night: close the shutters at sunset."
     },
     {
       "id": "part-east-gable",
@@ -261,7 +261,7 @@
       "scope": "part:inner-glazing",
       "title": "Inner glazing",
       "scene": "wall",
-      "text": "The second pane, near the wall, doubles the first, about twenty-five millimetres behind it in our drawing. The paper by the inventors only says two panes. [[isolate:on]] It is the one the hot air of the gap touches. [[isolate:off]] Both its faces are shut in between the frame, the other pane and the wall: they cannot be wiped."
+      "text": "The second pane, near the wall, doubles the first, about twenty-five millimetres behind it in our drawing. The paper by the inventors only says two panes. [[isolate:on]] It is the one the hot air of the gap touches. [[isolate:off]] In our drawing, both its faces are shut in between the frame, the other pane and the wall: they cannot be wiped."
     },
     {
       "id": "part-steel-frame",
@@ -317,7 +317,7 @@
       "scope": "part:head-beam",
       "title": "Head beam",
       "scene": "wall",
-      "text": "A band of concrete closes the top of the wall. [[isolate:on]] It holds the frame’s brackets, closes the top of the air gap, and takes the foot of the roof. [[isolate:off]] On the original figure, two letters mark it, and we do not know what they mean. We read them as head and foot, because the hatched masonry sits in those two places. That is our reading, and the figure does not give it."
+      "text": "A band of concrete closes the top of the wall. [[isolate:on]] It holds the frame’s brackets, closes the top of the air gap, and takes the foot of the roof. [[isolate:off]] Two letters mark it, and we do not know what they mean. We read them as head and foot, because the hatched masonry sits in those two places. That is our reading, and our sources do not give it."
     },
     {
       "id": "part-sill-beam",
@@ -345,7 +345,7 @@
       "scope": "part:hot-wire-anemometer",
       "title": "Hot-wire anemometer",
       "scene": "wall",
-      "text": "A fine wire, heated by a current, at the centre of the lower duct. The air that passes cools it: the faster it goes, the more current it takes to keep the wire hot. [[isolate:on]] The instrument reads from minus sixty to plus sixty centimetres a second. It could therefore see a reverse flow: the recordings show none. [[isolate:off]] A hot wire gets dirty: the reading drifts, and nothing shows it."
+      "text": "A fine wire, heated by a current, at the centre of the lower duct. The air that passes cools it: the faster it goes, the more current it takes to keep the wire hot. [[isolate:on]] The instrument reads from minus sixty to plus sixty centimetres a second. It could therefore see a reverse flow: our sources show none. [[isolate:off]] A hot wire gets dirty: the reading drifts, and nothing shows it."
     },
     {
       "id": "part-inner-wall-face",
@@ -401,14 +401,14 @@
       "scope": "part:room-surface-probes",
       "title": "Surface probes",
       "scene": "room",
-      "text": "A warm wall radiates to everything it sees: the floor, the ceiling, the neighbouring walls. What it gives depends on their temperature: eighteen degrees for our model. From the published figures, we work out about seventeen and a half. The two agree to within half a degree. [[isolate:on]] The two probes of our drawing are ours. [[isolate:off]] Stuck flat, in the shade: a badly stuck probe reads the air behind it."
+      "text": "A warm wall radiates to everything it sees: the floor, the ceiling, the neighbouring walls. What it gives depends on their temperature: eighteen degrees for our model. From the house’s own figures, we work out about seventeen and a half. The two agree to within half a degree. [[isolate:on]] The two probes of our drawing are ours. [[isolate:off]] Stuck flat, in the shade: a badly stuck probe reads the air behind it."
     },
     {
       "id": "part-chart-recorder",
       "scope": "part:chart-recorder",
       "title": "Chart recorder",
       "scene": "room",
-      "text": "The recorder traces the inner face, on a roll that moves on with the day. [[lab:speed:86400]] A day a second. The inventors’ paper speaks of recordings and describes no recorder. So the desk and the roll are our drawing. Four runs of four days, from December to June. A wall this slow cannot be read in one day. You need runs. [[lab:preset:prototype-1967]]"
+      "text": "The recorder traces the inner face, on a roll that moves on with the day. [[lab:speed:86400]] A day a second. The paper by the inventors speaks of recordings and describes no recorder. So the desk and the roll are our drawing. Four runs of four days, from December to June. A wall this slow cannot be read in one day. You need runs. [[lab:preset:prototype-1967]]"
     },
     {
       "id": "part-fresh-air-vent",
