@@ -124,3 +124,11 @@ The studio's audit (`~/Dev/energy-labs/studio/narration-style/audit-house.md`: 4
 - **V13, V14**: the first build of a world under the software renderer, and the what-if left on when a clip is stopped, are the kit's and the 3D's.
 
 **One take redone.** The first take of the English introduction came out at 146 seconds instead of about 106 (the recogniser that places the words lost 65 seconds in the middle, so six captions and five cues stood at the same instant): the rate was 27 % under the median and the cues 0.00 s apart. The introduction was made again with another take of the same voice (`VOICEBOX_SEED=7`, the generator's own way to get another take of a bad clip; the script is the same, the hash is the text's): 105.6 s, captions and cues in order. The English `intro` therefore has two takes on record in the history of this pass, one clip in the repository.
+
+## Seventh pass (12 Nov, the fifth fact-check: two one-line wordings)
+
+`docs/fact-check.md` section 9 cleared the second round of the slop pass but for two lines, both languages, two clips per language.
+
+- **G1** (`earth-tube-pipe`): « Cela ajoute environ un point à la part du soleil » / « That adds about one point to the sun's share » credited the pipe's gain to the sun; it comes from the soil's heat. Now « …à la part que l'électricité ne paie pas » / « …to the share that electricity does not pay » (the thermostat segment's own wording). **The pinned `FIGURES` row for `tubePoint` in `src/narration.test.ts` held the old phrase** (« environ un point à la part du soleil » / « about one point to the sun's share »): it now holds the new one (same figure, one point), and the old phrases are refused in `WENT_PAST`.
+- **G2** (`solar-furnace`): « La maison se contente de garder la chaleur » / « The house only keeps the heat » added an « only » (S1 p. 201 gives the wall's collection, storage and distribution). Now « La maison, elle, garde la chaleur au lieu de la concentrer » / « The house keeps the heat instead of concentrating it »; neither matches a refused wording, and the old ones are refused.
+- **Left alone, as asked** (n5): « Personne ne dit… » in `north-wall` and `chimney`, which would have cost two more clips per language.
