@@ -1,12 +1,12 @@
 {
   "lang": "fr",
   "model": "qwen3-tts-1.7B",
-  "generatedAt": "2026-11-12T02:26:47.744Z",
+  "generatedAt": "2026-11-12T02:50:07.597Z",
   "voiceLabel": {
     "fr": "Voix de synthèse",
     "en": "Synthetic voice"
   },
-  "totalSeconds": 1356.14,
+  "totalSeconds": 1356.78,
   "segments": [
     {
       "id": "intro",
@@ -1077,38 +1077,38 @@
       "title": "Four solaire",
       "scene": "site",
       "file": "part-solar-furnace.mp3",
-      "duration": 15.36,
-      "chars": 279,
-      "hash": "4c84c7a85a0f0e2f",
+      "duration": 16.4,
+      "chars": 295,
+      "hash": "8abdd1fa82b1bb08",
       "captions": [
         {
           "t0": 0,
-          "t1": 1.64,
+          "t1": 1.7,
           "text": "Le grand frère de la maison."
         },
         {
-          "t0": 1.64,
-          "t1": 3.94,
+          "t0": 1.7,
+          "t1": 3.78,
           "text": "Le même laboratoire a bâti ce four."
         },
         {
-          "t0": 3.94,
-          "t1": 9.09,
+          "t0": 3.78,
+          "t1": 9.01,
           "text": "Son miroir courbe, de mille huit cent trente mètres carrés, concentre la lumière sur un seul point."
         },
         {
-          "t0": 9.09,
-          "t1": 10.5,
+          "t0": 9.01,
+          "t1": 10.56,
           "text": "Mille kilowatts."
         },
         {
-          "t0": 10.5,
-          "t1": 12.84,
-          "text": "La maison se contente de garder la chaleur."
+          "t0": 10.56,
+          "t1": 13.92,
+          "text": "La maison, elle, garde la chaleur au lieu de la concentrer."
         },
         {
-          "t0": 12.84,
-          "t1": 15.36,
+          "t0": 13.92,
+          "t1": 16.4,
           "text": "Sa silhouette est composée d’après un gabarit publié."
         }
       ],
@@ -2086,43 +2086,43 @@
       "title": "Tuyau enterré (et si…)",
       "scene": "house",
       "file": "part-earth-tube-pipe.mp3",
-      "duration": 27.28,
-      "chars": 436,
-      "hash": "96985e463078c3b8",
+      "duration": 26.88,
+      "chars": 456,
+      "hash": "d96c28e0b88f299a",
       "captions": [
         {
           "t0": 0,
-          "t1": 4.78,
+          "t1": 4.68,
           "text": "Cinquante mètres de tuyau, à deux mètres sous terre : nos estimations."
         },
         {
-          "t0": 4.78,
-          "t1": 10.54,
+          "t0": 4.68,
+          "t1": 10.68,
           "text": "À Odeillo, en janvier, l’air du dehors est à moins un degré, et il sort à trois."
         },
         {
-          "t0": 10.54,
-          "t1": 13.98,
+          "t0": 10.68,
+          "t1": 14.14,
           "text": "En juillet, à quinze dehors, il sort à dix."
         },
         {
-          "t0": 13.98,
-          "t1": 19.1,
+          "t0": 14.14,
+          "t1": 18.54,
           "text": "Sur une année : six cent vingt-cinq kilowattheures, pour une charge de cinquante-sept mille."
         },
         {
-          "t0": 19.1,
-          "t1": 21.84,
-          "text": "Cela ajoute environ un point à la part du soleil."
+          "t0": 18.54,
+          "t1": 21.92,
+          "text": "Cela ajoute environ un point à la part que l’électricité ne paie pas."
         },
         {
-          "t0": 21.84,
-          "t1": 25.32,
+          "t0": 21.92,
+          "t1": 25.18,
           "text": "Aucun puits canadien mesuré sur une maison ne nous est parvenu."
         },
         {
-          "t0": 25.32,
-          "t1": 27.28,
+          "t0": 25.18,
+          "t1": 26.88,
           "text": "Ces chiffres sont ceux du calcul."
         }
       ],
@@ -2135,7 +2135,7 @@
           }
         },
         {
-          "t": 25.32,
+          "t": 25.18,
           "do": {
             "lab": "earthtube",
             "arg": "off"

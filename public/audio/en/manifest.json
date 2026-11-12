@@ -1,12 +1,12 @@
 {
   "lang": "en",
   "model": "qwen3-tts-1.7B",
-  "generatedAt": "2026-11-12T02:17:00.021Z",
+  "generatedAt": "2026-11-12T02:53:22.150Z",
   "voiceLabel": {
     "fr": "Voix de synthèse",
     "en": "Synthetic voice"
   },
-  "totalSeconds": 1323.1,
+  "totalSeconds": 1327.58,
   "segments": [
     {
       "id": "intro",
@@ -1067,38 +1067,38 @@
       "title": "Solar furnace",
       "scene": "site",
       "file": "part-solar-furnace.mp3",
-      "duration": 14.72,
-      "chars": 276,
-      "hash": "a4e1cd5510ecef16",
+      "duration": 16.56,
+      "chars": 299,
+      "hash": "5d93c4566a7c7dbc",
       "captions": [
         {
           "t0": 0,
-          "t1": 1.66,
+          "t1": 1.42,
           "text": "The house’s big brother."
         },
         {
-          "t0": 1.66,
-          "t1": 4,
+          "t0": 1.42,
+          "t1": 3.76,
           "text": "The same laboratory built this furnace."
         },
         {
-          "t0": 4,
-          "t1": 9.48,
+          "t0": 3.76,
+          "t1": 9.56,
           "text": "Its curved mirror, of eighteen hundred and thirty square metres, concentrates light onto a single point."
         },
         {
-          "t0": 9.48,
-          "t1": 10.82,
+          "t0": 9.56,
+          "t1": 10.74,
           "text": "A thousand kilowatts."
         },
         {
-          "t0": 10.82,
-          "t1": 12.34,
-          "text": "The house only keeps the heat."
+          "t0": 10.74,
+          "t1": 14.06,
+          "text": "The house keeps the heat instead of concentrating it."
         },
         {
-          "t0": 12.34,
-          "t1": 14.72,
+          "t0": 14.06,
+          "t1": 16.56,
           "text": "Its silhouette is composed from a published template."
         }
       ],
@@ -2066,43 +2066,43 @@
       "title": "Buried pipe (what if…)",
       "scene": "house",
       "file": "part-earth-tube-pipe.mp3",
-      "duration": 26.48,
-      "chars": 431,
-      "hash": "caddca00fdcece9d",
+      "duration": 29.12,
+      "chars": 455,
+      "hash": "1faa615414ba845c",
       "captions": [
         {
           "t0": 0,
-          "t1": 3.64,
+          "t1": 3.98,
           "text": "Fifty metres of pipe, two metres underground: our estimates."
         },
         {
-          "t0": 3.64,
-          "t1": 9.92,
+          "t0": 3.98,
+          "t1": 10.24,
           "text": "At Odeillo, in January, the outside air is at minus one degree, and it leaves at three."
         },
         {
-          "t0": 9.92,
-          "t1": 13.08,
+          "t0": 10.24,
+          "t1": 13.74,
           "text": "In July, with fifteen outside, it leaves at ten."
         },
         {
-          "t0": 13.08,
-          "t1": 18.82,
+          "t0": 13.74,
+          "t1": 20.2,
           "text": "Over a year: six hundred and twenty-five kilowatt-hours, against a load of fifty-seven thousand."
         },
         {
-          "t0": 18.82,
-          "t1": 21.48,
-          "text": "That adds about one point to the sun’s share."
+          "t0": 20.2,
+          "t1": 24.3,
+          "text": "That adds about one point to the share that electricity does not pay."
         },
         {
-          "t0": 21.48,
-          "t1": 24.6,
+          "t0": 24.3,
+          "t1": 26.82,
           "text": "No earth tube measured on a house has reached us."
         },
         {
-          "t0": 24.6,
-          "t1": 26.48,
+          "t0": 26.82,
+          "t1": 29.12,
           "text": "These figures come from the calculation."
         }
       ],
@@ -2115,7 +2115,7 @@
           }
         },
         {
-          "t": 24.6,
+          "t": 26.82,
           "do": {
             "lab": "earthtube",
             "arg": "off"
