@@ -922,7 +922,7 @@ describe.each(Object.keys(scripts))('narration script %s', (lang) => {
 
   it('is anonymous: no person, channel, company, brand, institution or series, in a text or a title', () => {
     const names =
-      /trombe|\bmichel\b|\bmorse\b|kelbaugh|balcomb|anderson|kipp|cnrs|promes|merim[ée]e|\bdrac\b|ministère|ministry|\bla poste\b|penn ar web|youtube|wikipedia|pvgis|era5|nasa|\bgiec\b|ademe|pelton|princeton|los alamos|darmstadt|\bsète\b|chauvency|\bmeuse\b|perpignan|mont-louis|il était une fois|once upon a time|maestro|elevenlabs|voicebox|qwen|whisper/i;
+      /trombe|\bmichel\b|\bmorse\b|kelbaugh|balcomb|anderson|kipp|cnrs|promes|merim[ée]e|\bdrac\b|ministère|ministry|\bla poste\b|penn ar web|youtube|wikipedia|pvgis|era5|nasa|\bgiec\b|ademe|pelton|princeton|los alamos|darmstadt|kranichstein|\bsète\b|chauvency|\bmeuse\b|perpignan|mont-louis|il était une fois|once upon a time|maestro|elevenlabs|voicebox|qwen|whisper/i;
     for (const s of script.segments) expect(`${s.title} ${spokenOf(s)}`, s.id).not.toMatch(names);
   });
 
