@@ -18,7 +18,9 @@ import {
 } from './textures';
 import { HouseSim } from '../sim/engine';
 import { PATCH_ALPHA, SHAFT_GAIN, SHAFT_LENGTH } from './wall/sunlight';
-import { SUN_MAX_DEG_PER_MIN, SUN_RATE, followSun, makeSky } from './wall/sky';
+import { SUN_FLAT_RATE, SUN_MAX_DEG_PER_MIN, SUN_RAMPS, clockSet, followSun, makeSky } from './wall/sky';
+import { GLASS_RATE, createWallScene as buildWall } from './wall/scene';
+import { smoothstep } from './common';
 import { createHouseScene, createRoomScene, createSiteScene, createWallScene } from './index';
 import { stateWith, view } from './test-utils';
 
@@ -380,77 +382,120 @@ describe('the sky of the wall world follows the sun', () => {
     expect(new Set(Array.from({ length: 64 }, (_, j) => d[j * 4 + 2])).size).toBeGreaterThan(8);
   });
 
-  it('the sun the picture follows: at most SUN_RATE degrees a second, still when no time passes, at once when the clock is set', () => {
-    // a chase: the state is far ahead (a pace: 1.2 degrees in two minutes of the model's time), the picture moves by its rate and no more, a frame at a time
-    let alt: number | null = followSun(null, 20, 1 / 30, Infinity, 0);
-    expect(alt).toBe(20);
-    for (let i = 0; i < 40; i++) {
-      const next: number = followSun(alt, 20 - 1.2 * (i + 1), 1 / 30, -1.2, 120);
-      expect(Math.abs(next - alt!)).toBeLessThanOrEqual((SUN_RATE / 30) * 1.0001);
-      alt = next;
+  it('the sun the picture follows: a pace is chased by what the picture reads and no faster, no time is no move, a set goes at once', () => {
+    const frame = (prev: number, target: number, moved = Math.sign(target - prev), elapsed = 120) =>
+      followSun(prev, target, 1 / 30, moved, elapsed);
+    // no ramp the picture reads moves by more than its limit in a frame, however far behind the picture is: from a high sun to the deep night, and back
+    for (const [from, to] of [
+      [40, -70],
+      [-70, 40],
+      [14, -20],
+      [-20, 14],
+    ] as const) {
+      let alt: number = from;
+      let steps = 0;
+      for (; Math.abs(alt - to) > 1e-6 && steps < 400; steps++) {
+        const next = frame(alt, to);
+        for (const [lo, hi, limit] of SUN_RAMPS)
+          expect(Math.abs(smoothstep(lo, hi, next) - smoothstep(lo, hi, alt))).toBeLessThanOrEqual(limit * 1.0001);
+        expect(Math.abs(next - alt)).toBeLessThanOrEqual((SUN_FLAT_RATE / 30) * 1.0001);
+        alt = next;
+      }
+      expect(Math.abs(alt - to)).toBeLessThan(1e-6);
     }
+    // where no ramp moves (a sun above 26 degrees, a night under −8) it goes at the flat rate, and not slower: the lag of the old law
+    expect(frame(60, 20)).toBeCloseTo(60 - SUN_FLAT_RATE / 30, 6);
+    expect(frame(-20, -70)).toBeCloseTo(-20 - SUN_FLAT_RATE / 30, 6);
+    // and through the dusk the sky, the steepest ramp, takes its thirtieth of a frame, so that the whole of it is a second of the picture (33 frames, 46 for the dusk with its tails)
+    let alt = 14;
+    let frames = 0;
+    while (alt > -8 && frames < 200) {
+      alt = frame(alt, -70);
+      frames++;
+    }
+    expect(frames).toBeGreaterThanOrEqual(30);
+    expect(frames).toBeLessThanOrEqual(50);
     // no time, no move
     expect(followSun(10, -20, 0, -1, 60)).toBe(10);
-    // the clock is set: the hour moved and the simulation's time did not (or a minute): the picture goes there at once
+    // the first frame, and the clock set (the hour moved and the simulation's time did not, or a minute): the picture goes there at once
+    expect(followSun(null, 20, 1 / 30, Infinity, 0)).toBe(20);
     expect(followSun(-40, 24, 1 / 30, 64, 0)).toBe(24);
     expect(followSun(-40, 24, 1 / 30, 64, 60)).toBe(24);
+    expect(clockSet(0, 0.01, 0)).toBe(false);
+    expect(clockSet(0, 0.5, 0)).toBe(true);
     // no pace is a set, at any speed and any frame rate: the sun moves at most SUN_MAX_DEG_PER_MIN of the model's minutes; ×86 400 at 30 frames a second is 48 minutes a frame, at 10 frames a second 144
-    for (const [elapsed, dt] of [
-      [2880, 1 / 30],
-      [8640, 0.1],
-      [400, 1 / 30],
-    ] as const) {
-      const move = SUN_MAX_DEG_PER_MIN * (elapsed / 60);
-      const next = followSun(0, -move, dt, -move, elapsed);
-      expect(Math.abs(next)).toBeLessThanOrEqual(SUN_RATE * Math.min(dt, 0.1) * 1.0001);
-    }
-    // and the real sun at ×86 400, ×30 000, ×12 000: a day of frames, the worst move of the altitude in a frame against what the time that passed allows
-    for (const scale of [12000, 30000, 86400]) {
+    for (const elapsed of [2880, 8640, 400])
+      expect(clockSet(0, SUN_MAX_DEG_PER_MIN * (elapsed / 60), elapsed)).toBe(false);
+    // the real sun, a day of frames from noon: at ×3 600 and under the picture is exactly the state's (the sky at ×3 600 is the sky of the clock), and at every pace no ramp moves by more than its limit
+    for (const scale of [130, 3600, 12000, 30000, 86400]) {
       const sim = new HouseSim();
       sim.set({ preset: 'prototype-1967', day: 355, hour: 12, running: true, timeScale: scale } as never);
       let was = sim.state.sunAltitude;
       let before = sim.state.simTime;
+      let shown = was;
       for (let f = 0; f < Math.round((24 * 3600) / (scale / 30)); f++) {
         sim.step(1 / 30);
-        const moved = sim.state.sunAltitude - was;
-        const elapsed = sim.state.simTime - before;
-        expect(followSun(was, sim.state.sunAltitude, 1 / 30, moved, elapsed), `×${scale} frame ${f}`).toBeCloseTo(
-          was + Math.max(-SUN_RATE / 30, Math.min(SUN_RATE / 30, moved)),
-          6,
+        const next = followSun(
+          shown,
+          sim.state.sunAltitude,
+          1 / 30,
+          sim.state.sunAltitude - was,
+          sim.state.simTime - before,
         );
+        if (scale <= 3600) expect(next, `×${scale} frame ${f}`).toBeCloseTo(sim.state.sunAltitude, 6);
+        for (const [lo, hi, limit] of SUN_RAMPS)
+          expect(
+            Math.abs(smoothstep(lo, hi, next) - smoothstep(lo, hi, shown)),
+            `×${scale} frame ${f}`,
+          ).toBeLessThanOrEqual(limit * 1.0001);
+        shown = next;
         was = sim.state.sunAltitude;
         before = sim.state.simTime;
       }
     }
   });
 
-  it('the world sets its sun with the clock and chases it with the pace: a slider goes there at once, a running clock lags', () => {
-    const wall = createWallScene();
+  it('the world sets its sun with the clock and chases it with the pace: a slider goes there at once, a running clock is followed', () => {
+    const wall = buildWall();
     const key = () => (wall.scene.getObjectByProperty('isDirectionalLight', true) as THREE.DirectionalLight).intensity;
     // an hour set: noon, then nine, then two: each is where the state says, with no frame between (the glass and the shafts read `SUN_UNIFORMS`, which keeps the last sun above the horizon at night)
     for (const hour of [12, 9, 14]) {
       const st = stateWith({}, { day: 355 } as never, hour);
       wall.update(st, 1 / 30, view());
       expect(Math.abs(SUN_UNIFORMS.dir.value.y - Math.sin((st.sunAltitude * Math.PI) / 180))).toBeLessThan(0.01);
+      expect(wall.shownSun).toBeCloseTo(st.sunAltitude, 6);
     }
     expect(key()).toBeGreaterThan(1);
-    // a running clock: the simulation's time moves with the hour, and the picture's sun is behind the state's by a few degrees at the horizon at ×12 000
+    // a running clock at ×3 600: the picture is the state's, frame by frame; at ×30 000 it is behind it through the dusk (the sky cannot change by a third of its range in a frame) and on it again when the clock stops
     const sim = new HouseSim();
-    sim.set({ preset: 'prototype-1967', day: 355, hour: 12, running: true, timeScale: 12000 } as never);
-    let lag = 0;
-    for (let f = 0; f < 120; f++) {
+    sim.set({ preset: 'prototype-1967', day: 355, hour: 12, running: true, timeScale: 3600 } as never);
+    for (let f = 0; f < 150; f++) {
       sim.step(1 / 30);
       wall.update(sim.state, 1 / 30, view());
-      const shown = (Math.asin(Math.min(1, Math.max(-1, SUN_UNIFORMS.dir.value.y))) * 180) / Math.PI;
-      lag = Math.max(lag, Math.abs(shown - Math.max(sim.state.sunAltitude, 0.3)));
+      expect(Math.abs(wall.shownSun - sim.state.sunAltitude)).toBeLessThan(0.01);
+    }
+    sim.set({ hour: 12, day: 355, timeScale: 30000 } as never);
+    wall.update(sim.state, 1 / 30, view());
+    let lag = 0;
+    for (let f = 0; f < 60; f++) {
+      sim.step(1 / 30);
+      wall.update(sim.state, 1 / 30, view());
+      lag = Math.max(lag, Math.abs(wall.shownSun - sim.state.sunAltitude));
     }
     expect(lag).toBeGreaterThan(3);
+    sim.set({ running: false } as never);
+    for (let f = 0; f < 30; f++) {
+      sim.step(1 / 30);
+      wall.update(sim.state, 1 / 30, view());
+    }
+    expect(Math.abs(wall.shownSun - sim.state.sunAltitude)).toBeLessThan(1);
   });
 
-  // The sky is chased by a follower that cannot snap (`SKY_RATE`): the first version eased and jumped when it was ten degrees behind the sun, so at ×12 000 dusk turned to night in one frame (56 % of the pixels).
-  // A day of the model's clock at three paces, at the film's 30 frames a second: no frame changes the sky's rows by more than 4 levels, and the fog's colour (the ground's horizon) not by more than 4 either.
+  // The sky is chased by a follower of what the picture reads (`followSun`): the first version eased and jumped when it was ten degrees behind the sun, so at ×12 000 dusk turned to night in one frame (56 % of the
+  // pixels); the second took four degrees a second and could not reach a night before the clock's midnight at ×5 000 and over (round 3). A day of the model's clock at four paces, at the film's 30 frames a second: no frame
+  // changes the sky's rows by more than 12 levels (the true sun at ×3 600 does 8: the sky of the clock) or the fog's colour (the ground's horizon) by more than 6 %.
   for (const scale of [3600, 12000, 30000, 86400]) {
-    it(`a day at ×${scale}: no frame of the sky changes by more than 4 levels, none of the ground's fog by more than 2.5 %`, () => {
+    it(`a day at ×${scale}: no frame of the sky changes by more than 12 levels, none of the ground's fog by more than 6 %`, () => {
       const sim = new HouseSim();
       sim.set({ preset: 'prototype-1967', day: 355, hour: 12, running: true, timeScale: scale } as never);
       const wall = createWallScene();
@@ -474,13 +519,152 @@ describe('the sky of the wall world follows the sun', () => {
         prev = data;
         prevFog = fogNow;
       }
-      expect(worst).toBeLessThanOrEqual(4);
-      // a linear colour channel, 0 to 1: 4 levels of 255 in sRGB at the bright end are 0.02 or so
-      expect(worstFog).toBeLessThan(0.025);
+      expect(worst).toBeLessThanOrEqual(12);
+      // a linear colour channel, 0 to 1: the sun's own dusk at ×3 600 moves it by 0.03 a frame
+      expect(worstFog).toBeLessThan(0.06);
       // and the night keeps a floor: never a black sky
       expect(lowest).toBeGreaterThan(24);
     });
   }
+
+  // The Short's coda (C7): the clock set to noon, ×10 800 for 20 frames, ×5 885 for 78, ×32 040 for 27, then stopped, at 30 frames a second. The sky must show a dusk (a second or more, not a flash) and be night by the
+  // clock's midnight, with no step above the limit, and after the stop it is still within the second. The round-2 follower (four degrees a second) showed a blue sky at 02:15 on the clock.
+  it('the coda: a dusk of a second and more, a night before the clock’s midnight, no step, and still within a second of the stop', () => {
+    const sim = new HouseSim();
+    sim.set({ preset: 'prototype-1967', day: 355, hour: 12, running: false } as never);
+    const wall = buildWall();
+    const noon = sim.state.simTime;
+    const fogSum = () => {
+      const c = (wall.scene.fog as THREE.Fog).color;
+      return c.r + c.g + c.b;
+    };
+    let prevSky: number[] | null = null;
+    let worst = 0;
+    let dusk = 0;
+    let wasUp = false;
+    let nightAt: number | null = null;
+    let ghost = 0;
+    const run = (scale: number | null, frames: number) => {
+      sim.set({ running: scale !== null, ...(scale !== null ? { timeScale: scale } : {}) } as never);
+      for (let f = 0; f < frames; f++) {
+        sim.step(1 / 30);
+        wall.update(sim.state, 1 / 30, view());
+        const sky = Array.from((wall.scene.background as THREE.DataTexture).image.data as Uint8Array);
+        if (prevSky)
+          for (let k = 0; k < sky.length; k++)
+            if (k % 4 !== 3) worst = Math.max(worst, Math.abs(sky[k]! - prevSky[k]!));
+        prevSky = sky;
+        const alt = wall.shownSun;
+        if (alt > 5) wasUp = true;
+        if (wasUp && alt <= 12 && alt > -8) dusk++;
+        if (wasUp && nightAt === null && alt <= -8) nightAt = (sim.state.simTime - noon) / 3600;
+        if (alt > 0.3 && sim.state.sunAltitude < -8) ghost++;
+      }
+    };
+    run(null, 30);
+    expect(fogSum()).toBeGreaterThan(1.5);
+    run(10800, 20);
+    run(5885, 78);
+    run(32040, 27);
+    // the clock stands at 02:15; night came before its midnight (twelve hours after noon), with the sky and the fog agreeing
+    expect(nightAt).not.toBeNull();
+    expect(nightAt!).toBeLessThan(12);
+    expect(fogSum()).toBeLessThan(0.5);
+    const sky = (wall.scene.background as THREE.DataTexture).image.data as Uint8Array;
+    expect(sky[0]! + sky[1]! + sky[2]!).toBeLessThan(250);
+    expect(dusk).toBeGreaterThanOrEqual(30);
+    expect(worst).toBeLessThanOrEqual(12);
+    // no frame of the coda shows a daylit sky over a night on the clock
+    expect(ghost).toBe(0);
+    // and the stop: the sky does not keep moving (the round-2 fog went 0.61 to 0.52 in the ten frames after it)
+    const before = fogSum();
+    run(null, 10);
+    expect(Math.abs(fogSum() - before)).toBeLessThan(0.02);
+    expect(Math.abs(wall.shownSun - sim.state.sunAltitude)).toBeLessThan(1);
+  });
+
+  it('the sun’s disc, shafts and glint go as the pace goes up, with no step when the pace changes, and a set is no pace', () => {
+    const wall = buildWall();
+    const sim = new HouseSim();
+    sim.set({ preset: 'prototype-1967', day: 355, hour: 11, running: true, timeScale: 130 } as never);
+    const k = () => SUN_UNIFORMS.k.value;
+    for (let f = 0; f < 20; f++) {
+      sim.step(1 / 30);
+      wall.update(sim.state, 1 / 30, view());
+    }
+    // a slow clock and the clock of the first scenes (×2 454, ×8 440 are under the fade): all of it
+    const slow = k();
+    expect(slow).toBeGreaterThan(0.5);
+    for (const scale of [2454, 8440]) {
+      sim.set({ timeScale: scale } as never);
+      for (let f = 0; f < 20; f++) {
+        sim.step(1 / 30);
+        wall.update(sim.state, 1 / 30, view());
+      }
+      expect(k()).toBeGreaterThan(0.9 * slow);
+    }
+    // the pace jumps to ×32 040: no step of more than a quarter of the light in a frame, and in a third of a second the sun is gone (it crosses a view of forty degrees in a third of a second)
+    sim.set({ timeScale: 32040 } as never);
+    let last = k();
+    let worst = 0;
+    let gone = -1;
+    for (let f = 0; f < 30; f++) {
+      sim.step(1 / 30);
+      wall.update(sim.state, 1 / 30, view());
+      worst = Math.max(worst, Math.abs(k() - last));
+      last = k();
+      if (gone < 0 && k() < 0.05 * slow) gone = f;
+    }
+    expect(worst).toBeLessThan(0.25 * slow);
+    expect(gone).toBeGreaterThan(0);
+    expect(gone).toBeLessThanOrEqual(25);
+    // at ×86 400 nothing at all
+    sim.set({ timeScale: 86400 } as never);
+    for (let f = 0; f < 30; f++) {
+      sim.step(1 / 30);
+      wall.update(sim.state, 1 / 30, view());
+    }
+    expect(k()).toBeLessThan(0.01);
+    // the clock set (an hour, with the simulation's time unmoved) is no pace: the sun is there at once at full strength after the pace has been stopped for a moment
+    sim.set({ running: false, hour: 12, day: 355 } as never);
+    for (let f = 0; f < 30; f++) {
+      sim.step(1 / 30);
+      wall.update(sim.state, 1 / 30, view());
+    }
+    expect(k()).toBeGreaterThan(0.5);
+  });
+
+  it('the glazing follows the model’s flag over a third of a second, and at once when the clock is set', () => {
+    const wall = createWallScene();
+    const glass = () => {
+      let m: THREE.MeshStandardMaterial | null = null;
+      wall.scene.traverse((o) => {
+        const mat = (o as THREE.Mesh).material as THREE.Material | undefined;
+        if (mat && !Array.isArray(mat) && mat.customProgramCacheKey?.() === 'collector-glass')
+          m = mat as THREE.MeshStandardMaterial;
+      });
+      return m as unknown as THREE.MeshStandardMaterial;
+    };
+    const a = stateWith({ glassRefuses: 0 }, { day: 355 } as never, 12);
+    const b = { ...a, glassRefuses: 1, simTime: a.simTime + 60 };
+    wall.update(a, 1 / 30, view());
+    const m = glass();
+    expect(m).toBeTruthy();
+    expect(m.opacity).toBeCloseTo(0.07, 6);
+    // the flag flips at a sunrise: the opacity goes to it in a third of a second, by no more than a tenth of its range a frame
+    let last = m.opacity;
+    let frames = 0;
+    for (; frames < 40 && Math.abs(m.opacity - 0.37) > 1e-6; frames++) {
+      wall.update({ ...b, simTime: b.simTime + frames * 2 }, 1 / 30, view());
+      expect(Math.abs(m.opacity - last)).toBeLessThanOrEqual(0.3 * (GLASS_RATE / 30) + 1e-9);
+      last = m.opacity;
+    }
+    expect(frames).toBeGreaterThanOrEqual(8);
+    expect(frames).toBeLessThanOrEqual(14);
+    // the clock set: at once, both ways
+    wall.update(stateWith({ glassRefuses: 0 }, { day: 355 } as never, 9), 1 / 30, view());
+    expect(m.opacity).toBeCloseTo(0.07, 6);
+  });
 
   it('the world uses it: the background is the sky and the fog is its horizon, dark at night and pale by day', () => {
     const wall = createWallScene();
