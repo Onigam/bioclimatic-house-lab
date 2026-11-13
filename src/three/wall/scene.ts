@@ -24,10 +24,10 @@ import { Followers } from '../follow';
 import { Caps, ClipSet } from '../section';
 import { Slots } from '../slots';
 import { makeRig } from '../sun';
-import { cutConcreteMap, tiled } from '../textures';
+import { cutConcreteMap, plateauGroundMap, tiled } from '../textures';
 import { anchor, box, crowdLabels, hotspots, viewFrom, type HotspotDef, type PartFraming } from '../world';
 import { buildLivedIn } from './livedin';
-import { makeSky } from './sky';
+import { followSun, makeSky } from './sky';
 import { buildSunlight } from './sunlight';
 
 // The `wall` world: where the heat goes. One collector element at one to one, cut open down its middle: the frame and two sheets of glass, the air gap, the black face, the concrete coloured by the model's temperatures cell by
@@ -103,6 +103,12 @@ export interface WallScene extends SceneModule<HouseState> {
 
 const V = (x: number, y: number, z: number) => new THREE.Vector3(x, y, z);
 const PAPER = 0xe9e2d3;
+/**
+ * What the black paint keeps of the night, as light it gives back (linear, a hundredth: 10 levels over a dark of 5): a dark blue-grey and not a hole, at the hour the sky is dark and the rig's hemisphere is 0.3. It is
+ * the paint's alone: a lift of the hemisphere (tried at 0.4 to 0.8) would do the same for the face and for the glazing's bars with it, and the bars' edges against the face then change more than twelve levels a frame on
+ * a drifting camera (the still-camera share 0.32 → 0.48 % at 0.8). Zero by day (`rig.night`).
+ */
+const NIGHT_PAINT = new THREE.Color().setRGB(0.0065, 0.009, 0.0145);
 
 export function createWallScene(opts: WallOptions = {}): WallScene {
   const scene = new THREE.Scene();
@@ -278,15 +284,21 @@ export function createWallScene(opts: WallOptions = {}): WallScene {
   );
 
   // ---- the ground: the plateau's granite, which takes the shadows and fades into the backdrop's paper at a distance (a place, not a table)
-  const groundMat = mats.granite.clone();
-  const GROUND = new THREE.Color(0xd9d4c8);
-  groundMat.color.copy(GROUND);
-  const ground = new THREE.Mesh(uvMetric(new THREE.PlaneGeometry(60, 60)), groundMat);
+  // (the plane runs past the camera's far plane, and the fog is complete before it: the ground never ends in a line, it goes into the sky)
+  const groundMat = new THREE.MeshStandardMaterial({
+    color: 0xffffff,
+    roughness: 1,
+    map: tiled(plateauGroundMap(), 1 / 0.8),
+  });
+  const GROUND = new THREE.Color(0xffffff);
+  // by night the ground is a dark blue-grey, not a neutral grey: moonlight and the hemisphere's blue
+  const NIGHT_GROUND = new THREE.Color(0.55, 0.64, 0.9);
+  const ground = new THREE.Mesh(uvMetric(new THREE.PlaneGeometry(600, 600)), groundMat);
   const sky = makeSky();
   const paper = new THREE.Color(PAPER);
   sky.update(35, paper);
   scene.background = sky.texture;
-  scene.fog = new THREE.Fog(PAPER, 24, 62);
+  scene.fog = new THREE.Fog(PAPER, 22, 105);
   ground.rotation.x = -Math.PI / 2;
   ground.position.y = -1.3;
   ground.receiveShadow = true;
@@ -393,6 +405,10 @@ export function createWallScene(opts: WallOptions = {}): WallScene {
   anchors['storage-wall#t0'] = anchor(scale, 0.07, BAR_Y0, 0.02, 't0');
   anchors['storage-wall#t70'] = anchor(scale, 0.07, BAR_Y0 + BAR_H, 0.02, 't70');
 
+  let sunAlt: number | null = null;
+  let sunSeen: number | null = null;
+  let simSeen = 0;
+  const sunState = {} as HouseState;
   let flapNow = 0;
   const drawn = { flap: 0, spec };
   const phoneLabels = crowdLabels(HOTSPOTS, anchors);
@@ -443,13 +459,27 @@ export function createWallScene(opts: WallOptions = {}): WallScene {
         lived.attach(build.layout.inner);
         drawn.spec = spec;
       }
-      rig.update(s, undefined, dt);
+      // the one sun the picture follows (docs/3d.md, « Round 2 »): the state's, chased at a bounded rate
+      sunAlt = followSun(
+        sunAlt,
+        s.sunAltitude,
+        dt,
+        sunSeen === null ? Infinity : s.sunAltitude - sunSeen,
+        s.simTime - simSeen,
+      );
+      sunSeen = s.sunAltitude;
+      simSeen = s.simTime;
+      Object.assign(sunState, s);
+      sunState.sunAltitude = sunAlt;
+      rig.update(sunState, undefined, dt);
+      // a night of this world is a dark blue-grey, not black: the sky's and the ground's own colours say so, the black paint gives back a little (`NIGHT_PAINT`), and the light is the rig's
+      mats.black.emissive.copy(NIGHT_PAINT).multiplyScalar(rig.night);
       sunlight.update();
       // the sky and the fog's horizon follow the sun and the cloud
-      sky.update(s.sunAltitude, paper, dt);
+      sky.update(sunAlt, paper, rig.beam);
       (scene.fog as THREE.Fog).color.copy(sky.horizon);
       // the ground is dark at night: the moon and the hemisphere's dim light are all it has
-      groundMat.color.copy(GROUND).multiplyScalar(0.35 + 0.65 * sky.day);
+      groundMat.color.copy(NIGHT_GROUND).lerp(GROUND, sky.day);
       // the light goes through the glass: with the outer sheet isolated away or not yet built, it has nothing to come through
       sunWanted = sunlight.on && Followers.drawn(registry, 'outer-glazing');
       sunGroup.visible = sunWanted;
