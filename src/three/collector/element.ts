@@ -333,14 +333,20 @@ export function buildElement(
 
   const glass = mats.glass;
   // sheets: the first is the outer glazing, the last (and the middle one of three) the inner glazing
-  const outer = inst('outer-glazing', glass, (c) => paneGeos(c, 0), { cast: false, name: 'outer-sheet' });
+  const outer = inst('outer-glazing', glass, (c) => paneGeos(c, 0), {
+    cast: false,
+    receive: false,
+    name: 'outer-sheet',
+  });
   const inner = inst('inner-glazing', glass, (c) => paneGeos(c, c.lay.sheetFront.length - 1), {
     cast: false,
+    receive: false,
     name: 'inner-sheet',
     shown: (c) => c.lay.sheetFront.length >= 2,
   });
   const middle = inst('inner-glazing', glass, (c) => paneGeos(c, 1), {
     cast: false,
+    receive: false,
     name: 'middle-sheet',
     shown: (c) => c.lay.sheetFront.length >= 3,
   });
@@ -357,6 +363,11 @@ export function buildElement(
     opacity: 0.045,
     depthWrite: false,
     fog: false,
+    // the volume's faces lie in the planes of what bounds it (the paint's front at `face + 0.002`, the frame's jambs and rails, the last sheet's back): against an opaque face in the same plane a translucent one
+    // fought for the depth test, in a checkerboard that changed with every frame. Pushed back, it always loses to the face it lies on.
+    polygonOffset: true,
+    polygonOffsetFactor: 1,
+    polygonOffsetUnits: 4,
   });
   const air = inst('air-gap', airMat, gapGeo, { cast: false, receive: false, name: 'air' });
   air.renderOrder = 1;

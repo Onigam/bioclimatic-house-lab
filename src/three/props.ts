@@ -51,10 +51,11 @@ export function buildMug(color = 0x3d6f8e): THREE.Group {
   const handle = new THREE.TorusGeometry(0.026, 0.006, 6, 12, Math.PI);
   handle.rotateZ(-Math.PI / 2);
   handle.translate(0.04, 0.045, 0);
-  g.add(mesh(joined([body, handle]), plain(color, 0.4)));
+  // a glazed stoneware: smooth, so that the window and the sun leave a highlight on it
+  g.add(mesh(joined([body, handle]), plain(color, 0.22)));
   const coffee = cyl(0.034, 0.034, 0.002, 16);
   coffee.translate(0, 0.082, 0);
-  g.add(mesh(coffee, plain(0x2a1a10, 0.3), false));
+  g.add(mesh(coffee, plain(0x2a1a10, 0.12), false));
   return g;
 }
 

@@ -3,7 +3,7 @@ import { PartRegistry, contactShadow, damp } from '@onigam/lab-kit/three';
 import type { Hotspot, SceneModule } from '@onigam/lab-kit/three';
 import type { HouseState } from '../../sim/types';
 import { AirFlow } from '../collector/air';
-import { addElementCaps } from '../collector/caps';
+import { addElementCaps, mergeRects, type Rect } from '../collector/caps';
 import { buildElement } from '../collector/element';
 import { bx } from '../house/geo';
 import {
@@ -16,7 +16,7 @@ import {
   elementSpecOf,
   type ElementSpec,
 } from '../dims';
-import { joined } from '../common';
+import { joined, uvMetric } from '../common';
 import { HEAT_MAX, HEAT_MIN, HeatStrip, heatColor } from '../heat';
 import { WALL_PARTS, type WallPart } from '../ids';
 import { makeMaterials } from '../materials';
@@ -24,8 +24,11 @@ import { Followers } from '../follow';
 import { Caps, ClipSet } from '../section';
 import { Slots } from '../slots';
 import { makeRig } from '../sun';
+import { cutConcreteMap, tiled } from '../textures';
 import { anchor, box, crowdLabels, hotspots, viewFrom, type HotspotDef, type PartFraming } from '../world';
 import { buildLivedIn } from './livedin';
+import { makeSky } from './sky';
+import { buildSunlight } from './sunlight';
 
 // The `wall` world: where the heat goes. One collector element at one to one, cut open down its middle: the frame and two sheets of glass, the air gap, the black face, the concrete coloured by the model's temperatures cell by
 // cell, the two ducts through it, the flap, the instruments of 1974–75. The section is always on (it is the world), so there is no tool. It is the very function `house` uses for its nine bays, in the element's own frame.
@@ -133,6 +136,19 @@ export function createWallScene(opts: WallOptions = {}): WallScene {
   const flow = new AirFlow([0], 34, build.layout, spec, 6);
   scene.add(flow.group);
 
+  // ---- the sun: shafts of light through the four panes and the sun's own disc, from the state's sun
+  const sunlight = buildSunlight(spec);
+  const sunGroup = new THREE.Group();
+  sunGroup.name = 'sun';
+  sunGroup.add(sunlight.mesh);
+  scene.add(sunGroup);
+  let sunWanted = false;
+  // The film's ambient occlusion draws the scene again, each mesh in a normal material of its own, transparent ones too: the light's sheets would stand in the depth like walls in the air and darken what lies round them, in
+  // dashes (the first version did, film look only). While that pass has swapped the light's material the light is out (`docs/kit-requests.md`: the pass should skip what is not solid).
+  scene.onBeforeRender = () => {
+    sunGroup.visible = sunWanted && sunlight.mesh.material === sunlight.material;
+  };
+
   // ---- the caps of the section: the element's own, and the stubs of the foundation, the floor, the ceiling and the head band that carry it
   const elementCaps = addElementCaps(capsSet, scene, mats, strip, 0, spec, (p) => p);
   const slots = new Slots<ElementSpec>();
@@ -158,25 +174,28 @@ export function createWallScene(opts: WallOptions = {}): WallScene {
     return slots.add(m, make);
   };
   const ROOM_REACH = 2.4;
+  // The stubs' faces in the section's plane (x = 0) lay on the clip plane, so that the clip took them away or kept them by the rounding of the frame, and what one saw through it was the same box seen from inside: the cut
+  // edge of the floor flickered, tile or its own back (docs/3d.md, « Material pass 2026-11-13 »). Each stub now ends 0.6 mm behind the plane, and the cap of its own lies in it.
+  const STUB_BACK = 0.0006;
   stub(
     mats.plinth,
-    (s) => bx(-half(s), -1.3, elementLayout(s).inner, 0 + 0.0, elementLayout(s).yBottom, 0),
+    (s) => bx(-half(s), -1.3, elementLayout(s).inner, -STUB_BACK, elementLayout(s).yBottom, 0),
     'foundation-stub',
   );
   stub(
     mats.plinth,
-    (s) => bx(-half(s), -SLAB, elementLayout(s).inner - ROOM_REACH - 0.1, 0, -0.03, elementLayout(s).inner),
+    (s) => bx(-half(s), -SLAB, elementLayout(s).inner - ROOM_REACH - 0.1, -STUB_BACK, -0.03, elementLayout(s).inner),
     'slab-stub',
   );
   stub(
     mats.tile,
-    (s) => bx(-half(s), -0.03, elementLayout(s).inner - ROOM_REACH - 0.1, 0, 0, elementLayout(s).inner),
+    (s) => bx(-half(s), -0.03, elementLayout(s).inner - ROOM_REACH - 0.1, -STUB_BACK, 0, elementLayout(s).inner),
     'tile-stub',
     false,
   );
   stub(
     mats.gravel,
-    (s) => bx(-half(s), -1.3, elementLayout(s).inner - ROOM_REACH - 0.1, 0, -SLAB, elementLayout(s).inner),
+    (s) => bx(-half(s), -1.3, elementLayout(s).inner - ROOM_REACH - 0.1, -STUB_BACK, -SLAB, elementLayout(s).inner),
     'hardcore-stub',
     false,
   );
@@ -187,7 +206,7 @@ export function createWallScene(opts: WallOptions = {}): WallScene {
         -half(s),
         ceilOf(s),
         elementLayout(s).inner - ROOM_REACH - 0.1,
-        0,
+        -STUB_BACK,
         ceilOf(s) + CEILING_T,
         elementLayout(s).inner,
       ),
@@ -197,56 +216,77 @@ export function createWallScene(opts: WallOptions = {}): WallScene {
   stub(
     mats.plaster,
     (s) =>
-      bx(-half(s), 0, elementLayout(s).inner - ROOM_REACH - 0.1, 0, ceilOf(s), elementLayout(s).inner - ROOM_REACH),
+      bx(
+        -half(s),
+        0,
+        elementLayout(s).inner - ROOM_REACH - 0.1,
+        -STUB_BACK,
+        ceilOf(s),
+        elementLayout(s).inner - ROOM_REACH,
+      ),
     'end-wall-stub',
   );
   stub(
     mats.concrete,
-    (s) => bx(-half(s), elementLayout(s).yTop, elementLayout(s).inner, 0, headTopOf(s), 0),
+    (s) => bx(-half(s), elementLayout(s).yTop, elementLayout(s).inner, -STUB_BACK, headTopOf(s), 0),
     'head-band-stub',
   );
   // stubs' caps: concrete grey, flat
-  const capMat = (m: THREE.MeshStandardMaterial): THREE.Material => {
+  const capMat = (m: THREE.MeshStandardMaterial, section?: THREE.Texture): THREE.Material => {
     const c = m.clone();
     c.side = THREE.DoubleSide;
     c.clippingPlanes = null;
     c.userData = { noShare: true };
+    // a cut shows the inside: the concrete's aggregate, a tile's body, not the face a surface of it wears; no relief on a plane that was sawn
+    if (section) {
+      c.map = section;
+      c.color.set(0xffffff);
+    }
+    c.normalMap = null;
     return c;
   };
-  const rectCap = (make: (s: ElementSpec) => [number, number, number, number], mat: THREE.Material): THREE.Mesh => {
-    const geo = (s: ElementSpec): THREE.BufferGeometry => {
-      const [z0, y0, z1, y1] = make(s);
-      const g = new THREE.PlaneGeometry(z1 - z0, y1 - y0);
-      g.rotateY(Math.PI / 2);
-      g.translate(0, (y0 + y1) / 2, (z0 + z1) / 2);
-      const uv = g.attributes.uv as THREE.BufferAttribute;
-      for (let i = 0; i < uv.count; i++) uv.setXY(i, uv.getX(i) * (z1 - z0), uv.getY(i) * (y1 - y0));
-      return g;
-    };
+  const cutConcrete = tiled(cutConcreteMap(), 1 / 0.5);
+  // The faces of the section's plane that the stubs leave: flat rectangles in the plane x = 0, UVs in metres of the element's frame (a map that spans two of them is one). Rectangles of one material are one mesh, so that the
+  // draw calls of the world are what they were before the cut of the floor got its tiles.
+  const rectCaps = (make: (s: ElementSpec) => Rect[], mat: THREE.Material): THREE.Mesh => {
+    const geo = (s: ElementSpec): THREE.BufferGeometry => mergeRects(0, make(s), (z, y) => [z, y]);
     const m = capsSet.addScenery(scene, geo(spec), mat);
     return slots.add(m, geo);
   };
-  rectCap((s) => [elementLayout(s).inner, -1.3, 0, elementLayout(s).yBottom], capMat(mats.plinth));
-  rectCap(
-    (s) => [elementLayout(s).inner - ROOM_REACH - 0.1, -SLAB, elementLayout(s).inner, -0.03],
-    capMat(mats.plinth),
+  // concrete in section: the footing, the slab, the head band
+  rectCaps(
+    (s) => [
+      [elementLayout(s).inner, -1.3, 0, elementLayout(s).yBottom],
+      [elementLayout(s).inner - ROOM_REACH - 0.1, -SLAB, elementLayout(s).inner, -0.03],
+      [elementLayout(s).inner, elementLayout(s).yTop, 0, headTopOf(s)],
+    ],
+    capMat(mats.plinth, cutConcrete),
   );
-  rectCap((s) => [elementLayout(s).inner - ROOM_REACH - 0.1, -1.3, elementLayout(s).inner, -SLAB], capMat(mats.gravel));
-  rectCap(
-    (s) => [elementLayout(s).inner - ROOM_REACH - 0.1, ceilOf(s), elementLayout(s).inner, ceilOf(s) + CEILING_T],
+  // the tiles' own: a terracotta body with a joint of mortar under it, in the plane like the rest
+  rectCaps((s) => [[elementLayout(s).inner - ROOM_REACH - 0.1, -0.03, elementLayout(s).inner, 0]], capMat(mats.tile));
+  rectCaps(
+    (s) => [[elementLayout(s).inner - ROOM_REACH - 0.1, -1.3, elementLayout(s).inner, -SLAB]],
+    capMat(mats.gravel),
+  );
+  rectCaps(
+    (s) => [[elementLayout(s).inner - ROOM_REACH - 0.1, ceilOf(s), elementLayout(s).inner, ceilOf(s) + CEILING_T]],
     capMat(mats.ceiling),
   );
-  rectCap(
-    (s) => [elementLayout(s).inner - ROOM_REACH - 0.1, 0, elementLayout(s).inner - ROOM_REACH, ceilOf(s)],
+  rectCaps(
+    (s) => [[elementLayout(s).inner - ROOM_REACH - 0.1, 0, elementLayout(s).inner - ROOM_REACH, ceilOf(s)]],
     capMat(mats.plaster),
   );
-  rectCap((s) => [elementLayout(s).inner, elementLayout(s).yTop, 0, headTopOf(s)], capMat(mats.concrete));
 
-  // ---- the ground: paper, which takes the shadows
-  const ground = new THREE.Mesh(
-    new THREE.PlaneGeometry(60, 60),
-    new THREE.MeshStandardMaterial({ color: PAPER, roughness: 1 }),
-  );
+  // ---- the ground: the plateau's granite, which takes the shadows and fades into the backdrop's paper at a distance (a place, not a table)
+  const groundMat = mats.granite.clone();
+  const GROUND = new THREE.Color(0xd9d4c8);
+  groundMat.color.copy(GROUND);
+  const ground = new THREE.Mesh(uvMetric(new THREE.PlaneGeometry(60, 60)), groundMat);
+  const sky = makeSky();
+  const paper = new THREE.Color(PAPER);
+  sky.update(35, paper);
+  scene.background = sky.texture;
+  scene.fog = new THREE.Fog(PAPER, 24, 62);
   ground.rotation.x = -Math.PI / 2;
   ground.position.y = -1.3;
   ground.receiveShadow = true;
@@ -317,6 +357,7 @@ export function createWallScene(opts: WallOptions = {}): WallScene {
   const followers = new Followers();
   followers.add(lived.coat, 'storage-wall', { moves: false });
   clip.clip(build.root);
+  clip.clip(sunGroup);
   clip.clip(stubs);
   // the instruments' beads and leads lie in the plane and are never clipped; the caps are made unclipped already
   for (const o of build.cutOnly) o.userData.notClipped = true;
@@ -394,6 +435,7 @@ export function createWallScene(opts: WallOptions = {}): WallScene {
         build.relayout(spec);
         elementCaps.relayout(spec);
         slots.apply(spec);
+        sunlight.relayout(spec);
         flow.relayout(build.layout, spec);
         placeAnchors();
         scale.position.z = build.layout.inner - 2.0;
@@ -402,6 +444,15 @@ export function createWallScene(opts: WallOptions = {}): WallScene {
         drawn.spec = spec;
       }
       rig.update(s, undefined, dt);
+      sunlight.update();
+      // the sky and the fog's horizon follow the sun and the cloud
+      sky.update(s.sunAltitude, paper, dt);
+      (scene.fog as THREE.Fog).color.copy(sky.horizon);
+      // the ground is dark at night: the moon and the hemisphere's dim light are all it has
+      groundMat.color.copy(GROUND).multiplyScalar(0.35 + 0.65 * sky.day);
+      // the light goes through the glass: with the outer sheet isolated away or not yet built, it has nothing to come through
+      sunWanted = sunlight.on && Followers.drawn(registry, 'outer-glazing');
+      sunGroup.visible = sunWanted;
       // the glass: more of a steep sun is sent back, so the sheets look brighter, and fainter ones show the black behind
       mats.glass.opacity = 0.07 + 0.3 * s.glassRefuses;
       mats.glass.envMapIntensity = 0.15 + 1.1 * s.glassRefuses;

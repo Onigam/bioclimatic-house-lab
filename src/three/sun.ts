@@ -9,6 +9,15 @@ import { smoothstep } from './common';
 // The sun of the 3D is the simulation's: its altitude and azimuth come from the state (`sunAltitude`, `sunAzimuth`, from the south towards the west), and so does the cloud, read as the share of the clear sky's sun
 // that the state's irradiance on the wall holds. So the shadow of the head of the frame, the beam on the black face and the glass that refuses a high sun are the model's, not a picture of a sun.
 
+/**
+ * The sun as the lab's shaders read it, one object for the page (only the world in view runs its rig): `dir` the unit vector towards the sun, `k` how much of it there is, 0 at night and under a cover that holds the beam
+ * back, 1 in a clear sky at noon. The glass of the collector throws it back as a glint, and the `wall` world's shafts of light take their strength from it. It follows the state and nothing else.
+ */
+export const SUN_UNIFORMS = {
+  dir: { value: new THREE.Vector3(0, 1, 0) },
+  k: { value: 0 },
+};
+
 /** The unit vector towards the sun in the house frame (x east, y up, z south). `alt` and `az` in degrees; `az` from the south, positive towards the west. */
 export function sunDirection(alt: number, az: number, out = new THREE.Vector3()): THREE.Vector3 {
   const h = alt * DEG;
@@ -155,6 +164,8 @@ export function makeRig(scene: THREE.Scene, o: RigOptions): Rig {
         key.color.copy(MOON);
       }
       key.intensity = total;
+      SUN_UNIFORMS.k.value = smoothstep(-1, 14, alt) * c;
+      if (alt > -1) SUN_UNIFORMS.dir.value.copy(sunDirection(Math.max(alt, 0.3), state.sunAzimuth, sunV));
       // the sky gives more when the beam is gone: a cover is bright
       // the sky comes up over twenty degrees of the sun's rise (the lamps and the stars keep to `day`, which is shorter): on a fast clock the whole picture brightens, and a steeper ramp reads as a flash
       const sky = smoothstep(-8, 12, alt);

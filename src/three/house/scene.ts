@@ -43,6 +43,7 @@ import { makeMaterials } from '../materials';
 import { buildLiving } from '../room/living';
 import { buildOtherRooms } from '../room/others';
 import { Caps, ClipSet } from '../section';
+import { cutConcreteMap, tiled } from '../textures';
 import { makeRig } from '../sun';
 import { anchor, box, crowdLabels, hotspots, viewFrom, type HotspotDef, type PartFraming } from '../world';
 import { buildEarthTube, tubeRuns } from './earthtube';
@@ -278,11 +279,18 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
   // ---- the section: the plane x = CUT_X keeps the west; the faces of everything it cuts
   const clip = new ClipSet([{ normal: [-1, 0, 0], at: [CUT_X, 0, 0] }]);
   const caps = new Caps();
-  const capMat = (m: THREE.MeshStandardMaterial, offset = 0): THREE.Material => {
+  // a cut shows the inside: concrete as the cut slab shows it (aggregate in a paste), not the face the surface wears; and no relief on a plane that was sawn
+  const cutConcrete = tiled(cutConcreteMap(), 1 / 0.5);
+  const capMat = (m: THREE.MeshStandardMaterial, offset = 0, section?: THREE.Texture): THREE.Material => {
     const c = m.clone();
     c.side = THREE.DoubleSide;
     c.clippingPlanes = null;
     c.userData = { noShare: true };
+    if (section) {
+      c.map = section;
+      c.color.set(0xffffff);
+    }
+    c.normalMap = null;
     if (offset) {
       c.polygonOffset = true;
       c.polygonOffsetFactor = offset;
@@ -351,12 +359,12 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
   // the foundation: south wall and footing, north footing, the hardcore under the slab
   dyn(
     (s) => R(Z_SOUTH + elementLayout(s).inner, GROUND_SOUTH - FOOTING + 0.02, Z_SOUTH, elementLayout(s).yBottom),
-    capMat(mats.plinth, -1),
+    capMat(mats.plinth, -1, cutConcrete),
     'foundation',
   );
   dyn(
     (s) => R(Z_SOUTH + elementLayout(s).inner - 0.2, GROUND_SOUTH - FOOTING, Z_SOUTH + 0.15, GROUND_SOUTH + 0.02),
-    capMat(mats.plinth, -1),
+    capMat(mats.plinth, -1, cutConcrete),
     'foundation',
   );
   rect(
@@ -364,7 +372,7 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
     GROUND_NORTH - FOOTING,
     Z_NORTH + WALL + 0.12,
     GROUND_NORTH,
-    capMat(mats.plinth, -1),
+    capMat(mats.plinth, -1, cutConcrete),
     'foundation',
   );
   dyn(
@@ -378,7 +386,7 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
     'foundation',
   );
   // slab, tile, ceiling, insulation
-  rect(Z_NORTH_IN, -SLAB, Z_RUN, -0.03, capMat(mats.plinth, -1), 'floor-slab');
+  rect(Z_NORTH_IN, -SLAB, Z_RUN, -0.03, capMat(mats.plinth, -1, cutConcrete), 'floor-slab');
   rect(Z_NORTH_IN, -0.03, Z_RUN, 0, capMat(mats.tile, -2), 'floor-slab');
   rect(Z_NORTH_IN, CEILING, Z_RUN, CEILING + CEILING_T, capMat(mats.ceiling, -1), 'roof-insulation');
   rect(
@@ -393,7 +401,7 @@ export function createHouseScene(opts: HouseOptions = {}): HouseScene {
   rect(Z_NORTH, GROUND_NORTH, Z_NORTH + WALL, Y_EAVE, capMat(mats.render, -1), 'north-wall');
   dyn(
     (s) => R(Z_SOUTH + elementLayout(s).inner, elementLayout(s).yTop, Z_SOUTH, Y_EAVE),
-    capMat(mats.concrete, -1),
+    capMat(mats.concrete, -1, cutConcrete),
     'south-facade',
   );
   // the roof's boards and slates: two parallelograms each side
