@@ -16,18 +16,18 @@ import {
   elementSpecOf,
   type ElementSpec,
 } from '../dims';
-import { joined, uvMetric } from '../common';
+import { joined, smoothstep, uvMetric } from '../common';
 import { HEAT_MAX, HEAT_MIN, HeatStrip, heatColor } from '../heat';
 import { WALL_PARTS, type WallPart } from '../ids';
 import { makeMaterials } from '../materials';
 import { Followers } from '../follow';
 import { Caps, ClipSet } from '../section';
 import { Slots } from '../slots';
-import { makeRig } from '../sun';
+import { SUN_UNIFORMS, makeRig } from '../sun';
 import { cutConcreteMap, plateauGroundMap, tiled } from '../textures';
 import { anchor, box, crowdLabels, hotspots, viewFrom, type HotspotDef, type PartFraming } from '../world';
 import { buildLivedIn } from './livedin';
-import { followSun, makeSky } from './sky';
+import { clockSet, followSun, makeSky } from './sky';
 import { buildSunlight } from './sunlight';
 
 // The `wall` world: where the heat goes. One collector element at one to one, cut open down its middle: the frame and two sheets of glass, the air gap, the black face, the concrete coloured by the model's temperatures cell by
@@ -99,6 +99,8 @@ export interface WallScene extends SceneModule<HouseState> {
   clip: ClipSet;
   drawn: { flap: number; spec: ElementSpec };
   scenery(): THREE.Object3D[];
+  /** The altitude of the sun the picture shows now, degrees: the state's, followed (`followSun`). */
+  readonly shownSun: number;
 }
 
 const V = (x: number, y: number, z: number) => new THREE.Vector3(x, y, z);
@@ -109,6 +111,11 @@ const PAPER = 0xe9e2d3;
  * a drifting camera (the still-camera share 0.32 → 0.48 % at 0.8). Zero by day (`rig.night`).
  */
 const NIGHT_PAINT = new THREE.Color().setRGB(0.0065, 0.009, 0.0145);
+/** The pace (the clock's seconds in a second of the picture) from which the sun's disc, shafts and glint begin to go, and the pace where they are gone. */
+export const SUN_FADE_FROM = 8000;
+export const SUN_FADE_TO = 20000;
+/** How fast the glazing's opacity follows the model's flag, a unit a second: a flip of the whole range takes a third of a second. */
+export const GLASS_RATE = 3;
 
 export function createWallScene(opts: WallOptions = {}): WallScene {
   const scene = new THREE.Scene();
@@ -408,6 +415,9 @@ export function createWallScene(opts: WallOptions = {}): WallScene {
   let sunAlt: number | null = null;
   let sunSeen: number | null = null;
   let simSeen = 0;
+  // how much of the sun's disc, shafts and glint the clock's pace lets through (below), and the glass's own state, followed (below)
+  let paceFade = 1;
+  let glassNow: number | null = null;
   const sunState = {} as HouseState;
   let flapNow = 0;
   const drawn = { flap: 0, spec };
@@ -423,6 +433,9 @@ export function createWallScene(opts: WallOptions = {}): WallScene {
     clip,
     drawn,
     scenery: () => [ground, stubs],
+    get shownSun() {
+      return sunAlt ?? 0;
+    },
     home: { position: V(8.6, 3.3, 2.3), target: V(0, 2.0, -0.6) },
     minDistance: 0.12,
     maxDistance: 22,
@@ -459,19 +472,21 @@ export function createWallScene(opts: WallOptions = {}): WallScene {
         lived.attach(build.layout.inner);
         drawn.spec = spec;
       }
-      // the one sun the picture follows (docs/3d.md, « Round 2 »): the state's, chased at a bounded rate
-      sunAlt = followSun(
-        sunAlt,
-        s.sunAltitude,
-        dt,
-        sunSeen === null ? Infinity : s.sunAltitude - sunSeen,
-        s.simTime - simSeen,
-      );
+      // the one sun the picture follows (docs/3d.md, « Round 3 »): the state's, chased so that no ramp the picture reads moves by more than its limit in a frame
+      const moved = sunSeen === null ? Infinity : s.sunAltitude - sunSeen;
+      const elapsed = s.simTime - simSeen;
+      const set = clockSet(sunAlt, moved, elapsed);
+      sunAlt = followSun(sunAlt, s.sunAltitude, dt, moved, elapsed);
       sunSeen = s.sunAltitude;
       simSeen = s.simTime;
       Object.assign(sunState, s);
       sunState.sunAltitude = sunAlt;
       rig.update(sunState, undefined, dt);
+      // a sun that crosses the sky in under half a second is not an object but a flash: the disc, the shafts and the glint go as the pace goes up (the clock's seconds in a second of the picture: the sun turns a degree
+      // every 240 s of it), fully there to ×8 000 (33 degrees a second: a view of forty degrees in a second), gone from ×20 000 (83: in under half a second). A set is no pace. The light itself is the model's and stays
+      const pace = set || dt <= 0 ? 0 : Math.abs(elapsed) / dt;
+      if (dt > 0) paceFade = damp(paceFade, 1 - smoothstep(SUN_FADE_FROM, SUN_FADE_TO, pace), 8, Math.min(dt, 0.1));
+      SUN_UNIFORMS.k.value *= paceFade;
       // a night of this world is a dark blue-grey, not black: the sky's and the ground's own colours say so, the black paint gives back a little (`NIGHT_PAINT`), and the light is the rig's
       mats.black.emissive.copy(NIGHT_PAINT).multiplyScalar(rig.night);
       sunlight.update();
@@ -484,8 +499,13 @@ export function createWallScene(opts: WallOptions = {}): WallScene {
       sunWanted = sunlight.on && Followers.drawn(registry, 'outer-glazing');
       sunGroup.visible = sunWanted;
       // the glass: more of a steep sun is sent back, so the sheets look brighter, and fainter ones show the black behind
-      mats.glass.opacity = 0.07 + 0.3 * s.glassRefuses;
-      mats.glass.envMapIntensity = 0.15 + 1.1 * s.glassRefuses;
+      // (the model's flag flips at the true sunrise and sunset, and the strip of glazing with it, in a frame or two at a fast clock: followed over a third of a second of the picture, at once when the clock is set)
+      glassNow =
+        glassNow === null || set
+          ? s.glassRefuses
+          : glassNow + Math.max(-GLASS_RATE * dt, Math.min(GLASS_RATE * dt, s.glassRefuses - glassNow));
+      mats.glass.opacity = 0.07 + 0.3 * glassNow;
+      mats.glass.envMapIntensity = 0.15 + 1.1 * glassNow;
       // the flap goes where the model's goes, smoothly
       flapNow = dt > 0 ? damp(flapNow, s.flapOpen, 5, Math.min(dt, 0.1)) : flapNow;
       build.setFlap(flapNow);
