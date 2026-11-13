@@ -974,3 +974,122 @@ Real phones, Safari, Firefox; **the voice itself** (the owner listens), includin
 ### Verdict of the seventh pass
 
 **Ready for the owner's checkpoint, for the spoken guide.** The 10 redone clips and the 4 neighbours play to their end in both languages (28 of 28), their cues land (the 38 cues of the 10 redone clips within 0.38 s), the right part opens (24 of 24), nothing is left on, the simulation and the starting-point label are back after every clip, the voice label shows, the console holds only the copy's font 403s, the captions of all 122 manifest entries are the committed scripts, and Whisper hears every new sentence (French 0.969, English 0.983; nothing missing, doubled or invented). **The numbers recount as claimed** (26 of 61, wall 7 of 15, site 6 of 12, no pair by word-form, « l'article » 7 of 8, in both languages) **and the extended guard counts away no attribution word**. Of the eleven items of the sixth pass's X list, seven are closed and two are closed by the words with a remainder (X3, X4); X5 is the owner's, taken; X6 stands; of W1 to W11 the nine standing ones are unchanged. I found **no blocker, no major and four minor items** (N1 to N4), none of them a lost figure or hedge: the same document under two words in consecutive clips (N1), a one-word gap in the guard (N2), short English pauses (N3), two English forms of the paper (N4). **For the owner's ear**: French `room-surface-probes` « lit l'air » (heard « l'hilaire » by two recognisers, the notes' own flag), the English `electric-panel` and the pause before « Forty to forty-five centimetres », and whether the paper named under two words in a row (N1) is still the tic he wanted gone. I set no status and pushed nothing.
+
+## Material pass review (wall world)
+
+- **Date:** 2026-11-13. **Commits:** `f688596` after, `8959cc8` before, local `main`, four commits (`2d8542f`, `23bc53f`, `1174354`, `f688596`). Not pushed. Screens: `docs/qa/mh-*.jpg` (`cad7632`, `b85711c`).
+- **Reviewer:** built none of it. First browser look at the pass. Served from fresh `git archive` copies (`~/.cache/lab-review/bioclimatic-house-lab/2026-11-13-f688596/{old,new}`), `node_modules` linked inside the copies only; dev servers for the views, `vite build` + `preview` for performance and the production console; Chrome for Testing 154 on Metal under `chrome.lock`; clocks pinned, simulation paused (two renders of one build differ by 0.000 %). The reviewer's own harness (`rv.mjs`, `legend.mjs`, `fade.mjs`, `perf.mjs`, `guide.mjs`) plus the kit's `flicker.mjs`.
+- **Walked:** 377 kept screenshots: 224 part shots (56 parts, two distances, 1280×800), 58 mode shots (four worlds), 24 views of the Short in the film look at 1080×1920, 7 black-face crops, 14 legend patches, 8 canvases at 390×844 at pixel ratio 3, 8 sun views, 14 section and glint views, 20 guide frames.
+- **The pass touches** 33 files; nothing in `src/sim`, `heat.ts`, `src/data`, `i18n`, `panels`, `narration`, `public`. No new visible text (string literals of the two bundles diffed).
+- **A working tree not the reviewer's:** at the time of writing the checkout held uncommitted edits to `sky.ts`, `sunlight.ts`, `wall/scene.ts`, `materials.ts`, `textures.ts`, `matter.test.ts`, `tools/look/shots.mjs` and an untracked `tools/look/day.mjs` (the modeler's round 2, one edit replaces the sky's snap). They are not reviewed here; this review is of the commits.
+
+### Verdict
+
+**Push: yes, from this review.** Blockers 0, majors 2, minors 6, notes 3. M6 of the Short's review is answered: the `wall` world now has matter, a sun, a sky and a night, and no flat band. Look at MH1 and MH2 first. The old build is the way back.
+
+### Pass says vs measured
+
+| `docs/3d.md` says                                       | Measured                                                                                                                                                                                                         |
+| ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 773 of 786 meshes identical, 13 intended, 1 new         | 792 objects with geometry: 779 identical, 13 changed (7 stubs moved 0.6 mm in x, 5 cut faces rebuilt and 1 merged), 1 new (the sun, 298 triangles). `house`, `room`, `site`: every object identical in 11 states |
+| Draws the same                                          | wall 57, house 281 (309 with the cut), room 162, site 224, identical; wall triangles 4,914 → 5,214                                                                                                               |
+| First frame +8.0 % (2,222 → 2,399 ms)                   | 2,184 → 2,410 ms, **+10.3 %**; the three pairs are +259, +226, +275 ms                                                                                                                                           |
+| Programs +10 to +30                                     | 77/120/158/206 → 87/140/182/236 ✓                                                                                                                                                                                |
+| Textures 34/38/41/44 → 39/44/47/51                      | ✓                                                                                                                                                                                                                |
+| +4.5 kB brotli                                          | +4,472 B (348,544 → 353,016) ✓                                                                                                                                                                                   |
+| 0 frames over 33 ms                                     | 0 of 200 in four worlds, both builds ✓                                                                                                                                                                           |
+| Kit tool: wall orbit 0.537 → 0.262, dolly 1.441 → 0.475 | identical to the digit                                                                                                                                                                                           |
+| Legend true, mean of the multiplier one                 | ✓ (below)                                                                                                                                                                                                        |
+| B4 and C7 show a fade over about twenty frames          | true up to ×5,885; **a one-frame pop from ×10,800** (MH1)                                                                                                                                                        |
+| Black face a satin charcoal, lighter than flat black    | at noon, in the Short's framing, it reads taupe (MH2)                                                                                                                                                            |
+
+### Gates (on the `f688596` copy)
+
+typecheck pass · format:check pass · `npm test` 776 passed, 1 skipped, 22 files · build pass (`index-CMyQ79j-.js`, 1,592.12 kB, gzip 479.71) · dev console: only the kit's four font 403s, as before · 60 slider ends and 48 scenario chips (four worlds): 0 errors, 0 warnings · production console: 0 messages.
+
+### The wall world, by eye
+
+- **Concrete.** Close up (the Short's cut at 1.3 m) it reads as an aggregate section: pale and dark grey stones in the ramp's paste, darker rims, pits (`mh-06`, `mh-10`, `mh-11`). At the Short's main framing and at phone size the grain is 4 px and reads as a fine blue speckle, terrazzo-like (MH3). The colour still reads as temperature everywhere (`mh-01`).
+- **Legend.** The wall at a uniform temperature, 61 values 10 to 70 °C in the old build as the table, the new pixels inverted through it:
+
+| °C  | Old RGB      | New mean RGB | Mean luma old → new | Inferred °C, mean (sd; p5 to p95; min to max) |
+| --- | ------------ | ------------ | ------------------- | --------------------------------------------- |
+| 10  | 25, 34, 95   | 27, 35, 89   | 36.5 → 37.0         | 10.0 (0.1; 10 to 10; 10 to 11)                |
+| 20  | 31, 103, 170 | 45, 103, 163 | 92.5 → 94.7         | 19.3 (1.6; 16 to 21; 12 to 31)                |
+| 40  | 161, 185, 69 | 162, 183, 91 | 171.5 → 172.1       | 38.8 (1.5; 37 to 41; 37 to 41)                |
+| 60  | 218, 94, 42  | 210, 100, 59 | 116.6 → 120.5       | 59.9 (1.8; 57 to 63; 55 to 67)                |
+| 70  | 160, 1, 45   | 151, 18, 49  | 38.0 → 48.2         | 69.5 (0.7; 68 to 70; 68 to 70)                |
+
+Same at 03:00 and in the film look: the mean within 1.3 °C everywhere. The sim values the world reads are unchanged (no `src/sim`, no `heat.ts`; the engine's layers and the strip texture hash identically at hours 4, 8, 12, 14, 17, 22; the scale post's colours are identical pixel for pixel).
+
+- **Black face.** Luma at P1 noon (film look, `mh-02`): before 96, after 144 (warm taupe), after with the sun hidden 103. At 17:00: before about 47, after about 35. At 04:48: before about 43, after about 28 (MH2).
+- **Glass.** Pale and milky at close range, as before, with a Fresnel sky; no glint blows out. **Sun:** the disc reads as a sun when the camera looks south (`mh-13`); the shafts read as light close in and as a pale veil from the home view (MH5); nothing odd at 17:00, 04:48 or 03:00.
+- **Sky across a sunrise.** The kit tool's 6.6 is its reading of a fade: at ×3,600, 06:00 to 10:20, mean luma 33 → 175 over about 60 frames, smooth (`mh-05`). Fast clocks: MH1.
+- **Tiles, hardcore, ground, stool, mug, plaster.** Tiles have joints and body in the cut (`mh-10`); hardcore is angular stone, a little large and cartoonish up close; ground MH8; stool unchanged; plaster and render relief MH7. **Moving thickness:** at 37, 45 and 60 cm the grain is the same (`mh-07`).
+
+### Regression hunt
+
+- **Geometry** (Node, both builds, world space, triangle by triangle, instances expanded; `wall` default, 37 cm, 45 cm, three sheets, night; `house` default, cut, cut at 45 cm; `room`; `site` at 12:00 and 15:00): `house`, `room`, `site` 0 objects changed in every state; `wall` 46 of 59 identical, the 13 are the intended ones; part membership identical; `receiveShadow` off on the panes only. **No part moved or changed shape.**
+- **Every part, close and mid, four worlds** (224 shots): changed pixels `wall` all (sky, ground, sun, matter); `house` 0.1 to 8.4 % (worst `earth-tube-drain`, a glass and render shift); `room` ≤ 1.0 %; `site` ≤ 0.10 %. No map missing, shifted or too large, no milky or black surface, no seam, no z-fighting, no changed light on the largest of each world and the wall's twelve main parts. The house's own section (`mh-11`) carries the same false colour and concrete as the wall. Modes: house 0.13 to 2.3 %, room 0.01 to 0.16 %, site 0.00 to 0.29 %; thermal unchanged in hue.
+- **`site`'s landscape** is pixel-identical (0.00 % in 17 of 22 views; the houses 0.04 to 0.10 %). No new text or marking anywhere; the location rule holds.
+
+### Budget (production build, CPU ×4, 390×844 at pixel ratio 3, 3 alternated runs, medians)
+
+|                                 | Before                               | After                           |
+| ------------------------------- | ------------------------------------ | ------------------------------- |
+| First frame, vsync on           | 2,184 ms                             | 2,410 ms (**+226, +10.3 %**)    |
+| First frame, vsync off          | 2,555                                | 2,795 (+9.4 %)                  |
+| Entering `wall`, `room`, `site` | 236, 281, 677 ms                     | 296, 313, 707                   |
+| Programs after each world       | 77, 120, 158, 206                    | 87, 140, 182, 236               |
+| Textures after each world       | 34, 38, 41, 44                       | 39, 44, 47, 51                  |
+| Frame time, vsync on            | 16.6 to 16.7 ms, 0 of 200 over 33 ms | the same                        |
+| JS raw / gzip-9 / brotli        | 1,577,600 / 466,947 / 348,544 B      | 1,592,125 / 472,458 / 353,016 B |
+
+A real phone's GPU is not measured.
+
+### Stability
+
+Kit flicker tool (1280×720, 150 frames, orbit / dolly, shimmer % (largest jump)): `site` 1.475 / 3.147 → 1.460 / 3.163; `house` 2.055 / 3.339 → 1.111 / 2.488; `wall` 0.537 (4.10) / 1.441 (2.84) → 0.262 (3.72) / 0.475 (**6.60**); `room` 1.242 / 3.272 → 1.257 / 3.273. Still camera drifting 2.2 mm a frame, share of pixels changing by more than 12 levels: P0 noon 1.609 → 0.460; P1 1.501 → 0.503; P3 17:00 2.113 → 0.317; P3 04:48 2.152 → 0.261; floor's cut edge 0.969 → 0.184; cut at 1.3 m 0.042 → **0.147** (the stones are detail and detail moves). Held still: 0.000 to 0.03 % in both builds.
+
+### Sky at fast clocks
+
+Mean absolute luma change per pixel between frames, 540×960, camera still, film look:
+
+| Pace and run                                                                             | Before                            | After                     |        |
+| ---------------------------------------------------------------------------------------- | --------------------------------- | ------------------------- | ------ |
+| ×3,600 sunrise 06:00 to 10:20                                                            | 1.35                              | 4.52                      | smooth |
+| ×5,885 sunset from 12:00                                                                 | not run                           | 3.57                      | smooth |
+| **×10,800** sunset from 12:00                                                            | 2.14                              | **37.15** (luma 101 → 64) | pop    |
+| **×12,000** sunrise from 04:00                                                           | 3.24                              | **48.19** (86 → 134)      | pop    |
+| **×32,040** sunrise from 04:00                                                           | 10.79                             | **72.82** (40 → 112)      | pop    |
+| ×86,400, three days                                                                      | 25 largest step, 6 frames over 15 | **86**, 17 frames over 15 | strobe |
+| The Short's B4 (×8,440 from 17:00)                                                       | 0.76                              | 1.58                      | smooth |
+| The Short's C7 as shot (×10,800 for 20 frames, ×5,885 for 78, ×32,040 for 27, from noon) | 1.58                              | 3.57                      | smooth |
+
+### The guide, five clips by their cues, no audio
+
+`scene:wall`, `part:outer-glazing`, `part:black-paint`, `part:storage-wall`, `part:inner-glazing` in French at ×2: each `frame` cue lands on what it names; the camera at every cue of the three clips also played in the old build is identical to the decimal; the isolate cue works. `part:storage-wall` runs at a day a second from its first second, so the sky strobes through the whole clip (MH1). The voice is not judged.
+
+### Defects
+
+**Blockers:** none.
+
+**Major**
+
+- **MH1. The sky and ground pop in one frame at clocks of ×10,800 and above.** World `wall`, the sky plane, the fog and the ground tone. In `sky.ts`, `update` follows the sun with `damp(seen, altitude, 1.8, dt)` and resets `seen` to the true altitude whenever it is more than 10° behind; the sun outruns the follower above roughly ×7,000 to ×8,000 at the December horizon, the reset fires and the whole picture changes at once. At a day a second the picture strobes between 30 and 176. Reached through the top speed chip ×86,400 and the clips `scene:wall` and `part:storage-wall`. **Not in the Short as shot** (the exact schedule is smooth). Screens `mh-03`, `mh-04`, `mh-12`.
+- **MH2. The black face reads taupe at noon in the Short's framing.** `black-paint`, P1 noon: luma 144 and a warm cast (153, 144, 126) against 96 before; with the sun hidden 103, mid-grey. The sun's pale patch (`sunlight.ts`, lifted 4 mm off the paint) adds 41 and the board marks stripe it. At 17:00 and 04:48 it is black. Screen `mh-02`. Knobs: the patch's strength, `roughness` 0.56, `envMapIntensity` 0.5.
+
+**Minor**
+
+- **MH3.** At phone size the cut face reads as blue speckle, not as concrete: the grain is 4 px at 1080 wide; the aggregate is legible only close up and in the warm band; the blue half is a low-contrast mottle (`mh-01`; `aggregateMap`, `HEAT_MATTER` 0.38).
+- **MH4.** The legend holds on average, not pixel by pixel: mean within 1.3 °C, sd 0.7 to 2.8, p5 to p95 within −4 and +3 °C; the darkest voids read 12 to 15 °C off at 20 and 30 °C; at 70 °C the stones lift the mean luma by 27 %. `mh-06`.
+- **MH5.** The shafts read as a pale hard-edged veil from the home view: a white wedge at the upper left with a straight upper edge across the sky and dark bands where the rails shadow it; close in, it reads as light (`mh-08`, `mh-09`, `mh-13`; `SHAFT_GAIN` 0.3, `SHAFT_LENGTH` 3.2 m).
+- **MH6.** The first frame costs more than the doc says: +10.3 % (+226 ms) against +8.0 %; `wall` entry +60 ms (+25 %), room +32 ms (+11 %), site +30 ms (+4 %). A lazy fill of the maps would give it back.
+- **MH7.** The render's and plaster's relief is cloudy up close (`room`, thermostat close: blotches of about 20 cm at `normalScale` 0.55 to 0.9, a plaster that looks sponged; `mh-14`; `renderNormalMap` in `materials.ts`).
+- **MH8.** The `wall`'s ground is a warm beige plain: a 2 m granite tile in large blotches under a flat horizon, in a world seen at the winter solstice while the `site` shows snow; it reads as desert, not as the plateau (`mh-01`, `mh-08`; `groundMat`, `GROUND`).
+
+**Notes.** N1: the kit tool still prints POP for the `wall` (orbit 3.72, dolly 6.60): the sun's fade over a still camera's tiny median, as the doc says. N2: the doc's « 773 of 786 » is 779 of 792 by this count (lines and points included); the 13 and the 1 agree. N3: the uncommitted work in the checkout (above).
+
+### Not checked
+
+Real phones and their GPUs, Safari, Firefox, other drivers; the voice itself (the guide only by its cues, no audio, French only); 768 px and the full interface at 390 px; English; light theme; the sheets, lessons, quiz and plans; the other 56 clips; the Short rendered from this build (its camera, hours and clock were replayed in the lab's own page, not through the film's pipeline); texture memory beyond counts; the `at-chauvency` preset and the 1974 element beyond one view; the earth tube's scenario beyond the part shots; one machine, one session (first-frame figures carry about ±50 ms).
