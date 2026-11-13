@@ -7,7 +7,7 @@
 // views.json: [{ id, world, pos:[x,y,z], target:[x,y,z], hour, day, preset, hide:['air-gap'], flows:false, xray:false, selected:null (a part: the kit frames it), settle: frames to wait (12), set:{...} }]
 //   --film   the film's look (supersample 3, AO) as `render.look` of the Short asks for it
 //   --still  N frames of each view with the camera still (or drifting by `drift` metres a frame, [x, y, z]): the share of pixels whose second difference of luma is over 12 levels (the kit's
-//            `shimmer`), the worst 32 x 32 block's share, and the share that changes by over 12 levels between two frames
+//            `shimmer`), the worst 32 x 32 block's share, and the share that changes by over 12 levels between two frames; `<id>-chg.png` is the map of those pixels (white: every frame)
 import { createRequire } from 'node:module';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -158,6 +158,74 @@ for (const v of views) {
       // the picture
       step(1);
       out.png = canvas.toDataURL('image/png');
+      {
+        // what the frame holds: the share of pixels at luma 5 or less and 8 or less, the mean luma, and the luma of each `probes` region (a quad of world points, projected: the mean and the 5th and 95th percentile)
+        const gl = st.renderer.getContext();
+        const w = gl.drawingBufferWidth;
+        const h = gl.drawingBufferHeight;
+        const px = new Uint8Array(w * h * 4);
+        gl.readPixels(0, 0, w, h, gl.RGBA, gl.UNSIGNED_BYTE, px);
+        let lo5 = 0;
+        let lo8 = 0;
+        let sum = 0;
+        for (let i = 0; i < w * h; i++) {
+          const y = 0.2126 * px[i * 4] + 0.7152 * px[i * 4 + 1] + 0.0722 * px[i * 4 + 2];
+          sum += y;
+          if (y <= 5) lo5++;
+          if (y <= 8) lo8++;
+        }
+        out.lumaMean = +(sum / (w * h)).toFixed(1);
+        out.lowShare5 = +((100 * lo5) / (w * h)).toFixed(2);
+        out.lowShare8 = +((100 * lo8) / (w * h)).toFixed(2);
+        st.camera.updateMatrixWorld();
+        for (const [name, quad] of Object.entries(v.probes ?? {})) {
+          const pts = quad.map(([x, y, z]) => {
+            const p = { x, y, z };
+            const q = new st.camera.position.constructor(p.x, p.y, p.z).project(st.camera);
+            return [(q.x * 0.5 + 0.5) * w, (q.y * 0.5 + 0.5) * h];
+          });
+          const xs = pts.map((p) => p[0]);
+          const ys = pts.map((p) => p[1]);
+          const vals = [];
+          for (let y = Math.max(0, Math.floor(Math.min(...ys))); y <= Math.min(h - 1, Math.ceil(Math.max(...ys))); y++)
+            for (
+              let x = Math.max(0, Math.floor(Math.min(...xs)));
+              x <= Math.min(w - 1, Math.ceil(Math.max(...xs)));
+              x++
+            ) {
+              // inside a convex quad: the same side of every edge
+              let pos = 0;
+              let neg = 0;
+              for (let k = 0; k < 4; k++) {
+                const a = pts[k];
+                const b = pts[(k + 1) % 4];
+                const c = (b[0] - a[0]) * (y - a[1]) - (b[1] - a[1]) * (x - a[0]);
+                if (c >= 0) pos++;
+                else neg++;
+              }
+              if (pos === 4 || neg === 4) {
+                const i = (y * w + x) * 4;
+                vals.push(0.2126 * px[i] + 0.7152 * px[i + 1] + 0.0722 * px[i + 2]);
+              }
+            }
+          vals.sort((a, b) => a - b);
+          const n = vals.length;
+          out[`probe-${name}`] = n
+            ? {
+                px: n,
+                mean: +(vals.reduce((a, b) => a + b, 0) / n).toFixed(1),
+                p5: +vals[Math.floor(n * 0.05)].toFixed(1),
+                p95: +vals[Math.floor(n * 0.95)].toFixed(1),
+                box: [
+                  Math.round(Math.min(...xs)),
+                  Math.round(Math.max(...xs)),
+                  Math.round(Math.min(...ys)),
+                  Math.round(Math.max(...ys)),
+                ],
+              }
+            : null;
+        }
+      }
       if (still > 0) {
         const gl = st.renderer.getContext();
         const w = gl.drawingBufferWidth;
@@ -178,6 +246,7 @@ for (const v of views) {
         const bw = Math.ceil(w / 32);
         const blocks = new Float64Array(bw * Math.ceil(h / 32));
         const blocksC = new Float64Array(blocks.length);
+        const cnt = new Uint16Array(w * h);
         for (let f = 0; f < still; f++) {
           // a slow drift of the camera, as the film's: v.drift is metres a frame along x, y, z
           if (v.drift) {
@@ -194,6 +263,7 @@ for (const v of views) {
             for (let i = 0; i < l.length; i++)
               if (Math.abs(l[i] - l1[i]) > 12) {
                 n++;
+                cnt[i]++;
                 blocksC[(((i / w) | 0) >> 5) * bw + ((i % w) >> 5)]++;
               }
             chg += n / l.length;
@@ -212,6 +282,23 @@ for (const v of views) {
           l0 = l1;
           l1 = l;
         }
+        {
+          // the map of the pixels that changed, white = every frame, upright
+          const cv = document.createElement('canvas');
+          cv.width = w;
+          cv.height = h;
+          const cx = cv.getContext('2d');
+          const im = cx.createImageData(w, h);
+          for (let y = 0; y < h; y++)
+            for (let x = 0; x < w; x++) {
+              const v8 = Math.min(255, (cnt[(h - 1 - y) * w + x] * 255) / Math.max(1, cc));
+              const k = (y * w + x) * 4;
+              im.data[k] = im.data[k + 1] = im.data[k + 2] = v8;
+              im.data[k + 3] = 255;
+            }
+          cx.putImageData(im, 0, 0);
+          out.chgmap = cv.toDataURL('image/png');
+        }
         out.shimmerPct = +((100 * shim) / Math.max(1, counted)).toFixed(3);
         out.changedPct = +((100 * chg) / Math.max(1, cc)).toFixed(3);
         out.worstBlockPct = +((100 * Math.max(...blocks)) / (1024 * Math.max(1, counted))).toFixed(2);
@@ -227,6 +314,10 @@ for (const v of views) {
     STILL,
   );
   fs.writeFileSync(path.join(OUT, `${v.id}.png`), Buffer.from(res.png.split(',')[1], 'base64'));
+  if (res.chgmap) {
+    fs.writeFileSync(path.join(OUT, `${v.id}-chg.png`), Buffer.from(res.chgmap.split(',')[1], 'base64'));
+    delete res.chgmap;
+  }
   delete res.png;
   results[v.id] = res;
   console.log(v.id, JSON.stringify(res));
