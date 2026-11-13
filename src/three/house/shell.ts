@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { stick } from '../common';
+import { stick, uvMetric } from '../common';
 import {
   STAIR_STEPS,
   BALCONY,
@@ -166,7 +166,8 @@ export function buildHouse(mats: Mats, opts: HouseOptions = {}): HouseBuild {
     const m = new THREE.Mesh(make(ctx), material);
     m.name = name;
     m.castShadow = cast;
-    m.receiveShadow = true;
+    // a pane takes no shadow: its faces lie along the light at noon and show the shadow map's acne, as stripes on the glass
+    m.receiveShadow = !material.userData.glass;
     m.userData.dynamic = true;
     (part ? groups[part] : parent).add(m);
     slots.push({ mesh: m, make });
@@ -745,7 +746,8 @@ export function buildHouse(mats: Mats, opts: HouseOptions = {}): HouseBuild {
     );
     const pot = new THREE.CylinderGeometry(0.11, 0.13, 0.32, 14);
     pot.translate(c.x, yTopStack + c.cap + 0.16, c.z);
-    fixed('chimney', mats.stone, pot, 'flue-pot');
+    // the stone's map is in metres: a pot of 0.12 m with the cylinder's own 0..1 UVs wore it three and a half times too large
+    fixed('chimney', mats.stone, uvMetric(pot), 'flue-pot');
   }
 
   // ---------------------------------------------------------------------------------------------- the rooms' own pieces

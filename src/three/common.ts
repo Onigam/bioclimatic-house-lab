@@ -165,29 +165,88 @@ export class DotPath {
 // ------------------------------------------------------------------------------------------------ UVs in metres, shapes
 
 /**
- * UVs in metres on any geometry, the way a box is mapped: each vertex takes the two coordinates across its normal's main axis. So a material with `repeat` of 1 / tile keeps its size whatever the
- * shape, and a wall, a bench and a brick read at their true scale.
+ * UVs in metres on any geometry, the way a box is mapped: each triangle takes the two coordinates across its own face's main axis. So a material with `repeat` of 1 / tile keeps its size whatever the shape, and a wall,
+ * a bench and a brick read at their true scale. A triangle is never mapped from three different sides (a smooth normal on a rounded edge did it, and the map ran to a hundred times its size across that triangle): a
+ * vertex that two faces map from different sides is copied, with its position and its normal, so the shading stays what it was. A face tilted off its axis stretches the map by 1.73 at the most.
  */
 export function uvMetric(g: THREE.BufferGeometry, offset = 0): THREE.BufferGeometry {
-  const p = g.attributes.position as THREE.BufferAttribute;
   if (!g.attributes.normal) g.computeVertexNormals();
-  const n = g.attributes.normal as THREE.BufferAttribute;
-  const uv = new Float32Array(p.count * 2);
-  for (let i = 0; i < p.count; i++) {
-    const ax = Math.abs(n.getX(i));
-    const ay = Math.abs(n.getY(i));
-    const az = Math.abs(n.getZ(i));
-    let u = p.getX(i);
-    let v = p.getZ(i);
-    if (ax >= ay && ax >= az) {
-      u = p.getZ(i);
-      v = p.getY(i);
-    } else if (az >= ay && az >= ax) {
-      u = p.getX(i);
-      v = p.getY(i);
+  const p = g.attributes.position as THREE.BufferAttribute;
+  const nrm = g.attributes.normal as THREE.BufferAttribute;
+  const idx = g.index;
+  const corners = idx ? idx.count : p.count;
+  const tris = corners / 3;
+  const a = new THREE.Vector3();
+  const b = new THREE.Vector3();
+  const c = new THREE.Vector3();
+  const n = new THREE.Vector3();
+  /** The side each triangle is mapped from: 0 across x (a wall that faces x), 1 across y (a floor), 2 across z. */
+  const sideOf = new Uint8Array(tris);
+  for (let t = 0; t < tris; t++) {
+    const i0 = idx ? idx.getX(t * 3) : t * 3;
+    const i1 = idx ? idx.getX(t * 3 + 1) : t * 3 + 1;
+    const i2 = idx ? idx.getX(t * 3 + 2) : t * 3 + 2;
+    a.fromBufferAttribute(p, i0);
+    b.fromBufferAttribute(p, i1).sub(a);
+    c.fromBufferAttribute(p, i2).sub(a);
+    n.crossVectors(b, c);
+    // a sliver has no face of its own: it takes its vertices' normals
+    if (n.lengthSq() < 1e-18) {
+      n.set(0, 0, 0);
+      for (const i of [i0, i1, i2]) n.add(c.fromBufferAttribute(nrm, i));
     }
-    uv[i * 2] = u + offset;
-    uv[i * 2 + 1] = v + offset;
+    const ax = Math.abs(n.x);
+    const ay = Math.abs(n.y);
+    const az = Math.abs(n.z);
+    sideOf[t] = ax >= ay && ax >= az ? 0 : az >= ay && az >= ax ? 2 : 1;
+  }
+  const base = p.count;
+  const side: number[] = new Array(base).fill(-1);
+  if (idx) {
+    // a vertex mapped from one side keeps its place, one mapped from two or three is copied for each
+    const copies: number[] = [];
+    const slot = new Map<number, number>();
+    const next: number[] = new Array(corners);
+    for (let k = 0; k < corners; k++) {
+      const v = idx.getX(k);
+      const s = sideOf[(k / 3) | 0]!;
+      const key = v * 3 + s;
+      let at = slot.get(key);
+      if (at === undefined) {
+        if (side[v] === -1) {
+          at = v;
+          side[v] = s;
+        } else {
+          at = base + copies.length;
+          copies.push(v);
+          side.push(s);
+        }
+        slot.set(key, at);
+      }
+      next[k] = at;
+    }
+    if (copies.length) {
+      for (const name of Object.keys(g.attributes)) {
+        const old = g.attributes[name] as THREE.BufferAttribute;
+        const size = old.itemSize;
+        const grown = new (old.array.constructor as new (n: number) => THREE.TypedArray)((base + copies.length) * size);
+        grown.set(old.array);
+        copies.forEach((v, k) => {
+          for (let i = 0; i < size; i++) grown[(base + k) * size + i] = old.array[v * size + i]!;
+        });
+        g.setAttribute(name, new THREE.BufferAttribute(grown, size, old.normalized));
+      }
+    }
+    g.setIndex(next);
+  } else {
+    for (let k = 0; k < corners; k++) side[k] = sideOf[(k / 3) | 0]!;
+  }
+  const q = g.attributes.position as THREE.BufferAttribute;
+  const uv = new Float32Array(q.count * 2);
+  for (let i = 0; i < q.count; i++) {
+    const s = side[i]!;
+    uv[i * 2] = (s === 0 ? q.getZ(i) : q.getX(i)) + offset;
+    uv[i * 2 + 1] = (s === 1 ? q.getZ(i) : q.getY(i)) + offset;
   }
   g.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
   return g;
