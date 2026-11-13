@@ -1,0 +1,176 @@
+[
+  {
+    "id": "w01-p0",
+    "world": "wall",
+    "pos": [4.55, 2.75, 0.6],
+    "target": [0, 2.25, -0.57],
+    "preset": "prototype-1967",
+    "hour": 12,
+    "day": 355,
+    "flows": true,
+    "film": true,
+    "drift": [0.002, 0.0005, 0.0006]
+  },
+  {
+    "id": "w02-p1",
+    "world": "wall",
+    "pos": [3.95, 2.27, 0.3],
+    "target": [0, 1.87, -0.6],
+    "preset": "prototype-1967",
+    "hour": 12,
+    "day": 355,
+    "flows": true,
+    "film": true,
+    "drift": [0.002, 0.0005, 0.0006]
+  },
+  {
+    "id": "w03-p3-1700",
+    "world": "wall",
+    "pos": [3.7, 2.24, 0.2],
+    "target": [0, 1.87, -0.6],
+    "preset": "prototype-1967",
+    "hour": 17,
+    "day": 355,
+    "flows": true,
+    "film": true,
+    "drift": [0.002, 0.0005, 0.0006]
+  },
+  {
+    "id": "w04-p3-night",
+    "world": "wall",
+    "pos": [3.7, 2.24, 0.2],
+    "target": [0, 1.87, -0.6],
+    "preset": "prototype-1967",
+    "hour": 4.8,
+    "day": 355,
+    "flows": true,
+    "film": true,
+    "drift": [0.002, 0.0005, 0.0006]
+  },
+  {
+    "id": "w05-close",
+    "world": "wall",
+    "pos": [1.3, 1.9, -0.2],
+    "target": [0, 1.9, -0.45],
+    "preset": "prototype-1967",
+    "hour": 14,
+    "day": 355,
+    "film": true,
+    "drift": [0.002, 0.0005, 0.0006]
+  },
+  {
+    "id": "w06-home",
+    "world": "wall",
+    "pos": [8.6, 3.3, 2.3],
+    "target": [0, 2.0, -0.6],
+    "preset": "prototype-1967",
+    "hour": 12,
+    "day": 355,
+    "film": true
+  },
+  {
+    "id": "w07-floor",
+    "world": "wall",
+    "pos": [3.0, 0.7, -1.2],
+    "target": [0, 0.0, -1.3],
+    "preset": "prototype-1967",
+    "hour": 12,
+    "day": 355,
+    "film": true,
+    "drift": [0.002, 0.0005, 0.0006]
+  },
+  {
+    "id": "w08-glass",
+    "world": "wall",
+    "pos": [1.6, 1.4, 1.2],
+    "target": [0, 1.4, -0.15],
+    "preset": "prototype-1967",
+    "hour": 12,
+    "day": 355,
+    "film": true
+  },
+  {
+    "id": "w09-room",
+    "world": "wall",
+    "pos": [3.2, 1.6, -3.4],
+    "target": [0, 1.0, -1.2],
+    "preset": "prototype-1967",
+    "hour": 12,
+    "day": 355,
+    "film": true
+  },
+  {
+    "id": "w10-night",
+    "world": "wall",
+    "pos": [8.6, 3.3, 2.3],
+    "target": [0, 2.0, -0.6],
+    "preset": "prototype-1967",
+    "hour": 3,
+    "day": 355,
+    "film": true
+  },
+  {
+    "id": "h01-home",
+    "world": "house",
+    "preset": "prototype-1967",
+    "hour": 12,
+    "day": 355,
+    "settle": 90
+  },
+  {
+    "id": "r01-home",
+    "world": "room",
+    "preset": "prototype-1967",
+    "hour": 12,
+    "day": 355,
+    "settle": 90
+  },
+  {
+    "id": "s01-home",
+    "world": "site",
+    "preset": "prototype-1967",
+    "hour": 12,
+    "day": 355,
+    "settle": 90
+  },
+  {
+    "id": "h04-north",
+    "world": "house",
+    "pos": [-1.5, 1.8, -7.5],
+    "target": [0, 1.8, -3.3],
+    "preset": "prototype-1967",
+    "hour": 12,
+    "day": 355,
+    "settle": 60
+  },
+  {
+    "id": "h05-roof",
+    "world": "house",
+    "pos": [2, 9, 7],
+    "target": [0, 5.2, 0.5],
+    "preset": "prototype-1967",
+    "hour": 12,
+    "day": 355,
+    "settle": 60
+  },
+  {
+    "id": "h06-south-low",
+    "world": "house",
+    "pos": [-3.5, 1.4, 6.6],
+    "target": [-1, 2.2, 3.3],
+    "preset": "prototype-1967",
+    "hour": 12,
+    "day": 355,
+    "settle": 60
+  },
+  {
+    "id": "r03-close",
+    "world": "room",
+    "pos": [1.2, 1.5, 0.2],
+    "target": [-1.2, 0.8, -2.0],
+    "preset": "prototype-1967",
+    "hour": 12,
+    "day": 355,
+    "settle": 60
+  }
+]
