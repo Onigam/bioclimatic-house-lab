@@ -59,7 +59,7 @@ export function mergeRects(
 }
 
 /** How much of the concrete's matter the false colour carries: the map's deviation from its paste, times this, multiplies the ramp. The ramp's hue and its range stay; its luminance moves by a fifth at the stones. */
-export const HEAT_MATTER = 0.38;
+export const HEAT_MATTER = 0.46;
 /** How far a stone's chroma falls toward grey under the false colour (0 to 1). */
 export const HEAT_STONE_GREY = 0.3;
 
@@ -99,7 +99,12 @@ export function heatMaterial(strip: HeatStrip): THREE.MeshStandardMaterial {
         float agA = texture2D( uAgg, vAgg * 2.0 ).g - 0.5;
         float agB = texture2D( uAgg, vAgg * 7.3 + vec2( 0.31, 0.57 ) ).g - 0.5;
         float agC = texture2D( uAgg, vAgg * 0.43 + vec2( 0.62, 0.17 ) ).g - 0.5;
-        float agm = 1.0 + uMatter * 2.0 * ( agA + 0.55 * agB + 0.45 * agC );
+        float agm = 1.0 + uMatter * 2.0 * ( agA + 0.1 * agB + 0.4 * agC );
+        // the lifts of a poured wall: a hairline a metre and a third apart, a little wavy, a millimetre and a half wide, a quarter darker (one or two in a shot)
+        float agLift = vAgg.y / 1.37 + 0.011 * sin( vAgg.x * 17.0 + vAgg.y * 2.0 ) + 0.006 * sin( vAgg.x * 41.0 );
+        agm *= 1.0 - 0.26 * ( 1.0 - smoothstep( 0.0, 0.0012, abs( fract( agLift + 0.5 ) - 0.5 ) ) );
+        // no void or line is darker than two thirds of the colour: the false colour's temperature stays readable at its darkest
+        agm = clamp( agm, 0.66, 1.5 );
         // a stone keeps a grey of its own under the heat: its chroma falls by up to two fifths, the paste between the stones keeps the ramp's
         float agStone = smoothstep( 0.05, 0.16, abs( agA ) ) * uStone;
         diffuseColor.rgb = mix( diffuseColor.rgb * agm, vec3( dot( diffuseColor.rgb, vec3( 0.2126, 0.7152, 0.0722 ) ) * agm ), agStone );

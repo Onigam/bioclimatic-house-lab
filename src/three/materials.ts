@@ -112,14 +112,15 @@ export function makeMaterials(): Mats {
     roughness: 0.96,
     map: tiled(renderMap(), 1 / 1.5),
     normalMap: tiled(renderNormalMap(), 1 / 1.5),
-    normalScale: new THREE.Vector2(0.9, 0.9),
+    normalScale: new THREE.Vector2(0.5, 0.5),
   });
-  // a satin black acrylic on board-marked concrete: the planks' imprint, a tie hole, the pits, and a sheen that rises where the face is seen along its plane
+  // a matt black acrylic on board-marked concrete: the planks' imprint, a tie hole, the pits. Matt, with its reflections kept low: the film sees the face along its plane (7 degrees), where a satin paint reflects the whole pale
+  // sky and the sun, and the black face read grey-beige by day (round 2: 135 levels at noon against 92 before the pass; now about 40, the aim under 45)
   const black = std({
-    color: 0xffffff,
-    roughness: 0.56,
+    color: 0x585858,
+    roughness: 1,
     metalness: 0.0,
-    envMapIntensity: 0.5,
+    envMapIntensity: 0.03,
     map: tiled(blackPaintMap(), 1 / 0.8),
     normalMap: tiled(blackPaintNormalMap(), 1 / 0.8),
     normalScale: new THREE.Vector2(0.5, 0.5),
@@ -135,6 +136,15 @@ export function makeMaterials(): Mats {
   });
   glass.userData.glass = true;
   glassLook(glass);
+  // the sun's specular on this paint, seen along its plane, was more than half of what the face gained at noon (0.015 of 0.027 in linear light, at roughness 1: Fresnel is small but the geometry term of a view at 7 degrees is not): a
+  // matt acrylic holds a fifth of it, and `customProgramCacheKey` keeps the paint's program its own
+  black.onBeforeCompile = (shader) => {
+    shader.fragmentShader = shader.fragmentShader.replace(
+      '#include <aomap_fragment>',
+      'reflectedLight.directSpecular *= 0.2;\n#include <aomap_fragment>',
+    );
+  };
+  black.customProgramCacheKey = () => 'black-paint';
   const frame = std({ color: 0x4f5c58, roughness: 0.55, metalness: 0.45 });
   const rubber = std({ color: 0x1b1b1d, roughness: 0.9 });
   const zinc = MAT.zinc();
@@ -153,7 +163,7 @@ export function makeMaterials(): Mats {
     roughness: 0.96,
     map: tiled(plasterMap(), 1 / 1.5),
     normalMap: tiled(renderNormalMap(), 1 / 1.5),
-    normalScale: new THREE.Vector2(0.55, 0.55),
+    normalScale: new THREE.Vector2(0.3, 0.3),
   });
   const tile = std({
     color: 0xffffff,
@@ -167,7 +177,7 @@ export function makeMaterials(): Mats {
     roughness: 0.97,
     map: tiled(plasterMap(), 1 / 1.5),
     normalMap: tiled(renderNormalMap(), 1 / 1.5),
-    normalScale: new THREE.Vector2(0.4, 0.4),
+    normalScale: new THREE.Vector2(0.2, 0.2),
   });
   const stone = std({ color: 0xffffff, roughness: 0.95, map: tiled(masonryMap(), 1 / 1.75) });
   const granite = std({ color: 0xffffff, roughness: 0.93, map: tiled(graniteMap(), 1 / 2) });

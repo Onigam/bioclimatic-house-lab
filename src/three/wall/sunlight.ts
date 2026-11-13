@@ -13,10 +13,13 @@ import { SUN_UNIFORMS } from '../sun';
 const PAINT_LIFT = 0.004;
 
 /** What the shafts' alpha is multiplied by: the light in the air is a hint, not a wall. */
-export const SHAFT_GAIN = 0.3;
+export const SHAFT_GAIN = 0.2;
+
+/** The pale patch of sun on the black face: a hair of warm light, added to a paint whose own value is under 0.01 (its luma is the patch's, mostly): 0.008 keeps the face under 45 levels at noon. */
+export const PATCH_ALPHA = 0.008;
 
 /** How far the shafts reach towards the sun from the glass, m. */
-export const SHAFT_LENGTH = 3.2;
+export const SHAFT_LENGTH = 2.6;
 /** How far the sun's quad stands from the eye, m, and the half-width of the glare in angle. */
 const SUN_DISTANCE = 90;
 const GLARE_HALF = (13 * Math.PI) / 180;
@@ -130,13 +133,17 @@ export function sunlightGeometry(spec: ElementSpec): THREE.BufferGeometry {
   const WHITE: [number, number, number] = [1, 1, 1];
   // along: -1 at the paint (alpha 0.5), 0 at the glass (1), 1 at the far end (0); across the pane, a soft edge of 6 cm
   const alongs: [number, number][] = [
-    [-1, 0.2],
-    [0, 0.32],
-    [0.22, 0.8],
-    [0.6, 0.42],
+    // in the gap, between the glass and the paint, the light in the air is nothing: seen from the side along the black face it was a veil over it, and the black face read grey-beige by day (round 2)
+    [-1, 0],
+    [0, 0.04],
+    // close to the glass it is light, strongest a few decimetres out; it thins away towards the sun and has no end
+    [0.1, 0.7],
+    [0.4, 0.34],
+    [0.75, 0.1],
     [1, 0],
   ];
-  const edge = 0.06;
+  // the edges are long: where a rail (or the top of the glazing) cuts the light it fades over a third of a metre, so that the four shafts run into one soft band and no edge is a line across the sky (the review's « sail »)
+  const edge = 0.32;
   // the sheets stand in the planes x = const: the west wall of the opening, a third of the way, and just behind the section's plane (x = 0 is where the world cuts); the first is the brightest
   const sheets: [number, number][] = [
     [-hw * 0.8, 1],
@@ -163,10 +170,10 @@ export function sunlightGeometry(spec: ElementSpec): THREE.BufferGeometry {
     }
     // the light on the paint: the pane's own footprint carried along the ray to the paint (`along` -1, which the shader does), a pale patch a hair in front of it
     const patch = [
-      vert(-hw, ya, zF, 0.08, -1, WHITE),
-      vert(-hw, yb, zF, 0.08, -1, WHITE),
-      vert(hw, yb, zF, 0.08, -1, WHITE),
-      vert(hw, ya, zF, 0.08, -1, WHITE),
+      vert(-hw, ya, zF, PATCH_ALPHA, -1, WHITE),
+      vert(-hw, yb, zF, PATCH_ALPHA, -1, WHITE),
+      vert(hw, yb, zF, PATCH_ALPHA, -1, WHITE),
+      vert(hw, ya, zF, PATCH_ALPHA, -1, WHITE),
     ];
     quad(patch[0]!, patch[1]!, patch[2]!, patch[3]!);
   }

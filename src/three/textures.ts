@@ -665,7 +665,10 @@ const PASTE = 0.56;
  */
 function aggregateField(): AggregateField {
   if (aggregateCache) return aggregateCache;
-  const bigL = stoneLayer(stones(22, 0.34, 0.5, 1), AGG_SIZE);
+  // the stones the eye reads at the Short's distance (the film's wall is 400 px wide for 0.6 m: 0.66 px a millimetre): the large and the big ones, 14 to 36 mm across, 9 to 24 px; the mid ones fill what lies
+  // between them at half the contrast, so that they are a texture and not the grain the review measured at 4 px
+  const largeL = stoneLayer(stones(11, 0.26, 0.4, 3), AGG_SIZE);
+  const bigL = stoneLayer(stones(22, 0.3, 0.46, 1), AGG_SIZE);
   const midL = stoneLayer(stones(44, 0.26, 0.44, 5), AGG_SIZE);
   const k = new Float32Array(AGG_SIZE * AGG_SIZE);
   const tint = new Float32Array(AGG_SIZE * AGG_SIZE * 3);
@@ -673,35 +676,59 @@ function aggregateField(): AggregateField {
     for (let i = 0; i < AGG_SIZE; i++) {
       const u = i / AGG_SIZE;
       const v = j / AGG_SIZE;
-      let t = PASTE + 0.06 * (tf(u, v, 4, 1) - 0.5) + 0.06 * (hash1(i, j) - 0.5);
+      let t = PASTE + 0.05 * (tf(u, v, 4, 1) - 0.5) + 0.02 * (hash1(i, j) - 0.5);
       let r = 1.02;
       let g = 1;
       let b = 0.95;
       const at = j * AGG_SIZE + i;
-      const layer = bigL.id[at]! >= 0 ? bigL : midL;
-      const hit = layer.id[at]! >= 0 ? { id: layer.id[at]! + (layer === bigL ? 0 : 5000), d: layer.d[at]! } : null;
-      if (hit) {
-        const h = hash1(hit.id, 77);
-        const base =
+      // the largest stone that holds the texel, if the cell it came from keeps a stone that reads (three in four of the large ones do)
+      let layer: StoneLayer | null = null;
+      let ident = 0;
+      let mid = false;
+      if (largeL.id[at]! >= 0 && hash1(largeL.id[at]!, 41) > 0.25) {
+        layer = largeL;
+        ident = largeL.id[at]! + 9000;
+      } else if (bigL.id[at]! >= 0) {
+        layer = bigL;
+        ident = bigL.id[at]!;
+      } else if (midL.id[at]! >= 0) {
+        layer = midL;
+        ident = midL.id[at]! + 5000;
+        mid = true;
+      }
+      if (layer) {
+        const d = layer.d[at]!;
+        const h = hash1(ident, 77);
+        const tone =
           h < 0.34
-            ? 0.66 + 0.13 * hash1(hit.id, 3)
+            ? 0.66 + 0.13 * hash1(ident, 3)
             : h < 0.82
-              ? 0.38 + 0.14 * hash1(hit.id, 3)
-              : 0.2 + 0.1 * hash1(hit.id, 3);
-        const grain = 0.05 * (hash1(i >> 1, j >> 1) - 0.5) + 0.02 * (hash1(i + 3, j) - 0.5);
-        const rim = smoothstep(0.82, 1.02, hit.d);
-        const inside = 1 - smoothstep(0.88, 1.04, hit.d);
-        const stone = (base + grain) * (1 - 0.16 * rim);
+              ? 0.38 + 0.14 * hash1(ident, 3)
+              : 0.2 + 0.1 * hash1(ident, 3);
+        const grain = 0.04 * (hash1(i >> 1, j >> 1) - 0.5) + 0.015 * (hash1(i + 3, j) - 0.5);
+        const rim = smoothstep(0.82, 1.02, d);
+        const inside = 1 - smoothstep(0.88, 1.04, d);
+        // the mid stones lie a third of the way from the paste to their own tone: a texture between the stones that read
+        const body = (tone + grain) * (1 - 0.16 * rim);
+        const stone = mid ? PASTE + (body - PASTE) * 0.35 : body;
         t = t + (stone - t) * inside;
-        const hue = hash1(hit.id, 21);
+        const hue = hash1(ident, 21);
         const warm = hue > 0.66 ? 1 : hue > 0.33 ? 0 : -1;
         r = r + (1 + 0.04 * warm - r) * inside;
         g = g + (1 - g) * inside;
         b = b + (1 - 0.07 * warm - b) * inside;
       }
-      // a few air voids, small dark dishes (a hash of the cell: no more than one in a hundred and fifty)
-      const cell = hash1((i >> 2) + 401, (j >> 2) + 77);
-      if (cell > 0.993) t *= 0.6 + 0.4 * smoothstep(0.0, 2.2, Math.hypot((i & 3) - 1.5, (j & 3) - 1.5));
+      // a few larger air voids, dark dishes of 3 to 7 mm: in one cell of fourteen of a 23 mm grid, each at a place of its own
+      const ci = Math.floor(i / 12);
+      const cj = Math.floor(j / 12);
+      const vh = hash1(ci + 401, cj + 77);
+      if (vh > 0.93) {
+        const cx = ci * 12 + 3 + 6 * hash1(ci + 5, cj + 9);
+        const cy = cj * 12 + 3 + 6 * hash1(ci + 2, cj + 19);
+        const rr = 1.8 + 1.5 * hash1(ci + 7, cj + 3);
+        const dd = Math.hypot(i - cx, j - cy);
+        if (dd < rr + 0.8) t *= 0.42 + 0.58 * smoothstep(rr - 0.8, rr + 0.8, dd);
+      }
       const n = j * AGG_SIZE + i;
       k[n] = Math.min(1, Math.max(0, t));
       tint[n * 3] = r;
@@ -750,22 +777,22 @@ export const blackPaintMap = (): THREE.DataTexture =>
     const boards = 4;
     const b = Math.floor(v * boards);
     const vv = (v * boards) % 1;
-    const board = 0.15 + 0.012 * (hash1(b, 5) - 0.5);
+    const board = 0.15 + 0.05 * (hash1(b, 5) - 0.5);
     const grain = tn(u * 5 + b * 7.1, v * 150, 256, 150) - 0.5;
     const film = tf(u, v, 6, 3) - 0.5;
     const stipple = hash1(i >> 1, j >> 1) - 0.5;
-    let k = board + 0.012 * grain + 0.022 * film + 0.012 * stipple + 0.005 * (hash1(i, j) - 0.5);
+    let k = board + 0.03 * grain + 0.05 * film + 0.03 * stipple + 0.012 * (hash1(i, j) - 0.5);
     // the joint between two boards: the arris rubbed through to a pale line, a shadow line under it
     const seam = Math.min(vv, 1 - vv);
-    if (seam < 0.022) k += 0.07 * (1 - seam / 0.022);
-    else if (vv > 0.9) k -= 0.025 * smoothstep(0.9, 0.975, vv);
+    if (seam < 0.026) k += 0.3 * (1 - seam / 0.026) ** 0.7;
+    else if (vv > 0.9) k -= 0.05 * smoothstep(0.9, 0.975, vv);
     // pits the paint did not fill, a little more of them along the joints
     const pit = hash1(i * 3 + 1, j * 5 + 2);
-    if (pit > 0.9965 - (seam < 0.05 ? 0.003 : 0)) k = 0.2 + 0.06 * hash1(j, i);
+    if (pit > 0.9965 - (seam < 0.05 ? 0.003 : 0)) k = 0.34 + 0.1 * hash1(j, i);
     // a tie hole: a recess with the concrete showing at its rim
     const d = Math.hypot(u - 0.5, v - 0.5);
     if (d < 0.013) k = 0.035;
-    else if (d < 0.026) k = 0.13 + 0.05 * smoothstep(0.026, 0.016, d);
+    else if (d < 0.026) k = 0.26 + 0.1 * smoothstep(0.026, 0.016, d);
     return [k * 1.02, k, k * 0.97];
   });
 
@@ -844,7 +871,7 @@ export const hardcoreMap = (): THREE.DataTexture =>
     return [k * r, k * g, k * b];
   });
 
-/** The relief of a lime render or an earth plaster put on by hand: a wall that is not a plane (the waves of a hand's reach), the float's low strokes, a roughcast's bumps. Tangent-space; one tile is 1.5 m, as the colour maps'. */
+/** The relief of a lime render or an earth plaster put on by hand: a wall that is a little off a plane (a slow wave over half a metre), the float's low strokes, and above all a fine grain, the sand of the coat, so that from a metre it is a texture and not a sponge (the first version's relief was blotches of 20 cm: the review's « sponged »). Tangent-space; one tile is 1.5 m, as the colour maps', at 128 px (12 mm a texel: the grain is 3 cm). */
 export const renderNormalMap = (): THREE.DataTexture =>
   normalMap(
     'render-normal',
@@ -852,8 +879,72 @@ export const renderNormalMap = (): THREE.DataTexture =>
     (u, v, i, j) => {
       const hand = tf(u, v, 3, 2);
       const stroke = tf(u, v, 8, 2, 20);
-      const bump = tf(u, v, 24, 2);
-      return 1.6 * hand + 0.5 * stroke + 0.55 * bump + 0.08 * (hash1(i, j) - 0.5);
+      const grain = tf(u, v, 40, 2);
+      return 0.5 * hand + 0.25 * stroke + 0.55 * grain + 0.1 * (hash1(i, j) - 0.5);
     },
     1.1,
   );
+
+// ---------------------------------------------------------------------------------------------- the ground of the wall world (round 2)
+
+const GR_GRAVEL = (): StoneLayer => stoneLayer(stones(24, 0.25, 0.42, 4), 128);
+const GR_PEBBLE = (): StoneLayer => stoneLayer(stones(10, 0.2, 0.35, 8), 128);
+
+/** A smooth tileable field sampled on a `G` × `G` lattice and read back bilinearly: the same slow noise for a fraction of the work of a `tf` at every texel. */
+function smoothLattice(fn: (u: number, v: number) => number, G: number): (u: number, v: number) => number {
+  const f = new Float32Array(G * G);
+  for (let j = 0; j < G; j++) for (let i = 0; i < G; i++) f[j * G + i] = fn(i / G, j / G);
+  return (u, v) => {
+    const x = u * G;
+    const y = v * G;
+    const i0 = Math.floor(x);
+    const j0 = Math.floor(y);
+    const fx = x - i0;
+    const fy = y - j0;
+    const a = f[(j0 % G) * G + (i0 % G)]!;
+    const b = f[(j0 % G) * G + ((i0 + 1) % G)]!;
+    const c = f[((j0 + 1) % G) * G + (i0 % G)]!;
+    const d = f[((j0 + 1) % G) * G + ((i0 + 1) % G)]!;
+    return a + (b - a) * fx + (c - a) * fy + (a - b - c + d) * fx * fy;
+  };
+}
+
+/**
+ * The plateau's ground, a granite gruss in winter: a cool grey of its own grains (a fine grain over the whole tile, the sand of a weathered granite), a few gravel stones and pebbles a shade lighter and darker than it, and
+ * faint patches of dry grass, olive and straw, that take the grey only a little off. Low in contrast, so that from a few metres it is a tone and from a hand's breadth a grain; never a pattern of blotches (the first ground, the
+ * granite slope's own map at 2 m, read as a sand plain). One tile is 0.8 m (6 mm a texel: a gravel of 2 cm is three).
+ */
+export const plateauGroundMap = (): THREE.DataTexture => {
+  const broadA = smoothLattice((u, v) => tf(u, v, 3, 2), 24);
+  const broadB = smoothLattice((u, v) => tf(u, v, 8, 2), 48);
+  const grassF = smoothLattice((u, v) => tf(u + 0.3, v + 0.1, 5, 2), 32);
+  return map('plateau-ground', 128, (u, v, i, j) => {
+    const at = j * 128 + i;
+    const grain = hash1(i, j) - 0.5;
+    const sand = hash1(i >> 1, (j >> 1) + 311) - 0.5;
+    let k = 0.4 + 0.045 * (broadA(u, v) - 0.5) + 0.03 * (broadB(u, v) - 0.5) + 0.03 * grain + 0.015 * sand;
+    let r = 0.97;
+    let g = 1;
+    let b = 1;
+    for (const [L, salt, amount] of [
+      [GR_GRAVEL(), 4, 0.045],
+      [GR_PEBBLE(), 8, 0.06],
+    ] as const) {
+      const id = L.id[at]!;
+      if (id < 0) continue;
+      const inside = 1 - smoothstep(0.86, 1.02, L.d[at]!);
+      if (inside <= 0) continue;
+      const h = hash1(id, salt + 3);
+      // not every cell holds a stone that reads: the pebbles are sparse
+      if (salt === 8 && h < 0.45) continue;
+      const tone = k + amount * (h < 0.5 ? -1 : 1) * (0.4 + 0.6 * hash1(id, salt));
+      k = k + (tone - k) * inside;
+    }
+    // dry grass, in patches the size of a hand to an arm, and only half a tone away from the grey
+    const grass = smoothstep(0.6, 0.78, grassF(u, v)) * (0.5 + 0.5 * hash1(i >> 2, j >> 2));
+    r = r + (1.1 - r) * grass * 0.5;
+    g = g + (1.02 - g) * grass * 0.5;
+    b = b + (0.8 - b) * grass * 0.5;
+    return [k * r, k * g, k * b];
+  });
+};
