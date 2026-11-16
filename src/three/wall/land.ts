@@ -88,8 +88,8 @@ export function wallBoulders(): Boulder[] {
   // a few where the Short's camera looks (it stands east of the wall and looks west-north-west, so that the ground behind the room is what the right of its frame sees): a stone at ten, sixteen and twenty-eight metres, with the sun's
   // shadow lying to their north, which is the right of the frame
   const sight: Boulder[] = [
-    { x: -5.5, z: -3.4, r: 0.32, squash: 0.62, sink: 0.34, seed: 3.1 },
-    { x: -12, z: -5.4, r: 0.55, squash: 0.58, sink: 0.36, seed: 17.7 },
+    { x: -8.15, z: -4.43, r: 0.41, squash: 0.62, sink: 0.34, seed: 3.1 },
+    { x: -13.85, z: -6.06, r: 0.62, squash: 0.58, sink: 0.36, seed: 17.7 },
     { x: -24, z: -9.6, r: 0.8, squash: 0.66, sink: 0.4, seed: 8.2 },
     { x: -35, z: -14.5, r: 0.45, squash: 0.6, sink: 0.38, seed: 29.4 },
   ];
@@ -200,7 +200,16 @@ export const HILL_LAYERS = [
   { layer: 1, r: 98, haze: 0.22 },
   { layer: 2, r: 104, haze: 0.5 },
 ] as const;
-const HILL_STEPS = 540;
+/** Samples of a ring, a third of a degree apart (the ridge's finest swell is a degree and a half: four samples to it; the first version's 540 were two thirds of a degree, and the crest was a polyline whose kinks a viewer could count at the film's field). */
+export const HILL_STEPS = 1080;
+/** Vertices of a sample of a ring: the foot, the crest and the feather's skirt. */
+export const HILL_STRIDE = 3;
+/** The hill's colour goes into the haze below its crest, over this much of the angle the crest is seen at (the tangent of 1.7°): the ridge is a rim of colour that the haze pools under, not a flat band of it (round 5, R4-3). */
+export const HILL_HAZE_FADE = Math.tan((1.7 * Math.PI) / 180);
+/** How much of the haze the hill's body has gone into at the foot of its fade (the rest is its own tone: a ridge never quite loses itself in the haze it stands in). */
+export const HILL_HAZE_AT_FOOT = 0.85;
+/** The width of the crest's feather, in pixels of the picture (not of the buffer it is drawn in: a supersampled film has more of those): the crest's one-row edge was 9 levels at noon and 14 to 15 at night. */
+export const HILL_FEATHER_PX = 2;
 
 export function hillGeometry(): THREE.BufferGeometry {
   const pos: number[] = [];
@@ -216,13 +225,18 @@ export function hillGeometry(): THREE.BufferGeometry {
       const h = L.r * Math.tan((ridgeElevation(az, L.layer) * Math.PI) / 180);
       const x = -Math.sin(a) * L.r;
       const z = Math.cos(a) * L.r;
-      // the crest's height above the eye (the elevation is the one the `site` draws its hills at, from an eye at their centre); the foot's is set in the shader, at the ground
-      pos.push(x, h, z, x, h, z);
-      k.push(0, 1);
-      t.push(L.haze, L.haze);
+      // the crest's height above the eye (the elevation is the one the `site` draws its hills at, from an eye at their centre); the foot's is set in the shader, at the ground, and the skirt's is the crest's lifted by the feather's
+      // width on the screen, also in the shader (1 the crest, 0 the foot, 2 the skirt)
+      pos.push(x, h, z, x, h, z, x, h, z);
+      k.push(0, 1, 2);
+      t.push(L.haze, L.haze, L.haze);
       if (i > 0) {
-        const p = b0 + (i - 1) * 2;
-        idx.push(p, p + 2, p + 1, p + 1, p + 2, p + 3);
+        const p = b0 + (i - 1) * HILL_STRIDE;
+        const q = p + HILL_STRIDE;
+        // the body: foot and crest
+        idx.push(p, q, p + 1, p + 1, q, q + 1);
+        // the skirt: the crest and the feather above it
+        idx.push(p + 1, q + 1, p + 2, p + 2, q + 1, q + 2);
       }
     }
   });
@@ -239,26 +253,39 @@ const HILL_VERT = /* glsl */ `
   attribute float aK;
   attribute float aHaze;
   uniform float uBase;
-  varying float vK;
+  uniform float uFeather;
   varying float vHaze;
+  varying float vDepth;
+  varying float vAlpha;
   void main() {
-    vK = aK;
     vHaze = aHaze;
     vec3 p = position;
-    if ( aK < 0.5 ) p.y = uBase;
+    // how far under its crest this point is, as the tangent of the angle it is seen at from the eye (the ring's radius is the horizontal distance): the haze gradient reads it
+    vDepth = 0.0;
+    if ( aK < 0.5 ) {
+      vDepth = ( position.y - uBase ) / length( position.xz );
+      p.y = uBase;
+    }
+    vAlpha = aK > 1.5 ? 0.0 : 1.0;
     gl_Position = projectionMatrix * modelViewMatrix * vec4( p, 1.0 );
+    // the skirt stands a few pixels over the crest whatever the camera does (uFeather is that height in clip units over w), so that the edge against the sky is a fade of that many pixels
+    if ( aK > 1.5 ) gl_Position.y += uFeather * gl_Position.w;
   }
 `;
 
 const HILL_FRAG = /* glsl */ `
   uniform vec3 uHaze;
   uniform vec3 uRidge;
-  varying float vK;
+  uniform float uFade;
+  uniform float uAtFoot;
   varying float vHaze;
+  varying float vDepth;
+  varying float vAlpha;
   void main() {
-    // the crest a blue-grey seen through the haze (the farther ring more of it), the foot the haze itself, which is the colour of the fogged ground it stands on
+    // the crest a blue-grey seen through the haze (the farther ring more of it); below it the colour goes into the haze it stands in, which is the colour of the fogged ground at the foot, over a degree and a half or so
     vec3 crest = mix( uRidge, uHaze, vHaze );
-    gl_FragColor = vec4( mix( uHaze, crest, smoothstep( 0.0, 0.6, vK ) ), 1.0 );
+    vec3 body = mix( crest, uHaze, uAtFoot * smoothstep( 0.0, uFade, vDepth ) );
+    gl_FragColor = vec4( body, vAlpha );
   }
 `;
 
@@ -274,10 +301,19 @@ const RIDGE_NIGHT = new THREE.Color().setRGB(0.07, 0.1, 0.19, THREE.SRGBColorSpa
 
 export function buildHills(): Hills {
   const material = new THREE.ShaderMaterial({
-    uniforms: { uHaze: { value: new THREE.Color() }, uRidge: { value: new THREE.Color() }, uBase: { value: -4 } },
+    uniforms: {
+      uHaze: { value: new THREE.Color() },
+      uRidge: { value: new THREE.Color() },
+      uBase: { value: -4 },
+      uFade: { value: HILL_HAZE_FADE },
+      uAtFoot: { value: HILL_HAZE_AT_FOOT },
+      uFeather: { value: 0 },
+    },
     vertexShader: HILL_VERT,
     fragmentShader: HILL_FRAG,
     side: THREE.DoubleSide,
+    // the crest fades into the sky behind it over a few pixels: the hills are drawn over the ground and the element (depth-tested, none written) and before the glass and the shafts (`renderOrder`)
+    transparent: true,
     depthWrite: false,
     fog: false,
   });
@@ -290,6 +326,13 @@ export function buildHills(): Hills {
   mesh.userData.noShadow = true;
   mesh.userData.notClipped = true;
   mesh.raycast = () => {};
+  // among the transparent things the hills come first: the glass and the shafts are in front of them
+  mesh.renderOrder = -10;
+  // the feather's height in clip units: the width asked for in the picture's pixels, over the picture's height (the canvas's, not the buffer's: a supersampled film draws into a bigger one, and the picture is the canvas)
+  mesh.onBeforeRender = (renderer) => {
+    const h = Math.max(1, renderer.domElement.height);
+    material.uniforms.uFeather!.value = (HILL_FEATHER_PX * 2) / h;
+  };
   const ridge = new THREE.Color();
   return {
     mesh,

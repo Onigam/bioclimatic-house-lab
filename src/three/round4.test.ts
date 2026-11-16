@@ -12,6 +12,8 @@ import {
   GROUND_RADIUS,
   GROUND_Y,
   HILL_LAYERS,
+  HILL_STEPS,
+  HILL_STRIDE,
   SHADOW_ALPHA,
   SIGHT_BOULDERS,
   boulderGeometries,
@@ -331,13 +333,13 @@ describe('the ground, the boulders and the hills', () => {
       for (let i = 0; i < per; i += 11) {
         const v = li * per + i;
         if (k.getX(v) < 0.5) continue;
-        const az = ((i / 2 / 540) * 360 - 180) | 0;
+        const az = ((i / HILL_STRIDE / HILL_STEPS) * 360 - 180) | 0;
         void az;
       }
       // the crest’s elevation from the eye at the centre is the one `site` draws the ring at: test a handful of azimuths
       for (const az of [-150, -90, -40, 0, 45, 90, 150]) {
-        const i = Math.round(((az + 180) / 360) * 540);
-        const v = li * per + i * 2 + 1;
+        const i = Math.round(((az + 180) / 360) * HILL_STEPS);
+        const v = li * per + i * HILL_STRIDE + 1;
         const y = p.getY(v);
         const r = Math.hypot(p.getX(v), p.getZ(v));
         expect((Math.atan2(y, r) * 180) / Math.PI).toBeCloseTo(ridgeElevation(az, L.layer), 1);

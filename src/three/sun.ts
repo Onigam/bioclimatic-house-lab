@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { clamp, damp, lerp } from '@onigam/lab-kit/three';
-import { SITES, type SiteId } from '../sim/climate';
+import { RECORDS, SITES, clearDay, type RecordedDay, type SiteId } from '../sim/climate';
 import { clearSkyPlane, sunTerms } from '../sim/solar';
 import type { HouseState } from '../sim/types';
 import { DEG } from './dims';
@@ -48,16 +48,56 @@ export const COVER_FROM_CLEAR = 380;
 /** The sun's altitude from which the wall's irradiance says whether there is a cover: the model's horizon is 5.7° at the highest, and the beam comes out from behind it over a few degrees more (a clear morning at 6° of sun still reads a cover for a few frames: found in a day at ×3 600, 18 % of the pixels moved by more than 4 levels at 08:16). */
 export const COVER_FROM_ALTITUDE = 11;
 
+/** The share of the clear sky's irradiance (the day's, or the instant's) under which it is a cover, and over which it is a clear sky: `clarity`'s. */
+export const COVER_SHARE_FROM = 0.4;
+export const COVER_SHARE_TO = 0.82;
+
+/** The recorded days by their date as the state prints it (`recordDate`, « 24/12 »): a date is in one row whatever the record it is read through (the four records share the December table). */
+let recordedByDate: Map<string, RecordedDay> | null = null;
+export function recordedDay(date: string): RecordedDay | null {
+  if (!recordedByDate) {
+    recordedByDate = new Map();
+    for (const days of Object.values(RECORDS))
+      for (const d of days) if (!recordedByDate.has(d.date)) recordedByDate.set(d.date, d);
+  }
+  return recordedByDate.get(date) ?? null;
+}
+
 /**
- * 1 under a cover that holds the sun back, 0 under a clear sky: the share of the clear sky's irradiance the state has, mapped so that 40 % or less is a cover (the same measure as `clarity`, which is its complement). It is read
- * only while the sun is `COVER_FROM_ALTITUDE` or more over the horizon and the clear sky gives the wall `COVER_FROM_CLEAR` or more (the sun well over the model's ridges), and is `null` below, at night, and at the dawn and the dusk, where the model's horizon
- * and not a cloud takes the beam (a clear morning at 1° of sun is at a seventh of the clear sky's irradiance). The recorded 24 December 1974 gets a twentieth of the day before's radiation, and is 1.
+ * The share of the clear day's radiation on the wall that the state's own day has: the recorded day's total (the table's, MJ/m²) over the clear day's at this site (`clearDay`, the engine's own division: its `k` of `shareDay`),
+ * or `null` when the sky is not a recorded one (the state's `recordDate` is empty: the engine prints the date of the record's day only when the sky is recorded). It is known from the day's first minute: the 24 December 1974 is
+ * 0.056 from 00:00, a dawn is not a guess. The 23rd is 1.06, the 25th 0.99.
+ */
+export function dayShare(state: HouseState, site: SiteId = 'odeillo'): number | null {
+  if (!state.recordDate) return null;
+  const row = recordedDay(state.recordDate);
+  if (!row) return null;
+  const clear = clearDay(SITES[site], row.day).total;
+  return clear > 0 ? row.incident / clear : null;
+}
+
+/**
+ * The cover a recorded day has, by its own share of the clear day's radiation, the whole day long (0 from 82 % and over, 1 at 40 % and under: the measure of `clarity`). The instantaneous irradiance cannot say it at a dawn
+ * (the model's ridge takes the beam off a clear morning: a clear day at 1° of sun is at a seventh of its noon), and the day's total can, from its first minute. `null` where the sky is not a recorded one.
+ */
+export function dayCover(state: HouseState, site: SiteId = 'odeillo'): number | null {
+  const k = dayShare(state, site);
+  return k === null ? null : 1 - smoothstep(COVER_SHARE_FROM, COVER_SHARE_TO, k);
+}
+
+/**
+ * 1 under a cover that holds the sun back, 0 under a clear sky. **A recorded day is read by its own share of the clear day's radiation** (`dayCover`), the whole day long, from its first minute: the dawn of the dull 24 December
+ * 1974 is a grey one, and the clear morning that the model's ridge takes the beam off is not a cover. A sky that is not recorded (the mean year, the series, the clear day) has no table to read, and is read by the state's
+ * irradiance against the clear sky's (the same measure as `clarity`, which is its complement), only while the sun is `COVER_FROM_ALTITUDE` or more over the horizon and the clear sky gives the wall `COVER_FROM_CLEAR` or more (the sun well over
+ * the model's ridges), and is `null` below, at night, and at the dawn and the dusk, where the model's horizon and not a cloud takes the beam (a clear morning at 1° of sun is at a seventh of the clear sky's irradiance).
  */
 export function cover(state: HouseState, site: SiteId = 'odeillo'): number | null {
+  const byDay = dayCover(state, site);
+  if (byDay !== null) return byDay;
   if (state.sunAltitude < COVER_FROM_ALTITUDE) return null;
   const clear = clearIncident(state, site);
   if (clear < COVER_FROM_CLEAR) return null;
-  return 1 - smoothstep(0.4, 0.82, state.incidentWm2 / clear);
+  return 1 - smoothstep(COVER_SHARE_FROM, COVER_SHARE_TO, state.incidentWm2 / clear);
 }
 
 export interface RigOptions {
@@ -83,7 +123,7 @@ export interface Rig {
   dir: THREE.Vector3;
   /** Share of the beam that reaches the ground (0 under cloud and at night). */
   beam: number;
-  /** How much of a cover the state is under (`cover`), eased as the beam is: 0 under a clear sky and at night, 1 under a cloud that holds the sun back. What a world's sky reads, to be a grey even cover and not a blue. */
+  /** How much of a cover the state is under (`cover`), eased as the beam is: 0 under a clear sky, 1 under a cloud that holds the sun back. A recorded day's is its own from its first minute (`dayCover`: at midnight it eases from the day before's, a night before the dawn it matters at), the others' is read at the noon and held through dusk, night and dawn. What a world's sky reads, to be a grey even cover and not a blue. */
   cover: number;
   /** `dt` is the view's step in seconds: the beam's share is eased over it (the model's ridge cuts the beam in one step; the picture lets the sun come out over a few frames). Without it the share is the state's, whole; at 0 nothing moves (the share stays where it was). */
   update(state: HouseState, site?: SiteId, dt?: number): void;
@@ -168,7 +208,8 @@ export function makeRig(scene: THREE.Scene, o: RigOptions): Rig {
       cNow = cNow === null ? target : dt <= 0 ? cNow : damp(cNow, target, 2.5, Math.min(dt, 0.1));
       const c = cNow;
       rig.beam = c;
-      // read while the sun is over the ridges, and held where it is not (dawn, dusk, night): a sky that was a cover at four in the afternoon is one at dusk
+      // a recorded day has its own cover from its first minute, so that the dull day's dawn is grey and the clear one's is not: the day rolls at midnight and the cover eases over the night, where the sky cannot show it (the
+      // sky weights its cover by its day factor). A sky with no table is read while the sun is over the ridges, and held where it is not (dawn, dusk, night): a sky that was a cover at four in the afternoon is one at dusk
       const cv = cover(state, site);
       if (cv !== null)
         coverNow = coverNow === null ? cv : dt <= 0 ? coverNow : damp(coverNow, cv, 2.5, Math.min(dt, 0.1));
