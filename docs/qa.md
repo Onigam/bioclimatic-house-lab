@@ -1250,3 +1250,44 @@ R2-1 and R2-2 are fixed, R2-3 and R2-4 largely. The coda now has a dusk and a ni
 ### Not checked
 
 Real phones, Safari, Firefox; the voice; the film's own render pipeline; the disc and shafts at ×8 000 and ×12 000 as pictures (read as a strength in the scene, not seen: the Short's camera does not see the sun); the day-factor's look in summer and equinox months (the lag was measured, not the look); the dusk with a camera that looks south at the sun; the 56 part shots; 768 px; light theme; the UI's own hour slider; the lab at a real frame rate of 60 a second (the follower scales with the frame time; I replayed at 30).
+
+## Material pass review, round 4 (wall world)
+
+Independent review of round 4 (`3cce76a`, the tip `f03047a` differs by docs only) against `c9db477`, 2026-11-16. The reviewer built none of it and wrote nothing in the lab. Pasted here in a condensed form by the lead of the session (the full section, 19 composite screens, raw data, scripts and run logs are in `~/.cache/lab-review/bioclimatic-house-lab/round-4-review/`: `screens/`, `shots/`, `reg/`, `dull/`, `motion/`, `coda/`, `phone/`, `scripts/`). Two `git archive` copies (`new`, `base`), production builds for the phone profile, every Chrome job under the lock. **Gates run by the reviewer:** typecheck 0, format 0, `npm test` 817 passed and 1 skipped (base 794), build green.
+
+### Verdict: yes with the listed conditions (0 blockers, 1 major, 6 minors)
+
+Short 2 (clear 21 December, the film's camera) may be drawn from this commit. Short 3 (dull 24 December) only once R4-1 is met.
+
+### What held, against the reviewer's own measures
+
+- **Black face**: strip luma at noon 34.7 → 15.2 (frame 0), 40.2 → 18.7, 39.4 → 17.8, 44.1 → 21.3; at night 19.8 → 18.1; the glass beside it does not move (160.6 / 160.3, others identical): not crushed.
+- **Sky/fog seam**: the 9 to 11-level one-row jump of `c9db477` is gone; ground reads as ground at 390 px, boulders recognisable and not stretched.
+- **Shimmer**: kit tool, wall orbit 0.274 → 0.299 (spike 5.04 → 4.12, both the known dusk fade), dolly 0.418 → 0.406, `house` and `room` identical, `site` not deterministic in the base either (no regression); still-camera film look equal (P0 0.115 → 0.106 %).
+- **Grey cover at noon and at the ends**: clear 22/12 (888 W/m²) wall sky 113,165,210 / 173,193,211, same as base; dull 24/12 (48 W/m²) wall 204,206,208 / 208,209,210, `site` 205,206,208, boulder shadows gone; night equals a clear night.
+- **Coda lag at ×11 150.8 from noon**: half way 37 min behind, night 93 min (Node); in the page half way 17:23 (was 18:37), 90 % down 18:37 (was 19:39); at ×8 000 14 / 40 min. Worst frame 0.041 % of pixels, largest sky step 9 levels a channel (tests hold 12). The follower's law holds at any pace.
+- **Other worlds**: meshes 228 / 313 / 192 identical, pixels 0.00 to 0.02 %; FR/EN untouched; no text in textures.
+- **Phone profile** (CPU ×4, production build): first frame 2 662 → 2 645 ms, 0 frames over 33 ms in 1 200, brotli +2.4 kB.
+
+### Defects, most severe first
+
+**Major**
+
+- **R4-1. The grey cover is not read at dawn: the morning of a dull recorded day is a clear blue sky that flips to grey in 0.8 s.** `cover()` (`src/three/sun.ts`) is read only with the sun 11° or more up and held below, so the sky keeps the previous day's value through night and dawn. Recorded 24/12/1974 after a clear 23rd, ×4 000, wall at P1: sky top 113,165,210 at 08:07, 132,173,209 at 08:53, 177,193,208 at 09:13, 204,206,208 from about 10:45: the cover arrives in 24 frames. `site` does the same. The house Short 3's shot a (wall, 23/12 16:00 to 24/12 08:46) ends on a blue morning and bluer than before (base 187,199,208). Affects Short 3 only. Likely fix: read the cover from the day's own radiation share (the recorded day's `incident` against the clear day's, held from the day's first minute) rather than the instantaneous irradiance gated at 11°; or document that a dull day's morning is blue until about 09:40.
+
+**Minor**
+
+- **R4-2.** The coda is still 37 to 93 minutes behind its clock at ×11 150 (a dusk at 17:00, mean luma 113 of 141 to 69). Reported, verified, not a defect of the build; ×8 000 is nearer the clock.
+- **R4-3. The ridge is a flat, faceted cut-out with a one-row edge** (9 levels at noon, 14 to 15 at night; a thin shimmer line along it at 17:00 under a moving camera). If a pass remains: a vertical haze gradient and a two-pixel feather (`src/three/wall/land.ts`, `buildHills`).
+- **R4-4. Entering the wall costs +150 ms at CPU ×4** (median 389 → 539 ms, three alternated runs) against the reported +89 ms.
+- **R4-5. A stone stands at the foot of the stool from the home camera**: the first « sight » boulder (`wallBoulders`, x −5.5, z −3.4) projects next to the stool on the tile floor at 1280 and 390 px. A few metres to the side would end it.
+- **R4-6. The report's test counts are off**: 817 passed and 1 skipped (report 816); `round4.test.ts` holds 21 tests (report 22).
+- **R4-7. Not round 4's**: at the tool's 30 settle frames the site's pines' trunks are missing in some frames in both builds (pre-existing progressive build; 0.000 % at 240 frames).
+
+### Refused or left open, reported honestly
+
+No disc by geometry (the camera stands 105° off the noon sun in a 23° field), coda lag, shafts' veil at the left edge, no room walls on this side, no `inner-wall-face` (a data request). No rule of `lab-quality.md` is broken.
+
+### Not checked
+
+Real phones, Safari, Firefox, 60 frames a second; the film's own render pipeline; a drag of the hour slider; the cover in a summer or equinox month; `house` and `room` at 768 px; the light theme; the 56 part shots and the spoken guide; the builder's twelve mutation tests; any dissolve between shots.
