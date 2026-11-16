@@ -1291,3 +1291,31 @@ No disc by geometry (the camera stands 105° off the noon sun in a 23° field), 
 ### Not checked
 
 Real phones, Safari, Firefox, 60 frames a second; the film's own render pipeline; a drag of the hour slider; the cover in a summer or equinox month; `house` and `room` at 768 px; the light theme; the 56 part shots and the spoken guide; the builder's twelve mutation tests; any dissolve between shots.
+
+## Material pass review, round 5 (wall world, scoped)
+
+Independent scoped re-review of round 5 (`4e46263`, against `3cce76a`), 2026-11-16, by the reviewer of round 4. Pasted here in a condensed form by the lead of the session (screens, data and scripts in `~/.cache/lab-review/bioclimatic-house-lab/round-4-review/round-5/`). **Verdict: yes with conditions (0 blockers, 0 majors, 5 minors).** R4-1, R4-3, R4-5 and R4-6 are fixed (832 passed, 1 skipped: 817 + 14 + 1).
+
+### What was verified
+
+- **R4-1**: recorded 24/12/1974 after a clear 23rd, ×4 000, wall at P1: top sky 06:20 night (9,29,68), 07:53 (160,176,193), 08:55 to 10:20 (204,206,208); the rise is monotone and 0.000 % of pixels move by more than 4 levels in frames 08:30 to 10:20 (old 8.96 %). The 25th after the dull evening is blue from first light (the clear 23rd and 25th dawns have the same colours). `site`: the 24th grey from −3.6° of sun, the 25th blue from first light. The day shares (0.056 / 1.064 / 0.985) are confirmed; across midnight at ×900, ×4 000 and ×11 150 the cover never steps by more than 0.08 a frame (23rd to 24th: 0.97 by about 04:00, 01:35 at ×4 000).
+- **Clear days and the rest unchanged**: 22/12 noon and the 23rd dawn identical; the black face (15.2 to 21.3) and the glass unchanged to the decimal; `house`, `room`, `site` identical to the pixel except `site` in June 0.25 % at 1280 (R4-7, pre-existing). The wall's film frames differ from `3cce76a` by 5.7 to 7.5 % of pixels over 8 levels, all in the ridge band and the lower right (the stones).
+- **R4-3 ridge**: largest one-row edge noon 9 → 7–8, night 15 → 8; shimmer figures unchanged (wall orbit 0.299 → 0.298, dolly 0.406 → 0.403; film-pose moves 5.097 → 5.083); no new shimmer line at 17:00.
+- **R4-5**: the stone is clear of the stool at 1280 and 390; in the film frame the nearest stone is about 10 % of the frame's height higher and a fifth smaller.
+- **Gates**: tsc 0, prettier ok, build green (brotli +0.9 kB), phone profile first frame 2 455 → 2 438 ms, wall entry 426 → 421 ms, 0 frames over 33 ms in 1 200.
+
+### Defects (all minor)
+
+- **R5-1**: the report understates the change of the film frame (the ridge band changes the whole top third of the ground, the stones are not « a hand's breadth »): **every Short must be re-rendered from this commit**; no earlier render can be mixed in.
+- **R5-2**: the haze under the ridge has faint vertical streaks, visible at 2× on the night crop only.
+- **R5-3**: a non-recorded overcast dawn (the app's series sky) still keeps the day before's cover until the sun is 11° up, as reported; no Short is affected.
+- **R5-4**: the worst frame over 12 levels at a clear sunrise at ×4 000 is 0.1–0.5 % (old) then 4.6–5.0 % (new) by `readPixels` in the page, 0.00 % by PNG frame pairs; inside the film's 15 % bound either way, and no Short crosses a clear sunrise.
+- **R5-5**: R4-7 (the site's pines' trunks) still shows as 0.25 % in one `site` view.
+
+### Conditions
+
+(a) A dull recorded day can only be replayed, never set: `engine.set({day, hour})` leaves the recording (`sky: 'mean'`, 411 W/m² at 09:00 on the 24th instead of 31), so Short 3 must replay `christmas-1974` through the clock; (b) every Short is re-rendered from this commit; (c) the coda's pace of Short 2 stays the R4-2 choice (×8 000 is nearer its clock).
+
+### Not checked
+
+Real phones, Safari, Firefox, 60 fps, the film's own render pipeline, paces above ×11 150 (at ×30 000 the night is short enough that the 25th would keep a little grey at dawn), `house` and `room` at 768, the mutation tests.
