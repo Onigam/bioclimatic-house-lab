@@ -2,7 +2,7 @@
 
 `lab-modeler`, 2026-11-16. Local `main`, `building`, not public. Nothing pushed, nothing merged, `src/sim` and `src/data` not touched, `status` not changed. The long form, with every number and its method, is in `docs/3d.md` « Round 4 »; the screens are `docs/qa/p4-01` to `p4-09` (before above or on the left). I wrote no review of my own work.
 
-Before is `c9db477` (the picture of `b6e6240`), served from a `git archive` copy on its own port; after is the working tree. The film's stills are `tools/film-proof.mjs` frames 0, 325, 600, 900, 1140, 1625 and 1780 of Short 2's shot list at 1080 × 1920 in the film's look; the lab's own are `tools/look/shots.mjs --film --zone 0.04,0.19,0.96,0.69` (the film's subject zone: new, so that a lab still is the film's frame). One Chrome job at a time under `~/.cache/lab-review/chrome.lock` (`onigam-video/tools/with-chrome-lock.sh`).
+Commits: `7b8e3f0` (the look tools), **`3cce76a` (the 3D: the code and its tests)**, `a7a33f1` (the docs and the screens). Before is `c9db477` (the picture of `b6e6240`), served from a `git archive` copy on its own port; after is the working tree. The film's stills are `tools/film-proof.mjs` frames 0, 325, 600, 900, 1140, 1625 and 1780 of Short 2's shot list at 1080 × 1920 in the film's look; the lab's own are `tools/look/shots.mjs --film --zone 0.04,0.19,0.96,0.69` (the film's subject zone: new, so that a lab still is the film's frame). One Chrome job at a time under `~/.cache/lab-review/chrome.lock` (`onigam-video/tools/with-chrome-lock.sh`).
 
 ## The six items
 
@@ -75,7 +75,7 @@ I looked at every still of `p4-01` to `p4-09` at full size or in 1:1 crops: the 
 
 ## What I need from the other roles
 
-- **Video engineer**: re-render from a clean clone of the commit named below (the frame is new everywhere: face, sky, ground, horizon, night's hills, coda); decide the coda's pace (×8 000 puts the sky within 40 minutes of its clock; ×11 150 leaves 93) and whether Short 2's first seconds want a shot with the disc (a camera on the north side, or a pan from the sun). `film-proof.mjs` and `film-check` are untouched.
+- **Video engineer**: re-render from a clean clone at `3cce76a` or after (the commits after it are docs only) (the frame is new everywhere: face, sky, ground, horizon, night's hills, coda); decide the coda's pace (×8 000 puts the sky within 40 minutes of its clock; ×11 150 leaves 93) and whether Short 2's first seconds want a shot with the disc (a camera on the north side, or a pan from the sun). `film-proof.mjs` and `film-check` are untouched.
 - **Data role**: a 15th wall part for `inner-wall-face` (a new id, a data entry, the frozen ids and the explode/framing entries are mine afterwards); nothing else.
 - **Physicist**: the two scenarios Short 3's report asks for; `engine.set({ hour })` without `day` (kit request 24, unchanged).
 - **Kit**: requests 25 to 27 in `docs/kit-requests.md` (the `envMapIntensity` trap; the film's subject zone as a `Stage` call; a backdrop that takes its rows from the camera).
