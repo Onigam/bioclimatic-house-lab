@@ -60,7 +60,7 @@ The two scenarios (the sun put out, the 20 recorded days): not done, as asked.
 
 ## Tests, gates, budgets
 
-`npm run typecheck`, `npm test` (**816 passed**, 794 at the start), `npm run build` and `npm run format:check`: green. `src/three/round4.test.ts` adds 22 tests (listed in `docs/3d.md`); mutation-tested in a copy, twelve mutations, each fails a test. **No existing test was weakened** (`matter.test.ts` passes unchanged: the follower's bounds are the law's own constants).
+`npm run typecheck`, `npm test` (**817 passed, 1 skipped**, 794 at the start; corrected in round 5, the first version said 816), `npm run build` and `npm run format:check`: green. `src/three/round4.test.ts` adds 21 tests (listed in `docs/3d.md`; the first version said 22); mutation-tested in a copy, twelve mutations, each fails a test. **No existing test was weakened** (`matter.test.ts` passes unchanged: the follower's bounds are the law's own constants).
 
 - **Geometry, Node, world space, every vertex:** `site` 227 of 227 meshes identical, `house` 310 of 310, `room` 191 of 191, `wall` 57 of 57 (the ground is replaced; the stones, their shadows and the hills are added and are not parts).
 - **Other worlds' screens, 1280 and 390** (`p4-07a`, `p4-07b`): `house`, `room`, `site` the same to 0.00 to 0.10 % of the pixels over 8 levels, but for the black paint where it is seen along its plane (`house` south-low 0.43 %).
