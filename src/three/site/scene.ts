@@ -495,7 +495,7 @@ export function createSiteScene(opts: SiteOptions = {}): SiteScene {
         drawn.spec = spec;
       }
       rig.update(s, undefined, dt);
-      sky.update(s, view.time, rig.night);
+      sky.update(s, view.time, rig.night, 1 - rig.cover);
       drawn.sunAltitude = s.sunAltitude;
       SNOW.value = snowOfState(s);
       drawn.snow = SNOW.value;

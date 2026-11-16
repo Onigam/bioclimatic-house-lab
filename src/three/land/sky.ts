@@ -12,12 +12,18 @@ import { sunDirection } from '../sun';
 function injectNight(sky: Sky): void {
   const m = sky.material;
   m.uniforms.uNight = { value: 0 };
+  m.uniforms.uOver = { value: 0 };
   const hook = 'gl_FragColor = vec4( texColor, 1.0 );';
   if (!m.fragmentShader.includes(hook)) return;
-  m.fragmentShader = m.fragmentShader.replace('void main() {', 'uniform float uNight;\nvoid main() {').replace(
-    hook,
-    /* glsl */ `
+  m.fragmentShader = m.fragmentShader
+    .replace('void main() {', 'uniform float uNight;\nuniform float uOver;\nvoid main() {')
+    .replace(
+      hook,
+      /* glsl */ `
       {
+        // a cover: an even grey, a little lighter at the horizon, whatever Preetham's blue and haze would say (the sun's own disc and glare go with it)
+        vec3 cover = mix(vec3(0.42, 0.44, 0.47), vec3(0.64, 0.65, 0.66), pow(1.0 - max(direction.y, 0.0), 2.0));
+        texColor = mix(texColor, cover, uOver);
         float up = max(direction.y, 0.0);
         vec3 nightCol = mix(vec3(0.010, 0.016, 0.040), vec3(0.0025, 0.004, 0.012), pow(up, 0.6));
         vec3 sd = direction * 260.0;
@@ -28,7 +34,7 @@ function injectNight(sky: Sky): void {
         texColor = mix(texColor, nightCol + vec3(star) * 0.9, uNight);
       }
       ${hook}`,
-  );
+    );
 }
 
 /** Equirectangular sky-and-ground gradient used as the environment (reflections on pipes, water, metal). */
@@ -71,7 +77,8 @@ const FOG_DENSITY = 0.00013;
 
 export interface SkyRig {
   sky: Sky;
-  update(state: HouseState, time: number, night: number): void;
+  /** `clear`: the share of the clear sky's beam the state holds (`rig.beam`: 1 under a clear sky, 0 under a cover that takes the sun off, as on the recorded 24 December 1974, a twentieth of the day before's radiation): the sky goes from blue to a grey cover. */
+  update(state: HouseState, time: number, night: number, clear?: number): void;
 }
 
 export function createSky(scene: THREE.Scene): SkyRig {
@@ -98,9 +105,11 @@ export function createSky(scene: THREE.Scene): SkyRig {
   const fogDay = new THREE.Color(0xc4d3e2);
   const fogDusk = new THREE.Color(0xd8b49a);
   const fogNight = new THREE.Color(0x0b1222);
+  const fogCover = new THREE.Color(0xc6c9cc);
+  const fogHere = new THREE.Color();
   return {
     sky,
-    update(state, time, night) {
+    update(state, time, night, clear = 1) {
       sunDirection(Math.max(state.sunAltitude, -12), state.sunAzimuth, sunDir);
       const alt = state.sunAltitude * DEG;
       const day = smoothstep(-7 * DEG, 3 * DEG, alt);
@@ -108,10 +117,19 @@ export function createSky(scene: THREE.Scene): SkyRig {
       u.sunPosition.value.copy(sunDir);
       u.uNight.value = smoothstep(-2 * DEG, -10 * DEG, alt);
       if (u.time) u.time.value = time;
+      // under a cover (the beam's share is the state's own: the clouds are not the model's weather, but the sun it lets through is) the dome is a grey, even sky with no sun in it (`uOver`, in the shader above); the fog's
+      // colour goes to the cover's grey with it
+      const over = 1 - clamp(clear, 0, 1);
+      u.uOver.value = smoothstep(0.2, 0.9, over) * day;
+      if (u.cloudCoverage) {
+        u.cloudCoverage.value = lerp(0.3, 0.8, over);
+        u.cloudDensity.value = lerp(0.5, 0.8, over);
+      }
+      fogHere.copy(fogDay).lerp(fogCover, over);
       (scene.fog as THREE.FogExp2).color
         .copy(fogNight)
-        .lerp(fogDay, day)
-        .lerp(fogDusk, low * day * 0.6);
+        .lerp(fogHere, day)
+        .lerp(fogDusk, low * day * 0.6 * (1 - over));
       void night;
       void clamp;
       void lerp;

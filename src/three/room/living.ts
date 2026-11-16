@@ -276,9 +276,12 @@ export function buildLiving(mats: Mats, spec0: ElementSpec, o: { floorAndCeiling
       recorder.carriage.position.x = (AT.desk.x0 + AT.desk.x1) / 2 - R / 2 + R * drawn.carriage;
       const pm = recorder.paper.material as THREE.MeshStandardMaterial;
       if (pm.map) pm.map.offset.x = -((s.simTime / 86400) * 2) % 1;
+      // The face's warmth is what the room is given from the back of the wall, by radiation and by the air that brushes it (the table's Qr and Qc): it is drawn as the lime wash taking a warm tone with how much hotter the face
+      // is than the room's air (round 4: it followed the face's own temperature, 22 °C and over, and a face 4 K over the room's air on a day of no sun, 24 °C, was a few levels from the wash's own colour). It stands
+      // with no stream, with the flows off and the jet and the return hidden.
       (face.material as THREE.MeshStandardMaterial).color
         .setRGB(0.93, 0.9, 0.84)
-        .lerp(tmp.setRGB(1, 0.8, 0.62), clamp((s.tInnerFace - 22) / 14, 0, 0.5));
+        .lerp(tmp.setRGB(1, 0.72, 0.5), clamp((s.tInnerFace - s.tRoom) / 10, 0, 0.6));
       const fwd = p.forwardFlow ? clamp(s.flowLs / 30, 0, 1) : 0;
       const warm = clamp((s.tGapOut - s.tRoom) / 14, 0, 1);
       jetMat.opacity = 0.34 * fwd * (0.35 + 0.65 * warm);

@@ -16,7 +16,7 @@ import {
   elementSpecOf,
   type ElementSpec,
 } from '../dims';
-import { joined, smoothstep, uvMetric } from '../common';
+import { joined, smoothstep } from '../common';
 import { HEAT_MAX, HEAT_MIN, HeatStrip, heatColor } from '../heat';
 import { WALL_PARTS, type WallPart } from '../ids';
 import { makeMaterials } from '../materials';
@@ -29,6 +29,7 @@ import { anchor, box, crowdLabels, hotspots, viewFrom, type HotspotDef, type Par
 import { buildLivedIn } from './livedin';
 import { clockSet, followSun, makeSky } from './sky';
 import { buildSunlight } from './sunlight';
+import { GROUND_Y, boulderGeometries, buildHills, groundGeometry, planarShadow, wallBoulders } from './land';
 
 // The `wall` world: where the heat goes. One collector element at one to one, cut open down its middle: the frame and two sheets of glass, the air gap, the black face, the concrete coloured by the model's temperatures cell by
 // cell, the two ducts through it, the flap, the instruments of 1974–75. The section is always on (it is the world), so there is no tool. It is the very function `house` uses for its nine bays, in the element's own frame.
@@ -110,7 +111,7 @@ const PAPER = 0xe9e2d3;
  * the paint's alone: a lift of the hemisphere (tried at 0.4 to 0.8) would do the same for the face and for the glazing's bars with it, and the bars' edges against the face then change more than twelve levels a frame on
  * a drifting camera (the still-camera share 0.32 → 0.48 % at 0.8). Zero by day (`rig.night`).
  */
-const NIGHT_PAINT = new THREE.Color().setRGB(0.0065, 0.009, 0.0145);
+const NIGHT_PAINT = new THREE.Color().setRGB(0.009, 0.0125, 0.0195);
 /** The pace (the clock's seconds in a second of the picture) from which the sun's disc, shafts and glint begin to go, and the pace where they are gone. */
 export const SUN_FADE_FROM = 8000;
 export const SUN_FADE_TO = 20000;
@@ -158,8 +159,16 @@ export function createWallScene(opts: WallOptions = {}): WallScene {
   let sunWanted = false;
   // The film's ambient occlusion draws the scene again, each mesh in a normal material of its own, transparent ones too: the light's sheets would stand in the depth like walls in the air and darken what lies round them, in
   // dashes (the first version did, film look only). While that pass has swapped the light's material the light is out (`docs/kit-requests.md`: the pass should skip what is not solid).
-  scene.onBeforeRender = () => {
+  scene.onBeforeRender = (_renderer, _scene, camera) => {
     sunGroup.visible = sunWanted && sunlight.mesh.material === sunlight.material;
+    // the hills and the shadows' decals are not solids (they would stand in the pass as walls at the far plane and as sheets on the ground)
+    hills.mesh.visible = hills.mesh.material === hills.material;
+    shadows.mesh.visible = shadows.on && shadows.mesh.material === shadows.material;
+    // the sky's rows are laid by the camera in use (its pitch, its field of view and a film's view offset), so that the horizon of the sky is the horizon of the ground and the fog's colour is the colour at it
+    if (camera) {
+      sky.align(camera);
+      hills.update(sky.horizon, sky.day, cover, camera);
+    }
   };
 
   // ---- the caps of the section: the element's own, and the stubs of the foundation, the floor, the ceiling and the head band that carry it
@@ -296,22 +305,40 @@ export function createWallScene(opts: WallOptions = {}): WallScene {
     color: 0xffffff,
     roughness: 1,
     map: tiled(plateauGroundMap(), 1 / 0.8),
+    vertexColors: true,
   });
   const GROUND = new THREE.Color(0xffffff);
   // by night the ground is a dark blue-grey, not a neutral grey: moonlight and the hemisphere's blue
   const NIGHT_GROUND = new THREE.Color(0.55, 0.64, 0.9);
-  const ground = new THREE.Mesh(uvMetric(new THREE.PlaneGeometry(600, 600)), groundMat);
+  const ground = new THREE.Mesh(groundGeometry(), groundMat);
   const sky = makeSky();
   const paper = new THREE.Color(PAPER);
   sky.update(35, paper);
   scene.background = sky.texture;
-  scene.fog = new THREE.Fog(PAPER, 22, 105);
-  ground.rotation.x = -Math.PI / 2;
-  ground.position.y = -1.3;
+  scene.fog = new THREE.Fog(PAPER, 30, 108);
+  ground.position.y = GROUND_Y;
   ground.receiveShadow = true;
   ground.name = 'ground';
   ground.userData.notClipped = true;
   scene.add(ground);
+  // the land round it (docs/3d.md, « Round 4 »): the hills of the model's own horizon behind the ground's fog, and the plateau's boulders with the sun's shadow on the ground
+  const hills = buildHills();
+  let cover = 0;
+  scene.add(hills.mesh);
+  const boulderList = wallBoulders();
+  // the stones' own material (the granite's map, the wall's copy): a little cooler than the map by day, and by night the ground's blue-grey, so that they do not stand lit on a dark ground
+  const stoneMat = mats.granite.clone();
+  stoneMat.userData = { noShare: true };
+  const STONE_DAY = new THREE.Color(0.88, 0.91, 0.97);
+  const boulders = new THREE.Mesh(boulderGeometries(boulderList), stoneMat);
+  boulders.name = 'boulders';
+  boulders.castShadow = true;
+  boulders.receiveShadow = true;
+  boulders.userData.notClipped = true;
+  boulders.raycast = () => {};
+  scene.add(boulders);
+  const shadows = planarShadow(boulders.geometry);
+  scene.add(shadows.mesh);
   const cs = contactShadow(ELEMENT_1967.width + 0.6, 1.6, 0.35, 0.3);
   cs.position.set(-ELEMENT_1967.width / 4, -1.299, -0.35);
   scene.add(cs);
@@ -491,10 +518,14 @@ export function createWallScene(opts: WallOptions = {}): WallScene {
       mats.black.emissive.copy(NIGHT_PAINT).multiplyScalar(rig.night);
       sunlight.update();
       // the sky and the fog's horizon follow the sun and the cloud
-      sky.update(sunAlt, paper, rig.beam);
+      sky.update(sunAlt, paper, 1 - rig.cover);
+      cover = rig.cover;
+      hills.update(sky.horizon, sky.day, cover);
+      shadows.update();
       (scene.fog as THREE.Fog).color.copy(sky.horizon);
       // the ground is dark at night: the moon and the hemisphere's dim light are all it has
       groundMat.color.copy(NIGHT_GROUND).lerp(GROUND, sky.day);
+      stoneMat.color.copy(NIGHT_GROUND).multiply(STONE_DAY).lerp(STONE_DAY, sky.day);
       // the light goes through the glass: with the outer sheet isolated away or not yet built, it has nothing to come through
       sunWanted = sunlight.on && Followers.drawn(registry, 'outer-glazing');
       sunGroup.visible = sunWanted;

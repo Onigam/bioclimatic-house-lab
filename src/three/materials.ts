@@ -100,6 +100,9 @@ export interface Mats {
   led: THREE.MeshStandardMaterial;
 }
 
+/** What the black paint keeps of the environment's reflection and of its diffuse light (1 is three's own). */
+export const BLACK_IBL = { radiance: 0.3, irradiance: 1.0 } as const;
+
 export function makeMaterials(): Mats {
   const shuttered = std({
     color: 0xb2afa8,
@@ -117,7 +120,7 @@ export function makeMaterials(): Mats {
   // a matt black acrylic on board-marked concrete: the planks' imprint, a tie hole, the pits. Matt, with its reflections kept low: the film sees the face along its plane (7 degrees), where a satin paint reflects the whole pale
   // sky and the sun, and the black face read grey-beige by day (round 2: 135 levels at noon against 92 before the pass; now about 40, the aim under 45)
   const black = std({
-    color: 0x585858,
+    color: 0x383a3e,
     roughness: 1,
     metalness: 0.0,
     envMapIntensity: 0.03,
@@ -136,13 +139,17 @@ export function makeMaterials(): Mats {
   });
   glass.userData.glass = true;
   glassLook(glass);
-  // the sun's specular on this paint, seen along its plane, was more than half of what the face gained at noon (0.015 of 0.027 in linear light, at roughness 1: Fresnel is small but the geometry term of a view at 7 degrees is not): a
-  // matt acrylic holds a fifth of it, and `customProgramCacheKey` keeps the paint's program its own
+  // The sun's specular on this paint, seen along its plane, was more than half of what the face gained at noon (0.015 of 0.027 in linear light, at roughness 1: Fresnel is small but the geometry term of a view at 7 degrees is not): a
+  // matt acrylic holds a fifth of it. And the room's environment, which three reads at `scene.environmentIntensity` and not at the material's own `envMapIntensity` (that one is for a map the material carries), gave the face
+  // three quarters of its light at noon, 30 of 40 levels (round 4: the same frame with the environment off reads 9.5): its reflection at a grazing view (a matt paint scatters a fraction of it) and its diffuse share are taken
+  // down here, so that the face from the film's camera reads black and not a brown-grey. `customProgramCacheKey` keeps the paint's program its own.
   black.onBeforeCompile = (shader) => {
-    shader.fragmentShader = shader.fragmentShader.replace(
-      '#include <aomap_fragment>',
-      'reflectedLight.directSpecular *= 0.2;\n#include <aomap_fragment>',
-    );
+    shader.fragmentShader = shader.fragmentShader
+      .replace('#include <aomap_fragment>', 'reflectedLight.directSpecular *= 0.2;\n#include <aomap_fragment>')
+      .replace(
+        '#include <lights_fragment_maps>',
+        `#include <lights_fragment_maps>\n#if defined( USE_ENVMAP ) && defined( RE_IndirectSpecular )\n  radiance *= ${BLACK_IBL.radiance.toFixed(2)};\n  iblIrradiance *= ${BLACK_IBL.irradiance.toFixed(2)};\n#endif`,
+      );
   };
   black.customProgramCacheKey = () => 'black-paint';
   const frame = std({ color: 0x4f5c58, roughness: 0.55, metalness: 0.45 });

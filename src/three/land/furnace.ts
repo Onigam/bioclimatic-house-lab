@@ -368,34 +368,45 @@ export function buildPyranometer(mats: Mats): THREE.Group {
   return g;
 }
 
+/** The far ridges' layers: the radius of each ring of hills (m) and the share of the model's horizon it takes. */
+export const RIDGE_LAYERS: readonly { r: number; scale: number }[] = [
+  { r: 2600, scale: 0.5 },
+  { r: 4000, scale: 0.8 },
+  { r: 6200, scale: 1.0 },
+];
+
+/** The model's own horizon (`SITES.odeillo.horizon`, from the terrain) in degrees at an azimuth from south positive west: piecewise linear through the table, wrapped. */
+export function horizonAngle(az: number): number {
+  const hor = SITES.odeillo.horizon!;
+  const a = ((((az + 180) % 360) + 360) % 360) - 180;
+  for (let i = 1; i < hor.length; i++)
+    if (a <= hor[i]![0])
+      return hor[i - 1]![1] + ((hor[i]![1] - hor[i - 1]![1]) * (a - hor[i - 1]![0])) / (hor[i]![0] - hor[i - 1]![0]);
+  return hor[hor.length - 1]![1];
+}
+
+/** The height of a ring of the ridges at an azimuth, m: the model's horizon at that bearing (`horizonAngle`) times the ring's radius, with broad swells, then peaks and cols two octaves finer than the model's coarse table. */
+export function ridgeHeight(az: number, layer: number): number {
+  const L = RIDGE_LAYERS[layer]!;
+  const base = Math.tan((horizonAngle(az) * Math.PI) / 180) * L.r * L.scale;
+  const ang = (az * Math.PI) / 180;
+  const broad = 0.7 + 0.6 * fbm(Math.cos(ang) * 3 + layer * 7, Math.sin(ang) * 3, 4);
+  const peaks = 0.5 * Math.abs(fbm(ang * 22 + layer * 5, 4.1, 3) - 0.5) * 2 + 0.35 * fbm(ang * 60 + layer, 1.7, 3);
+  return base * broad * (0.85 + 0.5 * peaks) + 40 * fbm(ang * 9 + layer * 3, 2.2, 3);
+}
+
+/** The elevation, in degrees, at which a ring of the ridges stands against the sky as seen from its centre: what a world with no room for the ridges at their distance (the `wall`, whose far plane is 120 m) draws them at. */
+export function ridgeElevation(az: number, layer: number): number {
+  return (Math.atan2(ridgeHeight(az, layer), RIDGE_LAYERS[layer]!.r) * 180) / Math.PI;
+}
+
 /** The far ridges: two rings of hills, their silhouettes from the model's own horizon (`SITES.odeillo.horizon`, from the terrain), snow on the high ground in winter. Height `r tan(angle)`; the ground is under them. */
 export function buildRidges(snowTone = new THREE.Color(0xf2f4f8)): {
   mesh: THREE.Mesh;
   heightAt: (az: number, layer: number) => number;
 } {
-  const hor = SITES.odeillo.horizon!;
-  const angleAt = (az: number): number => {
-    // piecewise linear through the table, azimuth from south positive west, wrapped
-    const a = ((((az + 180) % 360) + 360) % 360) - 180;
-    for (let i = 1; i < hor.length; i++)
-      if (a <= hor[i]![0])
-        return hor[i - 1]![1] + ((hor[i]![1] - hor[i - 1]![1]) * (a - hor[i - 1]![0])) / (hor[i]![0] - hor[i - 1]![0]);
-    return hor[hor.length - 1]![1];
-  };
-  const layers = [
-    { r: 2600, scale: 0.5 },
-    { r: 4000, scale: 0.8 },
-    { r: 6200, scale: 1.0 },
-  ];
-  const heightAt = (az: number, layer: number): number => {
-    const L = layers[layer]!;
-    const base = Math.tan((angleAt(az) * Math.PI) / 180) * L.r * L.scale;
-    const ang = (az * Math.PI) / 180;
-    // broad swells, then peaks and cols: two octaves finer than the model's coarse horizon
-    const broad = 0.7 + 0.6 * fbm(Math.cos(ang) * 3 + layer * 7, Math.sin(ang) * 3, 4);
-    const peaks = 0.5 * Math.abs(fbm(ang * 22 + layer * 5, 4.1, 3) - 0.5) * 2 + 0.35 * fbm(ang * 60 + layer, 1.7, 3);
-    return base * broad * (0.85 + 0.5 * peaks) + 40 * fbm(ang * 9 + layer * 3, 2.2, 3);
-  };
+  const layers = RIDGE_LAYERS;
+  const heightAt = ridgeHeight;
   const pos: number[] = [];
   const col: number[] = [];
   const idx: number[] = [];

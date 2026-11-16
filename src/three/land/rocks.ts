@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { rng } from '@onigam/lab-kit/three';
+import { mergeVertices } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import { joined, uvMetric } from '../common';
 import { fbm } from '../textures';
 import { groundY } from './ground';
@@ -17,9 +18,14 @@ export interface Boulder {
   seed: number;
 }
 
-export function boulderGeometry(b: Boulder, y: number, detail = 3): THREE.BufferGeometry {
-  const g = new THREE.IcosahedronGeometry(b.r, detail);
+/** `smooth`: the icosphere's corners are shared before the normals are computed, so that the stone is round and not a polyhedron (the `site` keeps its stones as they were: `false`; the `wall`, which sees them at ten metres, asks for it). */
+export function boulderGeometry(b: Boulder, y: number, detail = 3, smooth = false): THREE.BufferGeometry {
+  let g: THREE.BufferGeometry = new THREE.IcosahedronGeometry(b.r, detail);
   g.deleteAttribute('uv');
+  if (smooth) {
+    g.deleteAttribute('normal');
+    g = mergeVertices(g);
+  }
   const p = g.attributes.position as THREE.BufferAttribute;
   const v = new THREE.Vector3();
   for (let i = 0; i < p.count; i++) {

@@ -43,6 +43,23 @@ export function clarity(state: HouseState, site: SiteId = 'odeillo'): number {
   return smoothstep(0.4, 0.82, state.incidentWm2 / clear);
 }
 
+/** The clear sky's irradiance on the wall's plane (W/m²) from which the state's share of it says whether there is a cover: the model's own horizon (the ridges, up to 5.7°) takes the beam off a sun that is low, and a clear sky then looks as dull as a cloud. */
+export const COVER_FROM_CLEAR = 380;
+/** The sun's altitude from which the wall's irradiance says whether there is a cover: the model's horizon is 5.7° at the highest, and the beam comes out from behind it over a few degrees more (a clear morning at 6° of sun still reads a cover for a few frames: found in a day at ×3 600, 18 % of the pixels moved by more than 4 levels at 08:16). */
+export const COVER_FROM_ALTITUDE = 11;
+
+/**
+ * 1 under a cover that holds the sun back, 0 under a clear sky: the share of the clear sky's irradiance the state has, mapped so that 40 % or less is a cover (the same measure as `clarity`, which is its complement). It is read
+ * only while the sun is `COVER_FROM_ALTITUDE` or more over the horizon and the clear sky gives the wall `COVER_FROM_CLEAR` or more (the sun well over the model's ridges), and is `null` below, at night, and at the dawn and the dusk, where the model's horizon
+ * and not a cloud takes the beam (a clear morning at 1° of sun is at a seventh of the clear sky's irradiance). The recorded 24 December 1974 gets a twentieth of the day before's radiation, and is 1.
+ */
+export function cover(state: HouseState, site: SiteId = 'odeillo'): number | null {
+  if (state.sunAltitude < COVER_FROM_ALTITUDE) return null;
+  const clear = clearIncident(state, site);
+  if (clear < COVER_FROM_CLEAR) return null;
+  return 1 - smoothstep(0.4, 0.82, state.incidentWm2 / clear);
+}
+
 export interface RigOptions {
   /** Half the side of the shadow's box, metres. */
   half: number;
@@ -66,6 +83,8 @@ export interface Rig {
   dir: THREE.Vector3;
   /** Share of the beam that reaches the ground (0 under cloud and at night). */
   beam: number;
+  /** How much of a cover the state is under (`cover`), eased as the beam is: 0 under a clear sky and at night, 1 under a cloud that holds the sun back. What a world's sky reads, to be a grey even cover and not a blue. */
+  cover: number;
   /** `dt` is the view's step in seconds: the beam's share is eased over it (the model's ridge cuts the beam in one step; the picture lets the sun come out over a few frames). Without it the share is the state's, whole; at 0 nothing moves (the share stays where it was). */
   update(state: HouseState, site?: SiteId, dt?: number): void;
   focus(point: THREE.Vector3, half?: number): void;
@@ -103,6 +122,7 @@ export function makeRig(scene: THREE.Scene, o: RigOptions): Rig {
   const worldUp = new THREE.Vector3(0, 1, 0);
   const sunV = new THREE.Vector3();
   let cNow: number | null = null;
+  let coverNow: number | null = null;
 
   const setHalf = (h: number): void => {
     half = h;
@@ -137,6 +157,7 @@ export function makeRig(scene: THREE.Scene, o: RigOptions): Rig {
     night: 0,
     dir,
     beam: 1,
+    cover: 0,
     update(state, site, dt = 0) {
       const alt = state.sunAltitude;
       const day = smoothstep(-6, 3, alt);
@@ -147,6 +168,11 @@ export function makeRig(scene: THREE.Scene, o: RigOptions): Rig {
       cNow = cNow === null ? target : dt <= 0 ? cNow : damp(cNow, target, 2.5, Math.min(dt, 0.1));
       const c = cNow;
       rig.beam = c;
+      // read while the sun is over the ridges, and held where it is not (dawn, dusk, night): a sky that was a cover at four in the afternoon is one at dusk
+      const cv = cover(state, site);
+      if (cv !== null)
+        coverNow = coverNow === null ? cv : dt <= 0 ? coverNow : damp(coverNow, cv, 2.5, Math.min(dt, 0.1));
+      rig.cover = coverNow ?? 0;
       // The sun's beam and the moon's are laid together, each at its own strength, in one light: at dusk the sun fades out as the moon comes in, the direction turns from one to the other with them, and nothing changes in
       // one frame (the light used to be the sun's above −1° and the moon's under it, and it jumped there, twice a day: a pop in every picture at sunrise and sunset, on a fast clock). The beam comes in over the sun's first fourteen degrees: low, it crosses the thick of the air.
       const sunI = keyMax * smoothstep(-1, 14, alt) * (0.1 + 0.9 * c) * (1 - 0.15 * low);
@@ -182,5 +208,8 @@ export function makeRig(scene: THREE.Scene, o: RigOptions): Rig {
   };
   void clamp;
   rig.update({ sunAltitude: 35, sunAzimuth: 0, dayOfYear: 15, hour: 12, incidentWm2: 600 } as HouseState);
+  // that state was a placeholder: no cover has been read yet
+  coverNow = null;
+  rig.cover = 0;
   return rig;
 }
