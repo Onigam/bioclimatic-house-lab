@@ -3,9 +3,10 @@
 // (frames and time move only when the tool steps them), the simulation paused: two runs of the same build give the same pixels. Take the
 // Mac's Chrome lock first (one GPU job at a time, every agent):
 //   ~/Dev/onigam-video/tools/with-chrome-lock.sh node tools/look/shots.mjs --url http://localhost:5872/ --views tools/look/views.json --out DIR \
-//     [--film] [--size 1080x1920] [--dpr 1] [--only a,b] [--still 12] [--pick x,y,z]
+//     [--film] [--size 1080x1920] [--dpr 1] [--only a,b] [--still 12] [--pick x,y,z] [--zone 0.04,0.19,0.96,0.69]
 // views.json: [{ id, world, pos:[x,y,z], target:[x,y,z], hour, day, preset, hide:['air-gap'], flows:false, xray:false, selected:null (a part: the kit frames it), settle: frames to wait (12), set:{...} }]
 //   --film   the film's look (supersample 3, AO) as `render.look` of the Short asks for it
+//   --zone   the film's subject zone (x0,y0,x1,y1 as shares of the frame; the Short's is 0.04,0.19,0.96,0.69): the projection is centred on it, as the film's runtime does (`camera.setViewOffset`), so that a still is the film's frame
 //   --still  N frames of each view with the camera still (or drifting by `drift` metres a frame, [x, y, z]): the share of pixels whose second difference of luma is over 12 levels (the kit's
 //            `shimmer`), the worst 32 x 32 block's share, and the share that changes by over 12 levels between two frames; `<id>-chg.png` is the map of those pixels (white: every frame)
 import { createRequire } from 'node:module';
@@ -27,6 +28,7 @@ const views = JSON.parse(fs.readFileSync(path.resolve(opt('views')), 'utf8')).fi
   (v) => !opt('only') || opt('only').split(',').includes(v.id),
 );
 const STILL = Number(opt('still', 0));
+const ZONE = opt('zone') ? opt('zone').split(',').map(Number) : null;
 
 const HIDE = `#app > .topbar, #app > .rail, #app > .panel, #app > .strip, #viewport > .toolbar, #viewport > .peek,
   #viewport > .panel-toggle, #viewport > .narr, #viewport > .dv, #viewport > .label-layer { display: none !important; }
@@ -116,7 +118,7 @@ await page.evaluate((film) => {
 const results = {};
 for (const v of views) {
   const res = await page.evaluate(
-    async (v, still) => {
+    async (v, still, zone) => {
       const L = window.__lab;
       const st = L.stage;
       const step = (n) => window.__step(n);
@@ -151,6 +153,22 @@ for (const v of views) {
         st.camera.position.set(...v.pos);
         c.target.set(...v.target);
         c.update();
+      }
+      if (zone) {
+        // the film's runtime: the projection centred on the subject zone, and the kit's insets no longer touch it
+        const W = window.innerWidth;
+        const H = window.innerHeight;
+        st.setViewInsets = () => {};
+        st.camera.aspect = W / H;
+        st.camera.setViewOffset(
+          W,
+          H,
+          W / 2 - ((zone[0] + zone[2]) / 2) * W,
+          H / 2 - ((zone[1] + zone[3]) / 2) * H,
+          W,
+          H,
+        );
+        st.camera.updateProjectionMatrix();
       }
       step(v.settle ?? 12);
       const canvas = st.renderer.domElement;
@@ -312,6 +330,7 @@ for (const v of views) {
     },
     v,
     STILL,
+    ZONE,
   );
   fs.writeFileSync(path.join(OUT, `${v.id}.png`), Buffer.from(res.png.split(',')[1], 'base64'));
   if (res.chgmap) {
